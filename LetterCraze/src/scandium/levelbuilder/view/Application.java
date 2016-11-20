@@ -3,35 +3,34 @@
  * 
  * @author Scandium
  */
-package scandium.lettercraze.view;
+package scandium.levelbuilder.view;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import scandium.lettercraze.model.Model;
-
+import scandium.levelbuilder.model.Model;
 
 /**
- * The LetterCraze application window. 
+ * The LevelBuilder application window.
  */
-public class Application extends JFrame {
-	private static final long serialVersionUID = -7053432922965446279L;
-    private Model model;
-    private MainMenuView mainMenu;
-    private LevelPlayerView levelPlayer;
-
+public class Application extends JPanel {
+	private static final long serialVersionUID = 1110806632457203710L;
+	private Model model;
+	private MainMenuView mainMenu;
+	private LevelEditorView levelEditor;
+	
     /**
-     * Creates a new LetterCraze application window.
+     * Creates a new LevelBuilder application window.
      * @param model The model of the application.
      */
-    public void LetterCraze(Model model) {
+    public void LevelBuilder(Model model) {
     	this.model = model;
     	
     	initializeModel();
     	initializeView();
     	initializeControllers();
     }
-
-    /**
+    
+	/**
 	 * @return the model
 	 */
 	public Model getModel() {
@@ -44,12 +43,12 @@ public class Application extends JFrame {
 	public MainMenuView getMainMenu() {
 		return mainMenu;
 	}
-	
+
 	/**
-	 * @return the levelPlayer
+	 * @return the levelEditor
 	 */
-	public LevelPlayerView getLevelPlayer() {
-		return levelPlayer;
+	public LevelEditorView getLevelEditor() {
+		return levelEditor;
 	}
 
 	/**
@@ -62,7 +61,7 @@ public class Application extends JFrame {
     /**
      * Initialize the view.
      */
-    private  void initializeView() {
+    private void initializeView() {
         // TODO implement here
     }
 
@@ -72,5 +71,4 @@ public class Application extends JFrame {
     private void initializeControllers() {
         // TODO implement here
     }
-
 }
