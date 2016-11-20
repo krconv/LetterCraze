@@ -1,7 +1,5 @@
 /**
  * LetterCraze.java
- * 
- * @author Kodey Converse (kodey@krconv.com)
  */
 package scandium.lettercraze;
 
