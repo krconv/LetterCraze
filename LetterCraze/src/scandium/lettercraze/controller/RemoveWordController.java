@@ -1,6 +1,10 @@
-package controller;
+package scandium.lettercraze.controller;
 
-import java.util.*;
+import java.awt.event.ActionEvent;
+
+import scandium.common.tool.WordDictionary;
+import scandium.lettercraze.model.Model;
+import scandium.lettercraze.view.Application;
 
 /**
  * @author Scandium
@@ -35,14 +39,14 @@ public class RemoveWordController {
      * @param app 
      * @param dictionary
      */
-    public void RemoveWordController(Model model, Application app, WordDictionary dictionary) {
+    public RemoveWordController(Model model, Application app, WordDictionary dictionary) {
         // TODO implement here
     }
 
     /**
      * @param ActionEvent ae
      */
-    public void actionPerformed(void ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) {
         // TODO implement here
     }
 

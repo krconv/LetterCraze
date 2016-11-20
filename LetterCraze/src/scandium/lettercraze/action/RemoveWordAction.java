@@ -12,7 +12,9 @@ import scandium.common.model.Word;
  * Action where a word is removed from the level board.
  */
 public class RemoveWordAction implements IAction {
+	@SuppressWarnings("unused")
 	private Model model;
+	@SuppressWarnings("unused")
 	private Word word;
 
     /**

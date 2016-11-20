@@ -1,6 +1,10 @@
-package controller;
+package scandium.lettercraze.controller;
 
-import java.util.*;
+import java.awt.event.ActionEvent;
+
+import scandium.common.tool.LetterDictionary;
+import scandium.lettercraze.model.Model;
+import scandium.lettercraze.view.Application;
 
 /**
  * @author Scandium
@@ -34,14 +38,14 @@ public class ResetLevelController {
      * @param app 
      * @param dictionary
      */
-    public void ResetLevelController(Model model, Application app, LetterDictionary dictionary) {
+    public ResetLevelController(Model model, Application app, LetterDictionary dictionary) {
         // TODO implement here
     }
 
     /**
      * @param ActionEvent ae
      */
-    public void actionPerformed(void ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) {
         // TODO implement here
     }
 

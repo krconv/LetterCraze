@@ -1,6 +1,9 @@
-package controller;
+package scandium.levelbuilder.controller;
 
-import java.util.*;
+import java.awt.event.ActionEvent;
+
+import scandium.levelbuilder.model.Model;
+import scandium.levelbuilder.view.Application;
 
 /**
  * @author Scandium
@@ -27,14 +30,14 @@ public class DisableBoardSquareController {
      * @param model 
      * @param app
      */
-    public void DisableBoardSquareController(Model model, Application app) {
+    public DisableBoardSquareController(Model model, Application app) {
         // TODO implement here
     }
 
     /**
      * @param ActionEvent ae
      */
-    public void actionPerformed(void ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) {
         // TODO implement here
     }
 

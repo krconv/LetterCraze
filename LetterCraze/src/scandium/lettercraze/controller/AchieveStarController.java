@@ -1,6 +1,8 @@
-package controller;
+package scandium.lettercraze.controller;
 
-import java.util.*;
+import java.awt.event.ActionEvent;
+import scandium.lettercraze.model.Model;
+import scandium.lettercraze.view.Application;
 
 /**
  * @author Scandium
@@ -27,14 +29,14 @@ public class AchieveStarController {
      * @param model 
      * @param app
      */
-    public void AchieveStarController(Model model, Application app) {
+    public AchieveStarController(Model model, Application app) {
         // TODO implement here
     }
 
     /**
      * @param ActionEvent ae
      */
-    public void actionPerformed(void ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) {
         // TODO implement here
     }
 

@@ -14,12 +14,13 @@ import scandium.lettercraze.action.IAction;
  */
 public class UndoManager {
 	private static UndoManager instance;
+	@SuppressWarnings("unused")
 	private Stack<IAction> undoStack;
 
     /**
      * Creates a new manager.
      */
-    private void UndoManager() {
+    private UndoManager() {
         // TODO implement here
     }
 

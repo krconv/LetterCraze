@@ -13,9 +13,12 @@ import scandium.common.model.Tile;
  * A tool used for generating Tiles.
  */
 public class LetterDictionary {
-    private String[] letters;
-    private double[] frequencies;
-    private int[] scores;
+    @SuppressWarnings("unused")
+	private String[] letters;
+    @SuppressWarnings("unused")
+	private double[] frequencies;
+    @SuppressWarnings("unused")
+	private int[] scores;
     Random random;
 
     /**

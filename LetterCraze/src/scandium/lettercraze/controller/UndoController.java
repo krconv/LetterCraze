@@ -1,6 +1,9 @@
-package controller;
+package scandium.lettercraze.controller;
 
-import java.util.*;
+import java.awt.event.ActionEvent;
+
+import scandium.lettercraze.model.Model;
+import scandium.lettercraze.view.Application;
 
 /**
  * @author Scandium
@@ -27,7 +30,7 @@ public class UndoController {
      * @param model 
      * @param app
      */
-    public void UndoController(Model model, Application app) {
+    public UndoController(Model model, Application app) {
         // TODO implement here
     }
 
@@ -42,7 +45,7 @@ public class UndoController {
     /**
      * @param ActionEvent ae
      */
-    public void actionPerformed(void ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) {
         // TODO implement here
     }
 
