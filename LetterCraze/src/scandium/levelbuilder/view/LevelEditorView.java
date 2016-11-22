@@ -1,209 +1,599 @@
-/**
- * LevelEditor.java
- * 
- * @author Scandium
- */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
+ * ~~~~~ Team Scandium                                                                           *
+ * ~~~~~ CS 3733                                                                                 *
+ * ~~~~~ Project: Level Builder                                                                  *
+ * ~~~~~ Created: November 22nd - Jeff Martin                                                    *
+ * ~~~~~ Class: LevelEditor                                                                      *
+ * ~~~~~        This class displays Level Editing Window for the Level Builder. It allows the    *
+ * ~~~~~        controllers to easily access all of the Buttons, Labels, and Textfields          *
+ * ~~~~         within the window.                                                               *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 package scandium.levelbuilder.view;
+
+import java.awt.Font;
+import java.awt.TextArea;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import scandium.common.view.BoardView;
-import scandium.levelbuilder.model.Model;
 
-/**
- * The view for the Level Editor screen. 
- */
-public class LevelEditorView extends JPanel {
-	private static final long serialVersionUID = -719968016048370087L;
-	private Model model;
-	private JLabel titleLabel;
-	private BoardView boardView;
-	private ButtonGroup gravityButtonGroup;
-	private ButtonGroup levelButtonGroup;
-	private JButton puzzleButton;
-	private JButton lightningButton;
-	private JButton themeButton;
-	private JRadioButton gravityUpButton;
-	private JRadioButton gravityRightButton;
-	private JRadioButton gravityDownButton;
-	private JRadioButton gravityLeftButton;
-	private JButton saveButton;
-	private JButton previewButton;
-	private JButton mainMenuButton;
-	private JTextField levelNameTextField;
-	private JTextField maxNumWordsTextField;
-	private JTextField[] starThresholdTextFields;
-	private JTextField timeLimitTextField;
-	private JTextField themeTextField;
-	private JTextArea themeWordsTextArea;
+public class LevelEditorView extends JPanel{
+	
+	/* Serial ID                                                                                 */
+	private static final long serialVersionUID = -6718767832989688466L;
+	
+	/* ~~~~~                                                                               ~~~~~ *
+	 * Class Attributes                                                                          *
+	 * ~~~~~                                                                               ~~~~~ */
+	JLabel title_label;
+	JLabel level_name_label;
+	JLabel thresholds_title_label;
+	JLabel one_star_label;
+	JLabel two_star_label;
+	JLabel three_star_label;
+	JLabel one_star_unit_label;
+	JLabel two_star_unit_label;
+	JLabel three_star_unit_label;
+	JLabel gravity_label;
+	JLabel level_specific_label;
+	JLabel puzzle_max_num_words_label;
+	JLabel lightning_time_limit_label;
+	JLabel theme_name_label;
+	JLabel theme_words_label;
+	
+	JTextField level_name_textfield;
+	JTextField one_star_textfield;
+	JTextField two_star_textfield;
+	JTextField three_star_textfield;
+	JTextField puzzle_max_num_words_textfield;
+	JTextField lightning_time_limit_textfield;
+	JTextField theme_name_textfield;
+	TextArea theme_words_textarea;
+	
+	JButton save_button;
+	JButton generate_button;
+	JButton main_menu_button;
+	
+	JRadioButton puzzle_level_button;
+	JRadioButton lightning_level_button;
+	JRadioButton theme_level_button;
+	JRadioButton gravity_up_button;
+	JRadioButton gravity_down_button;
+	JRadioButton gravity_left_button;
+	JRadioButton gravity_right_button;
+	
+	ButtonGroup level_type_group;
+	ButtonGroup gravity_group;
+	
+	BoardView board_view;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * Constructor Method                                                                        *
+	 * ~~~~~                                                                               ~~~~~ */
+	public LevelEditorView() {
+		this.title_label = new JLabel("LevelBuilder: LevelEditor");
+		this.level_name_label = new JLabel("Level Name:");
+		this.thresholds_title_label = new JLabel("Enter Thresholds:");
+		this.one_star_label = new JLabel("1 Star:");
+		this.two_star_label = new JLabel("2 Star:");
+		this.three_star_label = new JLabel("3 Star");
+		this.one_star_unit_label = new JLabel("units");
+		this.two_star_unit_label = new JLabel("units");
+		this.three_star_unit_label = new JLabel("units");
+		this.gravity_label = new JLabel("Select Gravity Direction");
+		this.level_specific_label = new JLabel("Level Specific Fields");
+		this.puzzle_max_num_words_label = new JLabel("Maximum Number of Words:");
+		this.lightning_time_limit_label = new JLabel("Time Limit:");
+		this.theme_name_label = new JLabel("Theme Name:");
+		this.theme_words_label = new JLabel("Theme Words:");
+		
+		this.level_name_textfield = new JTextField();
+		this.one_star_textfield = new JTextField();
+		this.two_star_textfield = new JTextField();
+		this.three_star_textfield = new JTextField();
+		this.puzzle_max_num_words_textfield = new JTextField();
+		this.lightning_time_limit_textfield = new JTextField();
+		this.theme_name_textfield = new JTextField();
+		this.theme_words_textarea = new TextArea();
+		
+		this.save_button = new JButton("Save Level");
+		this.generate_button = new JButton("Generate Tiles");
+		this.main_menu_button = new JButton("Main Menu");
+		
+		this.puzzle_level_button = new JRadioButton("Puzzle Level");
+		this.lightning_level_button = new JRadioButton("Lightning Level");
+		this.theme_level_button = new JRadioButton("Theme Level");
+		
+		this.gravity_up_button = new JRadioButton("Up");
+		this.gravity_down_button = new JRadioButton("Down");
+		this.gravity_left_button = new JRadioButton("Left");
+		this.gravity_right_button = new JRadioButton("Right");
+		
+		this.level_type_group = new ButtonGroup();
+		this.gravity_group = new ButtonGroup();
+		
+		this.board_view = new BoardView();
+		
+		
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * initialize()                                                                              *
+	 * ~~~~~                                                                               ~~~~~ */
+	public void initialize(){
 
-    /**
-     * Creates a new view for the Level Editor screen.
-     * @param model The model.
-     */
-    public LevelEditorView(Model model) {
-    	this.model = model;
-    	
-    	initialize();
-    }
-    
-	/**
-	 * @return the model
-	 */
-	public Model getModel() {
-		return model;
+		/* Initialize Title Label                                                                */
+		title_label.setBounds(10, 10, 1280, 40);
+		title_label.setFont(new Font(title_label.getFont().getName(), Font.BOLD, 36));
+		add(title_label);
+		/* Initialize Level Name Label                                                           */
+		level_name_label.setBounds(900, 20, 100, 30);
+		add(level_name_label);
+		/* Initialize Threshold Title Label                                                      */
+		thresholds_title_label.setBounds(900, 100, 250, 30);
+		add(thresholds_title_label);
+		/* Initialize Star Labels                                                                */
+		one_star_label.setBounds(950, 150, 75, 30);
+		add(one_star_label);
+		two_star_label.setBounds(950, 200, 75, 30);
+		add(two_star_label);
+		three_star_label.setBounds(950, 250, 75, 30);
+		add(three_star_label);
+		/* Initialize Star Unit Labels                                                           */
+		one_star_unit_label.setBounds(1100, 150, 100, 30);
+		add(one_star_unit_label);
+		two_star_unit_label.setBounds(1100, 200, 100, 30);
+		add(two_star_unit_label);
+		three_star_unit_label.setBounds(1100, 250, 100, 30);
+		add(three_star_unit_label);
+		/* Initialize Gravity Direction Label                                                    */
+		gravity_label.setBounds(600, 130, 200, 30);
+		add(gravity_label);
+		/* Initialize Level Specific Label                                                       */
+		level_specific_label.setBounds(900, 350, 250, 30);
+		add(level_specific_label);
+		level_specific_label.setVisible(false);
+		/* Initialize Puzzle Max Num Words Label                                                 */
+		puzzle_max_num_words_label.setBounds(950, 400, 200, 30);
+		add(puzzle_max_num_words_label);
+		puzzle_max_num_words_label.setVisible(false);
+		/* Initialize Lightning Time Limit Label                                                 */
+		lightning_time_limit_label.setBounds(950, 400, 100, 30);
+		add(lightning_time_limit_label);
+		lightning_time_limit_label.setVisible(false);
+		/* Initialize Theme Name Label                                                           */
+		theme_name_label.setBounds(950, 400, 125, 30);
+		add(theme_name_label);
+		theme_name_label.setVisible(false);
+		/* Initialize Theme Words Label                                                          */
+		theme_words_label.setBounds(950, 450, 125, 30);
+		add(theme_words_label);
+		theme_words_label.setVisible(false);
+		
+		/* Initialize Level name TextField                                                       */
+		level_name_textfield.setBounds(1000, 20, 250, 30);
+		add(level_name_textfield);
+		/* Initialize One Star TextField                                                         */
+		one_star_textfield.setBounds(1025, 150, 50, 30);
+		add(one_star_textfield); 
+		/* Initialize Two Star TextField                                                         */
+		two_star_textfield.setBounds(1025, 200, 50, 30);
+		add(two_star_textfield);
+		/* Initialize Three Star TextField                                                       */
+		three_star_textfield.setBounds(1025, 250, 50, 30);
+		add(three_star_textfield);
+		/* Initialize Puzzle Max Num Words TextField                                             */
+		puzzle_max_num_words_textfield.setBounds(1150, 400, 50, 30);
+		add(puzzle_max_num_words_textfield);
+		puzzle_max_num_words_textfield.setVisible(false);
+		/* Initialize Lightning time limit TextField                                             */
+		lightning_time_limit_textfield.setBounds(1050, 400, 50, 30);
+		add(lightning_time_limit_textfield);
+		lightning_time_limit_textfield.setVisible(false);
+		/* Initialize Theme Name TextField                                                       */
+		theme_name_textfield.setBounds(1075, 400, 150, 30);
+		add(theme_name_textfield);
+		theme_name_textfield.setVisible(false);
+		/* Initialize Theme Words TextField                                                      */
+		theme_words_textarea.setBounds(1075, 450, 150, 200);
+		add(theme_words_textarea);
+		theme_words_textarea.setVisible(false);
+		
+		/* Initialize Save Level Button                                                          */
+		save_button.setBounds(600, 450, 150, 50);
+		add(save_button);
+		/* Initialize Generate Tiles Button                                                      */
+		generate_button.setBounds(600, 525, 150, 50);
+		add(generate_button);
+		/* Initialize Main Menu Button                                                           */
+		main_menu_button.setBounds(600, 600, 150, 50);
+		add(main_menu_button);
+		
+		/* Initialize Puzzle Level Button                                                        */
+		puzzle_level_button.setBounds(10, 75, 150, 50);
+		add(puzzle_level_button);
+		/* Initialize Lightning Level Button                                                     */
+		lightning_level_button.setBounds(180, 75, 150, 50);
+		add(lightning_level_button);
+		/* Initialize Theme Level Button                                                         */
+		theme_level_button.setBounds(350, 75, 150, 50);
+		add(theme_level_button);
+		/* Initialize Gravity Buttons                                                            */
+		gravity_up_button.setBounds(650,180,100,30);
+		add(gravity_up_button);
+		gravity_down_button.setBounds(650,350,100,30);
+		add(gravity_down_button);
+		gravity_left_button.setBounds(575,265,100,30);
+		add(gravity_left_button);
+		gravity_right_button.setBounds(715,265,100,30);
+		add(gravity_right_button);
+		
+		/* Initialize Level Type Button Group                                                    */
+		level_type_group.add(puzzle_level_button);
+		level_type_group.add(lightning_level_button);
+		level_type_group.add(theme_level_button);
+		/* Initialize Gravity Button Group                                                       */
+		gravity_group.add(gravity_down_button);
+		gravity_group.add(gravity_up_button);
+		gravity_group.add(gravity_left_button);
+		gravity_group.add(gravity_right_button);
+		
+		/* Initialize BoardView                                                                  */
+		board_view.setBounds(10, 130, 540, 540);
+		board_view.initialize();
+		add(board_view);
+		
+		
+		/* Remove all layout management from the JPanel */
+		setLayout(null);
 	}
 
-	/**
-	 * @return the titleLabel
-	 */
-	public JLabel getTitleLabel() {
-		return titleLabel;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getTitleLabel()                                                                           *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Title                                   *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetTitleLabel(){
+		return title_label;
 	}
-
-	/**
-	 * @return the boardView
-	 */
-	public BoardView getBoardView() {
-		return boardView;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getLevelNameLabel()                                                                       *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Level Name label                        *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetLevelNameLabel(){
+		return level_name_label;
 	}
-
-	/**
-	 * @return the gravityButtonGroup
-	 */
-	public ButtonGroup getGravityButtonGroup() {
-		return gravityButtonGroup;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThresholdsTitleLabel()                                                                 *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Threshold Label                         *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetThresholdsTitleLabel(){
+		return thresholds_title_label;
 	}
-
-	/**
-	 * @return the levelButtonGroup
-	 */
-	public ButtonGroup getLevelButtonGroup() {
-		return levelButtonGroup;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getOneStarLabel()                                                                         *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the one star Label                          *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetOneStarLabel(){
+		return one_star_label;
 	}
-
-	/**
-	 * @return the puzzleButton
-	 */
-	public JButton getPuzzleButton() {
-		return puzzleButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getTwoStarLabel()                                                                         *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Two star Label                          *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetTwoStarLabel(){
+		return two_star_label;
 	}
-
-	/**
-	 * @return the lightningButton
-	 */
-	public JButton getLightningButton() {
-		return lightningButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThreeStarLabel()                                                                       *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the three star Label                        *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetThreeStarLabel(){
+		return three_star_label;
 	}
-
-	/**
-	 * @return the themeButton
-	 */
-	public JButton getThemeButton() {
-		return themeButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getOneStarUnitLabel()                                                                     *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the one star unit Label                     *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetOneStarUnitLabel(){
+		return one_star_unit_label;
 	}
-
-	/**
-	 * @return the gravityUpButton
-	 */
-	public JRadioButton getGravityUpButton() {
-		return gravityUpButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getTwoStarUnitLabel()                                                                     *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the two star unit Label                     *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetTwoStarUnitLabel(){
+		return two_star_unit_label;
 	}
-
-	/**
-	 * @return the gravityRightButton
-	 */
-	public JRadioButton getGravityRightButton() {
-		return gravityRightButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThreeStarUnitLabel()                                                                   *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the three star unit Label                   *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetThreeStarUnitLabel(){
+		return three_star_unit_label;
 	}
-
-	/**
-	 * @return the gravityDownButton
-	 */
-	public JRadioButton getGravityDownButton() {
-		return gravityDownButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getGravityLabel()                                                                         *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the gravity Label                           *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetGravityLabel(){
+		return gravity_label;
 	}
-
-	/**
-	 * @return the gravityLeftButton
-	 */
-	public JRadioButton getGravityLeftButton() {
-		return gravityLeftButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getLevelSpecificLabel()                                                                   *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Level Specific Label                    *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetLevelSpecificLabel(){
+		return level_specific_label;
 	}
-
-	/**
-	 * @return the saveButton
-	 */
-	public JButton getSaveButton() {
-		return saveButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getPuzzleMaxNumWordsLabel()                                                               *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Puzzle Level's Max Num of Words label   *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetPuzzleMaxNumWordsLabel(){
+		return puzzle_max_num_words_label;
 	}
-
-	/**
-	 * @return the previewButton
-	 */
-	public JButton getPreviewButton() {
-		return previewButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getLightningTimeLimitLabel()                                                              *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Lightning Level's Time Limit Label      *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetLightningTimeLimitLabel(){
+		return lightning_time_limit_label;
 	}
-
-	/**
-	 * @return the mainMenuButton
-	 */
-	public JButton getMainMenuButton() {
-		return mainMenuButton;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThemeNameLabel()                                                                       *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Theme Level's Theme name label          *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetThemeNameLabel(){
+		return theme_name_label;
 	}
-
-	/**
-	 * @return the levelNameTextField
-	 */
-	public JTextField getLevelNameTextField() {
-		return levelNameTextField;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThemeWordsLabel()                                                                      *
+	 * @return JLabel                                                                            *
+	 * This function returns the JLabel representing the Theme Level's Theme words label         *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JLabel GetThemeWordsLabel(){
+		return theme_words_label;
 	}
-
-	/**
-	 * @return the maxNumWordsTextField
-	 */
-	public JTextField getMaxNumWordsTextField() {
-		return maxNumWordsTextField;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getLevelNameTextField()                                                                   *
+	 * @return JTextField                                                                        *
+	 * This function returns the JTextField that stores the user's entered level name            *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JTextField GetLevelNameTextField(){
+		return level_name_textfield;
 	}
-
-	/**
-	 * @return the starThresholdTextFields
-	 */
-	public JTextField[] getStarThresholdTextFields() {
-		return starThresholdTextFields;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getOneStarTextField()                                                                     *
+	 * @return JTextField                                                                        *
+	 * This function returns the JTextField that stores the user's entered value for the 1 star  *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JTextField GetOneStarTextField(){
+		return one_star_textfield;
 	}
-
-	/**
-	 * @return the timeLimitTextField
-	 */
-	public JTextField getTimeLimitTextField() {
-		return timeLimitTextField;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getTwoStarTextField()                                                                     *
+	 * @return JTextField                                                                        *
+	 * This function returns the JTextField that stores the user's entered value for the 2 star  *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JTextField GetTwoStarTextField(){
+		return two_star_textfield;
 	}
-
-	/**
-	 * @return the themeTextField
-	 */
-	public JTextField getThemeTextField() {
-		return themeTextField;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThreeStarTextField()                                                                   *
+	 * @return JTextField                                                                        *
+	 * This function returns the JTextField that stores the user's entered value for the 3 star  *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JTextField GetThreeStarTextField(){
+		return three_star_textfield;
 	}
-
-	/**
-	 * @return the themeWordsTextArea
-	 */
-	public JTextArea getThemeWordsTextArea() {
-		return themeWordsTextArea;
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getPuzzleMaxNumWordsTextField()                                                           *
+	 * @return JTextField                                                                        *
+	 * This function returns the JTextField that stores the user's entered value for puzzle      *
+	 * levels maximum number of words.                                                           *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JTextField GetPuzzleMaxNumWordsTextField(){
+		return puzzle_max_num_words_textfield;
 	}
-
-	/**
-     * Initializes the view.
-     */
-    private void initialize() {
-        // TODO implement here
-    }
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThemeNameTextField()                                                                   *
+	 * @return JTextField                                                                        *
+	 * This function returns the JTextField that stores the user's entered value for theme       *
+	 * levels theme name.                                                                        *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JTextField GetThemeNameTextField(){
+		return theme_name_textfield;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThemeNameTextArea()                                                                    *
+	 * @return TextArea                                                                          *
+	 * This function returns the TextArea that stores the user's entered value for theme         *
+	 * levels theme words                                                                        *
+	 * ~~~~~                                                                               ~~~~~ */
+	public TextArea GetThemeWordsTextArea(){
+		return theme_words_textarea;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getSaveButton()                                                                           *
+	 * @return JButton                                                                           *
+	 * This function returns the JButton that is used to save the current level.                 *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JButton GetSaveButton(){
+		return save_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getGenerateButton()                                                                       *
+	 * @return JButton                                                                           *
+	 * This function returns the JButton that is used to Generate tiles on the board.            *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JButton GetGenerateButton(){
+		return generate_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getMainMenuButton()                                                                       *
+	 * @return JButton                                                                           *
+	 * This function returns the JButton that is used to return to the main menu.                *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JButton GetMainMenuButton(){
+		return main_menu_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getPuzzleLevelButton()                                                                    *
+	 * @return JRadioButton                                                                      *
+	 * This function returns the JRadioButton that is used to specify that this level is a       *
+	 * puzzle level.                                                                             *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JRadioButton GetPuzzleLevelButton(){
+		return puzzle_level_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getLightningLevelButton()                                                                 *
+	 * @return JRadioButton                                                                      *
+	 * This function returns the JRadioButton that is used to specify that this level is a       *
+	 * lightning level.                                                                          *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JRadioButton GeLightningLevelButton(){
+		return lightning_level_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThemeLevelButton()                                                                     *
+	 * @return JRadioButton                                                                      *
+	 * This function returns the JRadioButton that is used to specify that this level is a       *
+	 * theme level.                                                                              *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JRadioButton GetThemeLevelButton(){
+		return theme_level_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getGravityUpButton()                                                                      *
+	 * @return JRadioButton                                                                      *
+	 * This function returns the JRadioButton that is used to specify that the direction of      *
+	 * gravity is up.                                                                            *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JRadioButton GetGravityUpButton(){
+		return gravity_up_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getGravityDownButton()                                                                    *
+	 * @return JRadioButton                                                                      *
+	 * This function returns the JRadioButton that is used to specify that the direction of      *
+	 * gravity is down.                                                                          *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JRadioButton GetGravityDownButton(){
+		return gravity_down_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getGravityLeftButton()                                                                    *
+	 * @return JRadioButton                                                                      *
+	 * This function returns the JRadioButton that is used to specify that the direction of      *
+	 * gravity is Left.                                                                          *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JRadioButton GetGravityLeftButton(){
+		return gravity_left_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getGravityRightButton()                                                                   *
+	 * @return JRadioButton                                                                      *
+	 * This function returns the JRadioButton that is used to specify that the direction of      *
+	 * gravity is Right.                                                                         *
+	 * ~~~~~                                                                               ~~~~~ */
+	public JRadioButton GetGravityRightButton(){
+		return gravity_right_button;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getLevelTypeGroup()                                                                       *
+	 * @return ButtonGroup                                                                       *
+	 * This function returns the Button Group representing the puzzle level, lightning level,    *
+	 * and theme level buttons                                                                   *
+	 * ~~~~~                                                                               ~~~~~ */
+	public ButtonGroup GetLevelTypeGroup(){
+		return level_type_group;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getGravityGroup()                                                                         *
+	 * @return ButtonGroup                                                                       *
+	 * This function returns the Button Group representing the up, down, left, and right gravity *
+	 * buttons                                                                                   *
+	 * ~~~~~                                                                               ~~~~~ */
+	public ButtonGroup GetGravityGroup(){
+		return level_type_group;
+	}
+	
+	/**~~~~~                                                                               ~~~~~ *
+	 * getBoardView()                                                                            *
+	 * @return BoardView                                                                         *
+	 * This function returns the Board View containing all the board squares                     *
+	 * ~~~~~                                                                               ~~~~~ */
+	public BoardView GetBoardView(){
+		return board_view;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+

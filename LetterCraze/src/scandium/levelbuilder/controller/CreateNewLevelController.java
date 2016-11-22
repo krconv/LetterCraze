@@ -3,7 +3,7 @@ package scandium.levelbuilder.controller;
 import java.awt.event.ActionEvent;
 
 import scandium.levelbuilder.model.Model;
-import scandium.levelbuilder.view.Application;
+import scandium.levelbuilder.view.LevelBuilder;
 
 /**
  * @author Scandium
@@ -24,13 +24,13 @@ public class CreateNewLevelController {
     /**
      * 
      */
-    Application app;
+    LevelBuilder app;
 
     /**
      * @param model 
      * @param app
      */
-    public CreateNewLevelController(Model model, Application app) {
+    public CreateNewLevelController(Model model, LevelBuilder app) {
         // TODO implement here
     }
 

@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import scandium.common.tool.LetterDictionary;
 import scandium.levelbuilder.model.Model;
-import scandium.levelbuilder.view.Application;
+import scandium.levelbuilder.view.LevelBuilder;
 
 /**
  * @author Scandium
@@ -25,7 +25,7 @@ public class GenerateBoardArrangementController {
     /**
      * 
      */
-    Application app;
+    LevelBuilder app;
 
     /**
      * 
@@ -36,7 +36,7 @@ public class GenerateBoardArrangementController {
      * @param model 
      * @param app
      */
-    public GenerateBoardArrangementController(Model model, Application app) {
+    public GenerateBoardArrangementController(Model model, LevelBuilder app) {
         // TODO implement here
     }
 
