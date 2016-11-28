@@ -1,9 +1,9 @@
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
  * ~~~~~ Team Scandium                                                                           *
  * ~~~~~ CS 3733                                                                                 *
  * ~~~~~ Project: Level Builder                                                                  *
  * ~~~~~ Created: November 22nd - Jeff Martin                                                    *
- * ~~~~~ Class: MainMenu                                                                      *
+ * ~~~~~ Class: MainMenu                                                                         *
  * ~~~~~        This class displays the Main Menu for the Level Builder. It allows the           *
  * ~~~~~        controllers to easily access all of the Buttons, Labels, and Textfields          *
  * ~~~~         within the window.                                                               *
