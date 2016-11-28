@@ -14,7 +14,7 @@ public class Star {
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
-    private int threshold;
+	int threshold;
 
 	/**~~~~~                                                                               ~~~~~ *
 	 * Constructor Method                                                                        *

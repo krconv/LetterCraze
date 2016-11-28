@@ -15,8 +15,8 @@ public class Tile {
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
-    private String content;
-    private int score;
+    String content;
+    int score;
 
     /**
      * Creates a new Tile.
