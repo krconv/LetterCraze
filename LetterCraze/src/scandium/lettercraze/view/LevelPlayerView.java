@@ -18,77 +18,100 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Component;
 import java.awt.Color;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
 
 /**
- * The view for the Level Player screen. 
+ * The view for the Level Player screen.
  */
 public class LevelPlayerView extends JPanel {
 	private static final long serialVersionUID = 2542897782615081218L;
 	private Model model;
+	// private JButton leaveButton;
+	// private JButton resetButton;
+	// private JButton undoButton;
+	// private BoardView boardView;
+	// private JLabel maxNumWordsLabel;
+	// private JLabel timerLabel;
+	// private JLabel themeLabel;
+	// private JLabel[] starLabels;
+	// private JLabel scoreLabel;
+	// private JLabel starThresholdLabel;
+	// private JLabel foundWordsLabel;
+	// private Box horizontalBox;
+	// private JButton btnLeave;
+	// private JButton btnResetBoard;
+	// private JButton btnUndo;
+	// private Component rigidArea;
+	// private Component rigidArea_1;
+	// private Box horizontalBox_1;
+	// private Box horizontalBox_2;
+	// private JLabel label_1;
+	// private JLabel label_2;
+	// private JLabel label_3;
+	// private JLabel label_4;
+	// private JLabel label_5;
+	// private Box verticalBox;
+	// private JLabel lblScore;
+	// private JLabel lblPts;
+	// private JLabel lblNextStar;
+	// private JLabel lblPts_1;
+	// private Box horizontalBox_3;
+	// private Box horizontalBox_4;
+	// private Component rigidArea_2;
+	// private Component rigidArea_3;
+	// private Box horizontalBox_5;
+	// private Component rigidArea_4;
+	// private JScrollPane scrollPane;
+	// private JLabel lblFoundWords;
+	// private JList<String> list;
+	private JLabel levelNameLabel;
+	private JPanel infoPanel;
+	private Box buttonsBox;
 	private JButton leaveButton;
 	private JButton resetButton;
 	private JButton undoButton;
-	private BoardView boardView;
-	private JLabel maxNumWordsLabel;
-	private JLabel timerLabel;
-	private JLabel themeLabel;
-	private JLabel[] starLabels;
+	private Box starBox;
+	private JLabel starOneLabel;
+	private JLabel starTwoLabel;
+	private JLabel starThreeLabel;
+	private Box scoreBox;
 	private JLabel scoreLabel;
-	private JLabel starThresholdLabel;
+	private JLabel scoreValueLabel;
+	private Box nextStarBox;
+	private JLabel nextStarLabel;
+	private JLabel nextStarValueLabel;
+	private Box maxNumWordsBox;
+	private JLabel maxNumWordsLabel;
+	private JLabel maxNumWordsValueLabel;
+	private JScrollPane foundWordsScrollPane;
 	private JLabel foundWordsLabel;
-	private Box horizontalBox;
-	private JButton btnLeave;
-	private JButton btnResetBoard;
-	private JButton btnUndo;
-	private Component rigidArea;
-	private Component rigidArea_1;
-	private JLabel levelNameLabel;
-	private Box horizontalBox_1;
-	private Box horizontalBox_2;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
-	private JLabel label_5;
-	private Box verticalBox;
-	private JLabel lblScore;
-	private JLabel lblPts;
-	private JLabel lblNextStar;
-	private JLabel lblPts_1;
-	private Box horizontalBox_3;
-	private Box horizontalBox_4;
-	private Component rigidArea_2;
-	private Component rigidArea_3;
-	private Box horizontalBox_5;
-	private Component rigidArea_4;
-	private JScrollPane scrollPane;
-	private JLabel lblFoundWords;
-	private JList<String> list;
+	private JList<String> foundWordsList;
+	private DefaultListModel<String> foundWordsListModel;
+	private BoardView boardView;
 
+	/**
+	 * Creates a new view for the Level Player screen.
+	 * 
+	 * @param model
+	 *            The model.
+	 */
+	public LevelPlayerView(Model model) {
+		this.model = model;
 
-    /**
-     * Creates a new view for the Level Player screen.
-     * @param model The model.
-     */
-    public LevelPlayerView(Model model) {
-    	setBackground(new Color(0, 191, 255));
-    	setBorder(new EmptyBorder(20, 20, 20, 20));
-    	this.model = model;
-    	
-    	initialize();
-    }
+		initialize();
+	}
 
-    /**
+	/**
 	 * @return the model
 	 */
 	public Model getModel() {
 		return model;
 	}
+
 	/**
 	 * @return the leaveButton
 	 */
@@ -128,14 +151,14 @@ public class LevelPlayerView extends JPanel {
 	 * @return the timerLabel
 	 */
 	public JLabel getTimerLabel() {
-		return timerLabel;
+		return null;
 	}
 
 	/**
 	 * @return the themeLabel
 	 */
 	public JLabel getThemeLabel() {
-		return themeLabel;
+		return null;
 	}
 
 	/**
@@ -149,7 +172,7 @@ public class LevelPlayerView extends JPanel {
 	 * @return the starLabels
 	 */
 	public JLabel[] getStarLabels() {
-		return starLabels;
+		return new JLabel[] { starOneLabel, starTwoLabel, starThreeLabel };
 	}
 
 	/**
@@ -163,7 +186,7 @@ public class LevelPlayerView extends JPanel {
 	 * @return the starThresholdLabel
 	 */
 	public JLabel getStarThresholdLabel() {
-		return starThresholdLabel;
+		return nextStarValueLabel;
 	}
 
 	/**
@@ -174,140 +197,141 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
-     * Initializes the view.
-     */
-    private void initialize() {
-    	setLayout(new BorderLayout(0, 0));
-    	
-    	levelNameLabel = new JLabel("Puzzled");
-    	levelNameLabel.setForeground(Color.BLACK);
-    	levelNameLabel.setFont(levelNameLabel.getFont().deriveFont(levelNameLabel.getFont().getSize() + 50f));
-    	add(levelNameLabel, BorderLayout.NORTH);
-    	
-    	JPanel panel_1 = new JPanel();
-    	panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
-    	panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
-    	panel_1.setOpaque(false);
-    	
-    	horizontalBox = Box.createHorizontalBox();
-    	horizontalBox.setBorder(new EmptyBorder(10, 10, 10, 10));
-    	panel_1.add(horizontalBox);
-    	
-    	btnLeave = new JButton("Leave");
-    	btnLeave.setFont(btnLeave.getFont().deriveFont(btnLeave.getFont().getSize() + 10f));
-    	horizontalBox.add(btnLeave);
-    	
-    	rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
-    	horizontalBox.add(rigidArea_1);
-    	
-    	btnResetBoard = new JButton("Reset");
-    	btnResetBoard.setFont(btnResetBoard.getFont().deriveFont(btnResetBoard.getFont().getSize() + 10f));
-    	horizontalBox.add(btnResetBoard);
-    	
-    	rigidArea = Box.createRigidArea(new Dimension(20, 20));
-    	horizontalBox.add(rigidArea);
-    	
-    	btnUndo = new JButton("Undo");
-    	btnUndo.setFont(btnUndo.getFont().deriveFont(btnUndo.getFont().getSize() + 10f));
-    	horizontalBox.add(btnUndo);
-    	
-    	add(panel_1, BorderLayout.CENTER);
-    	
-    	horizontalBox_1 = Box.createHorizontalBox();
-    	panel_1.add(horizontalBox_1);
-    	
-    	verticalBox = Box.createVerticalBox();
-    	verticalBox.setBorder(new EmptyBorder(10, 10, 10, 10));
-    	panel_1.add(verticalBox);
-    	
-    	horizontalBox_2 = Box.createHorizontalBox();
-    	verticalBox.add(horizontalBox_2);
-    	
-    	label_1 = new JLabel();
-    	label_1.setIcon(new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
-    	horizontalBox_2.add(label_1);
-    	
-    	label_2 = new JLabel();
-    	label_2.setIcon(new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
-    	horizontalBox_2.add(label_2);
-    	
-    	label_3 = new JLabel();
-    	label_3.setIcon(new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
-    	horizontalBox_2.add(label_3);
-    	
-    	horizontalBox_3 = Box.createHorizontalBox();
-    	verticalBox.add(horizontalBox_3);
-    	
-    	lblScore = new JLabel("Score:");
-    	lblScore.setFont(lblScore.getFont().deriveFont(lblScore.getFont().getSize() + 15f));
-    	horizontalBox_3.add(lblScore);
-    	lblScore.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	
-    	rigidArea_2 = Box.createRigidArea(new Dimension(20, 20));
-    	horizontalBox_3.add(rigidArea_2);
-    	
-    	lblPts = new JLabel("0 pts");
-    	lblPts.setFont(lblPts.getFont().deriveFont(lblPts.getFont().getSize() + 15f));
-    	horizontalBox_3.add(lblPts);
-    	lblPts.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	
-    	horizontalBox_4 = Box.createHorizontalBox();
-    	horizontalBox_4.setAlignmentY(Component.CENTER_ALIGNMENT);
-    	verticalBox.add(horizontalBox_4);
-    	
-    	lblNextStar = new JLabel("Next Star:");
-    	lblNextStar.setFont(lblNextStar.getFont().deriveFont(lblNextStar.getFont().getSize() + 15f));
-    	horizontalBox_4.add(lblNextStar);
-    	lblNextStar.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	
-    	rigidArea_3 = Box.createRigidArea(new Dimension(20, 20));
-    	horizontalBox_4.add(rigidArea_3);
-    	
-    	lblPts_1 = new JLabel("10 pts");
-    	lblPts_1.setFont(lblPts_1.getFont().deriveFont(lblPts_1.getFont().getSize() + 15f));
-    	horizontalBox_4.add(lblPts_1);
-    	lblPts_1.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	
-    	horizontalBox_5 = Box.createHorizontalBox();
-    	verticalBox.add(horizontalBox_5);
-    	
-    	label_4 = new JLabel("Max Number of Words:");
-    	label_4.setFont(label_4.getFont().deriveFont(label_4.getFont().getSize() + 15f));
-    	horizontalBox_5.add(label_4);
-    	
-    	rigidArea_4 = Box.createRigidArea(new Dimension(20, 20));
-    	horizontalBox_5.add(rigidArea_4);
-    	
-    	label_5 = new JLabel("10");
-    	label_5.setFont(label_5.getFont().deriveFont(label_5.getFont().getSize() + 15f));
-    	horizontalBox_5.add(label_5);
-    	
-    	scrollPane = new JScrollPane();
-    	scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    	panel_1.add(scrollPane);
-    	
-    	lblFoundWords = new JLabel("Found Words");
-    	lblFoundWords.setFont(lblFoundWords.getFont().deriveFont(lblFoundWords.getFont().getSize() + 15f));
-    	scrollPane.setColumnHeaderView(lblFoundWords);
-    	
-    	list = new JList<String>();
-    	list.setFont(list.getFont().deriveFont(list.getFont().getSize() + 10f));
-    	list.setVisibleRowCount(-1);
-    	list.setModel(new AbstractListModel<String>() {
-			private static final long serialVersionUID = -4671828597298661166L;
-			String[] values = new String[] {"1. Dog (12 pts)", "2. Cat (14 pts)", "3. Horse (24 pts)", "4. Red (9 pts)", "5.", "6.", "7.", "8.", "9.", "10.", "11.", "12."};
-    		public int getSize() {
-    			return values.length;
-    		}
-    		public String getElementAt(int index) {
-    			return values[index];
-    		}
-    	});
-    	scrollPane.setViewportView(list);
-    	
-    	boardView = new BoardView();
-    	boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
-    	add(boardView, BorderLayout.EAST);
-    	boardView.setPreferredSize(new Dimension(750, 500));
-    }
+	 * Initializes the view.
+	 */
+	private void initialize() {
+		setBackground(new Color(0, 191, 255));
+		setBorder(new EmptyBorder(20, 20, 20, 20));
+		setLayout(new BorderLayout(0, 0));
+
+		levelNameLabel = new JLabel("Puzzled");
+		levelNameLabel.setForeground(Color.BLACK);
+		levelNameLabel.setFont(levelNameLabel.getFont().deriveFont(levelNameLabel.getFont().getSize() + 50f));
+		add(levelNameLabel, BorderLayout.NORTH);
+
+		infoPanel = new JPanel();
+		infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+		infoPanel.setOpaque(false);
+
+		// set up the buttons
+		buttonsBox = Box.createHorizontalBox();
+		buttonsBox.setBorder(new EmptyBorder(10, 10, 10, 10));
+		// leave button
+		leaveButton = new JButton("Leave");
+		leaveButton.setFont(leaveButton.getFont().deriveFont(leaveButton.getFont().getSize() + 10f));
+		buttonsBox.add(leaveButton);
+
+		buttonsBox.add(Box.createRigidArea(new Dimension(20, 20)));
+		// reset button
+		resetButton = new JButton("Reset");
+		resetButton.setFont(resetButton.getFont().deriveFont(resetButton.getFont().getSize() + 10f));
+		buttonsBox.add(resetButton);
+
+		buttonsBox.add(Box.createRigidArea(new Dimension(20, 20)));
+		// undo button
+		undoButton = new JButton("Undo");
+		undoButton.setFont(undoButton.getFont().deriveFont(undoButton.getFont().getSize() + 10f));
+		buttonsBox.add(undoButton);
+
+		infoPanel.add(buttonsBox);
+
+		// set up the stars
+		starBox = Box.createHorizontalBox();
+		starBox.setBorder(new EmptyBorder(7, 7, 7, 7));
+		starOneLabel = new JLabel();
+		starOneLabel.setIcon(
+				new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
+		starBox.add(starOneLabel);
+
+		starTwoLabel = new JLabel();
+		starTwoLabel.setIcon(
+				new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
+		starBox.add(starTwoLabel);
+
+		starThreeLabel = new JLabel();
+		starThreeLabel.setIcon(
+				new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
+		starBox.add(starThreeLabel);
+		infoPanel.add(starBox);
+
+		// set up the score
+		scoreBox = Box.createHorizontalBox();
+		scoreBox.setBorder(new EmptyBorder(7, 7, 7, 7));
+		// the label for the score
+		scoreLabel = new JLabel("Score:");
+		scoreLabel.setFont(scoreLabel.getFont().deriveFont(scoreLabel.getFont().getSize() + 15f));
+		scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		scoreBox.add(scoreLabel);
+
+		scoreBox.add(Box.createRigidArea(new Dimension(20, 20)));
+		// the value for the score
+		scoreValueLabel = new JLabel("0 pts");
+		scoreValueLabel.setFont(scoreValueLabel.getFont().deriveFont(scoreValueLabel.getFont().getSize() + 15f));
+		scoreValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		scoreBox.add(scoreValueLabel);
+		infoPanel.add(scoreBox);
+
+		// set up next star score
+		nextStarBox = Box.createHorizontalBox();
+		// the label for the next star
+		nextStarLabel = new JLabel("Next Star:");
+		nextStarLabel.setFont(nextStarLabel.getFont().deriveFont(nextStarLabel.getFont().getSize() + 15f));
+		nextStarLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		nextStarBox.add(nextStarLabel);
+
+		nextStarBox.add(Box.createRigidArea(new Dimension(20, 20)));
+		// the value for the next star
+		nextStarValueLabel = new JLabel("10 pts");
+		nextStarValueLabel
+				.setFont(nextStarValueLabel.getFont().deriveFont(nextStarValueLabel.getFont().getSize() + 15f));
+		nextStarValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		nextStarBox.add(nextStarValueLabel);
+
+		// set up max number of words
+		maxNumWordsBox = Box.createHorizontalBox();
+		maxNumWordsBox.setBorder(new EmptyBorder(7, 7, 7, 7));
+		// label for max number of words
+		maxNumWordsLabel = new JLabel("Max Number of Words:");
+		maxNumWordsLabel.setFont(maxNumWordsLabel.getFont().deriveFont(maxNumWordsLabel.getFont().getSize() + 15f));
+		maxNumWordsBox.add(maxNumWordsLabel);
+
+		maxNumWordsBox.add(Box.createRigidArea(new Dimension(20, 20)));
+		// value for the max number of words
+		maxNumWordsValueLabel = new JLabel("10");
+		maxNumWordsValueLabel
+				.setFont(maxNumWordsValueLabel.getFont().deriveFont(maxNumWordsValueLabel.getFont().getSize() + 15f));
+		maxNumWordsBox.add(maxNumWordsValueLabel);
+		infoPanel.add(maxNumWordsBox);
+
+		// set up the scroll pane for found words
+		foundWordsScrollPane = new JScrollPane();
+		foundWordsScrollPane.setBorder(new EmptyBorder(7, 7, 7, 7));
+		foundWordsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		// the title for the scroll pane
+		foundWordsLabel = new JLabel("Found Words");
+		foundWordsLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		foundWordsLabel.setFont(foundWordsLabel.getFont().deriveFont(foundWordsLabel.getFont().getSize() + 15f));
+		foundWordsScrollPane.setColumnHeaderView(foundWordsLabel);
+		// the data for the scroll pane
+		foundWordsList = new JList<String>();
+		foundWordsList.setFont(foundWordsList.getFont().deriveFont(foundWordsList.getFont().getSize() + 10f));
+		foundWordsListModel = new DefaultListModel<String>();
+		for (String element : new String[] { "1. Dog (12 pts)", "2. Cat (14 pts)", "3. Horse (24 pts)",
+				"4. Red (9 pts)", "5. Cat (14 pts)", "6. Cat (14 pts)", "7. Cat (14 pts)", "8. Cat (14 pts)",
+				"9. Cat (14 pts)", "10. Cat (14 pts)", "11. Cat (14 pts)", "12. Cat (14 pts)", "13. Cat (14 pts)",
+				"14. Cat (14 pts)" }) {
+			foundWordsListModel.addElement(element);
+		}
+		foundWordsList.setModel(foundWordsListModel);
+		foundWordsScrollPane.setViewportView(foundWordsList);
+		infoPanel.add(foundWordsScrollPane);
+		add(infoPanel, BorderLayout.CENTER);
+
+		// add the board view
+		boardView = new BoardView();
+		boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
+		boardView.setPreferredSize(new Dimension(750, 750));
+		add(boardView, BorderLayout.EAST);
+	}
 }

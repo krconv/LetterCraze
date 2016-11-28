@@ -5,13 +5,16 @@
  */
 package scandium.lettercraze.view;
 
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import scandium.lettercraze.model.Model;
-import java.awt.Font;
-import java.awt.Color;
 
 /**
  * The LetterCraze application window.
@@ -63,6 +66,12 @@ public class Application extends JFrame {
 	public LevelPlayerView getLevelPlayer() {
 		return levelPlayer;
 	}
+	
+	public void setView(JPanel view) {
+		getContentPane().removeAll();
+		getContentPane().add(view);
+		getContentPane().revalidate();
+	}
 
 	/**
 	 * Initialize the model.
@@ -85,12 +94,70 @@ public class Application extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getContentPane().setFont(null);
-		this.mainMenu = new MainMenuView();
-		mainMenu.setForeground(new Color(0, 0, 0));
-		getContentPane().add(mainMenu);
 		
+		this.mainMenu = new MainMenuView();
 		this.levelPlayer = new LevelPlayerView(null);
+		mainMenu.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	setView(levelPlayer);
+            }
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		levelPlayer.getLeaveButton().addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	setView(levelPlayer);
+            }
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		setView(mainMenu);
 	}
 
 	/**
