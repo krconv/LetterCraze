@@ -68,7 +68,7 @@ public class MainMenuView extends JPanel{
 	 * @return JLabel                                                                            *
 	 * This function returns the JLabel representing the Title                                   *
 	 * ~~~~~                                                                               ~~~~~ */
-	public JLabel GetTitleLabel(){
+	public JLabel getTitleLabel(){
 		return title_label;
 	}
 	
@@ -77,7 +77,7 @@ public class MainMenuView extends JPanel{
 	 * @return JButton                                                                           *
 	 * This function returns the JButton that is used to create a new level.                     *
 	 * ~~~~~                                                                               ~~~~~ */
-	public JButton GetNewLevelButton(){
+	public JButton getNewLevelButton(){
 		return new_level_button;
 	}
 	
@@ -86,7 +86,7 @@ public class MainMenuView extends JPanel{
 	 * @return JButton                                                                           *
 	 * This function returns the JButton that is used to edit a selected level.                  *
 	 * ~~~~~                                                                               ~~~~~ */
-	public JButton GetEditLevelButton(){
+	public JButton getEditLevelButton(){
 		return edit_level_button;
 	}
 	
@@ -95,7 +95,7 @@ public class MainMenuView extends JPanel{
 	 * @return JButton                                                                           *
 	 * This function returns the JButton that is used to delete a selected level.                *
 	 * ~~~~~                                                                               ~~~~~ */
-	public JButton GetDeleteLevelButton(){
+	public JButton getDeleteLevelButton(){
 		return delete_level_button;
 	}
 

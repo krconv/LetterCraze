@@ -7,17 +7,11 @@ package scandium.lettercraze.view;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-
-import java.awt.SystemColor;
-import javax.swing.JTextPane;
 
 /**
  * 
@@ -31,7 +25,7 @@ public class BoardView extends JPanel {
 	public BoardView() {
 		setLayout(new GridLayout(6, 6, 0, 0));
 		setOpaque(false);
-		
+
 		JLabel label_1 = new JLabel("A");
 		label_1.setOpaque(true);
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -39,7 +33,7 @@ public class BoardView extends JPanel {
 		label_1.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_1.setBackground(Color.WHITE);
 		add(label_1);
-		
+
 		JLabel label_2 = new JLabel("A");
 		label_2.setOpaque(true);
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -47,7 +41,7 @@ public class BoardView extends JPanel {
 		label_2.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_2.setBackground(Color.WHITE);
 		add(label_2);
-		
+
 		JLabel label_3 = new JLabel("A");
 		label_3.setOpaque(true);
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -55,7 +49,7 @@ public class BoardView extends JPanel {
 		label_3.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_3.setBackground(Color.WHITE);
 		add(label_3);
-		
+
 		JLabel label_4 = new JLabel("A");
 		label_4.setOpaque(true);
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -63,7 +57,7 @@ public class BoardView extends JPanel {
 		label_4.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_4.setBackground(Color.WHITE);
 		add(label_4);
-		
+
 		JLabel label_5 = new JLabel("A");
 		label_5.setOpaque(true);
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,7 +65,7 @@ public class BoardView extends JPanel {
 		label_5.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_5.setBackground(Color.WHITE);
 		add(label_5);
-		
+
 		JLabel label_6 = new JLabel("A");
 		label_6.setOpaque(true);
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
@@ -79,7 +73,7 @@ public class BoardView extends JPanel {
 		label_6.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_6.setBackground(Color.WHITE);
 		add(label_6);
-		
+
 		JLabel label_7 = new JLabel("A");
 		label_7.setOpaque(true);
 		label_7.setHorizontalAlignment(SwingConstants.CENTER);
@@ -87,7 +81,7 @@ public class BoardView extends JPanel {
 		label_7.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_7.setBackground(Color.WHITE);
 		add(label_7);
-		
+
 		JLabel label_8 = new JLabel("A");
 		label_8.setOpaque(true);
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,7 +89,7 @@ public class BoardView extends JPanel {
 		label_8.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_8.setBackground(Color.WHITE);
 		add(label_8);
-		
+
 		JLabel label_9 = new JLabel("A");
 		label_9.setOpaque(true);
 		label_9.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,7 +97,7 @@ public class BoardView extends JPanel {
 		label_9.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_9.setBackground(Color.WHITE);
 		add(label_9);
-		
+
 		JLabel label_10 = new JLabel("A");
 		label_10.setOpaque(true);
 		label_10.setHorizontalAlignment(SwingConstants.CENTER);
@@ -111,7 +105,7 @@ public class BoardView extends JPanel {
 		label_10.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_10.setBackground(Color.WHITE);
 		add(label_10);
-		
+
 		JLabel label_11 = new JLabel("A");
 		label_11.setOpaque(true);
 		label_11.setHorizontalAlignment(SwingConstants.CENTER);
@@ -119,7 +113,7 @@ public class BoardView extends JPanel {
 		label_11.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_11.setBackground(Color.WHITE);
 		add(label_11);
-		
+
 		JLabel label_12 = new JLabel("A");
 		label_12.setOpaque(true);
 		label_12.setHorizontalAlignment(SwingConstants.CENTER);
@@ -127,7 +121,7 @@ public class BoardView extends JPanel {
 		label_12.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_12.setBackground(Color.WHITE);
 		add(label_12);
-		
+
 		JLabel label_13 = new JLabel("A");
 		label_13.setOpaque(true);
 		label_13.setHorizontalAlignment(SwingConstants.CENTER);
@@ -135,7 +129,7 @@ public class BoardView extends JPanel {
 		label_13.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_13.setBackground(Color.WHITE);
 		add(label_13);
-		
+
 		JLabel label_14 = new JLabel("A");
 		label_14.setOpaque(true);
 		label_14.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,7 +137,7 @@ public class BoardView extends JPanel {
 		label_14.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_14.setBackground(Color.WHITE);
 		add(label_14);
-		
+
 		JLabel label_15 = new JLabel("A");
 		label_15.setOpaque(true);
 		label_15.setHorizontalAlignment(SwingConstants.CENTER);
@@ -151,7 +145,7 @@ public class BoardView extends JPanel {
 		label_15.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_15.setBackground(Color.WHITE);
 		add(label_15);
-		
+
 		JLabel label_16 = new JLabel("A");
 		label_16.setOpaque(true);
 		label_16.setHorizontalAlignment(SwingConstants.CENTER);
@@ -159,7 +153,7 @@ public class BoardView extends JPanel {
 		label_16.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_16.setBackground(Color.WHITE);
 		add(label_16);
-		
+
 		JLabel label_17 = new JLabel("A");
 		label_17.setOpaque(true);
 		label_17.setHorizontalAlignment(SwingConstants.CENTER);
@@ -167,7 +161,7 @@ public class BoardView extends JPanel {
 		label_17.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_17.setBackground(Color.WHITE);
 		add(label_17);
-		
+
 		JLabel label_18 = new JLabel("A");
 		label_18.setOpaque(true);
 		label_18.setHorizontalAlignment(SwingConstants.CENTER);
@@ -175,7 +169,7 @@ public class BoardView extends JPanel {
 		label_18.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_18.setBackground(Color.WHITE);
 		add(label_18);
-		
+
 		JLabel label_19 = new JLabel("A");
 		label_19.setOpaque(true);
 		label_19.setHorizontalAlignment(SwingConstants.CENTER);
@@ -183,7 +177,7 @@ public class BoardView extends JPanel {
 		label_19.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_19.setBackground(Color.WHITE);
 		add(label_19);
-		
+
 		JLabel label_20 = new JLabel("A");
 		label_20.setOpaque(true);
 		label_20.setHorizontalAlignment(SwingConstants.CENTER);
@@ -191,7 +185,7 @@ public class BoardView extends JPanel {
 		label_20.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_20.setBackground(Color.WHITE);
 		add(label_20);
-		
+
 		JLabel label_21 = new JLabel("A");
 		label_21.setOpaque(true);
 		label_21.setHorizontalAlignment(SwingConstants.CENTER);
@@ -199,7 +193,7 @@ public class BoardView extends JPanel {
 		label_21.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_21.setBackground(Color.WHITE);
 		add(label_21);
-		
+
 		JLabel label_22 = new JLabel("A");
 		label_22.setOpaque(true);
 		label_22.setHorizontalAlignment(SwingConstants.CENTER);
@@ -207,7 +201,7 @@ public class BoardView extends JPanel {
 		label_22.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_22.setBackground(Color.WHITE);
 		add(label_22);
-		
+
 		JLabel label_23 = new JLabel("A");
 		label_23.setOpaque(true);
 		label_23.setHorizontalAlignment(SwingConstants.CENTER);
@@ -215,7 +209,7 @@ public class BoardView extends JPanel {
 		label_23.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_23.setBackground(Color.WHITE);
 		add(label_23);
-		
+
 		JLabel label_24 = new JLabel("A");
 		label_24.setOpaque(true);
 		label_24.setHorizontalAlignment(SwingConstants.CENTER);
@@ -223,7 +217,7 @@ public class BoardView extends JPanel {
 		label_24.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_24.setBackground(Color.WHITE);
 		add(label_24);
-		
+
 		JLabel label_25 = new JLabel("A");
 		label_25.setOpaque(true);
 		label_25.setHorizontalAlignment(SwingConstants.CENTER);
@@ -231,7 +225,7 @@ public class BoardView extends JPanel {
 		label_25.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_25.setBackground(Color.WHITE);
 		add(label_25);
-		
+
 		JLabel label_26 = new JLabel("A");
 		label_26.setOpaque(true);
 		label_26.setHorizontalAlignment(SwingConstants.CENTER);
@@ -239,7 +233,7 @@ public class BoardView extends JPanel {
 		label_26.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_26.setBackground(Color.WHITE);
 		add(label_26);
-		
+
 		JLabel label_27 = new JLabel("A");
 		label_27.setOpaque(true);
 		label_27.setHorizontalAlignment(SwingConstants.CENTER);
@@ -247,7 +241,7 @@ public class BoardView extends JPanel {
 		label_27.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_27.setBackground(Color.WHITE);
 		add(label_27);
-		
+
 		JLabel label_28 = new JLabel("A");
 		label_28.setOpaque(true);
 		label_28.setHorizontalAlignment(SwingConstants.CENTER);
@@ -255,7 +249,7 @@ public class BoardView extends JPanel {
 		label_28.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_28.setBackground(Color.WHITE);
 		add(label_28);
-		
+
 		JLabel label_29 = new JLabel("A");
 		label_29.setOpaque(true);
 		label_29.setHorizontalAlignment(SwingConstants.CENTER);
@@ -263,7 +257,7 @@ public class BoardView extends JPanel {
 		label_29.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_29.setBackground(Color.WHITE);
 		add(label_29);
-		
+
 		JLabel label_30 = new JLabel("A");
 		label_30.setOpaque(true);
 		label_30.setHorizontalAlignment(SwingConstants.CENTER);
@@ -271,7 +265,7 @@ public class BoardView extends JPanel {
 		label_30.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_30.setBackground(Color.WHITE);
 		add(label_30);
-		
+
 		JLabel label_31 = new JLabel("A");
 		label_31.setOpaque(true);
 		label_31.setHorizontalAlignment(SwingConstants.CENTER);
@@ -279,7 +273,7 @@ public class BoardView extends JPanel {
 		label_31.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_31.setBackground(Color.WHITE);
 		add(label_31);
-		
+
 		JLabel label_32 = new JLabel("A");
 		label_32.setOpaque(true);
 		label_32.setHorizontalAlignment(SwingConstants.CENTER);
@@ -287,7 +281,7 @@ public class BoardView extends JPanel {
 		label_32.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_32.setBackground(Color.WHITE);
 		add(label_32);
-		
+
 		JLabel label_33 = new JLabel("A");
 		label_33.setOpaque(true);
 		label_33.setHorizontalAlignment(SwingConstants.CENTER);
@@ -295,7 +289,7 @@ public class BoardView extends JPanel {
 		label_33.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_33.setBackground(Color.WHITE);
 		add(label_33);
-		
+
 		JLabel label_34 = new JLabel("A");
 		label_34.setOpaque(true);
 		label_34.setHorizontalAlignment(SwingConstants.CENTER);
@@ -303,7 +297,7 @@ public class BoardView extends JPanel {
 		label_34.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_34.setBackground(Color.WHITE);
 		add(label_34);
-		
+
 		JLabel label_35 = new JLabel("A");
 		label_35.setOpaque(true);
 		label_35.setHorizontalAlignment(SwingConstants.CENTER);
@@ -311,7 +305,7 @@ public class BoardView extends JPanel {
 		label_35.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		label_35.setBackground(Color.WHITE);
 		add(label_35);
-		
+
 		JLabel label_36 = new JLabel("A");
 		label_36.setOpaque(true);
 		label_36.setHorizontalAlignment(SwingConstants.CENTER);
@@ -320,6 +314,5 @@ public class BoardView extends JPanel {
 		label_36.setBackground(Color.WHITE);
 		add(label_36);
 	}
-
 
 }

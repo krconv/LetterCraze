@@ -141,11 +141,11 @@ public class LevelBuilder extends JFrame{
 			/* Fill some random letters */
 			level_builder.level_editor.board_view.getBoardSquares()[1][2].setText("J");
 			Thread.sleep(500);
-			level_builder.level_editor.board_view.getBoardSquares()[2][3].setText("E");
+			level_builder.level_editor.board_view.getBoardSquares()[1][3].setText("E");
 			Thread.sleep(500);
-			level_builder.level_editor.board_view.getBoardSquares()[3][4].setText("F");
+			level_builder.level_editor.board_view.getBoardSquares()[1][4].setText("F");
 			Thread.sleep(500);
-			level_builder.level_editor.board_view.getBoardSquares()[4][5].setText("F");
+			level_builder.level_editor.board_view.getBoardSquares()[1][5].setText("F");
 			Thread.sleep(500);
 			/* Re-enable the 2 of the squares */ 
 			level_builder.level_editor.board_view.getBoardSquares()[1][1].setVisible(true);
