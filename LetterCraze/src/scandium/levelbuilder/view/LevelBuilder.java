@@ -16,6 +16,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import scandium.lettercraze.view.SplashScreen;
+
 public class LevelBuilder extends JFrame{
 
 	/* Serial ID                                                                                 */
@@ -116,10 +118,15 @@ public class LevelBuilder extends JFrame{
 	 * Main Method                                                                               *
 	 * ~~~~~                                                                               ~~~~~ */
 	public static void main(String[] args){
+		
+		SplashScreen lcSplash = new SplashScreen(5000);
+		lcSplash.displaySplash();
+		
 		/* Create LevelBuilder */
 		LevelBuilder level_builder = new LevelBuilder();
 		/* Initialize LevelBuilder */
 		level_builder.initialize();
+		
 		
 		/* Simple Script to show both Windows and some 'functionality' */
 		try{
