@@ -15,6 +15,7 @@ import scandium.lettercraze.model.Model;
 import java.awt.BorderLayout;
 import javax.swing.Box;
 import java.awt.Component;
+
 import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -86,6 +87,8 @@ public class MainMenuView extends JPanel {
     private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		
+		levelIconViews = new ArrayList<LevelIconView>();
+		
 		titleLabel = new JLabel("LetterCraze");
 		titleLabel.setForeground(new Color(0, 0, 0));
 		titleLabel.setFont(titleLabel.getFont().deriveFont(titleLabel.getFont().getSize() + 50f));
@@ -98,20 +101,24 @@ public class MainMenuView extends JPanel {
 		levelIconView.getLevelNameLabel().setText("Welcome");
 		levelIconView.setBackground(new Color(255, 0, 0));
 		levelsPanel.add(levelIconView);
+		levelIconViews.add(levelIconView);
 		LevelIconView levelIconView_1 = new LevelIconView();
 		levelIconView_1.getStarThreeLabel().setIcon(new ImageIcon(MainMenuView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
 		levelIconView_1.getLevelNameLabel().setText("Wacko!");
 		levelIconView_1.setBackground(new Color(50, 205, 50));
+		levelIconViews.add(levelIconView_1);
 		levelsPanel.add(levelIconView_1);
 		LevelIconView levelIconView_2 = new LevelIconView();
 		levelIconView_2.getStarThreeLabel().setIcon(new ImageIcon(MainMenuView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
 		levelIconView_2.getHighScoreLabel().setText("4 words");
 		levelIconView_2.getLevelNameLabel().setText("Hmm...");
 		levelIconView_2.setBackground(new Color(147, 112, 219));
+		levelIconViews.add(levelIconView_2);
 		levelsPanel.add(levelIconView_2);
 		LevelIconView levelIconView_3 = new LevelIconView();
 		levelIconView_3.getLevelNameLabel().setText("Getting Difficult");
 		levelIconView_3.setBackground(new Color(255, 0, 0));
+		levelIconViews.add(levelIconView_3);
 		levelsPanel.add(levelIconView_3);
 		LevelIconView levelIconView_4 = new LevelIconView();
 		levelIconView_4.getStarOneLabel().setIcon(new ImageIcon(MainMenuView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
@@ -119,6 +126,7 @@ public class MainMenuView extends JPanel {
 		levelIconView_4.getStarThreeLabel().setIcon(new ImageIcon(MainMenuView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
 		levelIconView_4.setBackground(new Color(50, 205, 50));
 		levelIconView_4.getLevelNameLabel().setText("Yahooo");
+		levelIconViews.add(levelIconView_4);
 		levelsPanel.add(levelIconView_4);
 		LevelIconView levelIconView_5 = new LevelIconView();
 		levelIconView_5.getHighScoreLabel().setText("");
@@ -127,6 +135,7 @@ public class MainMenuView extends JPanel {
 		levelIconView_5.getStarTwoLabel().setIcon(null);
 		levelIconView_5.getStarThreeLabel().setIcon(null);
 		levelIconView_5.getLevelNameLabel().setText("Violets");
+		levelIconViews.add(levelIconView_5);
 		levelsPanel.add(levelIconView_5);
 		LevelIconView levelIconView_6 = new LevelIconView();
 		levelIconView_6.getHighScoreLabel().setText("");
@@ -135,6 +144,7 @@ public class MainMenuView extends JPanel {
 		levelIconView_6.getStarTwoLabel().setIcon(null);
 		levelIconView_6.getStarThreeLabel().setIcon(null);
 		levelIconView_6.getLevelNameLabel().setText("Let's Go!");
+		levelIconViews.add(levelIconView_6);
 		levelsPanel.add(levelIconView_6);
 		LevelIconView levelIconView_7 = new LevelIconView();
 		levelIconView_7.getHighScoreLabel().setText("");
@@ -143,6 +153,7 @@ public class MainMenuView extends JPanel {
 		levelIconView_7.getStarTwoLabel().setIcon(null);
 		levelIconView_7.getStarThreeLabel().setIcon(null);
 		levelIconView_7.getLevelNameLabel().setText("Trumped");
+		levelIconViews.add(levelIconView_7);
 		levelsPanel.add(levelIconView_7);
 		add(levelsPanel, BorderLayout.CENTER);
 		
@@ -159,5 +170,8 @@ public class MainMenuView extends JPanel {
 		Component verticalStrut = Box.createVerticalStrut(10);
 		buttonPanel.add(verticalStrut);
 		add(buttonPanel, BorderLayout.EAST);
+		
     }
+    
+ 
 }
