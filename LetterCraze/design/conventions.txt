@@ -1,0 +1,13 @@
+Views
+	Allowed to have logic that only modifies itself
+	Initialize functions are meant to be called from constructor
+	
+Comments
+	Click on anything, press ALT+SHIFT+J generates the required doc tags
+	Pre and Post conditions
+	/**
+	 * Creates a new level editor view
+	 * Precondition: Nothing
+	 * Postcondition: A new level editor is created
+	 * @param model The model of the level editor
+	 */
