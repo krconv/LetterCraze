@@ -1,6 +1,5 @@
 package scandium.lettercraze.view;
 import java.awt.*;
-import java.net.URL;
 
 import javax.swing.*;
 
