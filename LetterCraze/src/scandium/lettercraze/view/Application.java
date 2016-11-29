@@ -75,6 +75,9 @@ public class Application extends JFrame {
 	 * Initialize the view.
 	 */
 	private void initializeView() {
+		SplashScreen lcSplash = new SplashScreen(5000);
+		lcSplash.displaySplash();
+		
 		setTitle("LetterCraze");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Segoe WP Light", Font.PLAIN, 12));
