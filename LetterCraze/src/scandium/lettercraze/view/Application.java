@@ -128,8 +128,7 @@ public class Application extends JFrame {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// if we can't change to look, who cares
 		}
 		this.mainMenu = new MainMenuView();
 		this.levelPlayer = new LevelPlayerView(null);
