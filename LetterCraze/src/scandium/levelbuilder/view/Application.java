@@ -12,6 +12,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import scandium.levelbuilder.controller.CreateNewLevelController;
+import scandium.levelbuilder.controller.LeaveLevelEditorController;
 import scandium.levelbuilder.model.Model;
 
 public class Application extends JFrame{
@@ -67,6 +69,10 @@ public class Application extends JFrame{
 		setVisible(true);
 		setSize(WIDTH, HEIGHT);
 		pack();
+		
+		//controllers
+		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
+		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));
 	}
 	
 	/* ~~~~~                                                                               ~~~~~ *
