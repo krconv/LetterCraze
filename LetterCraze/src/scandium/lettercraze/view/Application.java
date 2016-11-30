@@ -5,10 +5,6 @@
  */
 package scandium.lettercraze.view;
 
-import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -95,7 +91,6 @@ public class Application extends JFrame {
 
 		setTitle("LetterCraze");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Segoe WP Light", Font.PLAIN, 12));
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
@@ -112,14 +107,7 @@ public class Application extends JFrame {
 	 * Initialize the controllers.
 	 */
 	private void initializeControllers() {
-		mainMenu.getLevelIconViews().get(0).addMouseListener(new OpenLevelController(model,this));
-//		mainMenu.getLevelIconViews().get(1).addMouseListener(new OpenLevelController(model,this));
-//		mainMenu.getLevelIconViews().get(2).addMouseListener(new OpenLevelController(model,this));
-//		mainMenu.getLevelIconViews().get(3).addMouseListener(new OpenLevelController(model,this));
-//		mainMenu.getLevelIconViews().get(4).addMouseListener(new OpenLevelController(model,this));
-//		mainMenu.getLevelIconViews().get(5).addMouseListener(new OpenLevelController(model,this));
-//		mainMenu.getLevelIconViews().get(6).addMouseListener(new OpenLevelController(model,this));
-//		mainMenu.getLevelIconViews().get(7).addMouseListener(new OpenLevelController(model,this));
+		mainMenu.getLevelIconView(0).addMouseListener(new OpenLevelController(model,this));
 		levelPlayer.getLeaveButton().addActionListener(new ExitLevelController(model,this));
 	}
 }
