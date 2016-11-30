@@ -6,10 +6,7 @@ import java.awt.event.MouseEvent;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
-/**
- * @author Felix
- */
-public class CreateNewLevelController extends MouseAdapter{
+public class LeaveLevelEditorController extends MouseAdapter{
 
 	//attributes
     Model model;
@@ -20,7 +17,7 @@ public class CreateNewLevelController extends MouseAdapter{
      * @param model 
      * @param app
      */
-    public CreateNewLevelController(Model m, Application a) {
+    public LeaveLevelEditorController(Model m, Application a) {
         this.model = m;
         this.app = a;
     }
@@ -30,7 +27,6 @@ public class CreateNewLevelController extends MouseAdapter{
      * @param MouseEvent me
      */
     public void mouseClicked(MouseEvent me) {
-    	app.setViewLevelEditor();
+    	app.setViewMainMenu();
     }
-
 }

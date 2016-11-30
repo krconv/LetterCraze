@@ -20,6 +20,7 @@ public class LevelBuilder{
 //		SplashScreen splash = new SplashScreen(5000);
 //		splash.displaySplash();
 		Application app = new Application();
+		
 		try{
 			Thread.sleep(500);
 			app.setViewLevelEditor();
@@ -39,5 +40,6 @@ public class LevelBuilder{
 		}catch(Exception e){
 			
 		}
+		
 	}
 }
