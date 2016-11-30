@@ -1,10 +1,13 @@
 package scandium.lettercraze.view;
 import java.awt.*;
-import java.net.URL;
 
 import javax.swing.*;
 
 public class SplashScreen extends JWindow {
+	/**
+	 * For some reason it wouldn't work without this...
+	 */
+	private static final long serialVersionUID = 1L;
 	private int time;
 	public SplashScreen(int t){
 		this.time = t;
