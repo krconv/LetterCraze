@@ -11,6 +11,7 @@ import scandium.lettercraze.view.Application;
  */
 public class OpenLevelController extends MouseAdapter{
 	
+	@SuppressWarnings("unused")
 	private Model model;
     private Application app;
     

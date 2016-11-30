@@ -10,8 +10,12 @@ package scandium.levelbuilder.view;
 
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+import scandium.lettercraze.view.LevelIconView;
 import scandium.levelbuilder.controller.CreateNewLevelController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
 import scandium.levelbuilder.model.Model;
@@ -115,5 +119,27 @@ public class Application extends JFrame{
 		level_editor.setVisible(true);
 	}
 
+	/**
+	 * Shows the splash screen.
+	 */
+	public void showSplashScreen() {
+		main_menu.setVisible(false);
+		level_editor.setVisible(false);
+		JPanel splashScreen = new JPanel();
+		splashScreen.add(new JLabel(new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/lettercraze-splash.gif"))));
+		add(splashScreen);
+		splashScreen.setVisible(true);
+		setResizable(false);
+		setVisible(true);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		splashScreen.setVisible(false);
+		remove(splashScreen);
+		main_menu.setVisible(true);
+	}
 	
 }

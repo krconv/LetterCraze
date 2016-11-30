@@ -11,6 +11,7 @@ import scandium.lettercraze.view.Application;
  */
 public class ExitLevelController implements ActionListener{
 
+	@SuppressWarnings("unused")
 	private Model model;
 	private Application app;
 
