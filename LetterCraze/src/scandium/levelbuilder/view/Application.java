@@ -12,6 +12,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import scandium.levelbuilder.view.SplashScreen;
 import scandium.levelbuilder.model.Model;
 
 public class Application extends JFrame{
@@ -54,6 +55,9 @@ public class Application extends JFrame{
 	 * Initializes the LevelBuilder View and Controllers
 	 */
 	void initialize(){
+		SplashScreen lcSplash = new SplashScreen(3000);
+		lcSplash.displaySplash();
+		
 		this.main_menu = new MainMenuView();
 		this.level_editor = new LevelEditorView();
 		/* Add both panels to the view                                                           */ 

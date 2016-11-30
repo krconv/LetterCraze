@@ -86,7 +86,7 @@ public class Application extends JFrame {
 	 * Initialize the view.
 	 */
 	private void initializeView() {
-		SplashScreen lcSplash = new SplashScreen(5000);
+		SplashScreen lcSplash = new SplashScreen(3000);
 		lcSplash.displaySplash();
 
 		setTitle("LetterCraze");
