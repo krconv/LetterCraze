@@ -1,44 +1,36 @@
 package scandium.levelbuilder.controller;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium
+ * @author Felix
  */
-public class CreateNewLevelController {
+public class CreateNewLevelController extends MouseAdapter{
 
-    /**
-     * Default constructor
-     */
-    public CreateNewLevelController() {
-    }
-
-    /**
-     * 
-     */
+	//attributes
     Model model;
-
-    /**
-     * 
-     */
     Application app;
 
+    
     /**
      * @param model 
      * @param app
      */
-    public CreateNewLevelController(Model model, Application app) {
-        // TODO implement here
+    public CreateNewLevelController(Model m, Application a) {
+        this.model = m;
+        this.app = a;
     }
 
+    
     /**
-     * @param ActionEvent ae
+     * @param MouseEvent me
      */
-    public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
+    public void mouseClicked(MouseEvent me) {
+    	app.setViewLevelEditor();
     }
 
 }
