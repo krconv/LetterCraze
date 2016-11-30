@@ -26,7 +26,7 @@ public class BoardView extends JPanel {
 		setLayout(new GridLayout(6, 6, 0, 0));
 		setOpaque(false);
 
-		JLabel label_1 = new JLabel("A");
+		JLabel label_1 = new JLabel("D");
 		label_1.setOpaque(true);
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setFont(label_1.getFont().deriveFont(label_1.getFont().getSize() + 20f));
@@ -34,7 +34,7 @@ public class BoardView extends JPanel {
 		label_1.setBackground(Color.WHITE);
 		add(label_1);
 
-		JLabel label_2 = new JLabel("A");
+		JLabel label_2 = new JLabel("N");
 		label_2.setOpaque(true);
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(label_2.getFont().deriveFont(label_2.getFont().getSize() + 20f));
@@ -42,7 +42,7 @@ public class BoardView extends JPanel {
 		label_2.setBackground(Color.WHITE);
 		add(label_2);
 
-		JLabel label_3 = new JLabel("A");
+		JLabel label_3 = new JLabel("P");
 		label_3.setOpaque(true);
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(label_3.getFont().deriveFont(label_3.getFont().getSize() + 20f));
@@ -50,7 +50,7 @@ public class BoardView extends JPanel {
 		label_3.setBackground(Color.WHITE);
 		add(label_3);
 
-		JLabel label_4 = new JLabel("A");
+		JLabel label_4 = new JLabel("Z");
 		label_4.setOpaque(true);
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
 		label_4.setFont(label_4.getFont().deriveFont(label_4.getFont().getSize() + 20f));
@@ -58,7 +58,7 @@ public class BoardView extends JPanel {
 		label_4.setBackground(Color.WHITE);
 		add(label_4);
 
-		JLabel label_5 = new JLabel("A");
+		JLabel label_5 = new JLabel("U");
 		label_5.setOpaque(true);
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
 		label_5.setFont(label_5.getFont().deriveFont(label_5.getFont().getSize() + 20f));
@@ -66,7 +66,7 @@ public class BoardView extends JPanel {
 		label_5.setBackground(Color.WHITE);
 		add(label_5);
 
-		JLabel label_6 = new JLabel("A");
+		JLabel label_6 = new JLabel("K");
 		label_6.setOpaque(true);
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(label_6.getFont().deriveFont(label_6.getFont().getSize() + 20f));
@@ -74,7 +74,7 @@ public class BoardView extends JPanel {
 		label_6.setBackground(Color.WHITE);
 		add(label_6);
 
-		JLabel label_7 = new JLabel("A");
+		JLabel label_7 = new JLabel("F");
 		label_7.setOpaque(true);
 		label_7.setHorizontalAlignment(SwingConstants.CENTER);
 		label_7.setFont(label_7.getFont().deriveFont(label_7.getFont().getSize() + 20f));
@@ -82,7 +82,7 @@ public class BoardView extends JPanel {
 		label_7.setBackground(Color.WHITE);
 		add(label_7);
 
-		JLabel label_8 = new JLabel("A");
+		JLabel label_8 = new JLabel("O");
 		label_8.setOpaque(true);
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
 		label_8.setFont(label_8.getFont().deriveFont(label_8.getFont().getSize() + 20f));
@@ -90,7 +90,7 @@ public class BoardView extends JPanel {
 		label_8.setBackground(Color.WHITE);
 		add(label_8);
 
-		JLabel label_9 = new JLabel("A");
+		JLabel label_9 = new JLabel("J");
 		label_9.setOpaque(true);
 		label_9.setHorizontalAlignment(SwingConstants.CENTER);
 		label_9.setFont(label_9.getFont().deriveFont(label_9.getFont().getSize() + 20f));
@@ -98,7 +98,7 @@ public class BoardView extends JPanel {
 		label_9.setBackground(Color.WHITE);
 		add(label_9);
 
-		JLabel label_10 = new JLabel("A");
+		JLabel label_10 = new JLabel("C");
 		label_10.setOpaque(true);
 		label_10.setHorizontalAlignment(SwingConstants.CENTER);
 		label_10.setFont(label_10.getFont().deriveFont(label_10.getFont().getSize() + 20f));
@@ -106,7 +106,7 @@ public class BoardView extends JPanel {
 		label_10.setBackground(Color.WHITE);
 		add(label_10);
 
-		JLabel label_11 = new JLabel("A");
+		JLabel label_11 = new JLabel("B");
 		label_11.setOpaque(true);
 		label_11.setHorizontalAlignment(SwingConstants.CENTER);
 		label_11.setFont(label_11.getFont().deriveFont(label_11.getFont().getSize() + 20f));
@@ -114,7 +114,7 @@ public class BoardView extends JPanel {
 		label_11.setBackground(Color.WHITE);
 		add(label_11);
 
-		JLabel label_12 = new JLabel("A");
+		JLabel label_12 = new JLabel("Y");
 		label_12.setOpaque(true);
 		label_12.setHorizontalAlignment(SwingConstants.CENTER);
 		label_12.setFont(label_12.getFont().deriveFont(label_12.getFont().getSize() + 20f));
@@ -122,7 +122,7 @@ public class BoardView extends JPanel {
 		label_12.setBackground(Color.WHITE);
 		add(label_12);
 
-		JLabel label_13 = new JLabel("A");
+		JLabel label_13 = new JLabel("E");
 		label_13.setOpaque(true);
 		label_13.setHorizontalAlignment(SwingConstants.CENTER);
 		label_13.setFont(label_13.getFont().deriveFont(label_13.getFont().getSize() + 20f));
@@ -130,7 +130,7 @@ public class BoardView extends JPanel {
 		label_13.setBackground(Color.WHITE);
 		add(label_13);
 
-		JLabel label_14 = new JLabel("A");
+		JLabel label_14 = new JLabel("L");
 		label_14.setOpaque(true);
 		label_14.setHorizontalAlignment(SwingConstants.CENTER);
 		label_14.setFont(label_14.getFont().deriveFont(label_14.getFont().getSize() + 20f));
@@ -138,7 +138,7 @@ public class BoardView extends JPanel {
 		label_14.setBackground(Color.WHITE);
 		add(label_14);
 
-		JLabel label_15 = new JLabel("A");
+		JLabel label_15 = new JLabel("E");
 		label_15.setOpaque(true);
 		label_15.setHorizontalAlignment(SwingConstants.CENTER);
 		label_15.setFont(label_15.getFont().deriveFont(label_15.getFont().getSize() + 20f));
@@ -146,7 +146,7 @@ public class BoardView extends JPanel {
 		label_15.setBackground(Color.WHITE);
 		add(label_15);
 
-		JLabel label_16 = new JLabel("A");
+		JLabel label_16 = new JLabel("V");
 		label_16.setOpaque(true);
 		label_16.setHorizontalAlignment(SwingConstants.CENTER);
 		label_16.setFont(label_16.getFont().deriveFont(label_16.getFont().getSize() + 20f));
@@ -154,7 +154,7 @@ public class BoardView extends JPanel {
 		label_16.setBackground(Color.WHITE);
 		add(label_16);
 
-		JLabel label_17 = new JLabel("A");
+		JLabel label_17 = new JLabel("H");
 		label_17.setOpaque(true);
 		label_17.setHorizontalAlignment(SwingConstants.CENTER);
 		label_17.setFont(label_17.getFont().deriveFont(label_17.getFont().getSize() + 20f));
@@ -162,7 +162,7 @@ public class BoardView extends JPanel {
 		label_17.setBackground(Color.WHITE);
 		add(label_17);
 
-		JLabel label_18 = new JLabel("A");
+		JLabel label_18 = new JLabel("M");
 		label_18.setOpaque(true);
 		label_18.setHorizontalAlignment(SwingConstants.CENTER);
 		label_18.setFont(label_18.getFont().deriveFont(label_18.getFont().getSize() + 20f));
@@ -170,7 +170,7 @@ public class BoardView extends JPanel {
 		label_18.setBackground(Color.WHITE);
 		add(label_18);
 
-		JLabel label_19 = new JLabel("A");
+		JLabel label_19 = new JLabel("E");
 		label_19.setOpaque(true);
 		label_19.setHorizontalAlignment(SwingConstants.CENTER);
 		label_19.setFont(label_19.getFont().deriveFont(label_19.getFont().getSize() + 20f));
@@ -178,7 +178,7 @@ public class BoardView extends JPanel {
 		label_19.setBackground(Color.WHITE);
 		add(label_19);
 
-		JLabel label_20 = new JLabel("A");
+		JLabel label_20 = new JLabel("S");
 		label_20.setOpaque(true);
 		label_20.setHorizontalAlignment(SwingConstants.CENTER);
 		label_20.setFont(label_20.getFont().deriveFont(label_20.getFont().getSize() + 20f));
@@ -186,7 +186,7 @@ public class BoardView extends JPanel {
 		label_20.setBackground(Color.WHITE);
 		add(label_20);
 
-		JLabel label_21 = new JLabel("A");
+		JLabel label_21 = new JLabel("X");
 		label_21.setOpaque(true);
 		label_21.setHorizontalAlignment(SwingConstants.CENTER);
 		label_21.setFont(label_21.getFont().deriveFont(label_21.getFont().getSize() + 20f));
@@ -194,7 +194,7 @@ public class BoardView extends JPanel {
 		label_21.setBackground(Color.WHITE);
 		add(label_21);
 
-		JLabel label_22 = new JLabel("A");
+		JLabel label_22 = new JLabel("R");
 		label_22.setOpaque(true);
 		label_22.setHorizontalAlignment(SwingConstants.CENTER);
 		label_22.setFont(label_22.getFont().deriveFont(label_22.getFont().getSize() + 20f));
@@ -202,7 +202,7 @@ public class BoardView extends JPanel {
 		label_22.setBackground(Color.WHITE);
 		add(label_22);
 
-		JLabel label_23 = new JLabel("A");
+		JLabel label_23 = new JLabel("G");
 		label_23.setOpaque(true);
 		label_23.setHorizontalAlignment(SwingConstants.CENTER);
 		label_23.setFont(label_23.getFont().deriveFont(label_23.getFont().getSize() + 20f));
@@ -210,7 +210,7 @@ public class BoardView extends JPanel {
 		label_23.setBackground(Color.WHITE);
 		add(label_23);
 
-		JLabel label_24 = new JLabel("A");
+		JLabel label_24 = new JLabel("T");
 		label_24.setOpaque(true);
 		label_24.setHorizontalAlignment(SwingConstants.CENTER);
 		label_24.setFont(label_24.getFont().deriveFont(label_24.getFont().getSize() + 20f));
@@ -218,7 +218,7 @@ public class BoardView extends JPanel {
 		label_24.setBackground(Color.WHITE);
 		add(label_24);
 
-		JLabel label_25 = new JLabel("A");
+		JLabel label_25 = new JLabel("I");
 		label_25.setOpaque(true);
 		label_25.setHorizontalAlignment(SwingConstants.CENTER);
 		label_25.setFont(label_25.getFont().deriveFont(label_25.getFont().getSize() + 20f));
@@ -234,7 +234,7 @@ public class BoardView extends JPanel {
 		label_26.setBackground(Color.WHITE);
 		add(label_26);
 
-		JLabel label_27 = new JLabel("A");
+		JLabel label_27 = new JLabel("W");
 		label_27.setOpaque(true);
 		label_27.setHorizontalAlignment(SwingConstants.CENTER);
 		label_27.setFont(label_27.getFont().deriveFont(label_27.getFont().getSize() + 20f));
@@ -242,7 +242,7 @@ public class BoardView extends JPanel {
 		label_27.setBackground(Color.WHITE);
 		add(label_27);
 
-		JLabel label_28 = new JLabel("A");
+		JLabel label_28 = new JLabel("Qu");
 		label_28.setOpaque(true);
 		label_28.setHorizontalAlignment(SwingConstants.CENTER);
 		label_28.setFont(label_28.getFont().deriveFont(label_28.getFont().getSize() + 20f));
@@ -250,7 +250,7 @@ public class BoardView extends JPanel {
 		label_28.setBackground(Color.WHITE);
 		add(label_28);
 
-		JLabel label_29 = new JLabel("A");
+		JLabel label_29 = new JLabel("V");
 		label_29.setOpaque(true);
 		label_29.setHorizontalAlignment(SwingConstants.CENTER);
 		label_29.setFont(label_29.getFont().deriveFont(label_29.getFont().getSize() + 20f));
@@ -258,7 +258,7 @@ public class BoardView extends JPanel {
 		label_29.setBackground(Color.WHITE);
 		add(label_29);
 
-		JLabel label_30 = new JLabel("A");
+		JLabel label_30 = new JLabel("E");
 		label_30.setOpaque(true);
 		label_30.setHorizontalAlignment(SwingConstants.CENTER);
 		label_30.setFont(label_30.getFont().deriveFont(label_30.getFont().getSize() + 20f));
@@ -266,7 +266,7 @@ public class BoardView extends JPanel {
 		label_30.setBackground(Color.WHITE);
 		add(label_30);
 
-		JLabel label_31 = new JLabel("A");
+		JLabel label_31 = new JLabel("B");
 		label_31.setOpaque(true);
 		label_31.setHorizontalAlignment(SwingConstants.CENTER);
 		label_31.setFont(label_31.getFont().deriveFont(label_31.getFont().getSize() + 20f));
@@ -274,7 +274,7 @@ public class BoardView extends JPanel {
 		label_31.setBackground(Color.WHITE);
 		add(label_31);
 
-		JLabel label_32 = new JLabel("A");
+		JLabel label_32 = new JLabel("C");
 		label_32.setOpaque(true);
 		label_32.setHorizontalAlignment(SwingConstants.CENTER);
 		label_32.setFont(label_32.getFont().deriveFont(label_32.getFont().getSize() + 20f));
@@ -282,7 +282,7 @@ public class BoardView extends JPanel {
 		label_32.setBackground(Color.WHITE);
 		add(label_32);
 
-		JLabel label_33 = new JLabel("A");
+		JLabel label_33 = new JLabel("O");
 		label_33.setOpaque(true);
 		label_33.setHorizontalAlignment(SwingConstants.CENTER);
 		label_33.setFont(label_33.getFont().deriveFont(label_33.getFont().getSize() + 20f));
@@ -290,7 +290,7 @@ public class BoardView extends JPanel {
 		label_33.setBackground(Color.WHITE);
 		add(label_33);
 
-		JLabel label_34 = new JLabel("A");
+		JLabel label_34 = new JLabel("F");
 		label_34.setOpaque(true);
 		label_34.setHorizontalAlignment(SwingConstants.CENTER);
 		label_34.setFont(label_34.getFont().deriveFont(label_34.getFont().getSize() + 20f));
@@ -298,7 +298,7 @@ public class BoardView extends JPanel {
 		label_34.setBackground(Color.WHITE);
 		add(label_34);
 
-		JLabel label_35 = new JLabel("A");
+		JLabel label_35 = new JLabel("M");
 		label_35.setOpaque(true);
 		label_35.setHorizontalAlignment(SwingConstants.CENTER);
 		label_35.setFont(label_35.getFont().deriveFont(label_35.getFont().getSize() + 20f));
@@ -306,7 +306,7 @@ public class BoardView extends JPanel {
 		label_35.setBackground(Color.WHITE);
 		add(label_35);
 
-		JLabel label_36 = new JLabel("A");
+		JLabel label_36 = new JLabel("R");
 		label_36.setOpaque(true);
 		label_36.setHorizontalAlignment(SwingConstants.CENTER);
 		label_36.setFont(label_36.getFont().deriveFont(label_36.getFont().getSize() + 20f));
