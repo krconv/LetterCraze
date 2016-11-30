@@ -17,7 +17,8 @@ public class LevelBuilder{
 	 */
 	public static void main(String[] args) {
 		Application app = new Application();
-		app.showSplashScreen();
+		try{Thread.sleep(5000);}catch(Exception e){};
+		app.setViewMainMenu();
 		app.getLevelEditor().setPuzzleLevelView();
 	}
 }
