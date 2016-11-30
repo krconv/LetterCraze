@@ -1,13 +1,11 @@
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
- * ~~~~~ Team Scandium                                                                           *
- * ~~~~~ CS 3733                                                                                 *
- * ~~~~~ Project: Level Builder                                                                  *
- * ~~~~~ Created: November 22nd - Jeff Martin                                                    *
- * ~~~~~ Class: MainMenu                                                                      *
- * ~~~~~        This class displays the Main Menu for the Level Builder. It allows the           *
- * ~~~~~        controllers to easily access all of the Buttons, Labels, and Textfields          *
- * ~~~~         within the window.                                                               *
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/**
+ * MainMenuView.java
+ * 
+ * @author Scandium
+ * Date: 11/22/2016
+ * Description: This class represents the main menu View/GUI. It allows the controllers to 
+ * easily access all of the buttons, labels, and textfields within the window.
+ */
 package scandium.levelbuilder.view;
 
 import java.awt.Font;
@@ -28,22 +26,52 @@ public class MainMenuView extends JPanel{
 	JButton new_level_button;
 	JButton edit_level_button;
 	JButton delete_level_button;
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * Constructor Method                                                                        *
+
+	/* ~~~~~                                                                               ~~~~~ *
+	 * Constructors And Initialization                                                           *
 	 * ~~~~~                                                                               ~~~~~ */
+	
+	/**
+	 * Creates a new MainMenuView object
+	 */
 	public MainMenuView() {
+		initialize();
+	}
+	
+	/**
+	 * This function initializes the MainMenu view (GUI and Controllers)
+	 */
+	void initialize(){
+		initializeView();
+		initializeControllers();
+	}
+	
+	/** 
+	 * This function initializes the main menu gui
+	 */
+	void initializeView(){
+		instantiateAttributes();
+		initializeAttributes();
+		
+		/* JPanel Management                                                                     */
+		setLayout(null);
+		setBounds(0,0,1280,720);
+	}
+	
+	/**
+	 * This function instantiates new instances of all the objects
+	 */
+	void instantiateAttributes(){
 		this.title_label = new JLabel("LevelBuilder: MainMenu");
 		this.new_level_button = new JButton("New Level");
 		this.edit_level_button = new JButton("Edit Level");
 		this.delete_level_button = new JButton("Delete Level");
 	}
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * initialize()                                                                              *
-	 * ~~~~~                                                                               ~~~~~ */
-	public void initialize(){
-
+	/**
+	 * This function initializes the GUI widgets (attributes)
+	 */
+	void initializeAttributes(){
 		/* Initialize Title Label                                                                */
 		title_label.setBounds(10, 10, 1280, 40);
 		title_label.setFont(new Font(title_label.getFont().getName(), Font.BOLD, 36));
@@ -57,46 +85,53 @@ public class MainMenuView extends JPanel{
 		/* Initialize Delete Level Button                                                        */
 		delete_level_button.setBounds(1000,  300,  125,  50);
 		add(delete_level_button);
-		
-		/* Remove all layout management from the JPanel */
-		setLayout(null);
-		
 	}
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * getTitleLabel()                                                                           *
-	 * @return JLabel                                                                            *
-	 * This function returns the JLabel representing the Title                                   *
+	/**
+	 * This function initializes the main menu controllers
+	 */
+	void initializeControllers(){
+		//TODO
+	}
+	
+	/* ~~~~~                                                                               ~~~~~ *
+	 * Getter Methods                                                                            *
 	 * ~~~~~                                                                               ~~~~~ */
+	
+	/**
+	 * This function returns the JLabel representing the title
+	 * @return JLabel
+	 */
 	public JLabel getTitleLabel(){
 		return title_label;
 	}
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * getNewLevelButton()                                                                       *
-	 * @return JButton                                                                           *
-	 * This function returns the JButton that is used to create a new level.                     *
-	 * ~~~~~                                                                               ~~~~~ */
+	/**
+	 * This function returns the JButton that is used to create a new level. 
+	 * @return JButton
+	 */
 	public JButton getNewLevelButton(){
 		return new_level_button;
 	}
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * getEditLevelButton()                                                                      *
-	 * @return JButton                                                                           *
-	 * This function returns the JButton that is used to edit a selected level.                  *
-	 * ~~~~~                                                                               ~~~~~ */
+	/**
+	 * This function returns the JButton that is used to edit a selected level.
+	 * @return JButton
+	 */
 	public JButton getEditLevelButton(){
 		return edit_level_button;
 	}
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * getDeleteLevelButton()                                                                    *
-	 * @return JButton                                                                           *
-	 * This function returns the JButton that is used to delete a selected level.                *
-	 * ~~~~~                                                                               ~~~~~ */
+	/**
+	 * This function returns the JButton that is used to delete a selected level
+	 * @return JButton
+	 */
 	public JButton getDeleteLevelButton(){
 		return delete_level_button;
 	}
+	
+	/* ~~~~~                                                                               ~~~~~ *
+	 * GUI Logic for Controllers                                                                 *
+	 * ~~~~~                                                                               ~~~~~ */
 
 }
