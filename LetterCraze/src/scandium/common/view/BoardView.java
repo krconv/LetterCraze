@@ -7,8 +7,15 @@
  * ~~~~~        This class displays the 6x6 board as a JPanel. It allows controllers to easily   *
  * ~~~~~        access all of the JLabel squares within the window.                              *
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/**
+ * BoardView.java
+ * 
+ * @author Scandium
+ * Date: 11/22/2016
+ * Description: This class displays the 6x6 board as a JPanel. It allows controllers to easily
+ * access all of the JLabel squares within the window
+ */
 package scandium.common.view;
-
 
 import java.awt.Color;
 import java.awt.Font;
@@ -21,28 +28,56 @@ public class BoardView extends JPanel{
 
 	/* Serial ID                                                                                 */
 	private static final long serialVersionUID = 6326535097986903469L;
-
+	private static final Color highlight = Color.GRAY;
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
 	JLabel[][] squares;
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * Constructor Method                                                                        *
+	/* ~~~~~                                                                               ~~~~~ *
+	 * Constructor Methods and Initialization                                                    *
 	 * ~~~~~                                                                               ~~~~~ */
+	
+	/**
+	 * Creates a new instance of the BoardView class
+	 */
 	public BoardView(){
+		initialize();
+	}
+	
+	/**
+	 * This function initializes the BoardView view/gui and controllers
+	 */
+	void initialize(){
+		initializeView();
+		initializeControllers();
+	}
+	
+	/**
+	 * This function initializes the BoardView gui
+	 */
+	void initializeView(){
+		instantiateAttributes();
+		initializeAttributes();
+		
+		/* Manage JPanel                                                                         */
+		setBounds(10, 130, 540, 540);
+		setBackground(Color.BLACK);
+		setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLACK));
+		setLayout(null);
+	}
+	
+	/**
+	 * This function instantiates new instances of all of the widgets (attributes)
+	 */
+	void instantiateAttributes(){
 		squares = new JLabel[6][6];
 	}
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * initialize()                                                                              *
-	 * ~~~~~                                                                               ~~~~~ */
-	public void initialize(){
-		setBackground(Color.BLACK);
-		/* Create Border                                                                         */
-		setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLACK));
-		setLayout(null);
-		
+	/**
+	 * This function initializes all of the widgets (attributes)
+	 */
+	void initializeAttributes(){
 		/* Initialize Each BoardSquare                                                           */
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < 6; j++){
@@ -57,13 +92,54 @@ public class BoardView extends JPanel{
 		}
 	}
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * getBoardSquares()                                                                         *
-	 * @return JLabel[][]                                                                        *
-	 * This function returns the JLabels representing the BoardSquares                           *
+	/**
+	 * This function initializes the BoardView Controllers
+	 */
+	void initializeControllers(){
+		//TODO
+	}
+	
+	/* ~~~~~                                                                               ~~~~~ *
+	 * Getter Methods                                                                            *
 	 * ~~~~~                                                                               ~~~~~ */
+	
+	/**
+	 * This function returns the JLabels representing the BoardSquares
+	 * @return JLabel[][]
+	 */
 	public JLabel[][] getBoardSquares(){
 		return squares;
 	}
 
+	/* ~~~~~                                                                               ~~~~~ *
+	 * GUI Logic for Controllers                                                                 *
+	 * ~~~~~                                                                               ~~~~~ */
+	
+	/**
+	 * This function 'selects' (highlights with grey) the Board square at the specified coordinate
+	 * @param row The row (indexed by 0) of the desired square
+	 * @param col The column (indexed by 0) of the desired square
+	 */
+	public void selectBoardSquare(int row, int col){
+		squares[row][col].setBackground(highlight);
+	}
+	
+	/** 
+	 * This function 'de-selects' (sets color to white) the board square at the specified coordinate
+	 * @param row The row (indexed by 0) of the desired square
+	 * @param col The column (indexed by 0) of the desired square
+	 */
+	public void deselectBoardSquare(int row, int col){
+		squares[row][col].setBackground(Color.WHITE);
+	}
+	
+	/** 
+	 * This function sets the text of the board square at the specified coordinate
+	 * @param letter The String to be added to the Square
+	 * @param row The row (indexed by 0) of the desired square
+	 * @param col The Column (indexed by 0) of the desired Square
+	 */
+	public void setBoardSquareText(String letter, int row, int col){
+		squares[row][col].setText(letter);
+	}
 }

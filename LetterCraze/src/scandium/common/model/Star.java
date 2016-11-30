@@ -1,62 +1,74 @@
-/**
- * Star.java
- * 
- * @author Scandium
- */
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
+ * ~~~~~ Team Scandium                                                                           *
+ * ~~~~~ CS 3733                                                                                 *
+ * ~~~~~ Project: Level Builder                                                                  *
+ * ~~~~~ Created: November 28th                                                                  *
+ * ~~~~~ Class: Star                                                                             *
+ * ~~~~~        This class represents a star for a level. A star has a threshold that when       *
+ * ~~~~~        surpassed, indicates that this star has been achieved.                           *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 package scandium.common.model;
 
-/**
- * A rank for how well a Player has done in a Level.
- */
 public class Star {
-    private int threshold;
+	
+	/* ~~~~~                                                                               ~~~~~ *
+	 * Class Attributes                                                                          *
+	 * ~~~~~                                                                               ~~~~~ */
+	int threshold;
 
-    /**
-     * Creates a new uninitialized Star.
-     */
+	/**~~~~~                                                                               ~~~~~ *
+	 * Constructor Method                                                                        *
+	 * Create an uninitialized Star                                                              *
+	 * ~~~~~                                                                               ~~~~~ */
     public Star() {
     	this.threshold = -1;
     }
 
-    /**
-     * Creates a new star with the given information.
-     * @param threshold The threshold required to obtain the star.
-     */
+	/**~~~~~                                                                               ~~~~~ *
+	 * Constructor Method                                                                        *
+	 * @param threshold: The stars threshold                                                     *
+	 * ~~~~~                                                                               ~~~~~ */
     public Star(int threshold) {
     	this.threshold = threshold;
     }
 
-    /**
-	 * @return the threshold
-	 */
+	/**~~~~~                                                                               ~~~~~ *
+	 * getThreshold()                                                                            *
+	 * @return int                                                                               *
+	 * This function returns the integer Star threshold. If the star has not been initialized    *
+	 * it will return -1                                                                         *
+	 * ~~~~~                                                                               ~~~~~ */
 	public int getThreshold() {
 		return threshold;
 	}
 
-	/**
-	 * @param threshold the threshold to set
-	 */
+	/**~~~~~                                                                               ~~~~~ *
+	 * setThreshold()                                                                            *
+	 * @return int                                                                               *
+	 * This function sets the integer Star threshold.                                            *
+	 * ~~~~~                                                                               ~~~~~ */
 	public void setThreshold(int threshold) {
 		this.threshold = threshold;
 	}
 
-	/**
-     * Determines whether this star has been obtained.
-     * @param score The obtained score.
-     * @return Whether this star is obtained.
-     */
+	/**~~~~~                                                                               ~~~~~ *
+	 * isObtained()                                                                              *
+	 * @param score: The integer representing the current score.                                 *
+	 * @return boolean                                                                           *
+	 * This function determines if this star has been obtained, given the current score.         *
+	 * ~~~~~                                                                               ~~~~~ */
     public boolean isObtained(int score) {
-        // TODO implement here
-        return false;
+        return score >= threshold;
     }
 
-    /**
-     * Determines whether this star is valid.
-     * @return Whether this star is valid.
-     */
+	/**~~~~~                                                                               ~~~~~ *
+	 * isValid()                                                                                 *
+	 * @return boolean                                                                           *
+	 * This function returns a boolean indicating if the star is valid. A Star is valid if the   *
+	 * threshold is non-negative.
+	 * ~~~~~                                                                               ~~~~~ */
     public boolean isValid() {
-        // TODO implement here
-        return false;
+        return threshold >= 0;
     }
 
 }
