@@ -5,7 +5,9 @@
  */
 package scandium.lettercraze.view;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -68,6 +70,10 @@ public class Application extends JFrame {
 		return levelPlayer;
 	}
 
+	/**
+	 * Sets the main view of the application.
+	 * @param view The view to change the application to.
+	 */
 	public void setView(JPanel view) {
 		getContentPane().removeAll();
 		getContentPane().add(view);
@@ -75,6 +81,36 @@ public class Application extends JFrame {
 		getContentPane().repaint();
 	}
 
+	/**
+	 * Gets the main view of the application.
+	 */
+	public JPanel getView() {
+		return (JPanel) getContentPane().getComponents()[0];
+	}
+	
+	/**
+	 * Shows the splash screen.
+	 */
+	public void showSplashScreen() {
+		boolean previousIsVisible = isVisible();
+		boolean previousIsResizable = isResizable();
+		JPanel previousView = getView();
+		JPanel splashScreen = new JPanel();
+		splashScreen.add(new JLabel(new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/lettercraze-splash.gif"))));
+		setView(splashScreen);
+		setResizable(false);
+		setVisible(true);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setVisible(previousIsVisible);
+		setResizable(previousIsResizable);
+		setView(previousView);
+	}
+	
 	/**
 	 * Initialize the model.
 	 */
@@ -86,9 +122,6 @@ public class Application extends JFrame {
 	 * Initialize the view.
 	 */
 	private void initializeView() {
-		SplashScreen lcSplash = new SplashScreen(5000);
-		lcSplash.displaySplash();
-
 		setTitle("LetterCraze");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		try {
@@ -98,7 +131,6 @@ public class Application extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		this.mainMenu = new MainMenuView();
 		this.levelPlayer = new LevelPlayerView(null);
 	}

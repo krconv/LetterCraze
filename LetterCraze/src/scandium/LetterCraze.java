@@ -23,6 +23,7 @@ public class LetterCraze {
 		app.setSize(new Dimension(1280, 720));
 		app.setMinimumSize(new Dimension(640, 480));
 		app.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
+		app.showSplashScreen();
 		app.setVisible(true);
 	}
 }
