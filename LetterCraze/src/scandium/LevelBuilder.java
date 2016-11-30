@@ -18,5 +18,6 @@ public class LevelBuilder{
 	public static void main(String[] args) {
 		Application app = new Application();
 		app.showSplashScreen();
+		app.getLevelEditor().setPuzzleLevelView();
 	}
 }

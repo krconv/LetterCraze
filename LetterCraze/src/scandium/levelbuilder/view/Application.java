@@ -126,7 +126,7 @@ public class Application extends JFrame{
 		main_menu.setVisible(false);
 		level_editor.setVisible(false);
 		JPanel splashScreen = new JPanel();
-		splashScreen.add(new JLabel(new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/lettercraze-splash.gif"))));
+		splashScreen.add(new JLabel(new ImageIcon(LevelIconView.class.getResource("/scandium/levelbuilder/resources/levelbuilder-splash.gif"))));
 		add(splashScreen);
 		splashScreen.setVisible(true);
 		setResizable(false);
