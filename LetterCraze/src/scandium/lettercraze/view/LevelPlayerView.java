@@ -30,44 +30,6 @@ import javax.swing.JList;
 public class LevelPlayerView extends JPanel {
 	private static final long serialVersionUID = 2542897782615081218L;
 	private Model model;
-	// private JButton leaveButton;
-	// private JButton resetButton;
-	// private JButton undoButton;
-	// private BoardView boardView;
-	// private JLabel maxNumWordsLabel;
-	// private JLabel timerLabel;
-	// private JLabel themeLabel;
-	// private JLabel[] starLabels;
-	// private JLabel scoreLabel;
-	// private JLabel starThresholdLabel;
-	// private JLabel foundWordsLabel;
-	// private Box horizontalBox;
-	// private JButton btnLeave;
-	// private JButton btnResetBoard;
-	// private JButton btnUndo;
-	// private Component rigidArea;
-	// private Component rigidArea_1;
-	// private Box horizontalBox_1;
-	// private Box horizontalBox_2;
-	// private JLabel label_1;
-	// private JLabel label_2;
-	// private JLabel label_3;
-	// private JLabel label_4;
-	// private JLabel label_5;
-	// private Box verticalBox;
-	// private JLabel lblScore;
-	// private JLabel lblPts;
-	// private JLabel lblNextStar;
-	// private JLabel lblPts_1;
-	// private Box horizontalBox_3;
-	// private Box horizontalBox_4;
-	// private Component rigidArea_2;
-	// private Component rigidArea_3;
-	// private Box horizontalBox_5;
-	// private Component rigidArea_4;
-	// private JScrollPane scrollPane;
-	// private JLabel lblFoundWords;
-	// private JList<String> list;
 	private JLabel levelNameLabel;
 	private JPanel infoPanel;
 	private Box buttonsBox;
@@ -317,21 +279,18 @@ public class LevelPlayerView extends JPanel {
 		foundWordsList = new JList<String>();
 		foundWordsList.setFont(foundWordsList.getFont().deriveFont(foundWordsList.getFont().getSize() + 10f));
 		foundWordsListModel = new DefaultListModel<String>();
-		for (String element : new String[] { "1. Dog (12 pts)", "2. Cat (14 pts)", "3. Horse (24 pts)",
-				"4. Red (9 pts)", "5. Cat (14 pts)", "6. Cat (14 pts)", "7. Cat (14 pts)", "8. Cat (14 pts)",
-				"9. Cat (14 pts)", "10. Cat (14 pts)", "11. Cat (14 pts)", "12. Cat (14 pts)", "13. Cat (14 pts)",
-				"14. Cat (14 pts)" }) {
+		for (String element : new String[] { }) {
 			foundWordsListModel.addElement(element);
 		}
 		foundWordsList.setModel(foundWordsListModel);
 		foundWordsScrollPane.setViewportView(foundWordsList);
 		infoPanel.add(foundWordsScrollPane);
-		add(infoPanel, BorderLayout.CENTER);
+		add(infoPanel, BorderLayout.WEST);
 
 		// add the board view
 		boardView = new BoardView();
 		boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
 		boardView.setPreferredSize(new Dimension(750, 750));
-		add(boardView, BorderLayout.EAST);
+		add(boardView, BorderLayout.CENTER);
 	}
 }
