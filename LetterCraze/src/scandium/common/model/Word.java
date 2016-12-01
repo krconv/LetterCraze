@@ -2,6 +2,9 @@
  * Word.java
  * 
  * @author Scandium
+ * Date 12/1/2016
+ * Description: This class represents the user's selected word. It stores information about the 
+ * the various tiles and board squares. 
  */
 package scandium.common.model;
 
@@ -12,6 +15,8 @@ import java.util.List;
  * An object for holding a list of tiles and board square.
  */
 public class Word {
+	
+	/* Class attributes                                                                          */
     private List<Tile> tiles;
     private List<BoardSquare> selection;
     
@@ -43,7 +48,8 @@ public class Word {
     }
 
     /**
-     * @return the total score of the contained tiles
+     * This function returns the total score of the currently selected word
+     * @return int
      */
     public int calculateScore() {
     	int score = 0;
@@ -58,12 +64,27 @@ public class Word {
     }
 
     /**
-     * Add another square to the selection.
-     * @param square The square to select.
-     * @return Whether the given square was selected.
+     * This function adds another square to the selection
+     * @param square The Selected BoardSquare
+     * @return boolean Was the addition of the board square successful?
      */
     public boolean addSelectedBoardSquare(BoardSquare square) {
-        // TODO implement here
-        return false;
+        boolean result = tiles.add(square.getTile());
+        if(result) result = selection.add(square);
+        return result;
+    }
+    
+    /**
+     * This function returns the selected tiles
+     */
+    public List<Tile> getTiles(){
+    	return tiles;
+    }
+    
+    /**
+     * This function returns the selected boardSquares
+     */
+    public List<BoardSquare> getBoardSquares(){
+    	return selection;
     }
 }
