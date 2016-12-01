@@ -172,11 +172,61 @@ public class LetterDictionary {
     }
 
     /**
-     * @return a random Tile
+     * This function creates and returns a tile with a random letter. 
+     * @return Tile
      */
     public Tile getRandomTile() {
-        // TODO implement here
-		return null;
+    	int rand = random.nextInt(1000);
+    	String letter = null;
+    	int score = -1;
+    	double relative_freq = 0;
+    	for(int i = 0; i < 26; i++){
+    		relative_freq += frequencies[i];
+    		if(rand < relative_freq * 100){
+    			letter = letters[i];
+    			score = scores[i];
+    			break;
+    		}
+    	}
+    	
+    	if(letter == null){
+    		System.out.println("Error Occured while generating random tile");
+    		return null;
+    	}
+    	Tile tile = new Tile(letter, score);
+		return tile;
     }
+    
+    /** 
+     * This function returns the score of the given letter 
+     * returns -1 if an error occurred
+     * @return int
+     */
+    public int getLetterScore(String letter){
+    	int score = -1;
+    	for(int i = 0; i < 26; i++){
+    		if(letters[i].equals(letter)){
+    			score = scores[i];
+    			break;
+    		}
+    	}
+    	return score;
+    }
+ 
 
+    /**
+     * This function returns the frequency of the given letter
+     * returns -1 if an error occurred
+     * @return double
+     */
+    public double getLetterFrequency(String letter){
+    	double frequency = -1;
+    	for(int i = 0; i < 26; i++){
+    		if(letters[i].equals(letter)){
+    			frequency = frequencies[i];
+    			break;
+    		}
+    	}
+    	return frequency;
+    }
 }
