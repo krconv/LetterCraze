@@ -46,8 +46,15 @@ public class Word {
      * @return the total score of the contained tiles
      */
     public int calculateScore() {
-        // TODO implement here
-        return 0;
+    	int score = 0;
+    	/* For every selected tile */
+    	for(Tile tile : tiles){
+    		score += tile.getScore();
+    	}
+    	/* Adjust the score based on the length (See lettercraze powerpoint for more info) */
+    	if(tiles.size() >= 3) score *= (tiles.size() - 2);
+  
+        return score;
     }
 
     /**
