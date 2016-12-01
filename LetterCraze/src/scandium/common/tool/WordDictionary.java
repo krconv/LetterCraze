@@ -17,8 +17,16 @@ public class WordDictionary {
      * Create a new dictionary.
      * @param words The words in the dictionary.
      */
-    public WordDictionary(HashSet<String> words) {
-    	this.words = words;
+    public WordDictionary() {
+    	this.words = new HashSet<String>();
+    	initialize();
+    }
+    
+    /**
+     * This function initializes the dictionary to hold the words stored in dictionary.txt
+     */
+    void initialize(){
+    	
     }
 
     /**
