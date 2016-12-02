@@ -22,7 +22,7 @@ public class BoardSquare {
      * @param board The Board that the square will be in.
      * @param enabled Whether the square should initially be enabled.
      */
-    public BoardSquare(int row, int col, Board board, boolean enabled) {
+    BoardSquare(int row, int col, Board board, boolean enabled) {
     	this.row = row;
     	this.col = col;
     	this.board = board;
