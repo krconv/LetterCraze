@@ -26,29 +26,19 @@ public class LetterDictionary {
     /**
      * Creates a new LetterDictionary.
      */
-<<<<<<< HEAD
-    public LetterDictionary(String[] letters, double[] frequencies, int[] scores) {
-    	this(letters, frequencies, scores, System.currentTimeMillis());
+    public LetterDictionary() {
+    	this(System.currentTimeMillis());
     }
     
     /**
      * Creates a new LetterDictionary.
-     * @param letters The letters which will be used to generate Tiles. 
-     * @param frequencies A list of frequencies corresponding to the letters.
-     * @param scores The list of scores corresponding to the letters.
      * @param seed The seed for the random generator.
      */
-    public LetterDictionary(String[] letters, double[] frequencies, int[] scores, long seed) {
-    	this.letters = letters;
-    	this.frequencies = frequencies;
-    	this.scores = scores;
-    	this.random = new Random(seed);
-=======
-    public LetterDictionary() {
+    public LetterDictionary(long seed) {
     	this.letters = new String[26];
     	this.frequencies = new double[26];
     	this.scores = new int[26];
-    	this.random = new Random();
+    	this.random = new Random(seed);
     	initialize();
     }
     
@@ -186,8 +176,6 @@ public class LetterDictionary {
     	letters[25] = "Z";
     	frequencies[25] = 0.07;
     	scores[25] = 8;
-    	
->>>>>>> refs/remotes/origin/master
     }
 
     /**
