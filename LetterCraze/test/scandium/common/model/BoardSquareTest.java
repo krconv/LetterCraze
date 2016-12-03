@@ -18,6 +18,7 @@ public class BoardSquareTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		board = new Board(true, GravityDirection.Down);
 	}
 
 	/* (non-Javadoc)
