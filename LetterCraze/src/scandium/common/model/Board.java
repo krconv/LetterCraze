@@ -19,7 +19,8 @@ public class Board {
 	/**
 	 * Creates a new Board. 
 	 * Postcondition: All of the squares will be created, and the gravity direction and should 
-	 * regenerate will be updated to indicate the given information.
+	 * regenerate will be updated to indicate the given information. All of the squares will be
+	 * enabled by default.
 	 * 
 	 * @param shouldRegenerate
 	 *            Whether new Tiles should be generated.

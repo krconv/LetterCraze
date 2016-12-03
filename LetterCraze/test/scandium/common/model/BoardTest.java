@@ -42,6 +42,8 @@ public class BoardTest extends TestCase {
 			for (int col = 0; col < 6; col++) {
 				BoardSquare square = board.getSquare(row, col);
 				assertNotNull(square);
+				assertTrue(square.isEnabled());
+				assertTrue(square.isEmpty());
 				assertBoardSquarePosition(row, col, square);
 			}
 		}
