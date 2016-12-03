@@ -17,12 +17,17 @@ public class BoardSquare {
 
     /**
      * Creates a new square on the given Board.
+     * Precondition: The board is not null.
+     * Postcondition: The given information has been saved in this square.
+     * 
      * @param row The row that the square will be in.
      * @param col The column that the square will be in.
      * @param board The Board that the square will be in.
      * @param enabled Whether the square should initially be enabled.
+     * 
+     * @exception NullPointerException Thrown if the board is null.
      */
-    BoardSquare(int row, int col, Board board, boolean enabled) {
+    BoardSquare(int row, int col, Board board, boolean enabled) throws NullPointerException {
     	this.row = row;
     	this.col = col;
     	this.board = board;
