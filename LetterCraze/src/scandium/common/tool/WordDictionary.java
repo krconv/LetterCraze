@@ -5,13 +5,21 @@
  */
 package scandium.common.tool;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * A tool to contain a list of words.
  */
 public class WordDictionary {
-    private HashSet<String> words;
+	
+	/* Dictionary File                                                                           */
+	final static String dictionary_file  = "Dictionary.txt";
+	
+	/* Class Attributes                                                                          */
+	HashSet<String> words = new HashSet<String>();
 
     /**
      * Create a new dictionary.
@@ -23,10 +31,21 @@ public class WordDictionary {
     }
     
     /**
-     * This function initializes the dictionary to hold the words stored in dictionary.txt
+     * This function initializes the dictionary to hold the words stored in Dictionary.txt
      */
     void initialize(){
-    	
+		Iterator<String> it = null;
+		try {
+			it = new StringFileIterator(new File (".", dictionary_file));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (it.hasNext()) {
+			String word = it.next();
+			word = word.trim();
+			words.add(word);
+		}
     }
 
     /**
@@ -35,7 +54,8 @@ public class WordDictionary {
      * @return Whether the given word is in this dictionary.
      */
     public boolean isWord(String word) {
-    	return words.contains(word);
+		word = word.toLowerCase();
+		return words.contains(word);
     }
-
 }
+
