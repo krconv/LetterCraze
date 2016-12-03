@@ -10,77 +10,101 @@ package scandium.common.model;
 
 import junit.framework.TestCase;
 
+/**
+ * Test class for {@link scandium.common.model.Star}.
+ */
 public class StarTest extends TestCase {
 	
-	/**~~~~~                                                                               ~~~~~ *
-	 * testDefaultConstructor()                                                                  *
-	 * This function tests the default constructor method of the star class                      *
-	 * ~~~~~                                                                               ~~~~~ */
-	public void testDefaultConstructor(){
+	/**
+	 * Test method for {@link scandium.common.model.Star#Star()}.
+	 */
+	public void testStar() {
+		// test that the default constructor sets the threshold to be uninitialized
 		Star star = new Star();
-		assertEquals(star.threshold, -1);
-	}
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * testConstructor()                                                                         *
-	 * This function tests the constructor method of the star class that takes a threshold param *
-	 * ~~~~~                                                                               ~~~~~ */
-	public void testConstructor(){
-		int threshold = 10;
-		Star star = new Star(threshold);
-		assertEquals(star.threshold, threshold);
-	}
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * testGetThreshold()                                                                        *
-	 * This function tests the function Star.getThreshold()                                      *
-	 * ~~~~~                                                                               ~~~~~ */
-	public void testGetThreshold(){
-		int threshold_orig = 10;
-		Star star = new Star(threshold_orig);
-		int threshold_new = star.getThreshold();
-		assertEquals(threshold_orig, threshold_new);
-	}
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * testSetThreshold()                                                                        *
-	 * This function tests the function Star.setThreshold()                                      *
-	 * ~~~~~                                                                               ~~~~~ */
-	public void testSetThreshold(){
-		int threshold_set = 10;
-		Star star = new Star();
-		star.setThreshold(threshold_set);
-		assertEquals(threshold_set, star.threshold);
-	}
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * testIsObtained()                                                                          *
-	 * This function tests the function Star.IsObtained()                                        *
-	 * ~~~~~                                                                               ~~~~~ */
-	public void testIsObtained(){
-		int threshold = 10;
-		Star star = new Star(threshold);
-		/* Test false when below threshold */
-		assertFalse(star.isObtained(threshold - 1));
-		/* Test true when above threshold */
-		assertTrue(star.isObtained(threshold + 1));
-		/* Test true when at threshold */
-		assertTrue(star.isObtained(threshold));
-	}
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * testIsValid()                                                                             *
-	 * This function tests the function Star.isValid()                                           *
-	 * ~~~~~                                                                               ~~~~~ */
-	public void testIsValid(){
-		Star star = new Star();
-		/* Test false when unitialized */
 		assertFalse(star.isValid());
-		/* Test false when initialized to an incorrect value */
-		star.setThreshold(-5);
-		assertFalse(star.isValid());
-		/* Test True when initialized to a proper value */
-		star.setThreshold(10);
+		
+		// test that the threshold constructor sets the threshold
+		star = new Star(1);
+		assertEquals(1, star.getThreshold());
+		
+		// test that giving the constructor a negative threshold throws an exception
+		try {
+			star = new Star(-1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			
+		} catch (Exception e) {
+			fail(); // threw the wrong exception
+		}
+	}
+
+	/**
+	 * Test method for {@link scandium.common.model.Star#getThreshold()} and {@link scandium.common.model.Star#setThreshold(int)}.
+	 */
+	public void testGetSetThreshold() {
+		// test that we can set and get a valid threshold
+		Star star = new Star();
+		star.setThreshold(0);
+		assertEquals(0, star.getThreshold());
+		
+		// test that getting an uninitialized threshold throws an exception
+		star = new Star();
+		try {
+			star.getThreshold();
+			fail();
+		} catch (IllegalStateException e) {
+			
+		} catch (Exception e) {
+			fail(); // threw the wrong exception
+		}
+		
+		// test that setting a negative threshold throws an exception
+		try {
+			star.setThreshold(-1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			
+		} catch (Exception e) {
+			fail(); // threw the wrong exception
+		}
+		
+	}
+
+	/**
+	 * Test method for {@link scandium.common.model.Star#isObtained(int)}.
+	 */
+	public void testIsObtained() {
+		// test that a score larger than and equal to threshold is obtained
+		Star star = new Star(5);
+		assertTrue(star.isObtained(5));
+		assertTrue(star.isObtained(6));
+		
+		// test that a score lower than the threshold is not obtained
+		assertFalse(star.isObtained(4));
+		assertFalse(star.isObtained(-1));
+		
+		// test that checking is obtained when the threshold is uninitialized throws an exception
+		star = new Star();
+		try {
+			star.isObtained(1);
+			fail();
+		} catch (IllegalStateException e) {
+			
+		} catch (Exception e) {
+			fail(); // threw the wrong exception
+		}
+	}
+
+	/**
+	 * Test method for {@link scandium.common.model.Star#isValid()}.
+	 */
+	public void testIsValid() {
+		// test that an initialized threshold is valid
+		Star star = new Star(5);
 		assertTrue(star.isValid());
+		
+		// test that an uninitialized threshold is invalid
+		star = new Star();
+		assertFalse(star.isValid());
 	}
 }
