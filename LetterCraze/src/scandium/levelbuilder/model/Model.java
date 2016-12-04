@@ -7,7 +7,7 @@ package scandium.levelbuilder.model;
 
 import java.util.ArrayList;
 
-import scandium.common.model.Level;
+import scandium.common.model.*;
 
 /**
  * The top level model container for the LevelBuilder application.
@@ -15,17 +15,37 @@ import scandium.common.model.Level;
 public class Model {
 	private Level selectedLevel;
 	private ArrayList<Level> levels;
+	//do we need this still even though the controllers control the view?
 	private LevelBuilderState state;
 	private EditProgress editProgress;
 
     /**
-     * Creates a new model for the LevelBuilder application.
+     * Creates a completely new and clean model for the LevelBuilder application.
      */
     public Model() {
-        // TODO implement here
+        selectedLevel = null;
+        levels = new ArrayList<Level>();        
     }
     
     /**
+     * This Constructor needs to be created
+     * @param LevelFile The File that Levels are loaded from
+     */
+    public Model(Object LevelFile) {
+    	selectedLevel = null;
+    	initializeLevelsFromFile(LevelFile);
+    }
+    
+    /**
+     * This Method needs to be created
+     * @param levelFile The File that Levels are loaded from
+     */
+    private void initializeLevelsFromFile(Object levelFile) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
 	 * @return the selectedLevel
 	 */
 	public Level getSelectedLevel() {
@@ -79,8 +99,8 @@ public class Model {
      * @return Whether the model was changed.
      */
     public boolean addLevel(Level level) {
-        // TODO implement here
-        return false;
+        levels.add(level);
+        return true;
     }
 
     /**
@@ -89,8 +109,8 @@ public class Model {
      * @return Whether the model was changed.
      */
     public boolean removeLevel(Level level) {
-        // TODO implement here
-        return false;
+        levels.remove(level);
+        return true;
     }
 
     /**
@@ -98,10 +118,26 @@ public class Model {
      * @param level The level being moved.
      * @param newIndex The new index of the level.
      * @return Whether the model was changed.
+     * @throws Exception for Level wanting to be moved not existing
      */
     public boolean moveLevel(Level level, int newIndex) {
-        // TODO implement here
-        return false;
+        int index = levels.indexOf(level);
+        int initialSize = levels.size();
+        if(index == -1){
+        	RuntimeException LevelDoesNotExist = new RuntimeException();
+        	throw LevelDoesNotExist;
+        } 
+        ArrayList<Level> workingArray =  new ArrayList<Level>();
+        for(int i=0; i < initialSize; i++){
+        	if(i==newIndex){
+        		workingArray.add(level);
+        	}else{
+        		workingArray.add(levels.get(i));
+        	}
+        }
+        levels.clear();
+        levels = workingArray;
+        return true;
     }
 
     /**
@@ -111,8 +147,8 @@ public class Model {
      * @return Whether the model was changed
      */
     public boolean replaceLevel(Level original, Level replacement) {
-        // TODO implement here
-        return false;
+        levels.set(levels.indexOf(original), replacement);
+        return true;
     }
 
 }
