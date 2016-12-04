@@ -16,49 +16,79 @@ public class Star {
 	int threshold;
 
 	/**
-	 * This function creates a new instance of the Star class (uninitialized threshold)
+	 * Creates a new star with an uninitialized threshold.
+	 * Precondition: None.
+	 * Postcondition: A new star is created with an uninitialized score threshold.
 	 */
     public Star() {
     	this.threshold = -1;
     }
 
     /**
-     * This function creates a new instance of the Star class with an initialized threshold 
-     * @param threshold The integer threshold for the star
-     */
-    public Star(int threshold) {
+	 * Creates a new star with the given threshold. 
+	 * Precondition: The threshold is not negative. 
+	 * Postcondition: A new star is created with the given score threshold.
+	 * 
+	 * @param threshold
+	 *            The score threshold needed to obtain the star.
+	 * @exception IllegalArgumentException
+	 *                Thrown if the threshold is negative.
+	 */
+    public Star(int threshold) throws IllegalArgumentException {
     	this.threshold = threshold;
     }
     
     /**
-     * This function returns this star's threshold value
-     * @return int The star's threshold
-     */
-	public int getThreshold() {
+	 * Gets the score threshold required to obtain this star. 
+	 * Precondition: The threshold has been initialized. 
+	 * Postcondition: The score threshold is returned.
+	 * 
+	 * @return The score threshold.
+	 * @exception IllegalStateException
+	 *                Thrown if this is called before the threshold has been
+	 *                initialized.
+	 */
+	public int getThreshold() throws IllegalStateException {
 		return threshold;
 	}
 
 	/**
-	 * This function sets this star's threshold value
-	 * @param threshold The integer threshold value
+	 * Sets the score threshold required to obtain this star. 
+	 * Precondition: The score is not negative. 
+	 * Postcondition: The score threshold for this star is updated.
+	 * 
+	 * @param threshold
+	 *            The integer threshold value
+	 * @exception IllegalArgumentException
+	 *                Thrown if the threshold is negative.
 	 */
-	public void setThreshold(int threshold) {
+	public void setThreshold(int threshold) throws IllegalArgumentException {
 		this.threshold = threshold;
 	}
 	
 	/**
-	 * This function determines if this star is obtained based on its threshold and the given score.
-	 * @param score The integer representing the game's current score
-	 * @return boolean Has the star been obtained?
+	 * Determines whether this star is obtained based on its threshold and the
+	 * given score. 
+	 * Precondition: The threshold has been initialized.
+	 * Postcondition: Returns whether the given score is enough to obtain this star.
+	 * 
+	 * @param score
+	 *            The integer representing the game's current score
+	 * @return Whether the given score is enough to obtain this star.
+	 * @exception IllegalStateException
+	 *                Thrown if this is called before the threshold has been
+	 *                initialized.
 	 */
-    public boolean isObtained(int score) {
+    public boolean isObtained(int score) throws IllegalStateException {
         return score >= threshold;
     }
     
     /**
-     * This function returns a boolean indicating if the star is valid. A star is valid
-     * if the threshold is non-negative.
-     * @return boolean Is the star valid?
+     * Determines whether this star is valid (e.g. the threshold has been initialized).
+     * Precondition: None.
+     * Postcondition: Returns whether this star is valid.
+     * 
+     * @return Whether this star is valid.
      */
     public boolean isValid() {
         return threshold >= 0;
