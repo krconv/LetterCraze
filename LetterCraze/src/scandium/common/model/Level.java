@@ -82,9 +82,5 @@ public abstract class Level {
      * Determines whether this Level is valid.
      * @return Whether this Level is valid.
      */
-    public boolean isValid() {
-        // TODO implement here
-        return false;
-    }
-
+    public abstract boolean isValid(); //For each of the different isValid methods, it might need to get more specific with how it is implemented in the future.
 }

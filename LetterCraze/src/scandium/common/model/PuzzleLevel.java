@@ -50,8 +50,7 @@ public class PuzzleLevel extends Level {
      */
     @Override
     public String getType() {
-        // TODO implement here
-        return "";
+        return "Puzzle";
     }
 
     /* (non-Javadoc)
@@ -59,8 +58,8 @@ public class PuzzleLevel extends Level {
      */
     @Override
     public PuzzleLevel copy() {
-        // TODO implement here
-        return null;
+    	PuzzleLevel levelCopy = new PuzzleLevel(super.getName(), super.getBoard(), super.getStars(), maxNumWords);
+        return levelCopy;
     }
 
     /* (non-Javadoc)
@@ -68,7 +67,9 @@ public class PuzzleLevel extends Level {
      */
     @Override 
     public boolean isValid() {
-        // TODO implement here
+    	if ((super.getName() != null) && (super.getBoard() != null) && (super.getStars() != null) && ((Integer) maxNumWords != null) && (super.getBoard().isValid() == true)){
+    		return true;
+    	}
         return false;
     }
 }

@@ -11,7 +11,7 @@ import scandium.common.tool.LetterDictionary;
  * A play area container for Tiles.
  */
 public class Board {
-	private BoardSquare[][] squares;
+    private BoardSquare[][] squares;
 	private Word selectedWord;
 	private GravityDirection gravityDirection;
 	private boolean shouldRegenerate;
@@ -44,6 +44,7 @@ public class Board {
 	 * @throws IndexOutOfBoundsException
 	 *             Thrown if the given row or column is out of bounds.
 	 */
+
 	public BoardSquare getSquare(int row, int col) throws IndexOutOfBoundsException {
 		return squares[row][col];
 	}
@@ -78,6 +79,17 @@ public class Board {
 	 */
 	public boolean shouldRegenerate() {
 		return shouldRegenerate;
+	}
+	
+	/**
+	 * Returns a BoardSquare that corresponds to a position given
+	 * @param row The row the BoardSquare is in
+	 * @param col The column the BoardSquare is in
+	 * @return The BoardSquare at the given position
+	 */
+	public BoardSquare getBoardSquare(int row, int col){
+		BoardSquare bs = squares[row][col];
+		return bs;
 	}
 
 	/**
