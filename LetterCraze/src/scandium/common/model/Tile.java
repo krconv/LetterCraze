@@ -18,11 +18,20 @@ public class Tile {
     int score;
 
     /**
-     * This function creates a new tile
-     * @param content The String letter
-     * @param score The integer score for the tile
-     */
-    public Tile(String content, int score) {
+	 * Creates a tile with the given content and score. 
+	 * Precondition: The content is not null and not empty, and the score is non-negative.
+	 * Postcondition: A tile is created with the given information.
+	 * 
+	 * @param content
+	 *            The String letter
+	 * @param score
+	 *            The integer score for the tile
+	 * @throws IllegalArgumentException
+	 *             Thrown if the content is empty or the score is negative.
+	 * @throws NullPointerException
+	 *             Thrown if content is null.
+	 */
+    public Tile(String content, int score) throws IllegalArgumentException, NullPointerException {
     	this.content = content;
     	this.score = score;
     }

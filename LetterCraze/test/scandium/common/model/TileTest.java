@@ -10,35 +10,60 @@ package scandium.common.model;
 
 import junit.framework.TestCase;
 
+/**
+ * Test class for {@link scandium.common.model.Tile}.
+ */
 public class TileTest extends TestCase {
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * TestConstructorMethod                                                                     *
-	 * This function tests the Tile's Constructor Method                                         *
-	 * ~~~~~                                                                               ~~~~~ */
+
+	/**
+	 * Test method for {@link scandium.common.model.Tile#Tile(java.lang.String, int)}.
+	 */
 	public void testConstructorMethod(){
-		String content = "A";
-		int score = 10;
-		Tile tile = new Tile(content, score);
-		assertEquals(tile.content, content);
-		assertEquals(tile.score, score);
+		// test that the constructor saves the given information
+		Tile tile = new Tile("A", 1);
+		assertEquals("A", tile.getContent());
+		assertEquals(1, tile.getScore());
+		
+		// test that an exception is thrown if given invalid information
+		try {
+			tile = new Tile("", 1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			
+		} catch (Exception e) {
+			fail(); // should have been an illegal argument exception
+		}
+		try {
+			tile = new Tile("A", -1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			
+		} catch (Exception e) {
+			fail(); // should have been an illegal argument exception
+		}
+		try {
+			tile = new Tile(null, 1);
+			fail();
+		} catch (NullPointerException e) {
+			
+		} catch (Exception e) {
+			fail(); // should have been a null pointer exception
+		}
 	}
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * TestGetContent()                                                                          *
-	 * This function tests the function Tile.getContent()                                        *
-	 * ~~~~~                                                                               ~~~~~ */
+
+	/**
+	 * Test method for {@link scandium.common.model.Tile#getContent()}.
+	 */
 	public void testGetContent(){
 		String value = "A";
 		Tile tile = new Tile(value, 10);
 		String content = tile.getContent();
 		assertEquals(value, content);
 	}
-	
-	/**~~~~~                                                                               ~~~~~ *
-	 * TestGetScore()                                                                            *
-	 * This function tests the function Tile.getScore()                                          *
-	 * ~~~~~                                                                               ~~~~~ */
+
+	/**
+	 * Test method for {@link scandium.common.model.Tile#getScore()}.
+	 */
 	public void testGetScore(){
 		int score_orig = 10;
 		Tile tile = new Tile("A", score_orig);
