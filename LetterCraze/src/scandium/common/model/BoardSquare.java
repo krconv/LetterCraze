@@ -82,8 +82,11 @@ public class BoardSquare {
      * @return Whether this square is empty.
      */
     public boolean isEmpty() {
-        // TODO implement here
-        return false;
+    	if (tile == null){ 
+    		return true; 
+    	}else{ 
+    		return false;
+    		}
     }
 
     /**
@@ -91,8 +94,12 @@ public class BoardSquare {
      * @return Whether any changes were made.
      */
     public boolean removeTile() {
-        // TODO implement here
-        return false;
+        if (tile != null){
+        	tile = null;
+        	return true;
+        }else{
+            return false;
+        }
     }
 
 }

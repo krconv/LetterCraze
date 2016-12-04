@@ -22,7 +22,8 @@ public class Board {
      * @param gravityDirection The direction of gravity for the board.
      */
     public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
-        // TODO implement here
+        this.shouldRegenerate = shouldRegenerate;
+        this.gravityDirection = gravityDirection;
     }
 
     /**
@@ -52,6 +53,17 @@ public class Board {
 	public boolean shouldRegenerate() {
 		return shouldRegenerate;
 	}
+	
+	/**
+	 * Returns a BoardSquare that corresponds to a position given
+	 * @param row The row the BoardSquare is in
+	 * @param col The column the BoardSquare is in
+	 * @return The BoardSquare at the given position
+	 */
+	public BoardSquare getBoardSquare(int row, int col){
+		BoardSquare bs = squares[row][col];
+		return bs;
+	}
 
 
 
@@ -66,7 +78,7 @@ public class Board {
     }
 
     /**
-     * Removes the elected Word from the Board.
+     * Removes the selected Word from the Board.
      * @return Whether the selected Word was removed.
      */
     public boolean removeSelectedWord() {
@@ -89,8 +101,20 @@ public class Board {
      * @return Whether any empty squares were filled.
      */
     public boolean fillEmptySquares(LetterDictionary dictionary) {
-        // TODO implement here
-        return false;
+        int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if ((squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+        			squares[i][j].setTile(dictionary.getRandomTile());
+        			indicator = 1;
+        		}
+        	}
+        }
+        if (indicator == 1){
+        	return true;
+        }else{
+        	return false;
+        }
     }
 
     /**
@@ -108,8 +132,11 @@ public class Board {
      * @return Whether the square was selected.
      */
     public boolean selectSquare(BoardSquare square) {
-        // TODO implement here
-        return false;
+    	if (selectedWord.addSelectedBoardSquare(square)){
+    		return true;
+    	}else{
+    		return false;
+    	}
     }
 
     /**
@@ -119,16 +146,23 @@ public class Board {
      * @return Whether the square was selected.
      */
     public boolean selectSquare(int row, int col) {
-        // TODO implement here
-        return false;
+        BoardSquare bs = getBoardSquare(row, col);
+        if (selectedWord.addSelectedBoardSquare(bs)){
+        	return true;
+        }else{
+        	return false;
+        }
     }
 
     /**
      * Deselects the selected word.
      * @return Whether any word was deselected.
      */
-    public boolean deselectWord() {
+    public boolean deselectWord() { //I started to write this method, but I think we need a removeSelectedBoardSquare in the Word class
         // TODO implement here
+    	//for (int i = selectedWord.getTiles().size(); i == 0; i--){
+    		
+    	//}
         return false;
     }
 
