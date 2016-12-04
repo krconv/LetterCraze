@@ -21,10 +21,19 @@ public class Word {
     private List<BoardSquare> selection;
     
     /**
-     * Creates a new word with the given first selected board square.
-     * @param first The first square selected.
-     */
-    public Word(BoardSquare first) {
+	 * Creates a new word with the given first selected board square.
+	 * Precondition: The given square is not null, it is enabled and it has a
+	 * tile. 
+	 * Postcondition: The given square is selected and it's tile is recorded.
+	 * 
+	 * @param first
+	 *            The first square selected.
+	 * @exception NullPointerException
+	 *                Thrown if the given square is null.
+	 * @exception IllegalArgumentException
+	 *                Thrown if the given square is disabled or is empty.
+	 */
+    public Word(BoardSquare first) throws NullPointerException, IllegalArgumentException {
     	this.tiles = new LinkedList<Tile>();
     	this.selection = new LinkedList<BoardSquare>();
 
@@ -33,8 +42,12 @@ public class Word {
     }
 
     /**
-     * This function returns the string representation of the selected tiles.
-     * @return String
+     * Generates the string representation of the selected tiles.
+     * Precondition: None.
+     * Postcondition: The value of the tiles that were selected are combined (in their
+     * selection order) into a string and returned.
+     * 
+     * @return A string consisting of all of the tiles that have been selected.
      */
     public final String generateString() {
     	/* Create Empty Word */
@@ -48,8 +61,13 @@ public class Word {
     }
 
     /**
-     * This function returns the total score of the currently selected word
-     * @return int
+     * Calculates the total score of the currently selected word.
+     * Precondition: None.
+     * Postcondition: The cumulative score of the selected tiles is calculated, which
+     * is composed of the total score of the selected tiles, times an optional modifier
+     * of the number of selected squares minus 2 if there are more than 3 selected squares.
+     * 
+     * @return The cumulative score of all of the selected tiles.
      */
     public int calculateScore() {
     	int score = 0;
@@ -64,25 +82,35 @@ public class Word {
     }
 
     /**
-     * This function adds another square to the selection
-     * @param square The Selected BoardSquare
-     * @return boolean Was the addition of the board square successful?
-     */
-    public boolean addSelectedBoardSquare(BoardSquare square) {
+	 * Adds another square to the selection. 
+	 * Precondition: The given square is not null, it is enabled and it has a tile. 
+	 * Postcondition: The given square is selected (if it isn't already) and it's tile is recorded.
+	 * 
+	 * @param square
+	 *            The selected BoardSquare.
+	 * @return Whether the board square was selected (false if this board square
+	 *         is already selected).
+	 * 
+	 * @exception NullPointerException
+	 *                Thrown if the given square is null.
+	 * @exception IllegalArgumentException
+	 *                Thrown if the given square is disabled or is empty.
+	 */
+    public boolean addSelectedBoardSquare(BoardSquare square) throws NullPointerException, IllegalArgumentException {
         boolean result = tiles.add(square.getTile());
         if(result) result = selection.add(square);
         return result;
     }
     
     /**
-     * This function returns the selected tiles
+     * @return the tiles that have been selected.
      */
     public List<Tile> getTiles(){
     	return tiles;
     }
     
     /**
-     * This function returns the selected boardSquares
+     * @return the board squares that have been selected.
      */
     public List<BoardSquare> getBoardSquares(){
     	return selection;

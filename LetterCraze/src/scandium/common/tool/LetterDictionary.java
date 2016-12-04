@@ -27,10 +27,18 @@ public class LetterDictionary {
      * Creates a new LetterDictionary.
      */
     public LetterDictionary() {
+    	this(System.currentTimeMillis());
+    }
+    
+    /**
+     * Creates a new LetterDictionary.
+     * @param seed The seed for the random generator.
+     */
+    public LetterDictionary(long seed) {
     	this.letters = new String[26];
     	this.frequencies = new double[26];
     	this.scores = new int[26];
-    	this.random = new Random();
+    	this.random = new Random(seed);
     	initialize();
     }
     
@@ -168,7 +176,6 @@ public class LetterDictionary {
     	letters[25] = "Z";
     	frequencies[25] = 0.07;
     	scores[25] = 8;
-    	
     }
 
     /**
