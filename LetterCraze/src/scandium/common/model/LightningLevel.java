@@ -50,8 +50,7 @@ public class LightningLevel extends Level {
      */
     @Override
     public String getType() {
-        // TODO implement here
-        return "";
+        return "Lightning";
     }
 
     /* (non-Javadoc)
@@ -59,8 +58,8 @@ public class LightningLevel extends Level {
      */
     @Override
     public LightningLevel copy() {
-        // TODO implement here
-        return null;
+    	LightningLevel levelCopy = new LightningLevel(super.getName(), super.getBoard(), super.getStars(), timeLimit);
+        return levelCopy;
     }
 
     /* (non-Javadoc)
@@ -68,7 +67,9 @@ public class LightningLevel extends Level {
      */
     @Override
     public boolean isValid() {
-        // TODO implement here
+    	if ((super.getName() != null) && (super.getBoard() != null) && (super.getStars() != null) && ((Integer) timeLimit != null) && (super.getBoard().isValid() == true)){
+    		return true;
+    	}
         return false;
     }
 }

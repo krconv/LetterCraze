@@ -69,8 +69,7 @@ public class ThemeLevel extends Level {
      */
     @Override
     public final String getType() {
-        // TODO implement here
-        return "";
+        return "Theme";
     }
 
     /* (non-Javadoc)
@@ -78,8 +77,8 @@ public class ThemeLevel extends Level {
      */
     @Override
     public ThemeLevel copy() {
-        // TODO implement here
-        return null;
+    	ThemeLevel levelCopy = new ThemeLevel(super.getName(), super.getBoard(), super.getStars(), theme, themeWords);
+        return levelCopy;
     }
 
     /* (non-Javadoc)
@@ -87,7 +86,9 @@ public class ThemeLevel extends Level {
      */
     @Override
     public boolean isValid() {
-        // TODO implement here
+    	if ((super.getName() != null) && (super.getBoard() != null) && (super.getStars() != null) && (theme != null) && (themeWords.isEmpty() == false) && (super.getBoard().isValid() == true)){
+    		return true;
+    	}
         return false;
     }
 
@@ -97,8 +98,7 @@ public class ThemeLevel extends Level {
      * @return Whether the word was added.
      */
     public boolean addThemeWord(String word) {
-        // TODO implement here
-        return false;
+    	return themeWords.add(word); 
     }
 
     /**
@@ -107,7 +107,6 @@ public class ThemeLevel extends Level {
      * @return Whether the word was removed.
      */
     public boolean removeThemeWord(String word) {
-        // TODO implement here
-        return false;
+    	return themeWords.remove(word);
     }
 }
