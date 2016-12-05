@@ -21,18 +21,17 @@ public class GameProgress {
 	/**
 	 * Creates a completely new game progress with nothing stored in it
 	 * Creates a currentLevelProgress with a null level and isPlaying equals false
-	 * @throws Exception if the current level progress is already running, 
+	 * @throws IllegalStateException if the current level progress is already running, 
 	 * 						or if one of the LevelProgress initializations fail
 	 */
-	public GameProgress() throws Exception {
+	public GameProgress() throws IllegalStateException{
 		//if current level progress already exists, throw exception
 		if (this.created == true){
 			this.levelProgresses = new HashMap<Level, LevelProgress>();
 			this.currentLevelProgress = new LevelProgress();
 			currentLevelProgress.setPlaying(false);
 		} else{
-			Exception CanOnlyHaveOneGameProgress = new Exception();
-			throw CanOnlyHaveOneGameProgress;
+			throw new IllegalStateException("The Game Progress Already Exists");
 		}
 	}
 
@@ -40,13 +39,17 @@ public class GameProgress {
 	 * Creates a new game progress from the given HashMap
 	 * Creates a currentLevelProgress with a null level and isPlaying equals false
 	 * @param storedProgress a HashMap of the current stored progress to be loaded
-	 * @throws Exception 
+	 * @throws IllegalStateException 
 	 */
-	public GameProgress(HashMap<Level, LevelProgress> storedProgress) throws Exception{
-		this.levelProgresses = storedProgress;
+	public GameProgress(HashMap<Level, LevelProgress> storedProgress) throws IllegalStateException{
+		if (this.created == true){
+			this.levelProgresses = storedProgress;
 		//TODO Replace this with loading the storedProgress from file
 		this.currentLevelProgress = new LevelProgress(null);
 		currentLevelProgress.setPlaying(false);
+		} else{
+			throw new IllegalStateException("The Game Progress Already Exists");
+		}
 	}
 
 	/**
@@ -60,20 +63,20 @@ public class GameProgress {
 	 * @param level the level to set the current level playing to 
 	 * @throws LevelNotUpdatedProperly
 	 */
-	public void setCurrentLevelProgress(Level level) throws Exception {
-		if(this.currentLevelProgress.setLevel(level)){
-			return;
-		}else{
-			Exception LevelNotUpdatedProperly = new Exception();
-			throw LevelNotUpdatedProperly;
-		}
+	public boolean setCurrentLevelProgress(Level level){
+		return this.currentLevelProgress.setLevel(level);
 	}
 
 	/**
-	 * @return the levelProgresses
+	 * This method removes the LevelProgress from LevelProgresses and returns true if the state has changed.
+	 * @return if the LevelProgress was added and if the state of LevelProgresses has changed
 	 */
-	public HashMap<Level, LevelProgress> getLevelProgresses() {
-		return levelProgresses;
+	public boolean removeLevelProgresses(LevelProgress lp) {
+		if(levelProgresses.remove(lp.getLevel()).equals(lp)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**
@@ -85,4 +88,20 @@ public class GameProgress {
 		return levelProgresses.get(level);
 	}
 
+	/**
+	 * This method adds the LevelProgress to LevelProgresses and returns true if the state has changed.
+	 * @param lp
+	 * @return true if the LevelProgress was added and if the state of LevelProgresses has changed
+	 */
+	public boolean addLevelProgress(LevelProgress lp){
+		if(levelProgresses.get(lp.getLevel()).equals(lp)){
+			return false;
+		}
+		if(levelProgresses.put(lp.getLevel(), lp).equals(null)){
+			return levelProgresses.get(lp.getLevel()).equals(lp);
+		}else{
+			return levelProgresses.get(lp.getLevel()).equals(lp);
+		}
+	}
+	
 }

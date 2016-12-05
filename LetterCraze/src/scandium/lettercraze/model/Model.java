@@ -25,7 +25,7 @@ public class Model {
      * Creates a completely new Model.
      * @throws Exception 
      */
-    public Model() throws Exception {
+    public Model() throws IllegalArgumentException {
         initialize();
     }
    
@@ -33,9 +33,8 @@ public class Model {
      * Creates the Model from file.
      * @param ProgressFile file containing the GameProgress
      * @param LevelFile file containing the Levels
-     * @throws Exception
      */
-    public Model(Object ProgressFile, Object LevelFile) throws Exception {
+    public Model(Object ProgressFile, Object LevelFile){
         initializeLevelsFromFile(LevelFile);
         initializeProgressFromFile(ProgressFile);
     }
@@ -62,7 +61,7 @@ public class Model {
 	 * Creates a completely new and clean Model
 	 * @throws Exception
 	 */
-	private void initialize() throws Exception {
+	private void initialize() throws IllegalArgumentException {
 		this.levels = new ArrayList<Level>();
 		this.progress = new GameProgress();
 	}

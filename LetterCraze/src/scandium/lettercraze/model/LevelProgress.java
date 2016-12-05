@@ -41,7 +41,7 @@ public class LevelProgress {
      * post-condition: LevelProgress is initialized and constructed
      * @throws Exception 
      */
-    public LevelProgress(Level level) throws Exception {
+    public LevelProgress(Level level) throws IllegalStateException{
         initialize(level);
     }
 
@@ -53,10 +53,9 @@ public class LevelProgress {
      * 					if it is a Lightning Level, sets game to stop after the proper amount of time
      * @throws GameProgressAlreadyRunning, timerNotInitializedProperly
      */
-    private void initialize(Level level) throws Exception{
+    private void initialize(Level level) throws IllegalStateException{
 		if (isPlaying = true){
-			Exception GameProgressAlreadyRunning = new Exception();
-			throw GameProgressAlreadyRunning;
+			throw new IllegalStateException("Current Level Progress is already running");
 		}else{
 			this.timer = new Timer();
 			this.foundWords = new LinkedList<String>();
@@ -71,8 +70,7 @@ public class LevelProgress {
 				timer.schedule(stopPlay(), ((LightningLevel)level).getTimeLimit());
 			}
 			catch(Exception e){ //timer had a problem initializing
-				Exception timerNotInitializedProperly = new Exception();
-				throw timerNotInitializedProperly;
+				throw new IllegalStateException("Timer not initialized properly");
 			}
 		}else{ //timer isn't needed
 			timer = null;
@@ -86,7 +84,7 @@ public class LevelProgress {
      * 					all attributes are at initial values, timer is running if is LightningLevel
      * @throws GameProgressAlreadyRunning, timerNotInitializedProperly
      */
-    public boolean setLevel(Level level) throws Exception{
+    public boolean setLevel(Level level) throws IllegalStateException{
     	try{
     		initialize(level);
     	}catch(Exception e){
@@ -187,12 +185,12 @@ public class LevelProgress {
      * pre-condition: can call whenever, but should be calling upon exit of levelPlayer
      * post-condition: no state has changed
      */
-    public boolean isHigherScore(GameProgress gameProgress) {
-    	//if high score stored in the gameProgress for this level is lower than the current score
-        if(gameProgress.getProgressForLevel(this.level).getScore() < this.score){
-        	return true;
-        }//else
-        return false;
+    public boolean isHigherScore(LevelProgress lp) {
+    	if(lp.getScore() < this.score){
+    		return true;
+    	}else{
+    		return false;
+    	}
     }
 
     /**

@@ -118,14 +118,13 @@ public class Model {
      * @param level The level being moved.
      * @param newIndex The new index of the level.
      * @return Whether the model was changed.
-     * @throws Exception for Level wanting to be moved not existing
+     * @throws IllegalArgumentException for Level wanting to be moved not existing
      */
-    public boolean moveLevel(Level level, int newIndex) {
+    public boolean moveLevel(Level level, int newIndex) throws IllegalArgumentException{
         int index = levels.indexOf(level);
         int initialSize = levels.size();
         if(index == -1){
-        	RuntimeException LevelDoesNotExist = new RuntimeException();
-        	throw LevelDoesNotExist;
+        	throw new IllegalArgumentException("Level does not exist");
         } 
         ArrayList<Level> workingArray =  new ArrayList<Level>();
         for(int i=0; i < initialSize; i++){
