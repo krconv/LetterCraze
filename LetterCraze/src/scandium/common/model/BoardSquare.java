@@ -14,7 +14,6 @@ public class BoardSquare {
     private Board board;
     private Tile tile;
     private boolean enabled;
-
     /**
      * Creates a new square on the given Board.
      * Precondition: The board is not null.
@@ -34,7 +33,7 @@ public class BoardSquare {
     	this.enabled = enabled;
     	this.tile = null;
     }
-
+    
 	/**
 	 * @return the enabled
 	 */
@@ -60,7 +59,7 @@ public class BoardSquare {
         }
         return false;
     }
-    
+
     /*-----Get Methods-----*/
     public int getRow(){
     	return this.row;
@@ -89,11 +88,11 @@ public class BoardSquare {
     public void setCol(int col){
     	this.col = col;
     }
-    public void getBoard(Board board){
+    public void setBoard(Board board){
     	this.board = board;
     }
     
-    public void getTile(Tile tile){
+    public void setTile(Tile tile){
     	this.tile = tile;
     }
     
