@@ -16,6 +16,7 @@ public class Board {
 	private GravityDirection gravityDirection;
 	private boolean shouldRegenerate;
 
+
 	/**
 	 * Creates a new Board. 
 	 * Postcondition: All of the squares will be created, and the gravity direction and should 
@@ -27,10 +28,13 @@ public class Board {
 	 * @param gravityDirection
 	 *            The direction of gravity for the board.
 	 */
-	public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
-		// TODO implement here
-	}
+    public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
+        this.shouldRegenerate = shouldRegenerate;
+        this.gravityDirection = gravityDirection;
+    }
 
+
+    
 	/**
 	 * Gets the square at the given position. 
 	 * Precondition: The indicated position is a valid one. 
@@ -119,8 +123,8 @@ public class Board {
 	 * @return Whether a word was removed.
 	 */
 	public boolean removeSelectedWord() {
-		// TODO implement here
-		return false;
+		this.selectedWord = null;
+		return (this.selectedWord == null);
 	}
 
 	/**

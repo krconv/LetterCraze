@@ -32,21 +32,8 @@ public class BoardSquare {
     	this.col = col;
     	this.board = board;
     	this.enabled = enabled;
+    	this.tile = null;
     }
-    
-    /**
-	 * @return the tile
-	 */
-	public Tile getTile() {
-		return tile;
-	}
-
-	/**
-	 * @param tile the tile to set
-	 */
-	public void setTile(Tile tile) {
-		this.tile = tile;
-	}
 
 	/**
 	 * @return the enabled
@@ -56,42 +43,10 @@ public class BoardSquare {
 	}
 
 	/**
-	 * @param enabled the enabled to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	/**
-	 * @return the row
-	 */
-	public int getRow() {
-		return row;
-	}
-
-	/**
-	 * @return the col
-	 */
-	public int getCol() {
-		return col;
-	}
-
-	/**
-	 * @return the board
-	 */
-	public Board getBoard() {
-		return board;
-	}
-
-	/**
      * @return Whether this square is empty.
      */
     public boolean isEmpty() {
-    	if (tile == null){ 
-    		return true; 
-    	}else{ 
-    		return false;
-    		}
+        return (this.tile == null);
     }
 
     /**
@@ -99,12 +54,50 @@ public class BoardSquare {
      * @return Whether any changes were made.
      */
     public boolean removeTile() {
-        if (tile != null){
-        	tile = null;
+        if (!this.isEmpty()) {
+        	this.tile = null;
         	return true;
-        }else{
-            return false;
         }
+        return false;
     }
-
+    
+    /*-----Get Methods-----*/
+    public int getRow(){
+    	return this.row;
+    }
+    
+    public int getCol(){
+    	return this.col;
+    }
+    
+    public Board getBoard(){
+    	return this.board;
+    }
+    
+    public Tile getTile(){
+    	return this.tile;
+    }
+    
+    //getEnabled() is redundant by isEnabled()
+    
+    
+    /*-----Set Methods-----*/
+    public void setRow(int row){
+    	this.row = row;
+    }
+    
+    public void setCol(int col){
+    	this.col = col;
+    }
+    public void getBoard(Board board){
+    	this.board = board;
+    }
+    
+    public void getTile(Tile tile){
+    	this.tile = tile;
+    }
+    
+    public void setEnabled(boolean enabled){
+    	this.enabled = enabled;
+    }
 }
