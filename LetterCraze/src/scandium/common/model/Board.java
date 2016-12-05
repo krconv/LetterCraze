@@ -35,6 +35,56 @@ public class Board {
     }
 
 	/**
+	 * Gets the square at the given position. 
+	 * Precondition: The indicated position is a valid one. 
+	 * Postcondition: The indicated square on the board is returned.
+	 * 
+	 * @param row
+	 *            The row of the square.
+	 * @param col
+	 *            The column of the square.
+	 * @return The indicated square.
+	 * @throws IndexOutOfBoundsException
+	 *             Thrown if the given row or column is out of bounds.
+	 */
+
+	public BoardSquare getSquare(int row, int col) throws IndexOutOfBoundsException {
+		return squares[row][col];
+	}
+
+	/**
+	 * Precondition: None.
+	 * Postcondition: The selected word has been returned without removing it.
+	 * @return the selectedWord, or null if no selection has been made.
+	 */
+	public Word getSelectedWord() {
+		return selectedWord;
+	}
+
+	/**
+	 * @return the gravityDirection
+	 */
+	public GravityDirection getGravityDirection() {
+		return gravityDirection;
+	}
+	
+	/**
+	 * Sets the gravity direction for the board.
+	 * @param direction The direction to change it to.
+	 */
+	public void setGravityDirection(GravityDirection direction) {
+		gravityDirection = direction;
+	}
+
+
+	/**
+	 * @return the whether tiles shouldRegenerate
+	 */
+	public boolean shouldRegenerate() {
+		return shouldRegenerate;
+	}
+
+	/**
 	 * Insert a Word into the Board, shifting tiles in the direction opposite to
 	 * gravity.
 	 * Precondition: The word is not null and the word consists of board squares on this board.
@@ -210,6 +260,27 @@ public class Board {
 	}
 
 	/**
+	 * Selects a new square on the board.
+	 * Precondition: The given board square is on this board.
+	 * Postcondition: The indicated square will be added to the selected word if the selection is
+	 * valid (e.g. the selection is consecutive, not repeating, and it contains a tile).
+	 * 
+	 * @param square
+	 *            The square to select.
+	 * @return Whether the square was selected.
+	 * @throws IllegalArgumentException
+	 *             Thrown if the given square is not in this board.
+	 */
+	public boolean selectSquare(BoardSquare square) throws IllegalArgumentException {
+		if (selectedWord.addSelectedBoardSquare(square)){
+    		return true;
+    	}else{
+    		return false;
+    	}
+
+	}
+
+	/**
 	 * Selects a new square on the board. 
 	 * Precondition: The given position exists on the board.
 	 * Postcondition: The indicated square will be added to the selected word if the selection is
@@ -224,7 +295,8 @@ public class Board {
 	 *             Thrown if the given row or column is out of bounds.
 	 */
 	public boolean selectSquare(int row, int col) throws IndexOutOfBoundsException {
-		BoardSquare bs = getBoardSquare(row, col);
+	BoardSquare bs = getBoardSquare(row, col);
+
         if (selectedWord.addSelectedBoardSquare(bs)){
         	return true;
         }else{
