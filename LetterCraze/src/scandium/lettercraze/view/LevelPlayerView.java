@@ -289,8 +289,8 @@ public class LevelPlayerView extends JPanel {
 
 		// add the board view
 		boardView = new BoardView();
-		boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
-		boardView.setPreferredSize(new Dimension(750, 750));
+		//boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
+		//boardView.setPreferredSize(new Dimension(750, 750));
 		add(boardView, BorderLayout.CENTER);
 	}
 }
