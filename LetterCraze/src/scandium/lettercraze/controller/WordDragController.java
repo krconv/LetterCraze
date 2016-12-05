@@ -32,8 +32,8 @@ public class WordDragController extends MouseMotionAdapter{
     /**
      * This constructor instantiates a new WordDragController. It accepts the entire LetterCraze
      * model and the entire LetterCraze GUI.
-     * @param model 
-     * @param app
+     * @param model The entire LetterCraze model.
+     * @param app The entire LetterCraze GUI.
      */
     public WordDragController(Model model, Application app) {
         this.model = model;
@@ -45,9 +45,11 @@ public class WordDragController extends MouseMotionAdapter{
      * This function handles a mouse drag across one of the board squares in the Level Player. 
      * It updates the view and the model to reflect the addition of tile on this board square
      * to the entire selected word. 
-     * Entry: The mouse is pressed and being dragged across the current board square. (JLabel)
-     * Exit: The current JLabel has been highlighted in the GUI and the model has been updated 
-     * to reflect the addition of this letter to the currently selected word. 
+     * 
+     * <p>Entry Condition: The mouse is pressed and being dragged across the current board square. (JLabel).</p>
+     * <p>Exit Condition: The current JLabel has been highlighted in the GUI and the model has been updated
+     * to reflect the addition of this letter to the currently selected word. </p>
+     * 
      * @param me The MouseEvent representing the user's drag across the current board square. 
      */
     @Override 

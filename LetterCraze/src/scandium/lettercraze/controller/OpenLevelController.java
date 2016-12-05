@@ -35,11 +35,11 @@ public class OpenLevelController extends MouseAdapter{
     /**
      * This constructor instantiates a new OpenLevelController. It accepts the LetterCraze model
      * and GUI. 
-	 * @param m The entire LetterCraze Model.
+	 * @param model The entire LetterCraze Model.
 	 * @param app The entire LetterCraze GUI.
 	 */
-    public OpenLevelController(Model m, Application app) {
-        this.model = m;
+    public OpenLevelController(Model model, Application app) {
+        this.model = model;
         this.app = app;
         this.dictionary = new LetterDictionary();
     }
@@ -47,8 +47,10 @@ public class OpenLevelController extends MouseAdapter{
     /**
      * This function handles a mouse click on a level in the Main Menu. It transitions the 
      * view from the Main Menu to the Level Player, and loads the selected level. 
-     * entry condition: the button this controller is attached to is pressed.
-	 * exit condition: the View has been set to the proper LevelPlayerView for the selected level.
+     * 
+     * <p>Entry Condition: the button this controller is attached to is pressed.</p>
+	 * <p>Exit Condition: the View has been set to the proper LevelPlayerView for the selected level.</p>
+	 * 
 	 * @param me The MouseEvent representing the user's mouse click on the level.
 	 */
     
