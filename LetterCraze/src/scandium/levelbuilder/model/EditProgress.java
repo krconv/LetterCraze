@@ -15,31 +15,24 @@ public class EditProgress {
 	private Level modified;
 
 	/**
-	 * Track the edits to a new Level.
-	 */
-	public EditProgress() {
-		// TODO implement here
-	}
-
-	/**
-	 * Track the edits to the given existing Level.
-	 * 
-	 * @param level
+	 * Creates a new level to track the edits to the given existing Level.
+	 * @param l
 	 *            The Level to modify.
 	 */
-	public EditProgress(Level level) {
-		// TODO implement here
+	public EditProgress(Level l) {
+		this.original = l;
+		this.modified = l.copy();
 	}
 
 	/**
-	 * @return the original
+	 * @return the original level
 	 */
 	public Level getOriginal() {
 		return original;
 	}
 
 	/**
-	 * @return the modified
+	 * @return the modified level
 	 */
 	public Level getModified() {
 		return modified;
