@@ -26,10 +26,11 @@ public class GameProgress {
 	 */
 	public GameProgress() throws IllegalStateException{
 		//if current level progress already exists, throw exception
-		if (this.created == true){
+		if (this.created == false){
 			this.levelProgresses = new HashMap<Level, LevelProgress>();
 			this.currentLevelProgress = new LevelProgress();
 			currentLevelProgress.setPlaying(false);
+			this.created = true;
 		} else{
 			throw new IllegalStateException("The Game Progress Already Exists");
 		}
@@ -42,11 +43,12 @@ public class GameProgress {
 	 * @throws IllegalStateException 
 	 */
 	public GameProgress(HashMap<Level, LevelProgress> storedProgress) throws IllegalStateException{
-		if (this.created == true){
+		if (this.created == false){
 			this.levelProgresses = storedProgress;
 		//TODO Replace this with loading the storedProgress from file
 		this.currentLevelProgress = new LevelProgress(null);
 		currentLevelProgress.setPlaying(false);
+		this.created = true;
 		} else{
 			throw new IllegalStateException("The Game Progress Already Exists");
 		}
