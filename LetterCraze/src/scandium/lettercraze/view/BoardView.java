@@ -38,6 +38,7 @@ public class BoardView extends JPanel {
 			label.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 			label.setBackground(Color.WHITE);
 			add(label);
+			board_squares.add(label);
 		}
 	}
 	

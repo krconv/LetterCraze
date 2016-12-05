@@ -3,6 +3,9 @@ package scandium.lettercraze.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JLabel;
+
+import scandium.common.tool.LetterDictionary;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 
@@ -39,6 +42,20 @@ public class OpenLevelController extends MouseAdapter{
     @Override
     public void mouseClicked(MouseEvent me) {
     	// TODO pass in the correct level information to set up the LevelPlayerView properly
+    	
+    	/* must initializes one letter dictionary for all tiles, not one per tile.
+    	 * Otherwise the seeds will be too close together and all tiles will be the same. 
+    	 */
+    	LetterDictionary letters = new LetterDictionary();
+    	/* initialize tiles with random letters */
+    	for(int i = 0; i < 6; i++){
+    		for(int j = 0; j < 6; j++){
+    			String random_letter = letters.getRandomTile().getContent();
+    			JLabel label = app.getLevelPlayer().getBoardView().getJLabel(i, j);
+    			label.setText(random_letter);
+    		}
+    	}
+    	
     	app.setView(app.getLevelPlayer());
     }
 
