@@ -40,6 +40,7 @@ public class BoardView extends JPanel {
 			add(label);
 			board_squares.add(label);
 		}
+		revalidate();
 	}
 	
 	/**
@@ -50,5 +51,17 @@ public class BoardView extends JPanel {
 		if (row >= 6 || col >= 6 || row < 0 || col < 0) return null;
 		return board_squares.get(row * 6 + col);
 	}
+	
+	/**
+	 * This function highlights the given JLabel
+	 * @param label The JLabel to be highlighted
+	 */
 
+	public void highlight(JLabel label){
+		if(label == null){
+			System.out.println("Error: Null Label in scandium.lettercraze.view.BoardView.highlight");
+			return;
+		}
+		label.setBackground(Color.GRAY);
+	}
 }

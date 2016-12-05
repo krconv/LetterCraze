@@ -14,9 +14,10 @@ import scandium.lettercraze.view.Application;
  */
 public class OpenLevelController extends MouseAdapter{
 	
-	@SuppressWarnings("unused")
-	private Model model;
-    private Application app;
+	/* Class attributes                                                                          */
+	Model model;
+    Application app;
+    LetterDictionary dictionary;
     
     /**
      * Default constructor
@@ -31,6 +32,7 @@ public class OpenLevelController extends MouseAdapter{
     public OpenLevelController(Model m, Application app) {
         this.model = m;
         this.app = app;
+        this.dictionary = new LetterDictionary();
      // TODO might need to pass in the specific level that this controller goes to rather than the full model
     }
 
@@ -46,7 +48,7 @@ public class OpenLevelController extends MouseAdapter{
     	/* must initializes one letter dictionary for all tiles, not one per tile.
     	 * Otherwise the seeds will be too close together and all tiles will be the same. 
     	 */
-    	LetterDictionary letters = new LetterDictionary();
+    	LetterDictionary letters = dictionary;
     	/* initialize tiles with random letters */
     	for(int i = 0; i < 6; i++){
     		for(int j = 0; j < 6; j++){
