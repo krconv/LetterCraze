@@ -28,7 +28,8 @@ public class Board {
 	 *            The direction of gravity for the board.
 	 */
 	public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
-		// TODO implement here
+		this.shouldRegenerate = shouldRegenerate;
+        this.gravityDirection = gravityDirection;
 	}
 
 	/**
@@ -79,17 +80,6 @@ public class Board {
 	 */
 	public boolean shouldRegenerate() {
 		return shouldRegenerate;
-	}
-	
-	/**
-	 * Returns a BoardSquare that corresponds to a position given
-	 * @param row The row the BoardSquare is in
-	 * @param col The column the BoardSquare is in
-	 * @return The BoardSquare at the given position
-	 */
-	public BoardSquare getBoardSquare(int row, int col){
-		BoardSquare bs = squares[row][col];
-		return bs;
 	}
 
 	/**
@@ -150,9 +140,21 @@ public class Board {
 	 * @return Whether any empty squares were filled.
 	 */
 	public boolean fillEmptySquares(LetterDictionary dictionary) {
-		// TODO implement here
-		return false;
-	}
+        int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if ((squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+        			squares[i][j].setTile(dictionary.getRandomTile());
+        			indicator = 1;
+        		}
+        	}
+        }
+        if (indicator == 1){
+        	return true;
+        }else{
+        	return false;
+        }
+    }
 
 	/**
 	 * Clears the tiles from the board.
@@ -162,8 +164,20 @@ public class Board {
 	 * @return Whether any of the tiles were removed.
 	 */
 	public boolean clearExistingTiles() {
-		// TODO implement here
-		return false;
+		int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if (squares[i][j].getTile() != null){
+        			squares[i][j].setTile(null);
+        			indicator = 1;
+        		}
+        	}
+        }
+        if (indicator == 1){
+        	return true;
+        }else{
+        	return false;
+        }
 	}
 
 	/**
@@ -179,8 +193,11 @@ public class Board {
 	 *             Thrown if the given square is not in this board.
 	 */
 	public boolean selectSquare(BoardSquare square) throws IllegalArgumentException {
-		// TODO implement here
-		return false;
+		if (selectedWord.addSelectedBoardSquare(square)){
+    		return true;
+    	}else{
+    		return false;
+    	}
 	}
 
 	/**
@@ -198,8 +215,12 @@ public class Board {
 	 *             Thrown if the given row or column is out of bounds.
 	 */
 	public boolean selectSquare(int row, int col) throws IndexOutOfBoundsException {
-		// TODO implement here
-		return false;
+		BoardSquare bs = getSquare(row, col);
+        if (selectedWord.addSelectedBoardSquare(bs)){
+        	return true;
+        }else{
+        	return false;
+        }
 	}
 
 	/**
@@ -210,8 +231,12 @@ public class Board {
 	 * @return Whether any word was deselected.
 	 */
 	public boolean deselectWord() {
-		// TODO implement here
-		return false;
+		if (selectedWord != null){
+			selectedWord = null;
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**
