@@ -11,16 +11,27 @@ import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 
 /**
+ * This class handles the selection of a word through the dragging of the mouse across the 
+ * board squares. It shows updates the view and the model to reflect the selection of letters. 
  * @author Scandium
+ * @date 12/5/2016
  */
 public class WordDragController extends MouseMotionAdapter{
 
-	/* Class Attributes                                                                          */
-    Model model;
+	/** 
+	 * The entire LetterCraze model. With this, the controller has access to all entities
+	 * that it may need. 
+	 */
+	Model model;
+	/** 
+	 * The entire LetterCraze GUI. With this, the controller has access to all widgets
+	 * that it may need. 
+	 */
     Application app;
     
     /**
-     * Instantiate a new Controller with the model and application.
+     * This constructor instantiates a new WordDragController. It accepts the entire LetterCraze
+     * model and the entire LetterCraze GUI.
      * @param model 
      * @param app
      */
@@ -30,9 +41,14 @@ public class WordDragController extends MouseMotionAdapter{
     }
 
    
-    /** This function handles a mouse Drag on one of the JLabel squares in the BoardView
-     * (used to select a tile)
-     * @param me The Mouse event for this controller
+    /** 
+     * This function handles a mouse drag across one of the board squares in the Level Player. 
+     * It updates the view and the model to reflect the addition of tile on this board square
+     * to the entire selected word. 
+     * Entry: The mouse is pressed and being dragged across the current board square. (JLabel)
+     * Exit: The current JLabel has been highlighted in the GUI and the model has been updated 
+     * to reflect the addition of this letter to the currently selected word. 
+     * @param me The MouseEvent representing the user's drag across the current board square. 
      */
     @Override 
     public void mouseDragged(MouseEvent me){
