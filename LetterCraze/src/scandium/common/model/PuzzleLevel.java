@@ -67,9 +67,6 @@ public class PuzzleLevel extends Level {
      */
     @Override 
     public boolean isValid() {
-    	if ((super.getName() != null) && (super.getBoard() != null) && (super.getStars() != null) && ((Integer) maxNumWords != null) && (super.getBoard().isValid() == true)){
-    		return true;
-    	}
-        return false;
+        return (super.isValid() && ((Integer) maxNumWords != null));
     }
 }

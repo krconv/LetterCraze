@@ -86,10 +86,7 @@ public class ThemeLevel extends Level {
      */
     @Override
     public boolean isValid() {
-    	if ((super.getName() != null) && (super.getBoard() != null) && (super.getStars() != null) && (theme != null) && (themeWords.isEmpty() == false) && (super.getBoard().isValid() == true)){
-    		return true;
-    	}
-        return false;
+    	return (super.isValid() && (theme != null) && (themeWords.isEmpty() == false));
     }
 
     /**
