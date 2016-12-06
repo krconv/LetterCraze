@@ -55,8 +55,6 @@ public class SelectTileController extends MouseAdapter{
     	if(!model.getProgress().getCurrentLevelProgress().isPlaying()) return;
     	/* AdjustView */
     	JLabel label = (JLabel) me.getComponent();
-    	/* Highlight the square in the view */
-    	app.getLevelPlayer().getBoardView().highlight(label);
     	/* Determine this labels coordinates */
     	int row = -1;
     	int col = -1;
@@ -70,6 +68,10 @@ public class SelectTileController extends MouseAdapter{
     	}
     	/* If the label is not in the board */
     	if(row == -1 || col == -1) return;
+    	/* Check that the board square is enabled */
+    	if(!model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row).isEnabled()) return;
+    	/* Highlight the square in the view */
+    	app.getLevelPlayer().getBoardView().highlight(label);
     	/* Register the new Word in the model */
     	BoardSquare square = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row);
     	Word word = new Word(square);

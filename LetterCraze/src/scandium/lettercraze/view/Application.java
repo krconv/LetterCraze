@@ -154,6 +154,7 @@ public class Application extends JFrame {
 				
 			}
 		}
+		levelPlayer.getResetButton().addMouseListener(new ResetLevelController(model, this));
 	}
 }
 

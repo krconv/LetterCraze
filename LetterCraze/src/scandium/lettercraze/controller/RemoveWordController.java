@@ -105,6 +105,8 @@ public class RemoveWordController extends MouseAdapter{
     		/* Add the word to the list of found words */
     		model.getProgress().getCurrentLevelProgress().addFoundWord(word.generateString());
     		app.getLevelPlayer().getFoundWordsListModel().addElement(word.generateString());
+    		/* Remove word from model */
+    		model.getProgress().getCurrentLevelProgress().getLevel().getBoard().setSelectedWord(null);
     		
     		/* Refresh View */
     		for(int i = 0; i < 6; i++){
