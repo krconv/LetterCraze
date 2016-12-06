@@ -16,6 +16,7 @@ public class Board {
 	private GravityDirection gravityDirection;
 	private boolean shouldRegenerate;
 
+
 	/**
 	 * Creates a new Board. 
 	 * Postcondition: All of the squares will be created, and the gravity direction and should 
@@ -27,10 +28,11 @@ public class Board {
 	 * @param gravityDirection
 	 *            The direction of gravity for the board.
 	 */
-	public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
-		this.shouldRegenerate = shouldRegenerate;
+    public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
+        this.shouldRegenerate = shouldRegenerate;
         this.gravityDirection = gravityDirection;
-	}
+        this.squares = new BoardSquare[6][6];
+    }
 
 	/**
 	 * Gets the square at the given position. 
@@ -56,14 +58,14 @@ public class Board {
 	 * @return the selectedWord, or null if no selection has been made.
 	 */
 	public Word getSelectedWord() {
-		return selectedWord;
+		return this.selectedWord;
 	}
 
 	/**
 	 * @return the gravityDirection
 	 */
 	public GravityDirection getGravityDirection() {
-		return gravityDirection;
+		return this.gravityDirection;
 	}
 	
 	/**
@@ -71,7 +73,7 @@ public class Board {
 	 * @param direction The direction to change it to.
 	 */
 	public void setGravityDirection(GravityDirection direction) {
-		gravityDirection = direction;
+		this.gravityDirection = direction;
 	}
 
 
@@ -109,8 +111,8 @@ public class Board {
 	 * @return Whether a word was removed.
 	 */
 	public boolean removeSelectedWord() {
-		// TODO implement here
-		return false;
+		this.selectedWord = null;
+		return (this.selectedWord == null);
 	}
 
 	/**
@@ -124,10 +126,87 @@ public class Board {
 	 * @return Whether any tiles were moved.
 	 */
 	public boolean applyGravity() {
-		// TODO implement here
-		return false;
+		boolean didItWork = false;
+		if(this.getGravityDirection() == GravityDirection.Up){
+	        int indicator = 0;
+	        for (int i = 0; i < squares.length; i++){
+	        	for (int j = 0; j < squares.length; j++){
+	        		if ((squares[i-1][j].getTile() == null) && (squares[i-1][j].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+	        			//^^^^^This logic probably doesn't work
+	        			//move shit from one to the next above
+	        			squares[i-1][j].setTile(squares[i][j].getTile());
+	        			squares[i][j].setTile(null);
+	        			indicator = 1;
+	        		}
+	        	}
+	        }
+	        if (indicator == 1){
+	        	didItWork = true;
+	        }else{
+	        	didItWork = false;
+	        }
+		}
+		if(this.getGravityDirection() == GravityDirection.Right && didItWork == false){
+	        int indicator = 0;
+	        for (int i = 0; i < squares.length; i++){
+	        	for (int j = 0; j < squares.length; j++){
+	        		if ((squares[i][j+1].getTile() == null) && (squares[i][j+1].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+	        			//^^^^^This logic probably doesn't work
+	        			//move shit from one to the next right one
+	        			squares[i][j+1].setTile(squares[i][j].getTile());
+	        			squares[i][j].setTile(null);
+	        			indicator = 1;
+	        		}
+	        	}
+	        }
+	        if (indicator == 1){
+	        	didItWork = true;
+	        }else{
+	        	didItWork = false;
+	        }
+		}
+		if(this.getGravityDirection() == GravityDirection.Down && didItWork == false){
+	        int indicator = 0;
+	        for (int i = 0; i < squares.length; i++){
+	        	for (int j = 0; j < squares.length; j++){
+	        		if ((squares[i+1][j].getTile() == null) && (squares[i+1][j].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+	        			//^^^^^This logic probably doesn't work
+	        			//move shit from one to the next below
+	        			squares[i+1][j].setTile(squares[i][j].getTile());
+	        			squares[i][j].setTile(null);
+	        			indicator = 1;
+	        		}
+	        	}
+	        }
+	        if (indicator == 1){
+	        	didItWork = true;
+	        }else{
+	        	didItWork = false;
+	        }
+		}
+		if(this.getGravityDirection() == GravityDirection.Left && didItWork == false){
+	        int indicator = 0;
+	        for (int i = 0; i < squares.length; i++){
+	        	for (int j = 0; j < squares.length; j++){
+	        		if ((squares[i][j-1].getTile() == null) && (squares[i][j-1].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+	        			//^^^^^This logic probably doesn't work
+	        			//move shit from one to the next left one
+	        			squares[i][j-1].setTile(squares[i][j].getTile());
+	        			squares[i][j].setTile(null);
+	        			indicator = 1;
+	        		}
+	        	}
+	        }
+	        if (indicator == 1){
+	        	didItWork = true;
+	        }else{
+	        	didItWork = false;
+	        }
+		}
+		
+		return didItWork;
 	}
-
+	
 	/**
 	 * Fills empty squares on the Board with random tiles from the given
 	 * dictionary. 
@@ -198,6 +277,7 @@ public class Board {
     	}else{
     		return false;
     	}
+
 	}
 
 	/**
@@ -215,13 +295,15 @@ public class Board {
 	 *             Thrown if the given row or column is out of bounds.
 	 */
 	public boolean selectSquare(int row, int col) throws IndexOutOfBoundsException {
-		BoardSquare bs = getSquare(row, col);
+	BoardSquare bs = getBoardSquare(row, col);
+
         if (selectedWord.addSelectedBoardSquare(bs)){
         	return true;
         }else{
         	return false;
         }
 	}
+
 
 	/**
 	 * Deselects the selected word.
@@ -245,8 +327,51 @@ public class Board {
 	 * @return Whether the Board is valid.
 	 */
 	public boolean isValid() {
-		// TODO implement here
-		return false;
+		boolean isItValid = true;
+		
+		if(this.squares == null){isItValid = false;}
+		if(this.gravityDirection == null){isItValid = false;}
+		if(getNumEnabled(this.squares) >= 9){isItValid = false;};
+		
+		return isItValid;
 	}
+	
+	//helper for isValid()
+	//gets the number of enabled squares
+	public int getNumEnabled(BoardSquare[][] squares) {
+		int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if (squares[i][j].isEnabled()){
+        			indicator++;
+        		}
+        	}
+        }
+        return indicator;
+	}
+	
+	/*-----Get Methods-----*/
+    public BoardSquare getBoardSquare(int col, int row){
+		BoardSquare bs = squares[row][col];
+		return bs;
+    }
+    
 
+	public boolean getShouldRegenerate(){
+		return this.shouldRegenerate;
+	}
+	
+	/*-----Set Methods-----*/
+    public void setBoardSquare(int col, int row, Tile tile){
+		this.squares[row][col].setTile(tile);
+    }
+    
+	public void setSelectedWord(Word word){
+		this.selectedWord = word;
+	}
+	
+	public void setShouldRegenerate(boolean regen){
+		this.shouldRegenerate = regen;
+	}
+	
 }
