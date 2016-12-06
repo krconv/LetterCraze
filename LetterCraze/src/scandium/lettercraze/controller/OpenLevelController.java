@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import scandium.common.model.Board;
@@ -15,6 +16,7 @@ import scandium.common.model.Tile;
 import scandium.common.tool.LetterDictionary;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
+import scandium.lettercraze.view.LevelPlayerView;
 
 /**
  * This class handles the opening of a level in LetterCraze. It Transitions the view from the Main 
@@ -70,7 +72,7 @@ public class OpenLevelController extends MouseAdapter{
     	Star[] stars = new Star[3];
     	stars[0] = new Star(1);
     	stars[1] = new Star(10);
-    	stars[2] = new Star(12);
+    	stars[2] = new Star(100);
     	String name = "Test";
     	int max_num_words = 500;
     	PuzzleLevel level = new PuzzleLevel(name, board, stars, max_num_words);
@@ -100,6 +102,16 @@ public class OpenLevelController extends MouseAdapter{
     	if(level.getType().equals("Puzzle")){
     		app.getLevelPlayer().getMaxNumWordsValueLabel().setText(level.getMaxNumWords()+ "");
     	}
+    	
+    	/* Set the view to reflect the score of 0 */
+    	app.getLevelPlayer().getScoreValueLabel().setText(0 + "");
+    	/* Set the view to reflect no stars */
+    	for(int i = 0; i < 3; i++){
+			app.getLevelPlayer().getStarLabels()[i].setIcon(
+					new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
+    	}
+    	/* Set the view to reflect no words in the found words box */
+    	app.getLevelPlayer().getFoundWordsListModel().clear();
     	
     	/* Set the view to the Level Player */
     	app.setView(app.getLevelPlayer());

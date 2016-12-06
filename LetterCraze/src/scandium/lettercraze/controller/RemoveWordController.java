@@ -4,14 +4,18 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
+
 import scandium.common.model.Board;
 import scandium.common.model.BoardSquare;
+import scandium.common.model.Star;
 import scandium.common.model.Tile;
 import scandium.common.model.Word;
 import scandium.common.tool.LetterDictionary;
 import scandium.common.tool.WordDictionary;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
+import scandium.lettercraze.view.LevelPlayerView;
 
 /**
  * This class handles the removal of a word from the board in LetterCraze. It is initiated 
@@ -81,7 +85,7 @@ public class RemoveWordController extends MouseAdapter{
     		app.getLevelPlayer().getBoardView().getJLabel(row, col).setBackground(Color.WHITE);
     	}
     	/* If word is valid */
-    	if(dictionary.isWord(word.generateString())){
+    	if(dictionary.isWord(word.generateString()) && word.getBoardSquares().size() >= 3){
     		/* Remove word from board */
     		for(BoardSquare bs : word.getBoardSquares()){
     			bs.setTile(null);
@@ -109,6 +113,17 @@ public class RemoveWordController extends MouseAdapter{
     				}else
     					val = tile.getContent();
     				app.getLevelPlayer().getBoardView().getJLabel(i, j).setText(val);
+    			}
+    		}
+    		
+    		/* Determine if a star was achieved */
+    		Star[] stars = model.getProgress().getCurrentLevelProgress().getLevel().getStars();
+    		for(int i = 0; i < 3; i++){
+    			Star star = stars[i];
+    			if (star.isObtained(score)){
+    				model.getProgress().getCurrentLevelProgress().setStarCount(i);
+    				app.getLevelPlayer().getStarLabels()[i].setIcon(
+    						new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-on.png")));
     			}
     		}
     	}

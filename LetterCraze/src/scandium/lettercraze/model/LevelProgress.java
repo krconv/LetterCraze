@@ -155,7 +155,14 @@ public class LevelProgress {
 	public int getStarCount() {
 		return starCount;
 	}
-
+	
+	/**
+	 * @param star_count The new StarCount Value
+	 */
+	public void setStarCount(int star_count){
+		this.starCount = star_count;
+	}
+	
 	/**
 	 * @return the foundWords
 	 */
