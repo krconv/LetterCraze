@@ -58,14 +58,14 @@ public class Board {
 	 * @return the selectedWord, or null if no selection has been made.
 	 */
 	public Word getSelectedWord() {
-		return selectedWord;
+		return this.selectedWord;
 	}
 
 	/**
 	 * @return the gravityDirection
 	 */
 	public GravityDirection getGravityDirection() {
-		return gravityDirection;
+		return this.gravityDirection;
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class Board {
 	 * @param direction The direction to change it to.
 	 */
 	public void setGravityDirection(GravityDirection direction) {
-		gravityDirection = direction;
+		this.gravityDirection = direction;
 	}
 
 
@@ -356,14 +356,7 @@ public class Board {
 		return bs;
     }
     
-	public Word getSelectedWord(){
-		return this.selectedWord;
-	}
-	
-	public GravityDirection getGravityDirection(){
-		return this.gravityDirection;
-	}
-	
+
 	public boolean getShouldRegenerate(){
 		return this.shouldRegenerate;
 	}
@@ -375,10 +368,6 @@ public class Board {
     
 	public void setSelectedWord(Word word){
 		this.selectedWord = word;
-	}
-	
-	public void setGravityDirection(GravityDirection gd){
-		this.gravityDirection = gd;
 	}
 	
 	public void setShouldRegenerate(boolean regen){
