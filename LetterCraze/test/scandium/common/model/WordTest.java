@@ -37,16 +37,16 @@ public class WordTest extends TestCase {
 	public void testWord() {
 		// test that the constructor captures the correct information
 		board.fillEmptySquares(dictionary);		
-		Word word = new Word(board.getSquare(1, 1));
+		Word word = new Word(board.getBoardSquare(1, 1));
 		assertEquals(1, word.getTiles().size());
-		assertEquals(board.getSquare(1, 1).getTile(), word.getTiles().get(0));
+		assertEquals(board.getBoardSquare(1, 1).getTile(), word.getTiles().get(0));
 		assertEquals(1, word.getBoardSquares().size());
-		assertEquals(board.getSquare(1, 1), word.getBoardSquares().get(0));
+		assertEquals(board.getBoardSquare(1, 1), word.getBoardSquares().get(0));
 		
 		// test that an exception is thrown if an empty square is selected
 		board.clearExistingTiles();
 		try {
-			word = new Word(board.getSquare(1, 1));
+			word = new Word(board.getBoardSquare(1, 1));
 			fail();
 		} catch (IllegalArgumentException e) {
 			
@@ -54,9 +54,9 @@ public class WordTest extends TestCase {
 			fail(); // should have been an illegal argument
 		}
 		// test that an exception is thrown if a disabled square is selected
-		board.getSquare(1, 1).setEnabled(false);
+		board.getBoardSquare(1, 1).setEnabled(false);
 		try {
-			word = new Word(board.getSquare(1, 1));
+			word = new Word(board.getBoardSquare(1, 1));
 			fail();
 		} catch (IllegalArgumentException e) {
 			
@@ -80,16 +80,16 @@ public class WordTest extends TestCase {
 	public void testGenerateString() {
 		board.fillEmptySquares(dictionary);
 		// test that the the first selected square is reflected in the string
-		Word word = new Word(board.getSquare(1, 1));
-		assertTrue(word.generateString().equalsIgnoreCase(board.getSquare(1, 1).getTile().getContent()));
+		Word word = new Word(board.getBoardSquare(1, 1));
+		assertTrue(word.generateString().equalsIgnoreCase(board.getBoardSquare(1, 1).getTile().getContent()));
 		
 		// test that the generate string is correct for multiple selected squares
-		word.addSelectedBoardSquare(board.getSquare(1, 2));
-		word.addSelectedBoardSquare(board.getSquare(1, 3));
+		word.addSelectedBoardSquare(board.getBoardSquare(1, 2));
+		word.addSelectedBoardSquare(board.getBoardSquare(1, 3));
 		assertTrue(word.generateString().equalsIgnoreCase(
-				board.getSquare(1, 1).getTile().getContent() +
-				board.getSquare(1, 2).getTile().getContent() +
-				board.getSquare(1, 3).getTile().getContent()));
+				board.getBoardSquare(1, 1).getTile().getContent() +
+				board.getBoardSquare(1, 2).getTile().getContent() +
+				board.getBoardSquare(1, 3).getTile().getContent()));
 	}
 
 	/**
@@ -98,25 +98,25 @@ public class WordTest extends TestCase {
 	public void testCalculateScore() {
 		board.fillEmptySquares(dictionary);
 		// test that the the first selected square is reflected in the score
-		Word word = new Word(board.getSquare(1, 1));
-		assertEquals(board.getSquare(1, 1).getTile().getScore(), word.calculateScore());
+		Word word = new Word(board.getBoardSquare(1, 1));
+		assertEquals(board.getBoardSquare(1, 1).getTile().getScore(), word.calculateScore());
 		
 		// test that the score is correct for 3 selected squares
-		word.addSelectedBoardSquare(board.getSquare(1, 2));
-		word.addSelectedBoardSquare(board.getSquare(1, 3));
-		assertEquals(board.getSquare(1, 1).getTile().getScore() +
-				board.getSquare(1, 2).getTile().getScore() +
-				board.getSquare(1, 3).getTile().getScore(),
+		word.addSelectedBoardSquare(board.getBoardSquare(1, 2));
+		word.addSelectedBoardSquare(board.getBoardSquare(1, 3));
+		assertEquals(board.getBoardSquare(1, 1).getTile().getScore() +
+				board.getBoardSquare(1, 2).getTile().getScore() +
+				board.getBoardSquare(1, 3).getTile().getScore(),
 				word.calculateScore());
 		
 		// test that the score is correct for 5 selected squares
-		word.addSelectedBoardSquare(board.getSquare(1, 4));
-		word.addSelectedBoardSquare(board.getSquare(1, 5));
-		assertEquals((board.getSquare(1, 1).getTile().getScore() +
-				board.getSquare(1, 2).getTile().getScore() +
-				board.getSquare(1, 3).getTile().getScore() +
-				board.getSquare(1, 4).getTile().getScore() +
-				board.getSquare(1, 5).getTile().getScore()) *
+		word.addSelectedBoardSquare(board.getBoardSquare(1, 4));
+		word.addSelectedBoardSquare(board.getBoardSquare(1, 5));
+		assertEquals((board.getBoardSquare(1, 1).getTile().getScore() +
+				board.getBoardSquare(1, 2).getTile().getScore() +
+				board.getBoardSquare(1, 3).getTile().getScore() +
+				board.getBoardSquare(1, 4).getTile().getScore() +
+				board.getBoardSquare(1, 5).getTile().getScore()) *
 				3,
 				word.calculateScore());
 	}
@@ -127,26 +127,26 @@ public class WordTest extends TestCase {
 	public void testAddSelectedBoardSquare() {
 		// test that selecting a square captures the correct information
 		board.fillEmptySquares(dictionary);
-		Word word = new Word(board.getSquare(1, 1));
-		word.addSelectedBoardSquare(board.getSquare(1, 2));
+		Word word = new Word(board.getBoardSquare(1, 1));
+		word.addSelectedBoardSquare(board.getBoardSquare(1, 2));
 		assertEquals(2, word.getTiles().size());
-		assertEquals(board.getSquare(1, 2).getTile(), word.getTiles().get(1));
+		assertEquals(board.getBoardSquare(1, 2).getTile(), word.getTiles().get(1));
 		assertEquals(2, word.getBoardSquares().size());
-		assertEquals(board.getSquare(1, 2), word.getBoardSquares().get(1));
+		assertEquals(board.getBoardSquare(1, 2), word.getBoardSquares().get(1));
 		
 		// test selecting an already selected square
-		assertFalse(word.addSelectedBoardSquare(board.getSquare(1, 1)));
-		assertFalse(word.addSelectedBoardSquare(board.getSquare(1, 2)));
+		assertFalse(word.addSelectedBoardSquare(board.getBoardSquare(1, 1)));
+		assertFalse(word.addSelectedBoardSquare(board.getBoardSquare(1, 2)));
 		// the number of selected tiles and board squares shouldn't have changed
 		assertEquals(2, word.getTiles().size());
-		assertEquals(board.getSquare(1, 2).getTile(), word.getTiles().get(1));
+		assertEquals(board.getBoardSquare(1, 2).getTile(), word.getTiles().get(1));
 		assertEquals(2, word.getBoardSquares().size());
-		assertEquals(board.getSquare(1, 2), word.getBoardSquares().get(1));
+		assertEquals(board.getBoardSquare(1, 2), word.getBoardSquares().get(1));
 		
 		// test that an exception is thrown if an empty square is selected
 		board.clearExistingTiles();
 		try {
-			word.addSelectedBoardSquare(board.getSquare(1, 3));
+			word.addSelectedBoardSquare(board.getBoardSquare(1, 3));
 			fail();
 		} catch (IllegalArgumentException e) {
 			
@@ -154,9 +154,9 @@ public class WordTest extends TestCase {
 			fail(); // should have been an illegal argument
 		}
 		// test that an exception is thrown if a disabled square is selected
-		board.getSquare(1, 3).setEnabled(false);
+		board.getBoardSquare(1, 3).setEnabled(false);
 		try {
-			word.addSelectedBoardSquare(board.getSquare(1, 3));
+			word.addSelectedBoardSquare(board.getBoardSquare(1, 3));
 			fail();
 		} catch (IllegalArgumentException e) {
 			
@@ -175,8 +175,8 @@ public class WordTest extends TestCase {
 		
 		// the number of selected tiles and board squares shouldn't have changed
 		assertEquals(2, word.getTiles().size());
-		assertEquals(board.getSquare(1, 2).getTile(), word.getTiles().get(1));
+		assertEquals(board.getBoardSquare(1, 2).getTile(), word.getTiles().get(1));
 		assertEquals(2, word.getBoardSquares().size());
-		assertEquals(board.getSquare(1, 2), word.getBoardSquares().get(1));
+		assertEquals(board.getBoardSquare(1, 2), word.getBoardSquares().get(1));
 	}
 }
