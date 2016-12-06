@@ -12,7 +12,6 @@ import java.util.TimerTask;
 
 import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
-import scandium.common.model.Word;
 
 
 /**

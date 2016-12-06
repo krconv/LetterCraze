@@ -7,6 +7,7 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JLabel;
 
+import scandium.common.model.BoardSquare;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 
@@ -72,7 +73,23 @@ public class WordDragController extends MouseMotionAdapter{
     	int y = (int)selected_label.getLocation().getY();
     	int xp = (int)point.getX();
     	int yp = (int)point.getY();
-    	if(!(xp >= x + 10 && yp >= y + 10 && xp <= x + (width - 10) && yp <= y + (height - 10))) return;
+    	if(!(xp >= x + 20 && yp >= y + 20 && xp <= x + (width - 20) && yp <= y + (height - 20))) return;
+    	
+    	/* Determine the coordinates of the label */
+    	int row = -1;
+    	int col = -1;
+    	for(int i = 0; i < 6; i++){
+    		for(int j = 0; j < 6; j++){
+    			if(app.getLevelPlayer().getBoardView().getJLabel(i, j).equals(selected_label)){
+    				row = i;
+    				col = j;
+    			}
+    		}
+    	}
+    	
+    	/* Add selected Square to the model */
+    	BoardSquare square = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row);
+    	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().selectSquare(square);
     	
     	/* Adjust View */
     	app.getLevelPlayer().getBoardView().highlight(selected_label);
