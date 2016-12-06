@@ -50,12 +50,27 @@ public class SelectTileController extends MouseAdapter{
      * @param me The mouse event for this controller
      */
     @Override
-    public void mousePressed(MouseEvent me){  	
+    public void mousePressed(MouseEvent me){
     	/* Check that the game is being played */
     	if(!model.getProgress().getCurrentLevelProgress().isPlaying()) return;
     	/* AdjustView */
     	JLabel label = (JLabel) me.getComponent();
-    	/* Determine this labels coordinates */
+    	BoardSquare square = getLabelBoardSquare(label);
+    	/* Check that the board square is enabled */
+    	if(!square.isEnabled()) return;
+    	/* Highlight the square in the view */
+    	app.getLevelPlayer().getBoardView().highlight(label);
+    	/* Register the new Word in the model */
+    	Word word = new Word(square);
+    	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().setSelectedWord(word);
+    }
+    
+    /**
+     * This function returns the BoardSquare that is associated with the given JLabel.
+     * It returns null if no square is associated with the label.
+     * @return BoardSquare the label's corresponding board square.
+     */
+    BoardSquare getLabelBoardSquare(JLabel label){
     	int row = -1;
     	int col = -1;
     	for(int i = 0; i < 6; i++){
@@ -63,21 +78,13 @@ public class SelectTileController extends MouseAdapter{
     			if(app.getLevelPlayer().getBoardView().getJLabel(i, j).equals(label)){
     				row = i;
     				col = j;
+    				break;
     			}
     		}
     	}
-    	/* If the label is not in the board */
-    	if(row == -1 || col == -1) return;
-    	/* Check that the board square is enabled */
-    	if(!model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row).isEnabled()) return;
-    	/* Highlight the square in the view */
-    	app.getLevelPlayer().getBoardView().highlight(label);
-    	/* Register the new Word in the model */
-    	BoardSquare square = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row);
-    	Word word = new Word(square);
-    	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().setSelectedWord(word);
+    	if(row == -1 || col == -1) return null;
+    	return model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row);
     }
-    
     
 }
     

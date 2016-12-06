@@ -8,12 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import scandium.common.model.Board;
-import scandium.common.model.BoardSquare;
 import scandium.common.model.GravityDirection;
 import scandium.common.model.PuzzleLevel;
 import scandium.common.model.Star;
-import scandium.common.model.Tile;
 import scandium.common.tool.LetterDictionary;
+import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 import scandium.lettercraze.view.LevelPlayerView;
@@ -79,42 +78,94 @@ public class OpenLevelController extends MouseAdapter{
     	
     	/* Store the selected level as the current level progress */
     	model.getProgress().getCurrentLevelProgress().setLevel(level);
+    	/* Generate tiles */
+    	regenerateBoardTiles();
     	
-    	/* Load the board squares to the view */
-    	for(int i = 0; i < 6; i++){
-    		for(int j = 0; j < 6; j++){
-    			BoardSquare square = level.getBoard().getBoardSquare(j, i);
-    			JLabel label = app.getLevelPlayer().getBoardView().getJLabel(i, j);
-    			if (square.isEnabled()){
-    				Tile random_tile = dictionary.getRandomTile();
-    				square.setTile(random_tile);
-    				label.setText(random_tile.getContent());
-    				label.setVisible(true);
-    			}else
-    				label.setBackground(Color.BLACK);
-    		}
-    	}
+    	/* Refresh the View to show the new status of the model */
+    	refreshView();
     	
     	/* Load the Level Name to the view */
     	app.getLevelPlayer().getLevelNameLabel().setText(level.getName());
-    	
-    	/* If Puzzle Level, Load the max number of words value to the view */
-    	if(level.getType().equals("Puzzle")){
-    		app.getLevelPlayer().getMaxNumWordsValueLabel().setText(level.getMaxNumWords()+ "");
-    	}
-    	
-    	/* Set the view to reflect the score of 0 */
-    	app.getLevelPlayer().getScoreValueLabel().setText(0 + "");
-    	/* Set the view to reflect no stars */
-    	for(int i = 0; i < 3; i++){
-			app.getLevelPlayer().getStarLabels()[i].setIcon(
-					new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
-    	}
-    	/* Set the view to reflect no words in the found words box */
-    	app.getLevelPlayer().getFoundWordsListModel().clear();
+
+    	/* Load Level Type Specific things */
+    	String level_type = level.getType();
+    	if(level_type.equals("Puzzle")) loadPuzzleLevel();
+        else if(level_type.equals("Lightning")) loadLightningLevel();
+        else if(level_type.equals("Theme")) loadThemeLevel();
+        else System.out.println("Invalid Level Type: " + level_type);
     	
     	/* Set the view to the Level Player */
     	app.setView(app.getLevelPlayer());
     }
 
+    /** 
+     * This function refreshes the view from the current state of the model
+     */
+    void refreshView(){
+    	LevelProgress CLP = model.getProgress().getCurrentLevelProgress();
+    	LevelPlayerView  level_player = app.getLevelPlayer();
+    	/* Remove all found words */
+    	level_player.getFoundWordsListModel().clear();
+    	/* Load found words from model */
+    	for(String word : CLP.getFoundWords()){
+    		level_player.getFoundWordsListModel().addElement(word);
+    	}
+    	/* Refresh Score */
+    	level_player.getScoreValueLabel().setText(CLP.getScore() + "");
+    	/* Refresh Stars */
+    	for(JLabel star : level_player.getStarLabels()){
+    		star.setIcon(new ImageIcon(LevelPlayerView.class.getResource(
+    				"/scandium/lettercraze/resources/star-icon-off.png")));
+    	}
+    	for(int i = 0; i < 3 && i < CLP.getStarCount(); i++){
+    		level_player.getStarLabels()[i].setIcon(new ImageIcon(LevelPlayerView.class.getResource(
+    				"/scandium/lettercraze/resources/star-icon-on.png")));
+    	}
+    	/* Refresh Board View */
+    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+    	for(int i = 0; i < 6; i++){
+    		for(int j = 0; j < 6; j++){
+    			if(board.getBoardSquare(j, i).isEnabled())
+    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setText(board.getBoardSquare(j, i).getTile().getContent());
+    			else 
+    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setBackground(Color.BLACK);
+    		}
+    	}
+    }
+    
+    /**
+     * This function regenerates the tiles on the board
+     */
+    void regenerateBoardTiles(){
+    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+    	for(int i = 0; i < 6; i++){
+    		for(int j = 0; j < 6; j++){
+    			if(board.getBoardSquare(j, i).isEnabled())
+    				board.setBoardSquare(j, i, dictionary.getRandomTile());
+    		}
+    	}
+    }
+    
+    /**
+     * This function loads the Puzzle Level View attributes 
+     */
+    void loadPuzzleLevel(){
+    	PuzzleLevel level = (PuzzleLevel) model.getProgress().getCurrentLevelProgress().getLevel();
+		app.getLevelPlayer().getMaxNumWordsValueLabel().setText(level.getMaxNumWords()+ "");
+    }
+    
+    /**
+     * This function loads the Lightning Level View attributes 
+     */
+    void loadLightningLevel(){
+    	return;
+    }
+    
+    /**
+     * This function loads the Theme Level View attributes 
+     */
+    void loadThemeLevel(){
+    	return;
+    }
+    
 }

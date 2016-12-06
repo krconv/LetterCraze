@@ -75,7 +75,11 @@ public class ResetLevelController extends MouseAdapter{
      */
     public void resetPuzzleLevel(){
     	/* Reset the model */
-    	resetCurrentProgress();
+    	LevelProgress current_level_progress = model.getProgress().getCurrentLevelProgress();
+    	current_level_progress.getFoundWords().clear();
+    	current_level_progress.setScore(0);
+    	current_level_progress.setStarCount(0);
+    	current_level_progress.setPlaying(true);
     	regenerateBoardTiles();
     	
     	/* Reset View */
@@ -103,8 +107,6 @@ public class ResetLevelController extends MouseAdapter{
      */
     void regenerateBoardTiles(){
     	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-    	board.clearExistingTiles();
-    	board.fillEmptySquares(dictionary);
     	for(int i = 0; i < 6; i++){
     		for(int j = 0; j < 6; j++){
     			if(board.getBoardSquare(j, i).isEnabled())
@@ -113,28 +115,30 @@ public class ResetLevelController extends MouseAdapter{
     	}
     }
     
-    /**
-     * This function resets the current Level Progress
-     */
-    void resetCurrentProgress(){
-    	LevelProgress current_level_progress = model.getProgress().getCurrentLevelProgress();
-    	current_level_progress.getFoundWords().clear();
-    	current_level_progress.setScore(0);
-    	current_level_progress.setStarCount(0);
-    	current_level_progress.setPlaying(true);
-    }
-    
     /** 
-     * This function refreshes the view 
+     * This function refreshes the view from the current state of the model
      */
     void refreshView(){
+    	LevelProgress CLP = model.getProgress().getCurrentLevelProgress();
     	LevelPlayerView  level_player = app.getLevelPlayer();
+    	/* Remove all found words */
     	level_player.getFoundWordsListModel().clear();
-    	level_player.getScoreValueLabel().setText(0 + "");
+    	/* Load found words from model */
+    	for(String word : CLP.getFoundWords()){
+    		level_player.getFoundWordsListModel().addElement(word);
+    	}
+    	/* Refresh Score */
+    	level_player.getScoreValueLabel().setText(CLP.getScore() + "");
+    	/* Refresh Stars */
     	for(JLabel star : level_player.getStarLabels()){
     		star.setIcon(new ImageIcon(LevelPlayerView.class.getResource(
     				"/scandium/lettercraze/resources/star-icon-off.png")));
     	}
+    	for(int i = 0; i < 3 && i < CLP.getStarCount(); i++){
+    		level_player.getStarLabels()[i].setIcon(new ImageIcon(LevelPlayerView.class.getResource(
+    				"/scandium/lettercraze/resources/star-icon-on.png")));
+    	}
+    	/* Refresh Board View */
     	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
     	for(int i = 0; i < 6; i++){
     		for(int j = 0; j < 6; j++){
