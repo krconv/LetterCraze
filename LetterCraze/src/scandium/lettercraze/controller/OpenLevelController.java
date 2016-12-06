@@ -74,7 +74,7 @@ public class OpenLevelController extends MouseAdapter{
     	stars[1] = new Star(10);
     	stars[2] = new Star(100);
     	String name = "Test";
-    	int max_num_words = 500;
+    	int max_num_words = 5;
     	PuzzleLevel level = new PuzzleLevel(name, board, stars, max_num_words);
     	
     	/* Store the selected level as the current level progress */

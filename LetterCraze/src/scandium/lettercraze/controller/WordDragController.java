@@ -57,6 +57,8 @@ public class WordDragController extends MouseMotionAdapter{
      */
     @Override 
     public void mouseDragged(MouseEvent me){
+    	/* Check that the game is being played */
+    	if(!model.getProgress().getCurrentLevelProgress().isPlaying()) return;
     	/* Get the location of the mouse */
     	Point relative_point = me.getPoint();
     	Point starting_point = me.getComponent().getLocation();

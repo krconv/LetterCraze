@@ -51,6 +51,8 @@ public class SelectTileController extends MouseAdapter{
      */
     @Override
     public void mousePressed(MouseEvent me){  	
+    	/* Check that the game is being played */
+    	if(!model.getProgress().getCurrentLevelProgress().isPlaying()) return;
     	/* AdjustView */
     	JLabel label = (JLabel) me.getComponent();
     	/* Highlight the square in the view */

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 
 import scandium.common.model.Board;
 import scandium.common.model.BoardSquare;
+import scandium.common.model.PuzzleLevel;
 import scandium.common.model.Star;
 import scandium.common.model.Tile;
 import scandium.common.model.Word;
@@ -74,6 +75,8 @@ public class RemoveWordController extends MouseAdapter{
      */
     @Override
     public void mouseReleased(MouseEvent me){
+    	/* Check that the game is being played */
+    	if(!model.getProgress().getCurrentLevelProgress().isPlaying()) return;
     	/* Get Word */
     	Word word = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getSelectedWord();
     	/* If no selection */
@@ -126,6 +129,15 @@ public class RemoveWordController extends MouseAdapter{
     						new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-on.png")));
     			}
     		}
+    		/* Check if the maximum number of words has been reached */
+    		if(model.getProgress().getCurrentLevelProgress().getLevel().getType().equals("Puzzle")){
+    			int num_words = model.getProgress().getCurrentLevelProgress().getFoundWords().size();
+    			PuzzleLevel level = (PuzzleLevel) model.getProgress().getCurrentLevelProgress().getLevel();
+    			if(num_words >= level.getMaxNumWords()){
+    				model.getProgress().getCurrentLevelProgress().setPlaying(false);
+    			}
+    		}
+    		
     	}
     }
 
