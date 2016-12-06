@@ -7,7 +7,7 @@ import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium
+ * @author Scandium WORK ON THIS
  */
 public class GenerateBoardArrangementController {
 

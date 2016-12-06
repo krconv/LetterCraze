@@ -27,14 +27,6 @@ public class RemoveWordAction implements IAction {
     	this.word = word;
     }
 
-    /* (non-Javadoc)
-     * @see scandium.lettercraze.action.IAction#execute()
-     */
-    @Override
-    public boolean execute() {
-        // TODO implement here
-        return false;
-    }
 
     /* (non-Javadoc)
      * @see scandium.lettercraze.action.IAction#undo()
@@ -50,6 +42,12 @@ public class RemoveWordAction implements IAction {
 	 */
 	@Override
 	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean execute() {
 		// TODO Auto-generated method stub
 		return false;
 	}
