@@ -25,7 +25,6 @@ public class LevelProgress {
     private List<String> foundWords;
     private boolean isPlaying = false;
     private Timer timer;
-    private Word word;
 
     /**
      * Creates a new LevelProgress with no data.
@@ -165,12 +164,6 @@ public class LevelProgress {
 		return foundWords;
 	}
 	
-	/**
-	 * @return the current word selection
-	 */
-	public Word getWord(){
-		return word;
-	}
 
 	/**
      * Resets the progress.

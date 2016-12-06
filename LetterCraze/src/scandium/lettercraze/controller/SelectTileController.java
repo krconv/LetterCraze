@@ -5,6 +5,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
+import scandium.common.model.BoardSquare;
+import scandium.common.model.Word;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 
@@ -51,8 +53,27 @@ public class SelectTileController extends MouseAdapter{
     public void mousePressed(MouseEvent me){  	
     	/* AdjustView */
     	JLabel label = (JLabel) me.getComponent();
+    	/* Highlight the square in the view */
     	app.getLevelPlayer().getBoardView().highlight(label);
+    	/* Determine this labels coordinates */
+    	int row = -1;
+    	int col = -1;
+    	for(int i = 0; i < 6; i++){
+    		for(int j = 0; j < 6; j++){
+    			if(app.getLevelPlayer().getBoardView().getJLabel(i, j).equals(label)){
+    				row = i;
+    				col = j;
+    			}
+    		}
+    	}
+    	/* If the label is not in the board */
+    	if(row == -1 || col == -1) return;
+    	/* Register the new Word in the model */
+    	BoardSquare square = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row);
+    	Word word = new Word(square);
+    	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().setSelectedWord(word);
     }
+    
     
 }
     
