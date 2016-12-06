@@ -109,7 +109,14 @@ public class LevelPlayerView extends JPanel {
 	public JLabel getMaxNumWordsLabel() {
 		return maxNumWordsLabel;
 	}
-
+	
+	/** 
+	 * @return the maxNumWordsValueLabel
+	 */
+	public JLabel getMaxNumWordsValueLabel(){
+		return maxNumWordsValueLabel;
+	}
+	
 	/**
 	 * @return the timerLabel
 	 */

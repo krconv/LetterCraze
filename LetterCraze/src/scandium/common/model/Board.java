@@ -32,6 +32,12 @@ public class Board {
         this.shouldRegenerate = shouldRegenerate;
         this.gravityDirection = gravityDirection;
         this.squares = new BoardSquare[6][6];
+        /* Initialize BoardSquares */
+        for(int i = 0; i < 6; i++){
+        	for(int j = 0; j < 6; j++){
+        		squares[i][j] = new BoardSquare(i, j, this, true);
+        	}
+        }
     }
 
 	/**

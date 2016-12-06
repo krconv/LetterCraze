@@ -58,16 +58,15 @@ public class LevelProgress {
      * @throws GameProgressAlreadyRunning, timerNotInitializedProperly
      */
     private void initialize(Level level) throws IllegalStateException{
-		if (isPlaying = true){
-			throw new IllegalStateException("Current Level Progress is already running");
-		}else{
-			this.timer = new Timer();
-			this.foundWords = new LinkedList<String>();
-			isPlaying = true;
-			foundWords.clear();
-			starCount = 0;
-			score = 0;
-			this.level = level;
+		this.timer = new Timer();
+		this.foundWords = new LinkedList<String>();
+		isPlaying = true;
+		foundWords.clear();
+		starCount = 0;
+		score = 0;
+		this.level = level;
+		if(level == null){
+			throw new IllegalStateException("Null Level");
 		}
 		if(level.getType().equals("lightning")){
 			try{

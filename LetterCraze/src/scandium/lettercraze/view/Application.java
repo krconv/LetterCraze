@@ -116,7 +116,7 @@ public class Application extends JFrame {
 	 * Initialize the model.
 	 */
 	private void initializeModel() {
-		// TODO implement here
+		model = new Model();
 	}
 
 	/**

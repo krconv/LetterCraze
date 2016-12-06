@@ -1,10 +1,17 @@
 package scandium.lettercraze.controller;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
+import scandium.common.model.Board;
+import scandium.common.model.BoardSquare;
+import scandium.common.model.GravityDirection;
+import scandium.common.model.PuzzleLevel;
+import scandium.common.model.Star;
+import scandium.common.model.Tile;
 import scandium.common.tool.LetterDictionary;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
@@ -55,14 +62,43 @@ public class OpenLevelController extends MouseAdapter{
 	 */
     
     @Override
-    public void mouseClicked(MouseEvent me) {   	
-    	/* initialize tiles with random letters */
+    public void mouseClicked(MouseEvent me) {  
+    	/* Initialize Fake Level */
+    	Board board = new Board(true, GravityDirection.Up);
+    	board.getBoardSquare(0,3).setEnabled(false);
+    	board.getBoardSquare(1, 2).setEnabled(false);
+    	Star[] stars = new Star[3];
+    	stars[0] = new Star(1);
+    	stars[1] = new Star(10);
+    	stars[2] = new Star(12);
+    	String name = "Test";
+    	int max_num_words = 500;
+    	PuzzleLevel level = new PuzzleLevel(name, board, stars, max_num_words);
+    	
+    	/* Store the selected level as the current level progress */
+    	model.getProgress().getCurrentLevelProgress().setLevel(level);
+    	
+    	/* Load the board squares to the view */
     	for(int i = 0; i < 6; i++){
     		for(int j = 0; j < 6; j++){
-    			String random_letter = dictionary.getRandomTile().getContent();
+    			BoardSquare square = level.getBoard().getBoardSquare(i, j);
     			JLabel label = app.getLevelPlayer().getBoardView().getJLabel(i, j);
-    			label.setText(random_letter);
+    			if (square.isEnabled()){
+    				Tile random_tile = dictionary.getRandomTile();
+    				square.setTile(random_tile);
+    				label.setText(random_tile.getContent());
+    				label.setVisible(true);
+    			}else
+    				label.setBackground(Color.BLACK);
     		}
+    	}
+    	
+    	/* Load the Level Name to the view */
+    	app.getLevelPlayer().getLevelNameLabel().setText(level.getName());
+    	
+    	/* If Puzzle Level, Load the max number of words value to the view */
+    	if(level.getType().equals("Puzzle")){
+    		app.getLevelPlayer().getMaxNumWordsValueLabel().setText(level.getMaxNumWords()+ "");
     	}
     	
     	/* Set the view to the Level Player */
