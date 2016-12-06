@@ -151,6 +151,14 @@ public class LevelPlayerView extends JPanel {
 	public JLabel getScoreLabel() {
 		return scoreLabel;
 	}
+	
+	/**
+	 * @return the scoreValueLabel
+	 * @return
+	 */
+	public JLabel getScoreValueLabel(){
+		return scoreValueLabel;
+	}
 
 	/**
 	 * @return the starThresholdLabel
@@ -166,6 +174,13 @@ public class LevelPlayerView extends JPanel {
 		return foundWordsLabel;
 	}
 
+	/**
+	 * @return the foundWordsListModel
+	 */
+	public DefaultListModel<String> getFoundWordsListModel(){
+		return foundWordsListModel;
+	}
+	
 	/**
 	 * Initializes the view.
 	 */

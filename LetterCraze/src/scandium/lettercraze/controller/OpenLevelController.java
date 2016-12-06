@@ -81,7 +81,7 @@ public class OpenLevelController extends MouseAdapter{
     	/* Load the board squares to the view */
     	for(int i = 0; i < 6; i++){
     		for(int j = 0; j < 6; j++){
-    			BoardSquare square = level.getBoard().getBoardSquare(i, j);
+    			BoardSquare square = level.getBoard().getBoardSquare(j, i);
     			JLabel label = app.getLevelPlayer().getBoardView().getJLabel(i, j);
     			if (square.isEnabled()){
     				Tile random_tile = dictionary.getRandomTile();

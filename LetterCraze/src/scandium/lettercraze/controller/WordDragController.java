@@ -1,5 +1,6 @@
 package scandium.lettercraze.controller;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -8,6 +9,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JLabel;
 
 import scandium.common.model.BoardSquare;
+import scandium.common.model.Word;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 
@@ -61,7 +63,11 @@ public class WordDragController extends MouseMotionAdapter{
     	Point point = new Point((int)(starting_point.getX() + relative_point.getX()), (int)(starting_point.getY() + relative_point.getY()));
     	Component c = app.getLevelPlayer().getBoardView().findComponentAt(point);
     	JLabel selected_label = null;
-    	if(c == null) return;
+    	/* If the drag left the board view */
+    	if(c == null){
+    		abortSelection();
+    		return;
+    	}
     	if(c.getClass().toString().equals("class javax.swing.JLabel")){
     		selected_label = (JLabel) c;
     	}else return;
@@ -87,13 +93,56 @@ public class WordDragController extends MouseMotionAdapter{
     		}
     	}
     	
-    	/* Add selected Square to the model */
+    	/* Determine if the Drag is a Drag to an enabled Square */
     	BoardSquare square = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row);
+    	if(!square.isEnabled()){
+    		abortSelection();
+    		return;
+    	}
+    	/* Determine if the Drag is to a already selected Square */
+    	Word word = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getSelectedWord();
+    	if(word == null) return;
+    	if(word.getBoardSquares().contains(square)){
+    		/* If its not the drag on the same tile. */
+    		if(!square.equals(word.getBoardSquares().get(word.getBoardSquares().size() - 1))){
+    			abortSelection();
+    		}
+    		return;
+    	}
+    	/* Determine if the Drag is to an adjacent square */
+    	BoardSquare last_square = word.getBoardSquares().get(word.getBoardSquares().size() - 1);
+    	x = (int)last_square.getRow();
+    	y = (int)last_square.getCol();
+    	if(!(x==row || x==row-1 || x==row+1)&&(y==col || y==col-1 || y==col+1)){
+    		abortSelection();
+    		return;
+    	}
+    	
+    	/* Add selected Square to the model */
+    	//Word word = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getSelectedWord();
+    	//already Selected = word.getBoardSquares().contains(square);
+    	
     	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().selectSquare(square);
     	
     	/* Adjust View */
     	app.getLevelPlayer().getBoardView().highlight(selected_label);
     }
+    
+    
+    void abortSelection(){
+    	/* Un-highlight the word on the board view */
+    	Word word = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getSelectedWord();
+    	/* If no selection */
+    	if(word == null) return;
+    	for(BoardSquare bs : word.getBoardSquares()){
+    		int row = bs.getRow();
+    		int col = bs.getCol();
+    		app.getLevelPlayer().getBoardView().getJLabel(row, col).setBackground(Color.WHITE);
+    	}
+    	/* Un-select the word in the model */
+		model.getProgress().getCurrentLevelProgress().getLevel().getBoard().removeSelectedWord();
+    }
+    
 }
     
     

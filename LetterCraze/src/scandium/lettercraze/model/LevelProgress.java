@@ -206,5 +206,13 @@ public class LevelProgress {
         score = score + delta;
         return true;
     }
+    
+    /** 
+     * This function adds a word to the list of found words
+     * @param word The found word
+     */
+    public void addFoundWord(String word){
+    	this.foundWords.add(word);
+    }
 
 }
