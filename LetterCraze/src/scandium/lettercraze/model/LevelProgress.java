@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import scandium.common.model.*;
+import scandium.common.model.Level;
+import scandium.common.model.LightningLevel;
+import scandium.common.model.Word;
+
 
 /**
  * An object which contains information about a Player's progress in a Level.
@@ -22,6 +25,7 @@ public class LevelProgress {
     private List<String> foundWords;
     private boolean isPlaying = false;
     private Timer timer;
+    private Word word;
 
     /**
      * Creates a new LevelProgress with no data.
@@ -160,6 +164,13 @@ public class LevelProgress {
 	 */
 	public List<String> getFoundWords() {
 		return foundWords;
+	}
+	
+	/**
+	 * @return the current word selection
+	 */
+	public Word getWord(){
+		return word;
 	}
 
 	/**

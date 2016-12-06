@@ -1,44 +1,72 @@
 package scandium.lettercraze.controller;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
 
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 
 /**
+ * This class handles the beginning of the user's word selection in LetterCraze. It uses 
+ * a mouse press event to determine which tile starts the currently selected word. 
  * @author Scandium
+ * @date 12/5/16
  */
-public class SelectTileController {
-
-    /**
-     * Default constructor
-     */
-    public SelectTileController() {
-    }
-
-    /**
-     * 
-     */
-    Model model;
-
-    /**
-     * 
-     */
+public class SelectTileController extends MouseAdapter{
+	/** 
+	 * The entire LetterCraze model. With this, the controller has access to all entities
+	 * that it may need. 
+	 */
+	Model model;
+	/** 
+	 * The entire LetterCraze GUI. With this, the controller has access to all widgets
+	 * that it may need. 
+	 */
     Application app;
 
     /**
-     * @param model 
-     * @param app
+     * This constructor instantiates a new SelectTileController. It accepts the LetterCraze model
+     * and the LetterCraze GUI.
+     * @param model The entire LetterCraze model.
+     * @param app The entire LetterCraze GUI.
      */
     public SelectTileController(Model model, Application app) {
-        // TODO implement here
+        this.model = model;
+        this.app = app;
     }
 
     /**
-     * @param ActionEvent ae
+     * This function handles a mouse press on one of the board Squares in the Level Player. 
+     * This signals the start of a word selection by the user. It creates a new word entity in
+     * the LetterCraze Model and highlights the selected board square in the GUI.
+     * 
+     * <p>Entry Condition: The user generates a mouse press on a board square</p>
+     * <p>Exit Condition: The board square has been selected and a new word has been started</p>
+     * 
+     * @param me The mouse event for this controller
      */
-    public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
+    @Override
+    public void mousePressed(MouseEvent me){  	
+    	/* AdjustView */
+    	JLabel label = (JLabel) me.getComponent();
+    	app.getLevelPlayer().getBoardView().highlight(label);
     }
-
+    
 }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
