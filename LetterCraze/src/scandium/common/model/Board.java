@@ -36,8 +36,17 @@ public class Board {
 	 * Postcondition: The board is created with default information.
 	 */
 	public Board() {
-		this.shouldRegenerate = true;
-		this.gravityDirection = GravityDirection.Up;
+		this(true, GravityDirection.Up);
+	}
+
+	/**
+	 * Creates a new Board with the given information.
+	 * Precondition: None.
+	 * Postcondition: The board is created with the given information.
+	 */
+	public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
+		this.shouldRegenerate = shouldRegenerate;
+		this.gravityDirection = gravityDirection;
 		this.squares = new BoardSquare[6][6];
 
 		// create all of the squares
@@ -72,14 +81,14 @@ public class Board {
 	 * @return the selectedWord, or null if no selection has been made.
 	 */
 	public Word getSelectedWord() {
-		return selectedWord;
+		return this.selectedWord;
 	}
 
 	/**
 	 * @return the gravityDirection
 	 */
 	public GravityDirection getGravityDirection() {
-		return gravityDirection;
+		return this.gravityDirection;
 	}
 	
 	/**
@@ -87,7 +96,7 @@ public class Board {
 	 * @param direction The direction to change it to.
 	 */
 	public void setGravityDirection(GravityDirection direction) {
-		gravityDirection = direction;
+		this.gravityDirection = direction;
 	}
 
 
@@ -96,17 +105,6 @@ public class Board {
 	 */
 	public boolean shouldRegenerate() {
 		return shouldRegenerate;
-	}
-	
-	/**
-	 * Returns a BoardSquare that corresponds to a position given
-	 * @param row The row the BoardSquare is in
-	 * @param col The column the BoardSquare is in
-	 * @return The BoardSquare at the given position
-	 */
-	public BoardSquare getBoardSquare(int row, int col){
-		BoardSquare bs = squares[row][col];
-		return bs;
 	}
 
 	/**
@@ -136,8 +134,8 @@ public class Board {
 	 * @return Whether a word was removed.
 	 */
 	public boolean removeSelectedWord() {
-		// TODO implement here
-		return false;
+		this.selectedWord = null;
+		return (this.selectedWord == null);
 	}
 
 	/**
@@ -151,10 +149,119 @@ public class Board {
 	 * @return Whether any tiles were moved.
 	 */
 	public boolean applyGravity() {
-		// TODO implement here
-		return false;
+		/* indicator of tile movement */
+		boolean moved_tiles = false;
+		/* Apply Upwards Gravity */
+		if(getGravityDirection() == GravityDirection.Up){
+			for(int row = 0; row < 6; row++){
+				boardSquareLoop:
+				for(int col = 0; col < 6; col++){
+					/* Get the current Square */
+					BoardSquare this_square = squares[row][col];
+					/* Determine if it needs to be filled */
+					if(this_square.isEnabled() && this_square.isEmpty()){
+						/* Determine if the lower squares have a tile to fill it with */
+						for(int i = row + 1; i < 6; i++){
+							BoardSquare possible_filler = squares[i][col];
+							if(possible_filler.isEnabled() && !possible_filler.isEmpty()){
+								/* Transfer Tile contents */
+								Tile t = possible_filler.getTile();
+								possible_filler.setTile(null);
+								this_square.setTile(t);
+								/* Continue to the next board Square in BoardQuareLoop */
+								continue boardSquareLoop;
+							}
+						}
+					}
+				}
+			}
+		}else System.out.println("Have not yet implemented other gravity directions");
+		
+		return moved_tiles;
+		
+		/*
+		boolean didItWork = false;
+		if(this.getGravityDirection() == GravityDirection.Up){
+	        int indicator = 0;
+	        for (int i = 0; i < squares.length; i++){
+	        	for (int j = 0; j < squares.length; j++){
+	        		if ((squares[i-1][j].getTile() == null) && (squares[i-1][j].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+	        			//^^^^^This logic probably doesn't work
+	        			//move shit from one to the next above
+	        			squares[i-1][j].setTile(squares[i][j].getTile());
+	        			squares[i][j].setTile(null);
+	        			indicator = 1;
+	        		}
+	        	}
+	        }
+	        if (indicator == 1){
+	        	didItWork = true;
+	        }else{
+	        	didItWork = false;
+	        }
+		}
+		if(this.getGravityDirection() == GravityDirection.Right && didItWork == false){
+	        int indicator = 0;
+	        for (int i = 0; i < squares.length; i++){
+	        	for (int j = 0; j < squares.length; j++){
+	        		if ((squares[i][j+1].getTile() == null) && (squares[i][j+1].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+	        			//^^^^^This logic probably doesn't work
+	        			//move shit from one to the next right one
+	        			squares[i][j+1].setTile(squares[i][j].getTile());
+	        			squares[i][j].setTile(null);
+	        			indicator = 1;
+	        		}
+	        	}
+	        }
+	        if (indicator == 1){
+	        	didItWork = true;
+	        }else{
+	        	didItWork = false;
+	        }
+		}
+		if(this.getGravityDirection() == GravityDirection.Down && didItWork == false){
+	        int indicator = 0;
+	        for (int i = 0; i < squares.length; i++){
+	        	for (int j = 0; j < squares.length; j++){
+	        		if ((squares[i+1][j].getTile() == null) && (squares[i+1][j].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+	        			//^^^^^This logic probably doesn't work
+	        			//move shit from one to the next below
+	        			squares[i+1][j].setTile(squares[i][j].getTile());
+	        			squares[i][j].setTile(null);
+	        			indicator = 1;
+	        		}
+	        	}
+	        }
+	        if (indicator == 1){
+	        	didItWork = true;
+	        }else{
+	        	didItWork = false;
+	        }
+		}
+		if(this.getGravityDirection() == GravityDirection.Left && didItWork == false){
+	        int indicator = 0;
+	        for (int i = 0; i < squares.length; i++){
+	        	for (int j = 0; j < squares.length; j++){
+	        		if ((squares[i][j-1].getTile() == null) && (squares[i][j-1].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+	        			//^^^^^This logic probably doesn't work
+	        			//move shit from one to the next left one
+	        			squares[i][j-1].setTile(squares[i][j].getTile());
+	        			squares[i][j].setTile(null);
+	        			indicator = 1;
+	        		}
+	        	}
+	        }
+	        if (indicator == 1){
+	        	didItWork = true;
+	        }else{
+	        	didItWork = false;
+	        }
+		}
+		
+		return didItWork;
+		*/
 	}
-
+	
 	/**
 	 * Fills empty squares on the Board with random tiles from the given
 	 * dictionary. 
@@ -167,9 +274,21 @@ public class Board {
 	 * @return Whether any empty squares were filled.
 	 */
 	public boolean fillEmptySquares(LetterDictionary dictionary) {
-		// TODO implement here
-		return false;
-	}
+        int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if ((squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
+        			squares[i][j].setTile(dictionary.getRandomTile());
+        			indicator = 1;
+        		}
+        	}
+        }
+        if (indicator == 1){
+        	return true;
+        }else{
+        	return false;
+        }
+    }
 
 	/**
 	 * Clears the tiles from the board.
@@ -179,8 +298,20 @@ public class Board {
 	 * @return Whether any of the tiles were removed.
 	 */
 	public boolean clearExistingTiles() {
-		// TODO implement here
-		return false;
+		int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if (squares[i][j].getTile() != null){
+        			squares[i][j].setTile(null);
+        			indicator = 1;
+        		}
+        	}
+        }
+        if (indicator == 1){
+        	return true;
+        }else{
+        	return false;
+        }
 	}
 
 	/**
@@ -196,8 +327,13 @@ public class Board {
 	 *             Thrown if the given square is not in this board.
 	 */
 	public boolean selectSquare(BoardSquare square) throws IllegalArgumentException {
-		// TODO implement here
-		return false;
+		if (selectedWord == null) return false;
+		if (selectedWord.addSelectedBoardSquare(square)){
+    		return true;
+    	}else{
+    		return false;
+    	}
+
 	}
 
 	/**
@@ -215,9 +351,15 @@ public class Board {
 	 *             Thrown if the given row or column is out of bounds.
 	 */
 	public boolean selectSquare(int row, int col) throws IndexOutOfBoundsException {
-		// TODO implement here
-		return false;
+	BoardSquare bs = getBoardSquare(row, col);
+
+        if (selectedWord.addSelectedBoardSquare(bs)){
+        	return true;
+        }else{
+        	return false;
+        }
 	}
+
 
 	/**
 	 * Deselects the selected word.
@@ -227,8 +369,12 @@ public class Board {
 	 * @return Whether any word was deselected.
 	 */
 	public boolean deselectWord() {
-		// TODO implement here
-		return false;
+		if (selectedWord != null){
+			selectedWord = null;
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**
@@ -237,8 +383,51 @@ public class Board {
 	 * @return Whether the Board is valid.
 	 */
 	public boolean isValid() {
-		// TODO implement here
-		return false;
+		boolean isItValid = true;
+		
+		if(this.squares == null){isItValid = false;}
+		if(this.gravityDirection == null){isItValid = false;}
+		if(getNumEnabled(this.squares) >= 9){isItValid = false;};
+		
+		return isItValid;
 	}
+	
+	//helper for isValid()
+	//gets the number of enabled squares
+	public int getNumEnabled(BoardSquare[][] squares) {
+		int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if (squares[i][j].isEnabled()){
+        			indicator++;
+        		}
+        	}
+        }
+        return indicator;
+	}
+	
+	/*-----Get Methods-----*/
+    public BoardSquare getBoardSquare(int col, int row){
+		BoardSquare bs = squares[row][col];
+		return bs;
+    }
+    
 
+	public boolean getShouldRegenerate(){
+		return this.shouldRegenerate;
+	}
+	
+	/*-----Set Methods-----*/
+    public void setBoardSquare(int col, int row, Tile tile){
+		this.squares[row][col].setTile(tile);
+    }
+    
+	public void setSelectedWord(Word word){
+		this.selectedWord = word;
+	}
+	
+	public void setShouldRegenerate(boolean regen){
+		this.shouldRegenerate = regen;
+	}
+	
 }
