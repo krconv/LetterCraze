@@ -5,32 +5,49 @@
  */
 package scandium.common.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import scandium.common.tool.LetterDictionary;
 
 /**
- * A play area container for Tiles.
+ * A play area container for tiles, which is made out of board squares.
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Board {
+	@XmlElementWrapper(name = "rows")
+	@XmlElement(name = "row")
     private BoardSquare[][] squares;
+	@XmlTransient
 	private Word selectedWord;
+	@XmlElement
 	private GravityDirection gravityDirection;
+	@XmlElement
 	private boolean shouldRegenerate;
 
 	/**
-	 * Creates a new Board. 
-	 * Postcondition: All of the squares will be created, and the gravity direction and should 
-	 * regenerate will be updated to indicate the given information. All of the squares will be
-	 * enabled by default.
-	 * 
-	 * @param shouldRegenerate
-	 *            Whether new Tiles should be generated.
-	 * @param gravityDirection
-	 *            The direction of gravity for the board.
+	 * Creates a new Board with the default information.
+	 * Precondition: None.
+	 * Postcondition: The board is created with default information.
 	 */
-	public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
-		// TODO implement here
-	}
+	public Board() {
+		this.shouldRegenerate = true;
+		this.gravityDirection = GravityDirection.Up;
+		this.squares = new BoardSquare[6][6];
 
+		// create all of the squares
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 6; col++) {
+				squares[row][col] = new BoardSquare(row, col, this, true);
+			}
+		}
+	}
+	
 	/**
 	 * Gets the square at the given position. 
 	 * Precondition: The indicated position is a valid one. 
