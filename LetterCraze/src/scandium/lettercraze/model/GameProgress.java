@@ -22,12 +22,13 @@ public class GameProgress {
 	 * Creates a completely new game progress with nothing stored in it
 	 * Creates a currentLevelProgress with a null level and isPlaying equals false
 	 * @throws IllegalStateException if the current level progress is already running, 
-	 * 						or if one of the LevelProgress initializations fail
+	 * 						or if one of the LevelProgress initializations fails
 	 */
 	public GameProgress() throws IllegalStateException{
 		//if current level progress already exists, throw exception
 		if (this.created == false){
 			this.levelProgresses = new HashMap<Level, LevelProgress>();
+			this.currentLevelProgress = new LevelProgress();
 			currentLevelProgress.setPlaying(false);
 			this.created = true;
 		} else{
@@ -45,7 +46,7 @@ public class GameProgress {
 		if (this.created == false){
 			this.levelProgresses = storedProgress;
 		//TODO Replace this with loading the storedProgress from file
-		this.currentLevelProgress = new LevelProgress(null);
+		this.currentLevelProgress = new LevelProgress();
 		currentLevelProgress.setPlaying(false);
 		this.created = true;
 		} else{
