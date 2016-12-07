@@ -1,6 +1,6 @@
 package scandium.levelbuilder.controller;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
@@ -10,35 +10,27 @@ import scandium.levelbuilder.view.Application;
  */
 public class OpenLevelEditorController {
 
-    /**
-     * Default constructor
-     */
-    public OpenLevelEditorController() {
-    }
-
-    /**
-     * 
-     */
+	//attributes
     Model model;
-
-    /**
-     * 
-     */
     Application app;
 
+    
     /**
      * @param model 
      * @param app
      */
-    public OpenLevelEditorController(Model model, Application app) {
-        // TODO implement here
+    public OpenLevelEditorController(Model m, Application a) {
+        this.model = m;
+        this.app = a;
     }
 
+    
     /**
-     * @param ActionEvent ae
+     * @param MouseEvent me
      */
-    public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
+    public void mousePressed(MouseEvent me) {
+    	app.setViewLevelEditor();
+    	//load up selected level
     }
 
 }

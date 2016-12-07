@@ -1,44 +1,36 @@
 package scandium.levelbuilder.controller;
 
-import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
 
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium WORK ON THIS
+ * @author Felix
  */
 public class EnableBoardSquareController {
-
-    /**
-     * Default constructor
-     */
-    public EnableBoardSquareController() {
-    }
-
-    /**
-     * 
-     */
+ 	//attributes
     Model model;
-
-    /**
-     * 
-     */
     Application app;
-
+    JLabel square;
+    
     /**
-     * @param model 
-     * @param app
+     * @param m 
+     * @param a
      */
-    public EnableBoardSquareController(Model model, Application app) {
-        // TODO implement here
+    public EnableBoardSquareController(JLabel jl,Model m, Application a) {
+    	this.model = m;
+    	this.app = a;
+    	this.square = jl;
     }
 
     /**
-     * @param ActionEvent ae
+     * @param MouseEvent me
      */
-    public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
+    public void mousePressed(MouseEvent me) {
+    	this.square.setBackground(Color.WHITE);
     }
-
 }
