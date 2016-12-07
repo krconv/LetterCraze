@@ -42,7 +42,8 @@ public class LevelProgress {
 	 * Creates a new Level progress with uninitialized information.
 	 */
 	@SuppressWarnings("unused") // only used for XML serializer
-	private LevelProgress() {
+    public LevelProgress() {
+		
 	}
 
 	/**

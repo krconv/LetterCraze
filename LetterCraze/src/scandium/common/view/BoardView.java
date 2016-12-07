@@ -110,6 +110,17 @@ public class BoardView extends JPanel{
 	public JLabel[][] getBoardSquares(){
 		return squares;
 	}
+	
+	/**
+	 * This function returns the JLabel at the given row and column (indexed by 0)
+	 * @param row The row index
+	 * @param col The col index
+	 * @return JLabel
+	 */
+	public JLabel getJLabel(int row, int col){
+		return squares[row][col];
+		
+	}
 
 	/* ~~~~~                                                                               ~~~~~ *
 	 * GUI Logic for Controllers                                                                 *
