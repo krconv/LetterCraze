@@ -32,6 +32,12 @@ public class Board {
         this.shouldRegenerate = shouldRegenerate;
         this.gravityDirection = gravityDirection;
         this.squares = new BoardSquare[6][6];
+        /* Initialize BoardSquares */
+        for(int i = 0; i < 6; i++){
+        	for(int j = 0; j < 6; j++){
+        		squares[i][j] = new BoardSquare(i, j, this, true);
+        	}
+        }
     }
 
 	/**
@@ -126,6 +132,37 @@ public class Board {
 	 * @return Whether any tiles were moved.
 	 */
 	public boolean applyGravity() {
+		/* indicator of tile movement */
+		boolean moved_tiles = false;
+		/* Apply Upwards Gravity */
+		if(getGravityDirection() == GravityDirection.Up){
+			for(int row = 0; row < 6; row++){
+				boardSquareLoop:
+				for(int col = 0; col < 6; col++){
+					/* Get the current Square */
+					BoardSquare this_square = squares[row][col];
+					/* Determine if it needs to be filled */
+					if(this_square.isEnabled() && this_square.isEmpty()){
+						/* Determine if the lower squares have a tile to fill it with */
+						for(int i = row + 1; i < 6; i++){
+							BoardSquare possible_filler = squares[i][col];
+							if(possible_filler.isEnabled() && !possible_filler.isEmpty()){
+								/* Transfer Tile contents */
+								Tile t = possible_filler.getTile();
+								possible_filler.setTile(null);
+								this_square.setTile(t);
+								/* Continue to the next board Square in BoardQuareLoop */
+								continue boardSquareLoop;
+							}
+						}
+					}
+				}
+			}
+		}else System.out.println("Have not yet implemented other gravity directions");
+		
+		return moved_tiles;
+		
+		/*
 		boolean didItWork = false;
 		if(this.getGravityDirection() == GravityDirection.Up){
 	        int indicator = 0;
@@ -205,6 +242,7 @@ public class Board {
 		}
 		
 		return didItWork;
+		*/
 	}
 	
 	/**
@@ -272,6 +310,7 @@ public class Board {
 	 *             Thrown if the given square is not in this board.
 	 */
 	public boolean selectSquare(BoardSquare square) throws IllegalArgumentException {
+		if (selectedWord == null) return false;
 		if (selectedWord.addSelectedBoardSquare(square)){
     		return true;
     	}else{

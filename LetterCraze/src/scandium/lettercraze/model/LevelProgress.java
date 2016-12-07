@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import scandium.common.model.*;
+import scandium.common.model.Level;
+import scandium.common.model.LightningLevel;
+
 
 /**
  * An object which contains information about a Player's progress in a Level.
@@ -54,16 +56,15 @@ public class LevelProgress {
      * @throws GameProgressAlreadyRunning, timerNotInitializedProperly
      */
     private void initialize(Level level) throws IllegalStateException{
-		if (isPlaying = true){
-			throw new IllegalStateException("Current Level Progress is already running");
-		}else{
-			this.timer = new Timer();
-			this.foundWords = new LinkedList<String>();
-			isPlaying = true;
-			foundWords.clear();
-			starCount = 0;
-			score = 0;
-			this.level = level;
+		this.timer = new Timer();
+		this.foundWords = new LinkedList<String>();
+		isPlaying = true;
+		foundWords.clear();
+		starCount = 0;
+		score = 0;
+		this.level = level;
+		if(level == null){
+			throw new IllegalStateException("Null Level");
 		}
 		if(level.getType().equals("lightning")){
 			try{
@@ -154,13 +155,21 @@ public class LevelProgress {
 	public int getStarCount() {
 		return starCount;
 	}
-
+	
+	/**
+	 * @param star_count The new StarCount Value
+	 */
+	public void setStarCount(int star_count){
+		this.starCount = star_count;
+	}
+	
 	/**
 	 * @return the foundWords
 	 */
 	public List<String> getFoundWords() {
 		return foundWords;
 	}
+	
 
 	/**
      * Resets the progress.
@@ -203,6 +212,14 @@ public class LevelProgress {
     public boolean updateScore(int delta) {
         score = score + delta;
         return true;
+    }
+    
+    /** 
+     * This function adds a word to the list of found words
+     * @param word The found word
+     */
+    public void addFoundWord(String word){
+    	this.foundWords.add(word);
     }
 
 }
