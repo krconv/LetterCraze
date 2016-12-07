@@ -8,19 +8,39 @@ package scandium.lettercraze.model;
 import java.util.List;
 import java.util.Timer;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import scandium.common.model.Level;
 
 /**
  * An object which contains information about a Player's progress in a Level.
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class LevelProgress {
+	@XmlTransient
     private Level level;
+	@XmlElement
     private int score;
+	@XmlElement
     private int starCount;
+	@XmlTransient
     private List<String> foundWords;
+	@XmlTransient
     private boolean isPlaying;
+	@XmlTransient
     private Timer timer;
 
+	/**
+	 * Creates a new Level progress with uninitialized information.
+	 */
+	@SuppressWarnings("unused") // only used for XML serializer
+	private LevelProgress() { }
+	
     /**
      * Creates a new LevelProgress to be associated with the given Level.
      * @param level The Level to be associated with.
@@ -69,6 +89,13 @@ public class LevelProgress {
 	 */
 	public void setTimer(Timer timer) {
 		this.timer = timer;
+	}
+
+	/**
+	 * @param level the level to set
+	 */
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
 	/**
