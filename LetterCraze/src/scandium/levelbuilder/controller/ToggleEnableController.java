@@ -11,8 +11,8 @@ import scandium.levelbuilder.view.Application;
 /**
  * @author Felix
  */
-public class EnableBoardSquareController {
- 	//attributes
+public class ToggleEnableController {
+	//attributes
     Model model;
     Application app;
     JLabel square;
@@ -21,7 +21,7 @@ public class EnableBoardSquareController {
      * @param m 
      * @param a
      */
-    public EnableBoardSquareController(JLabel jl,Model m, Application a) {
+    public ToggleEnableController(JLabel jl,Model m, Application a) {
     	this.model = m;
     	this.app = a;
     	this.square = jl;
@@ -31,6 +31,11 @@ public class EnableBoardSquareController {
      * @param MouseEvent me
      */
     public void mousePressed(MouseEvent me) {
-    	this.square.setBackground(Color.WHITE);
+    	if(this.square.getBackground() == Color.WHITE) {
+    		this.square.setBackground(Color.BLACK);
+    	}
+    	else{
+    		this.square.setBackground(Color.WHITE);
+    	}
     }
 }
