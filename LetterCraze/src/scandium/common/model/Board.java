@@ -331,7 +331,7 @@ public class Board {
 		
 		if(this.squares == null){isItValid = false;}
 		if(this.gravityDirection == null){isItValid = false;}
-		if(getNumEnabled(this.squares) >= 9){isItValid = false;};
+		if(getNumEnabled(this.squares) < 9){isItValid = false;};
 		
 		return isItValid;
 	}
@@ -351,7 +351,7 @@ public class Board {
 	}
 	
 	/*-----Get Methods-----*/
-    public BoardSquare getBoardSquare(int col, int row){
+    public BoardSquare getBoardSquare(int row, int col){
 		BoardSquare bs = squares[row][col];
 		return bs;
     }
@@ -362,7 +362,7 @@ public class Board {
 	}
 	
 	/*-----Set Methods-----*/
-    public void setBoardSquare(int col, int row, Tile tile){
+    public void setBoardSquare(int row, int col, Tile tile){
 		this.squares[row][col].setTile(tile);
     }
     

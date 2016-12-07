@@ -67,6 +67,6 @@ public class LightningLevel extends Level {
      */
     @Override
     public boolean isValid() {
-    	return (super.isValid() && ((Integer) timeLimit != null));
+    	return (super.isValid() && (timeLimit > 0));
     }
 }
