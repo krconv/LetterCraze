@@ -112,6 +112,13 @@ public class BoardView extends JPanel {
 					} else {
 						getBoardSquareLabel(row, col).setBackground(Color.WHITE);
 					}
+					
+					// make disabled squares black
+					if (square.isEnabled()) {
+						getBoardSquareLabel(row, col).setBackground(Color.WHITE);
+					} else {
+						getBoardSquareLabel(row, col).setBackground(Color.BLACK);
+					}
 				}
 			}
 		}
