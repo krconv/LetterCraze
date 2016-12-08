@@ -66,17 +66,11 @@ public class PuzzleLevelTest extends TestCase {
 	/**
 	 * Test method for {@link scandium.common.model.PuzzleLevel#isValid()}.
 	 */
-	public void testIsValid() {
+	public void testIsValid() { //Test more of this.
 		level.setMaxNumWords(20);
 		level.setName("This is a level");
 		level.setBoard(board);
-		for (int i = 0; i < 6; i++){
-			for (int j = 0; j < 2; j++){
-				board.setBoardSquare(i, j, new Tile("a", 1));
-				board.fillEmptySquares(dictionary);
-				//board.getBoardSquare(i, j).setEnabled(true);
-			}
-		}
+		board.fillEmptySquares(dictionary);
 		assertTrue(level.isValid());
 	}
 }

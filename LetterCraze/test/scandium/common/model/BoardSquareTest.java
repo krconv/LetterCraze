@@ -34,7 +34,7 @@ public class BoardSquareTest extends TestCase {
 	public void testBoardSquare() {
 		// make sure that the square has the information passed to it stored
 		board = new Board(true, GravityDirection.Down);
-		BoardSquare square = board.getBoardSquare(1, 1);
+		BoardSquare square = board.getSquare(1, 1);
 		assertEquals(1, square.getRow());
 		assertEquals(1, square.getCol());
 		assertEquals(board, square.getBoard());
@@ -55,7 +55,7 @@ public class BoardSquareTest extends TestCase {
 	 * Test method for {@link scandium.common.model.BoardSquare#getTile()} and {@link scandium.common.model.BoardSquare#setTile(scandium.common.model.Tile)}.
 	 */
 	public void testGetSetTile() {
-		BoardSquare square = board.getBoardSquare(0, 0);
+		BoardSquare square = board.getSquare(0, 0);
 		
 		// set the tile and make sure get tile returns the tile we gave it
 		Tile tile = new Tile("A", 1);
@@ -71,7 +71,7 @@ public class BoardSquareTest extends TestCase {
 	 * Test method for {@link scandium.common.model.BoardSquare#isEnabled()} and {@link scandium.common.model.BoardSquare#setEnabled(boolean)}.
 	 */
 	public void testIsSetEnabled() {
-		BoardSquare square = board.getBoardSquare(0, 0);
+		BoardSquare square = board.getSquare(0, 0);
 		
 		// set the enabled flag and make sure get returns the value we give it
 		square.setEnabled(true);
@@ -85,7 +85,7 @@ public class BoardSquareTest extends TestCase {
 	 */
 	public void testIsEmpty() {
 		// test that a non-empty square is not empty
-		BoardSquare square = board.getBoardSquare(0, 0);
+		BoardSquare square = board.getSquare(0, 0);
 		square.setTile(new Tile("A", 1));
 		assertFalse(square.isEmpty());
 		
