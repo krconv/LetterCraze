@@ -50,6 +50,15 @@ public class UndoManager {
     }
 
     /**
+     * Removes every action that was made.
+     * @return Whether any actions were undone.
+     */
+    public boolean removeAllActions() {
+        // TODO implement here
+        return false;
+    }
+
+    /**
      * Forgets all of the actions that were recorded.
      */
     public void forgetActions() {

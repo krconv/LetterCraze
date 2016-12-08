@@ -10,14 +10,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import scandium.common.model.Level;
+import scandium.lettercraze.model.LevelProgress;
+
 import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import java.awt.Font;
+
 import javax.swing.ImageIcon;
-import java.awt.SystemColor;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 
@@ -26,37 +28,28 @@ import java.awt.Color;
  */
 public class LevelIconView extends JPanel {
 	private static final long serialVersionUID = -5714193539673524092L;
-	private Level model;
+	private LevelProgress progress;
 	private JLabel levelNameLabel;
 	private JLabel highScoreLabel;
 	private Box starBox;
-	private JLabel starOneLabel;
-	private JLabel starTwoLabel;
-	private JLabel starThreeLabel;
-
-	/**
-	 * Creates a new level view without a model.
-	 */
-	public LevelIconView() {
-		initialize();
-	}
 
 	/**
 	 * Creates a new level view.
 	 * 
-	 * @param model
-	 *            The model of the view.
+	 * @param progress
+	 *            The progress of the level.
 	 */
-	public void LevelView(Level model) {
-		this.model = model;
+	public LevelIconView(LevelProgress progress) {
+		this.progress = progress;
 		initialize();
+		refresh();
 	}
 
 	/**
 	 * @return the model
 	 */
-	public Level getModel() {
-		return model;
+	public LevelProgress getModel() {
+		return progress;
 	}
 
 	/**
@@ -76,22 +69,8 @@ public class LevelIconView extends JPanel {
 	/**
 	 * @return the starOneLabel
 	 */
-	public JLabel getStarOneLabel() {
-		return starOneLabel;
-	}
-
-	/**
-	 * @return the starTwoLabel
-	 */
-	public JLabel getStarTwoLabel() {
-		return starTwoLabel;
-	}
-
-	/**
-	 * @return the starThreeLabel
-	 */
-	public JLabel getStarThreeLabel() {
-		return starThreeLabel;
+	public JLabel getStarLabel(int index) {
+		return (JLabel) starBox.getComponent(index);
 	}
 
 	/**
@@ -102,37 +81,78 @@ public class LevelIconView extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 
-		levelNameLabel = new JLabel("Level 1", SwingConstants.CENTER);
+		// add the name label
+		levelNameLabel = new JLabel();
 		levelNameLabel.setForeground(new Color(0, 0, 0));
-		levelNameLabel.setBackground(SystemColor.activeCaption);
 		levelNameLabel.setFont(levelNameLabel.getFont().deriveFont(levelNameLabel.getFont().getStyle() | Font.BOLD, levelNameLabel.getFont().getSize() + 20f));
 		levelNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		levelNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		levelNameLabel.setPreferredSize(new Dimension(250, 35));
 		levelNameLabel.setMaximumSize(new Dimension(300, 35));
 		add(levelNameLabel);
 
+		// add the stars
 		starBox = Box.createHorizontalBox();
+		for (int i = 0; i < 3; i++) {
+			starBox.add(new JLabel());
+		}
 		add(starBox);
 
-		starOneLabel = new JLabel();
-		starOneLabel.setIcon(
-				new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/star-icon-on.png")));
-		starBox.add(starOneLabel);
-
-		starTwoLabel = new JLabel();
-		starTwoLabel.setIcon(
-				new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/star-icon-on.png")));
-		starBox.add(starTwoLabel);
-
-		starThreeLabel = new JLabel();
-		starThreeLabel.setIcon(
-				new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/star-icon-on.png")));
-		starBox.add(starThreeLabel);
-
-		highScoreLabel = new JLabel("100 pts");
+		// add the high score label
+		highScoreLabel = new JLabel();
 		highScoreLabel.setForeground(new Color(0, 0, 0));
 		highScoreLabel.setFont(highScoreLabel.getFont().deriveFont(highScoreLabel.getFont().getSize() + 6f));
 		highScoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		highScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(highScoreLabel);
+	}
+	
+	/**
+	 * @param level
+	 *            The level to calculate using
+	 * @return the background color for the given level 
+	 */
+	private static Color getBackgroundColorForLevel(Level level) {
+		switch (level.getType().toLowerCase()) {
+		case "puzzle":
+			return Color.RED;
+		case "lightning":
+			return Color.MAGENTA;
+		case "theme":
+			return Color.GREEN;
+		default:
+			return Color.BLACK;
+		}
+	}
+	
+	/**
+	 * Refreshes the data of the level icon from the model.
+	 */
+	public void refresh() {
+		// update the level name
+		levelNameLabel.setText(progress.getLevel().getName());
+		if (progress.isUnlocked()) {
+			// update the background
+			setBackground(getBackgroundColorForLevel(progress.getLevel()));
+			// update the star icons
+			starBox.setVisible(true);
+			for (int i = 0; i < 3; i++) {
+				if (progress.getStarCount() > i)
+					getStarLabel(i).setIcon(
+						new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/star-icon-on.png")));
+				else
+					getStarLabel(i).setIcon(
+							new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
+			}
+			// update the high score label
+			highScoreLabel.setVisible(true);
+			highScoreLabel.setText(progress.getScore() + " " + progress.getLevel().getScoreUnits(progress.getScore() != 1));
+		} else {
+			// level is locked so hide everything and make it gray
+			setBackground(Color.GRAY);
+			starBox.setVisible(false);
+			highScoreLabel.setVisible(false);;
+		}
+		repaint();
 	}
 }
