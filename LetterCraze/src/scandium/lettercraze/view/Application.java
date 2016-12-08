@@ -131,15 +131,17 @@ public class Application extends JFrame {
 				| UnsupportedLookAndFeelException e) {
 			// if we can't change to look, who cares
 		}
-		this.mainMenu = new MainMenuView();
-		this.levelPlayer = new LevelPlayerView(null);
+		this.mainMenu = new MainMenuView(model);
+		this.levelPlayer = new LevelPlayerView(model.getProgress().getCurrentLevelProgress());
 	}
 
 	/**
 	 * Initialize the controllers.
 	 */
 	private void initializeControllers() {
-		mainMenu.getLevelIconView(0).addMouseListener(new OpenLevelController(model,this));
+		for (LevelIconView view : mainMenu.getLevelIcons()) {
+			view.addMouseListener(new OpenLevelController(model, this, view.getModel()));
+		}
 		levelPlayer.getLeaveButton().addActionListener(new ExitLevelController(model,this));
 		
 		/* Create WordDictionary for the controllers */
@@ -148,9 +150,9 @@ public class Application extends JFrame {
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < 6; j++){
 				
-				levelPlayer.getBoardView().getJLabel(i, j).addMouseListener(new SelectTileController(model, this));
-				levelPlayer.getBoardView().getJLabel(i, j).addMouseListener(new RemoveWordController(model, this, dictionary));
-				levelPlayer.getBoardView().getJLabel(i, j).addMouseMotionListener(new WordDragController(model, this));
+				levelPlayer.getBoardView().getBoardSquareLabel(i, j).addMouseListener(new SelectTileController(model, this, i, j));
+				levelPlayer.getBoardView().getBoardSquareLabel(i, j).addMouseListener(new RemoveWordController(model, this, dictionary));
+				levelPlayer.getBoardView().getBoardSquareLabel(i, j).addMouseMotionListener(new WordDragController(model, this, i, j));
 				
 			}
 		}

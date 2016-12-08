@@ -97,7 +97,7 @@ public class GameLoader {
 	 *  
 	 * @return The game token loaded from file, or zero if the token couldn't be loaded.
 	 */
-	public long GetGameToken(List<Level> list) {
+	public long GetGameToken() {
 		long token = 0;
 		try {
 			JAXBContext context = JAXBContext.newInstance(LevelContainer.class);
@@ -200,4 +200,6 @@ public class GameLoader {
 			return token;
 		}
 	}
+	
+	
 }

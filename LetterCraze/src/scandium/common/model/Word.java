@@ -93,13 +93,17 @@ public class Word {
 	 * 
 	 * @exception NullPointerException
 	 *                Thrown if the given square is null.
-	 * @exception IllegalArgumentException
-	 *                Thrown if the given square is disabled or is empty.
 	 */
-    public boolean addSelectedBoardSquare(BoardSquare square) throws NullPointerException, IllegalArgumentException {
-        boolean result = tiles.add(square.getTile());
-        if(result) result = selection.add(square);
-        return result;
+    public boolean addSelectedBoardSquare(BoardSquare square) throws NullPointerException {
+    	if (!selection.contains(square)) {
+    		selection.add(square);
+    		if (!square.isEmpty()) {
+        		tiles.add(square.getTile());
+    		}
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
     /**
@@ -114,5 +118,12 @@ public class Word {
      */
     public List<BoardSquare> getBoardSquares(){
     	return selection;
+    }
+    
+    /**
+     * @return the most recently selected board square
+     */
+    public BoardSquare getLastSelectedSquare() {
+    	return selection.get(selection.size() - 1);
     }
 }

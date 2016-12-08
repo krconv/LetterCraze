@@ -84,6 +84,20 @@ public abstract class Level {
 	public Star[] getStars() {
 		return stars;
 	}
+	
+	/**
+	 * Determines how many points should be gained for finding the given word.
+	 * @param word The word that is being scored.
+	 * @return The score of the found word.
+	 */
+	public abstract int determineScore(Word word);
+	
+	/**
+	 * Gets the units that the scores for this level are in.
+	 * @param plural Whether the unit should be pluralized.
+	 * @return The units for the scores in this level.
+	 */
+	public abstract String getScoreUnits(boolean plural);
 
 	/**
      * @return the user friendly type of the Level

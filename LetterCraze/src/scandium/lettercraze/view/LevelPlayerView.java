@@ -12,7 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import scandium.lettercraze.model.Model;
+import scandium.common.model.Level;
+import scandium.common.model.PuzzleLevel;
+import scandium.lettercraze.model.LevelProgress;
 import javax.swing.Box;
 import javax.swing.border.EmptyBorder;
 import java.awt.Component;
@@ -30,7 +32,7 @@ import javax.swing.JList;
  */
 public class LevelPlayerView extends JPanel {
 	private static final long serialVersionUID = 2542897782615081218L;
-	private Model model;
+	private LevelProgress progress;
 	private JLabel levelNameLabel;
 	private JPanel infoPanel;
 	private Box buttonsBox;
@@ -38,9 +40,6 @@ public class LevelPlayerView extends JPanel {
 	private JButton resetButton;
 	private JButton undoButton;
 	private Box starBox;
-	private JLabel starOneLabel;
-	private JLabel starTwoLabel;
-	private JLabel starThreeLabel;
 	private Box scoreBox;
 	private JLabel scoreLabel;
 	private JLabel scoreValueLabel;
@@ -62,17 +61,17 @@ public class LevelPlayerView extends JPanel {
 	 * @param model
 	 *            The model.
 	 */
-	public LevelPlayerView(Model model) {
-		this.model = model;
-
+	public LevelPlayerView(LevelProgress progress) {
+		this.progress = progress;
 		initialize();
+		refresh();
 	}
 
 	/**
 	 * @return the model
 	 */
-	public Model getModel() {
-		return model;
+	public LevelProgress getModel() {
+		return progress;
 	}
 
 	/**
@@ -139,10 +138,10 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
-	 * @return the starLabels
+	 * @return the starOneLabel
 	 */
-	public JLabel[] getStarLabels() {
-		return new JLabel[] { starOneLabel, starTwoLabel, starThreeLabel };
+	public JLabel getStarLabel(int index) {
+		return (JLabel) starBox.getComponent(index);
 	}
 
 	/**
@@ -189,11 +188,13 @@ public class LevelPlayerView extends JPanel {
 		setBorder(new EmptyBorder(20, 20, 20, 20));
 		setLayout(new BorderLayout(0, 0));
 
-		levelNameLabel = new JLabel("Puzzled");
+		// add the level name label
+		levelNameLabel = new JLabel();
 		levelNameLabel.setForeground(Color.BLACK);
 		levelNameLabel.setFont(levelNameLabel.getFont().deriveFont(levelNameLabel.getFont().getSize() + 50f));
 		add(levelNameLabel, BorderLayout.NORTH);
 
+		// add the info panel
 		infoPanel = new JPanel();
 		infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
@@ -223,21 +224,9 @@ public class LevelPlayerView extends JPanel {
 
 		// set up the stars
 		starBox = Box.createHorizontalBox();
-		starBox.setBorder(new EmptyBorder(7, 7, 7, 7));
-		starOneLabel = new JLabel();
-		starOneLabel.setIcon(
-				new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
-		starBox.add(starOneLabel);
-
-		starTwoLabel = new JLabel();
-		starTwoLabel.setIcon(
-				new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
-		starBox.add(starTwoLabel);
-
-		starThreeLabel = new JLabel();
-		starThreeLabel.setIcon(
-				new ImageIcon(LevelPlayerView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
-		starBox.add(starThreeLabel);
+		for (int i = 0; i < 3; i++) {
+			starBox.add(new JLabel());
+		}
 		infoPanel.add(starBox);
 
 		// set up the score
@@ -251,7 +240,7 @@ public class LevelPlayerView extends JPanel {
 
 		scoreBox.add(Box.createRigidArea(new Dimension(20, 20)));
 		// the value for the score
-		scoreValueLabel = new JLabel("0 pts");
+		scoreValueLabel = new JLabel();
 		scoreValueLabel.setFont(scoreValueLabel.getFont().deriveFont(scoreValueLabel.getFont().getSize() + 15f));
 		scoreValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		scoreBox.add(scoreValueLabel);
@@ -267,7 +256,7 @@ public class LevelPlayerView extends JPanel {
 
 		nextStarBox.add(Box.createRigidArea(new Dimension(20, 20)));
 		// the value for the next star
-		nextStarValueLabel = new JLabel("10 pts");
+		nextStarValueLabel = new JLabel();
 		nextStarValueLabel
 				.setFont(nextStarValueLabel.getFont().deriveFont(nextStarValueLabel.getFont().getSize() + 15f));
 		nextStarValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -283,10 +272,11 @@ public class LevelPlayerView extends JPanel {
 
 		maxNumWordsBox.add(Box.createRigidArea(new Dimension(20, 20)));
 		// value for the max number of words
-		maxNumWordsValueLabel = new JLabel("10");
+		maxNumWordsValueLabel = new JLabel();
 		maxNumWordsValueLabel
 				.setFont(maxNumWordsValueLabel.getFont().deriveFont(maxNumWordsValueLabel.getFont().getSize() + 15f));
 		maxNumWordsBox.add(maxNumWordsValueLabel);
+		maxNumWordsBox.setVisible(false);
 		infoPanel.add(maxNumWordsBox);
 
 		// set up the scroll pane for found words
@@ -302,18 +292,66 @@ public class LevelPlayerView extends JPanel {
 		foundWordsList = new JList<String>();
 		foundWordsList.setFont(foundWordsList.getFont().deriveFont(foundWordsList.getFont().getSize() + 10f));
 		foundWordsListModel = new DefaultListModel<String>();
-		for (String element : new String[] { }) {
-			foundWordsListModel.addElement(element);
-		}
 		foundWordsList.setModel(foundWordsListModel);
 		foundWordsScrollPane.setViewportView(foundWordsList);
 		infoPanel.add(foundWordsScrollPane);
 		add(infoPanel, BorderLayout.WEST);
 
 		// add the board view
-		boardView = new BoardView();
-		//boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
-		//boardView.setPreferredSize(new Dimension(750, 750));
+		boardView = new BoardView(progress);
+		boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
+		boardView.setPreferredSize(new Dimension(750, 750));
 		add(boardView, BorderLayout.CENTER);
+	}
+
+	/**
+	 * Refreshes the data of the level player from the model.
+	 */
+	public void refresh() {
+		Level level = progress.getLevel();
+		if (level != null) {
+			// update the level name
+			levelNameLabel.setText(level.getName());
+			
+			// update the star icons
+			for (int i = 0; i < 3; i++) {
+				if (progress.getStarCount() > i) // this star is on
+					getStarLabel(i).setIcon(
+						new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/star-icon-on.png")));
+				else // this star is off
+					getStarLabel(i).setIcon(
+							new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/star-icon-off.png")));
+			}
+			
+			// update the current score
+			scoreValueLabel.setText(progress.getScore() + " " + level.getScoreUnits(progress.getScore() != 1));
+
+			// update the next star score
+			if (progress.getStarCount() < 3) {
+				nextStarBox.setVisible(true);
+				nextStarValueLabel.setText(level.getStars()[progress.getStarCount()] + " " + level.getScoreUnits(progress.getScore() != 1));
+			} else
+				nextStarBox.setVisible(false);
+
+			// update found words
+			if (foundWordsListModel.size() != progress.getFoundWords().size()) {
+				foundWordsListModel.removeAllElements();
+				for (String word : progress.getFoundWords())
+					foundWordsListModel.addElement(word);
+			}
+			
+			// hide the level specific attributes
+			maxNumWordsBox.setVisible(false);
+			
+			// update the level specific attributes
+			if (level instanceof PuzzleLevel) {
+				// update max num words
+				maxNumWordsValueLabel.setText("" + ((PuzzleLevel) level).getMaxNumWords());
+				maxNumWordsBox.setVisible(true);
+			}
+			
+			// update the board
+			boardView.refresh();
+		}
 	}
 }

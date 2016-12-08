@@ -75,6 +75,22 @@ public class ThemeLevel extends Level {
 	public void setThemeWords(ArrayList<String> themeWords) {
 		this.themeWords = themeWords;
 	}
+	
+	/* (non-Javadoc)
+	 * @see scandium.common.model.Level#determineScore(scandium.common.model.Word)
+	 */
+	@Override
+	public int determineScore(Word word) {
+		return 1;
+	}
+	
+	/* (non-Javadoc)
+	 * @see scandium.common.model.Level#getScoreUnits(boolean)
+	 */
+	@Override
+	public String getScoreUnits(boolean plural) {
+		return "word" + (plural ? "s" : "");
+	}
 
 	/* (non-Javadoc)
      * @see scandium.common.model.Level#getType()

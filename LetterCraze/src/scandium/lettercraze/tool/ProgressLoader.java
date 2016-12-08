@@ -33,7 +33,7 @@ public class ProgressLoader {
 	 * Creates a new progress loader which will load and save to the default save file.
 	 */
 	public ProgressLoader() {
-		savePath = Paths.get(System.getProperty("user.home"), "LetterCrazeGame.xml").toString();
+		savePath = Paths.get(System.getProperty("user.home"), "LetterCrazeProgress.xml").toString();
 	}
 	
 	/**
@@ -94,8 +94,15 @@ public class ProgressLoader {
 				}
 			} else {
 				// the token doesn't match so the progress is reset
+				boolean first = true;
+				// add brand new progresses with the first one set to unlocked
 				for (Level level : levels) {
-					list.add(new LevelProgress(level));
+					LevelProgress progress = new LevelProgress(level);
+					if (first) {
+						progress.setUnlocked(true);
+						first = false;
+					}
+					list.add(progress);
 				}
 			}
 		} catch (JAXBException e) {
@@ -120,7 +127,7 @@ public class ProgressLoader {
 	 * 
 	 * @return Whether any progress was saved.
 	 */
-	public boolean SaveLevelProgress(List<LevelProgress> progress, long gameToken) throws JAXBException {
+	public boolean SaveLevelProgress(List<LevelProgress> progress, long gameToken) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(ProgressContainer.class);
 			Marshaller marshaller = context.createMarshaller();
