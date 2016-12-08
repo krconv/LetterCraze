@@ -199,7 +199,5 @@ public class GameLoader {
 		public long getToken() {
 			return token;
 		}
-	}
-	
-	
+	}	
 }

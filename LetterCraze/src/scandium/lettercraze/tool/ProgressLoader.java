@@ -83,17 +83,32 @@ public class ProgressLoader {
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 
 			// load the file
-			ProgressContainer unmarshalled = (ProgressContainer) unmarshaller.unmarshal(new File(savePath));
-
-			if (unmarshalled.getToken() == gameToken) {
-				// add the results to the passed in list
-				int pos = 0;
-				for (LevelProgress progress : unmarshalled.getProgress()) {
-					progress.setLevel(levels.get(pos++));
-					list.add(progress);
+			File file = new File(savePath);
+			if (file.exists() && !file.isDirectory()) {
+				ProgressContainer unmarshalled = (ProgressContainer) unmarshaller.unmarshal(file);
+	
+				if (unmarshalled.getToken() == gameToken) {
+					// add the results to the passed in list
+					int pos = 0;
+					for (LevelProgress progress : unmarshalled.getProgress()) {
+						progress.setLevel(levels.get(pos++));
+						list.add(progress);
+					}
+				} else {
+					// the token doesn't match so the progress is reset
+					boolean first = true;
+					// add brand new progresses with the first one set to unlocked
+					for (Level level : levels) {
+						LevelProgress progress = new LevelProgress(level);
+						if (first) {
+							progress.setUnlocked(true);
+							first = false;
+						}
+						list.add(progress);
+					}
 				}
 			} else {
-				// the token doesn't match so the progress is reset
+				// the progress file doesn't exist
 				boolean first = true;
 				// add brand new progresses with the first one set to unlocked
 				for (Level level : levels) {
