@@ -336,8 +336,9 @@ public class LevelPlayerView extends JPanel {
 			// update found words
 			if (foundWordsListModel.size() != progress.getFoundWords().size()) {
 				foundWordsListModel.removeAllElements();
+				int i = 1;
 				for (String word : progress.getFoundWords())
-					foundWordsListModel.addElement(word);
+					foundWordsListModel.addElement((i++) + ". " + word);
 			}
 			
 			// hide the level specific attributes
@@ -352,6 +353,7 @@ public class LevelPlayerView extends JPanel {
 			
 			// update the board
 			boardView.refresh();
+			repaint();
 		}
 	}
 }

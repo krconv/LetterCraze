@@ -153,5 +153,6 @@ public class LevelIconView extends JPanel {
 			starBox.setVisible(false);
 			highScoreLabel.setVisible(false);;
 		}
+		repaint();
 	}
 }

@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import scandium.common.tool.LetterDictionary;
-import scandium.lettercraze.undo.UndoManager;
 
 /**
  * A play area container for tiles, which is made out of board squares.
@@ -175,6 +174,7 @@ public class Board {
 								// found a tile to fill with, so let's move it
 								square.setTile(filler.getTile());
 								filler.removeTile();
+								moved_tiles = true;
 							}
 						}
 					}
@@ -307,7 +307,7 @@ public class Board {
         for (int i = 0; i < squares.length; i++){
         	for (int j = 0; j < squares.length; j++){
         		if (squares[i][j].getTile() != null){
-        			squares[i][j].setTile(null);
+        			squares[i][j].removeTile();
         			indicator = 1;
         		}
         	}
@@ -361,26 +361,6 @@ public class Board {
 	 */
 	public boolean selectSquare(int row, int col) throws IndexOutOfBoundsException {
 		return selectSquare(getSquare(row, col));
-	}
-
-	/**
-	 * Resets the board.
-	 * @return Whether the board changed.
-	 */
-	public boolean reset() {
-		boolean changed = false;
-		
-		if (shouldRegenerate) {
-			clearExistingTiles();
-			fillEmptySquares(new LetterDictionary());
-			changed = true;
-		} else {
-			changed = UndoManager.getInstance().removeAllActions();
-		}
-		
-		changed |= deselectWord();
-		
-		return changed;
 	}
 	
 	/**

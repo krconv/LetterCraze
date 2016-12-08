@@ -114,7 +114,10 @@ public class MainMenuView extends JPanel {
 		scrollPane.setViewportView(levelsPanel);
 		add(scrollPane, BorderLayout.CENTER);
     }
-    
+
+	/**
+	 * Refreshes the data of the main menu from the model.
+	 */
     public void refresh() {
     	// update the level icons
     	List<Level> levels = model.getLevels();
@@ -128,5 +131,6 @@ public class MainMenuView extends JPanel {
 		// refresh the level icons
 		for (LevelIconView icon : getLevelIcons())
 			icon.refresh();
+		repaint();
     }
 }

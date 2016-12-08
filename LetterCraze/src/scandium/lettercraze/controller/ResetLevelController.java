@@ -3,8 +3,10 @@ package scandium.lettercraze.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import scandium.common.model.Board;
 import scandium.common.tool.LetterDictionary;
 import scandium.lettercraze.model.Model;
+import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
 
 /**
@@ -58,7 +60,14 @@ public class ResetLevelController extends MouseAdapter{
     	model.getProgress().getCurrentLevelProgress().reset();
     	
     	// reset the board
-    	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().reset();
+    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+    	if (board.shouldRegenerate()) {
+    		board.clearExistingTiles();
+    		board.fillEmptySquares(dictionary);
+    	} else {
+    		UndoManager.getInstance().removeLastAction();
+    	}
+    	board.removeSelectedWord();
     	
     	// refresh the player
     	app.getLevelPlayer().refresh();

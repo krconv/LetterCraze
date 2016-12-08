@@ -84,6 +84,9 @@ public class RemoveWordController extends MouseAdapter{
     			// update the score
     			progress.updateScore(progress.getLevel().determineScore(selectedWord));
     			
+    			// add to found words
+    			progress.addFoundWord(selectedWord.generateString());
+    			
     			// update the board
         		progress.getLevel().getBoard().removeSelectedWord();
         		progress.getLevel().getBoard().applyGravity();
