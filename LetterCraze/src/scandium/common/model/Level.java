@@ -114,5 +114,7 @@ public abstract class Level {
      * Determines whether this Level is valid.
      * @return Whether this Level is valid.
      */
-    public abstract boolean isValid(); //For each of the different isValid methods, it might need to get more specific with how it is implemented in the future.
+    public boolean isValid(){ //For each of the different isValid methods, it might need to get more specific with how it is implemented in the future.
+    	return ((name != null) && (board != null) && (stars != null) && board.isValid());
+    }
 }

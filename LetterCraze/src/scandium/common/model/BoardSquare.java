@@ -120,6 +120,11 @@ public class BoardSquare {
     
     public void setTile(Tile tile){
     	this.tile = tile;
+    	if (tile != null){
+    		setEnabled(true);
+    	}else{
+    		setEnabled(false);
+    	}
     }
     
     public void setEnabled(boolean enabled){

@@ -25,7 +25,7 @@ public class GameProgress {
 	 * Creates a completely new game progress with nothing stored in it
 	 * Creates a currentLevelProgress with a null level and isPlaying equals false
 	 * @throws IllegalStateException if the current level progress is already running, 
-	 * 						or if one of the LevelProgress initializations fail
+	 * 						or if one of the LevelProgress initializations fails
 	 */
 	public GameProgress(List<Level> levels, long gameToken) throws IllegalStateException{
 		//if current level progress already exists, throw exception

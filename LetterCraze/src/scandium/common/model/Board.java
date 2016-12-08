@@ -409,7 +409,7 @@ public class Board {
 		
 		if(this.squares == null){isItValid = false;}
 		if(this.gravityDirection == null){isItValid = false;}
-		if(getNumEnabled(this.squares) >= 9){isItValid = false;};
+		if(getNumEnabled(this.squares) < 9){isItValid = false;};
 		
 		return isItValid;
 	}

@@ -114,10 +114,7 @@ public class ThemeLevel extends Level {
      */
     @Override
     public boolean isValid() {
-    	if ((super.getName() != null) && (super.getBoard() != null) && (super.getStars() != null) && (theme != null) && (themeWords.isEmpty() == false) && (super.getBoard().isValid() == true)){
-    		return true;
-    	}
-        return false;
+    	return (super.isValid() && (theme != null) && (themeWords.isEmpty() == false));
     }
 
     /**
@@ -126,7 +123,19 @@ public class ThemeLevel extends Level {
      * @return Whether the word was added.
      */
     public boolean addThemeWord(String word) {
-    	return themeWords.add(word); 
+    	//int wordFound = 0;
+    	//if (themeWords.size() > 0){
+    		//for (int i = 0; i < themeWords.size(); i++){
+    			//if (themeWords.get(i) == word){
+    				//wordFound = 1;
+    			//}
+    		//}
+    	//}
+    	//if (wordFound == 1){
+    		//return false;
+    	//}else{
+    		return themeWords.add(word);
+    	//}
     }
 
     /**
