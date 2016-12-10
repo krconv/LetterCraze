@@ -39,22 +39,21 @@ public class BoardView extends JPanel{
 	 * ~~~~~                                                                               ~~~~~ */
 	
 	/**
-	 * Creates a new instance of the BoardView class
+	 * Creates a new instance of the BoardView class.
 	 */
 	public BoardView(){
 		initialize();
 	}
 	
 	/**
-	 * This function initializes the BoardView view/gui and controllers
+	 * This function initializes the BoardView view/gui and controllers.
 	 */
 	void initialize(){
 		initializeView();
-		initializeControllers();
 	}
 	
 	/**
-	 * This function initializes the BoardView gui
+	 * This function initializes the BoardView GUI.
 	 */
 	void initializeView(){
 		instantiateAttributes();
@@ -68,14 +67,14 @@ public class BoardView extends JPanel{
 	}
 	
 	/**
-	 * This function instantiates new instances of all of the widgets (attributes)
+	 * This function instantiates new instances of all of the widgets (attributes).
 	 */
 	void instantiateAttributes(){
 		squares = new JLabel[6][6];
 	}
 	
 	/**
-	 * This function initializes all of the widgets (attributes)
+	 * This function initializes all of the widgets (attributes).
 	 */
 	void initializeAttributes(){
 		/* Initialize Each BoardSquare                                                           */
@@ -92,19 +91,12 @@ public class BoardView extends JPanel{
 		}
 	}
 	
-	/**
-	 * This function initializes the BoardView Controllers
-	 */
-	void initializeControllers(){
-		//TODO
-	}
-	
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Getter Methods                                                                            *
 	 * ~~~~~                                                                               ~~~~~ */
 	
 	/**
-	 * This function returns the JLabels representing the BoardSquares
+	 * This function returns the JLabels representing the BoardSquares.
 	 * @return JLabel[][]
 	 */
 	public JLabel[][] getBoardSquares(){
@@ -112,7 +104,7 @@ public class BoardView extends JPanel{
 	}
 	
 	/**
-	 * This function returns the JLabel at the given row and column (indexed by 0)
+	 * This function returns the JLabel at the given row and column (indexed by 0).
 	 * @param row The row index
 	 * @param col The col index
 	 * @return JLabel
@@ -127,7 +119,7 @@ public class BoardView extends JPanel{
 	 * ~~~~~                                                                               ~~~~~ */
 	
 	/**
-	 * This function 'selects' (highlights with grey) the Board square at the specified coordinate
+	 * This function 'selects' (highlights with grey) the Board square at the specified coordinate.
 	 * @param row The row (indexed by 0) of the desired square
 	 * @param col The column (indexed by 0) of the desired square
 	 */
@@ -136,7 +128,7 @@ public class BoardView extends JPanel{
 	}
 	
 	/** 
-	 * This function 'de-selects' (sets color to white) the board square at the specified coordinate
+	 * This function 'de-selects' (sets color to white) the board square at the specified coordinate.
 	 * @param row The row (indexed by 0) of the desired square
 	 * @param col The column (indexed by 0) of the desired square
 	 */
@@ -145,7 +137,7 @@ public class BoardView extends JPanel{
 	}
 	
 	/** 
-	 * This function sets the text of the board square at the specified coordinate
+	 * This function sets the text of the board square at the specified coordinate.
 	 * @param letter The String to be added to the Square
 	 * @param row The row (indexed by 0) of the desired square
 	 * @param col The Column (indexed by 0) of the desired Square

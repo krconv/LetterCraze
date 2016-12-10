@@ -68,8 +68,7 @@ public class LevelProgress {
 	 *            post-condition: if isPlaying is true, throws an exception
 	 *            otherwise initializes the levelProgress if it is a Lightning
 	 *            Level, sets game to stop after the proper amount of time
-	 * @throws GameProgressAlreadyRunning,
-	 *             timerNotInitializedProperly
+	 * @throws IllegalStateException
 	 */
 //	private void initialize(Level level) {
 //		this.timer = new Timer();

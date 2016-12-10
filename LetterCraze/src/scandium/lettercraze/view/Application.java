@@ -44,7 +44,6 @@ public class Application extends JFrame {
 	public Application(Model model) {
 		this.model = model;
 
-		initializeModel();
 		initializeView();
 		initializeControllers();
 		setView(mainMenu);
