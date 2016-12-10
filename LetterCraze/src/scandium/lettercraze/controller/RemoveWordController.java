@@ -65,8 +65,8 @@ public class RemoveWordController extends MouseAdapter{
     	
     	// don't do anything if the game isn't being played
     	if (!progress.isPlaying()) {
-    		progress.getLevel().getBoard().deselectWord();
-    		app.getLevelPlayer().refresh();
+    		if (progress.getLevel().getBoard().deselectWord())
+    			app.getLevelPlayer().refresh(); // update the board if a word was deselected
     		return;
     	}
     	
