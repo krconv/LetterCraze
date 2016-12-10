@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import scandium.lettercraze.model.GameProgress;
 import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
+import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
 
 /**
@@ -61,6 +62,7 @@ public class ExitLevelController implements ActionListener{
 			gameProgress.SaveProgress();
 		
 		// reset the current level progress and open up the main menu
+		UndoManager.instance.removeAllActions();
 		gameProgress.getCurrentLevelProgress().reset();
 		app.getMainMenu().refresh();
 		app.setView(app.getMainMenu());

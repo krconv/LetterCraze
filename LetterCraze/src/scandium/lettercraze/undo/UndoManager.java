@@ -13,30 +13,22 @@ import scandium.lettercraze.action.IAction;
  * A tool for keeping track of actions that can be undone.
  */
 public class UndoManager {
-	private static UndoManager instance;
-	@SuppressWarnings("unused")
+	public static UndoManager instance = new UndoManager();
 	private Stack<IAction> undoStack;
 
     /**
      * Creates a new manager.
      */
     private UndoManager() {
-        // TODO implement here
+    	undoStack = new Stack<IAction>();
     }
-
-    /**
-	 * @return the instance
-	 */
-	public static UndoManager getInstance() {
-		return instance;
-	}
-
+    
 	/**
      * Records an action that has been done.
      * @param action The action to record.
      */
     public void recordAction(IAction action) {
-        // TODO implement here
+    	undoStack.push(action);
         return;
     }
 
@@ -45,8 +37,10 @@ public class UndoManager {
      * @return The action that was removed.
      */
     public IAction removeLastAction() {
-        // TODO implement here
-        return null;
+    	if (!undoStack.isEmpty())
+    		return undoStack.pop();
+    	else
+    		return null;
     }
 
     /**
@@ -54,16 +48,19 @@ public class UndoManager {
      * @return Whether any actions were undone.
      */
     public boolean removeAllActions() {
-        // TODO implement here
-        return false;
+    	boolean modified = false;
+    	while (!undoStack.isEmpty()) {
+    		if (undoStack.pop().undo()) 
+    			modified = true;
+    	}
+        return modified;
     }
 
     /**
      * Forgets all of the actions that were recorded.
      */
     public void forgetActions() {
-        // TODO implement here
-        return;
+    	undoStack.removeAllElements();
     }
 
 }
