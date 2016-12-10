@@ -9,10 +9,21 @@ import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
 
 /**
+ * This controller handles the undoing of an IAction object. It allows the player to undo their 
+ * previous move when the undo button is clicked.
  * @author Scandium
+ * @date 12/10/2016
  */
 public class UndoController implements ActionListener {
-    Model model;
+	/** 
+	 * The entire LetterCraze model. With this, the controller has access to all entities
+	 * that it may need. 
+	 */
+	Model model;
+	/** 
+	 * The entire LetterCraze GUI. With this, the controller has access to all widgets
+	 * that it may need. 
+	 */
     Application app;
 
     /**
@@ -26,8 +37,12 @@ public class UndoController implements ActionListener {
     }
 
     /**
-     * Handles the undo button being clicked on.
-     * @param The event arguments.
+     * This function handles the undoing of an IAction.
+     * 
+     * <p>Entry Condition: The user clicked on the undo button.</p>
+     * <p>Exit Condition: The previous move was undone (if it exits).</p>
+     * 
+     * @param ae The action Event representing the user's mouse click on the undo button.
      */
     public void actionPerformed(ActionEvent ae) {
     	if (model.getProgress().getCurrentLevelProgress().isPlaying()) {

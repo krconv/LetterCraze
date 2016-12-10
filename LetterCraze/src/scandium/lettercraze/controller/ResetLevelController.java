@@ -52,6 +52,10 @@ public class ResetLevelController extends MouseAdapter{
      * It resets the level specific fields (except for the lightning level's timer),
      * removes all found words, and creates a new auto generation of tiles (unless
      * the level is a theme level, in which the tiles are generated as before 
+     * 
+     * <p>Entry Condition:  </p>
+     * <p>Exit Condition: </p>
+     * 
      * @param me The user's mouse click on the reset button
      */
     @Override
@@ -73,85 +77,6 @@ public class ResetLevelController extends MouseAdapter{
 	    	// refresh the player
 	    	app.getLevelPlayer().refresh();
     	}
-    }
-    
-    /**
-     * This function handles the reseting of the puzzle level board. It removes
-     * all found words, resets the score, resets the achieved stars, and 
-     * generates new tiles for all enabled board squares. 
-     */
-//    public void resetPuzzleLevel(){
-//    	/* Reset the model */
-//    	LevelProgress current_level_progress = model.getProgress().getCurrentLevelProgress();
-//    	current_level_progress.getFoundWords().clear();
-//    	current_level_progress.setScore(0);
-//    	current_level_progress.setStarCount(0);
-//    	current_level_progress.setPlaying(true);
-//    	regenerateBoardTiles();
-//    	
-//    	/* Reset View */
-//    	refreshView();
-//    	
-//    }
-    
-//    /**
-//     * 
-//     */
-//    void resetLightningLevel(){
-//    	
-//    }
-//    
-//    /** 
-//     * 
-//     */
-//    void resetThemeLevel(){
-//    	
-//    }
-//    
-//    
-////    /**
-////     * This function regenerates the tiles on the board
-////     */
-////    void regenerateBoardTiles(){
-////    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-////    	for(int i = 0; i < 6; i++){
-////    		for(int j = 0; j < 6; j++){
-////    			if(board.getBoardSquare(j, i).isEnabled())
-////    				board.setBoardSquare(j, i, dictionary.getRandomTile());
-////    		}
-////    	}
-////    }
-////    
-//    /** 
-////     * This function refreshes the view from the current state of the model
-////     */
-//    void refreshView(){
-//    	LevelProgress CLP = model.getProgress().getCurrentLevelProgress();
-//    	LevelPlayerView  level_player = app.getLevelPlayer();
-//    	/* Remove all found words */
-//    	level_player.getFoundWordsListModel().clear();
-//    	/* Load found words from model */
-//    	for(String word : CLP.getFoundWords()){
-//    		level_player.getFoundWordsListModel().addElement(word);
-//    	}
-//    	/* Refresh Score */
-//    	level_player.getScoreValueLabel().setText(CLP.getScore() + "");
-//    	/* Refresh Stars */
-//    	for(JLabel star : level_player.getStarLabels()){
-//    		star.setIcon(new ImageIcon(LevelPlayerView.class.getResource(
-//    				"/scandium/lettercraze/resources/star-icon-off.png")));
-//    	}
-//    	for(int i = 0; i < 3 && i < CLP.getStarCount(); i++){
-//    		level_player.getStarLabels()[i].setIcon(new ImageIcon(LevelPlayerView.class.getResource(
-//    				"/scandium/lettercraze/resources/star-icon-on.png")));
-//    	}
-//    	/* Refresh Board View */
-//    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-//    	for(int i = 0; i < 6; i++){
-//    		for(int j = 0; j < 6; j++){
-//    			if(board.getBoardSquare(j, i).isEnabled())
-//    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setText(board.getBoardSquare(j, i).getTile().getContent());
-//    		}
-//    	}
-//    }
+    } 	
+
 }
