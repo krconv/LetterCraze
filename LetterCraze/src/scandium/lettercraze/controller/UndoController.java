@@ -1,52 +1,42 @@
 package scandium.lettercraze.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import scandium.lettercraze.action.IAction;
 import scandium.lettercraze.model.Model;
+import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
 
 /**
  * @author Scandium
  */
-public class UndoController {
-
-    /**
-     * Default constructor
-     */
-    public UndoController() {
-    }
-
-    /**
-     * 
-     */
+public class UndoController implements ActionListener {
     Model model;
-
-    /**
-     * 
-     */
     Application app;
 
     /**
-     * @param model 
-     * @param app
+     * Creates a new controller which will undo the last move.
+     * @param model The model.
+     * @param app The application.
      */
     public UndoController(Model model, Application app) {
-        // TODO implement here
+    	this.model = model;
+    	this.app = app;
     }
 
     /**
-     * @return
-     */
-    public boolean process() {
-        // TODO implement here
-        return false;
-    }
-
-    /**
-     * @param ActionEvent ae
+     * Handles the undo button being clicked on.
+     * @param The event arguments.
      */
     public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
+    	// undo the last action
+    	IAction action = UndoManager.instance.removeLastAction();
+    	if (action != null)
+    		action.undo();
+    	
+    	// refresh the view
+    	app.getLevelPlayer().refresh();
     }
 
 }
