@@ -1,23 +1,14 @@
 package scandium.lettercraze.controller;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
-import scandium.common.model.Board;
-import scandium.common.model.BoardSquare;
-import scandium.common.model.PuzzleLevel;
-import scandium.common.model.Star;
 import scandium.common.model.Word;
 import scandium.common.tool.LetterDictionary;
 import scandium.common.tool.WordDictionary;
 import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
-import scandium.lettercraze.view.LevelPlayerView;
 
 /**
  * This class handles the removal of a word from the board in LetterCraze. It is initiated 
@@ -76,160 +67,161 @@ public class RemoveWordController extends MouseAdapter{
      */
     @Override
     public void mouseReleased(MouseEvent me){
-    	/* Check that the game is being played */
-    	if(!model.getProgress().getCurrentLevelProgress().isPlaying()) return;
-    	/* Get Word: return if no valid word*/
-    	Word word = model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getSelectedWord();
-    	if (word == null) return;
+    	LevelProgress progress = model.getProgress().getCurrentLevelProgress();
     	
-    	/* Remove highlight */
-    	removeHighlight(word);
+    	// don't do anything if the game isn't being played
+    	if (!progress.isPlaying()) {
+    		progress.getLevel().getBoard().deselectWord();
+    		app.getLevelPlayer().refresh();
+    		return;
+    	}
     	
-    	/* Determine how to handle the removal of a word */
-        String level_type = model.getProgress().getCurrentLevelProgress().getLevel().getType();
-        if(level_type.equals("Puzzle")) removeFromPuzzleLevel(word);
-        else if(level_type.equals("Lightning")) removeFromLightningLevel(word);
-        else if(level_type.equals("Theme")) removeFromThemeLevel(word);
-        else System.out.println("Invalid Level Type: " + level_type);	
-    	
-    }
-    
-    
-    /**
-     * This function removes the highlight from all selected squares
-     * @param word The selected word
-     */
-    void removeHighlight(Word word){
-    	for(BoardSquare bs : word.getBoardSquares()){
-    		int row = bs.getRow();
-    		int col = bs.getCol();
-    		app.getLevelPlayer().getBoardView().getJLabel(row, col).setBackground(Color.WHITE);
+    	Word selectedWord = progress.getLevel().getBoard().getSelectedWord();
+    	// if the player has selected a word, see if it is valid
+    	if (selectedWord != null) {
+    		if (dictionary.isWord(selectedWord.generateString())) {
+    			// the selected word is a valid one
+    			// update the score
+    			progress.updateScore(progress.getLevel().determineScore(selectedWord));
+    			
+    			// add to found words
+    			progress.addFoundWord(selectedWord.generateString());
+    			
+    			// update the board
+        		progress.getLevel().getBoard().removeSelectedWord();
+        		progress.getLevel().getBoard().applyGravity();
+        		if (progress.getLevel().getBoard().shouldRegenerate()) {
+        			progress.getLevel().getBoard().fillEmptySquares(letter_dictionary);
+        		}
+    		} 
+    		progress.getLevel().getBoard().deselectWord();
+    		// refresh the player with the updates
+    		app.getLevelPlayer().refresh();
     	}
     }
-    
-    /**
-     * This function removes the given word from the board
-     * @param word The word to be removed from the board
-     */
-    void removeWord(Word word){
-		for(BoardSquare bs : word.getBoardSquares()){
-			bs.setTile(null);
-		}    	
-    }
-    
-    /** 
-     * This function determines if a new star was achieved and updates the model if it was.
-     */
-    void achieveStars(){
-    	int score = model.getProgress().getCurrentLevelProgress().getScore();
-    	int star_count = 0;
-    	for(Star star : model.getProgress().getCurrentLevelProgress().getLevel().getStars()){
-    		if(star.isObtained(score)) star_count++;
-    	}
-    	model.getProgress().getCurrentLevelProgress().setStarCount(star_count);
-    }
-    
-    /** 
-     * This function determines if the maximum number of words have been found for a puzzle level.
-     */
-    void foundMaxNumWords(){
-		if(model.getProgress().getCurrentLevelProgress().getLevel().getType().equals("Puzzle")){
-			int num_words = model.getProgress().getCurrentLevelProgress().getFoundWords().size();
-			PuzzleLevel level = (PuzzleLevel) model.getProgress().getCurrentLevelProgress().getLevel();
-			if(num_words >= level.getMaxNumWords()){
-				model.getProgress().getCurrentLevelProgress().setPlaying(false);
-			}
-		}
-    }
-    
-    /**
-     * This function handles the removal of a word from a puzzle level. 
-     * @param word The word to be removed
-     */
-    public void removeFromPuzzleLevel(Word word){
-       	
-        if(!(dictionary.isWord(word.generateString()) && word.getBoardSquares().size() >= 3)){
-        	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().setSelectedWord(null);
-        	return;
-        }
-        
-        /* Remove word from board and model*/
-        removeWord(word);
-		model.getProgress().getCurrentLevelProgress().getLevel().getBoard().setSelectedWord(null);
-
-    	/* Apply gravity and generate tiles */
-    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-    	board.applyGravity();
-    	board.fillEmptySquares(letter_dictionary);
-    	
-    	/* Add the Score to the level Progress */
-    	int score = model.getProgress().getCurrentLevelProgress().getScore();
-    	score += word.calculateScore();
-    	model.getProgress().getCurrentLevelProgress().setScore(score);
-    	/* Add the word to the list of found words */
-    	
-    	model.getProgress().getCurrentLevelProgress().addFoundWord(word.generateString());
-    	app.getLevelPlayer().getFoundWordsListModel().addElement(word.generateString());
-
-    		
-    	/* Determine if a star was achieved */
-    	achieveStars();
-    	
-
-    	/* Check if the maximum number of words has been reached */
-    	foundMaxNumWords();
-    		
-    	/* Refresh the view to reflect the changes to the model */
-    	refreshView();
-    	
-    }
-    
-    /**
-     * 
-     */
-    void removeFromLightningLevel(Word word){
-    	
-    }
-    
-    /** 
-     * 
-     */
-    void removeFromThemeLevel(Word word){
-    	
-    }
-    
-    /** 
-     * This function refreshes the view from the current state of the model
-     */
-    void refreshView(){
-    	LevelProgress CLP = model.getProgress().getCurrentLevelProgress();
-    	LevelPlayerView  level_player = app.getLevelPlayer();
-    	/* Remove all found words */
-    	level_player.getFoundWordsListModel().clear();
-    	/* Load found words from model */
-    	for(String word : CLP.getFoundWords()){
-    		level_player.getFoundWordsListModel().addElement(word);
-    	}
-    	/* Refresh Score */
-    	level_player.getScoreValueLabel().setText(CLP.getScore() + "");
-    	/* Refresh Stars */
-    	for(JLabel star : level_player.getStarLabels()){
-    		star.setIcon(new ImageIcon(LevelPlayerView.class.getResource(
-    				"/scandium/lettercraze/resources/star-icon-off.png")));
-    	}
-    	for(int i = 0; i < 3 && i < CLP.getStarCount(); i++){
-    		level_player.getStarLabels()[i].setIcon(new ImageIcon(LevelPlayerView.class.getResource(
-    				"/scandium/lettercraze/resources/star-icon-on.png")));
-    	}
-    	/* Refresh Board View */
-    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-    	for(int i = 0; i < 6; i++){
-    		for(int j = 0; j < 6; j++){
-    			if(board.getBoardSquare(j, i).isEnabled())
-    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setText(board.getBoardSquare(j, i).getTile().getContent());
-    		}
-    	}
-    }
+//    
+//    /**
+//     * This function removes the given word from the board
+//     * @param word The word to be removed from the board
+//     */
+//    void removeWord(Word word){
+//		for(BoardSquare bs : word.getBoardSquares()){
+//			bs.setTile(null);
+//		}    	
+//    }
+//    
+//    /** 
+//     * This function determines if a new star was achieved and updates the model if it was.
+//     */
+//    void achieveStars(){
+//    	int score = model.getProgress().getCurrentLevelProgress().getScore();
+//    	int star_count = 0;
+//    	for(Star star : model.getProgress().getCurrentLevelProgress().getLevel().getStars()){
+//    		if(star.isObtained(score)) star_count++;
+//    	}
+//    	model.getProgress().getCurrentLevelProgress().setStarCount(star_count);
+//    }
+//    
+//    /** 
+//     * This function determines if the maximum number of words have been found for a puzzle level.
+//     */
+//    void foundMaxNumWords(){
+//		if(model.getProgress().getCurrentLevelProgress().getLevel().getType().equals("Puzzle")){
+//			int num_words = model.getProgress().getCurrentLevelProgress().getFoundWords().size();
+//			PuzzleLevel level = (PuzzleLevel) model.getProgress().getCurrentLevelProgress().getLevel();
+//			if(num_words >= level.getMaxNumWords()){
+//				model.getProgress().getCurrentLevelProgress().setPlaying(false);
+//			}
+//		}
+//    }
+//    
+//    /**
+//     * This function handles the removal of a word from a puzzle level. 
+//     * @param word The word to be removed
+//     */
+//    public void removeFromPuzzleLevel(Word word){
+//       	
+//        if(!(dictionary.isWord(word.generateString()) && word.getBoardSquares().size() >= 3)){
+//        	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().deselectWord();
+//        	return;
+//        }
+//        
+//        /* Remove word from board and model*/
+//        removeWord(word);
+//    	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().deselectWord();
+//
+//    	/* Apply gravity and generate tiles */
+//    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+//    	board.applyGravity();
+//    	board.fillEmptySquares(letter_dictionary);
+//    	
+//    	/* Add the Score to the level Progress */
+//    	int score = model.getProgress().getCurrentLevelProgress().getScore();
+//    	score += word.calculateScore();
+//    	model.getProgress().getCurrentLevelProgress().setScore(score);
+//    	/* Add the word to the list of found words */
+//    	
+//    	model.getProgress().getCurrentLevelProgress().addFoundWord(word.generateString());
+//
+//    		
+//    	/* Determine if a star was achieved */
+//    	achieveStars();
+//    	
+//
+//    	/* Check if the maximum number of words has been reached */
+//    	foundMaxNumWords();
+//    		
+//    	/* Refresh the view to reflect the changes to the model */
+////    	refreshView();
+//    	
+//    }
+//    
+//    /**
+//     * 
+//     */
+//    void removeFromLightningLevel(Word word){
+//    	
+//    }
+//    
+//    /** 
+//     * 
+//     */
+//    void removeFromThemeLevel(Word word){
+//    	
+//    }
+////    
+////    /** 
+////     * This function refreshes the view from the current state of the model
+////     */
+////    void refreshView(){
+////    	LevelProgress CLP = model.getProgress().getCurrentLevelProgress();
+////    	LevelPlayerView  level_player = app.getLevelPlayer();
+////    	/* Remove all found words */
+////    	level_player.getFoundWordsListModel().clear();
+////    	/* Load found words from model */
+////    	for(String word : CLP.getFoundWords()){
+//    		level_player.getFoundWordsListModel().addElement(word);
+//    	}
+//    	/* Refresh Score */
+//    	level_player.getScoreValueLabel().setText(CLP.getScore() + "");
+//    	/* Refresh Stars */
+//    	for(JLabel star : level_player.getStarLabels()){
+//    		star.setIcon(new ImageIcon(LevelPlayerView.class.getResource(
+//    				"/scandium/lettercraze/resources/star-icon-off.png")));
+//    	}
+//    	for(int i = 0; i < 3 && i < CLP.getStarCount(); i++){
+//    		level_player.getStarLabels()[i].setIcon(new ImageIcon(LevelPlayerView.class.getResource(
+//    				"/scandium/lettercraze/resources/star-icon-on.png")));
+//    	}
+//    	/* Refresh Board View */
+//    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+//    	for(int i = 0; i < 6; i++){
+//    		for(int j = 0; j < 6; j++){
+//    			if(board.getBoardSquare(j, i).isEnabled())
+//    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setText(board.getBoardSquare(j, i).getTile().getContent());
+//    		}
+//    	}
+//    }
    
 
 }

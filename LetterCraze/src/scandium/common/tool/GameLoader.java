@@ -28,12 +28,13 @@ import scandium.common.model.Level;
  */
 public class GameLoader {
 	private String savePath;
+	private LevelContainer container;
 
 	/**
 	 * Creates a new game loader which will load and save to the default save file.
 	 */
 	public GameLoader() {
-		savePath = Paths.get(System.getProperty("user.home"), "LetterCrazeGame.xml").toString();
+		savePath = Paths.get("LetterCrazeGame.xml").toString();
 	}
 	
 	/**
@@ -70,23 +71,10 @@ public class GameLoader {
 	 *         levels were loaded.
 	 */
 	public List<Level> LoadLevels(List<Level> list) {
-		try {
-			JAXBContext context = JAXBContext.newInstance(LevelContainer.class);
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-
-			// load the file
-			LevelContainer unmarshalled = (LevelContainer) unmarshaller.unmarshal(new File(savePath));
-
-			// add the results to the passed in list
-			for (Level level : unmarshalled.getLevels()) {
-				list.add(level);
-			}
-		} catch (JAXBException e) {
-			System.err.println("Could not load levels from \"" + savePath + "\"!");
-			e.printStackTrace();
-		}
-
-		// return the list
+		LevelContainer container = LoadLevelContainer();
+		if (container != null) 
+			list.addAll(container.getLevels());
+		
 		return list;
 	}
 
@@ -97,22 +85,56 @@ public class GameLoader {
 	 *  
 	 * @return The game token loaded from file, or zero if the token couldn't be loaded.
 	 */
-	public long GetGameToken(List<Level> list) {
-		long token = 0;
+	public long GetGameToken() {
+		LevelContainer container = LoadLevelContainer();
+		if (container != null)
+			return container.getToken();
+		else
+			return 0;
+	}
+	
+	/**
+	 * Loads the LevelContainer if it exists in file.
+	 * Precondition: None.
+	 * Postcondition: The level file is loaded, or the defaults are loaded if the file couldn't be found.
+	 * 
+	 * @return The loaded levels.
+	 */
+	private LevelContainer LoadLevelContainer() {
+		if (container != null)
+			// return the already loaded container if it was previously loaded
+			return container;
+		
+		LevelContainer unmarshalled = null; 
 		try {
 			JAXBContext context = JAXBContext.newInstance(LevelContainer.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
+			
+			try {
+				File file = new File(savePath);
+				if (file.exists() && !file.isDirectory()) {
+					// load the file from the file system
+					unmarshalled = (LevelContainer) unmarshaller.unmarshal(file);
+				} else {
+					System.err.println("The save file could not be found! Path: \"" + savePath + "\"!");
+				}
+			} catch (JAXBException e) {
+				System.err.println("The save file could not be loaded! Path: \"" + savePath + "\"!");
+				e.printStackTrace();
+			}
 
-			// load the file
-			LevelContainer unmarshalled = (LevelContainer) unmarshaller.unmarshal(new File(savePath));
-			token = unmarshalled.getToken();
+			if (unmarshalled == null) {
+				// couldn't load the levels the normal way so let's try the default file
+				System.err.println("Loading the save file for the default levels!");
+				unmarshalled = (LevelContainer) unmarshaller.unmarshal(this.getClass().getResourceAsStream("/scandium/common/resources/LetterCrazeGame.xml"));
+			}
 			
 		} catch (JAXBException e) {
-			System.err.println("Could not load game token from \"" + savePath + "\"!");
+			System.err.println("Could not load the levels!");
 			e.printStackTrace();
 		}
-		// return the token
-		return token;
+		
+		return container = unmarshalled;
 	}
 	
 	/**
@@ -132,6 +154,9 @@ public class GameLoader {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			File file = new File(savePath);
 
+			// invalidate the previously loaded levels
+			container = null;
+			
 			// save the levels
 			marshaller.marshal(new LevelContainer(levels), file);
 			
@@ -199,5 +224,5 @@ public class GameLoader {
 		public long getToken() {
 			return token;
 		}
-	}
+	}	
 }

@@ -5,18 +5,21 @@
  */
 package scandium.lettercraze.model;
 
-import java.util.HashMap;
+import java.util.List;
 
 import scandium.common.model.Level;
+import scandium.lettercraze.tool.ProgressLoader;
 
 /**
  * A collection of progresses to track the Player's total progress on a set of Levels.
  */
 public class GameProgress {
-	private HashMap<Level, LevelProgress> levelProgresses;
+	private List<LevelProgress> levelProgresses;
 	private LevelProgress currentLevelProgress;
+	private ProgressLoader progressLoader;
 	//to create a flag so that the GameProgress is a singleton
 	private boolean created = false;
+	private long gameToken;
 
 	/**
 	 * Creates a completely new game progress with nothing stored in it
@@ -24,31 +27,17 @@ public class GameProgress {
 	 * @throws IllegalStateException if the current level progress is already running, 
 	 * 						or if one of the LevelProgress initializations fails
 	 */
-	public GameProgress() throws IllegalStateException{
+	public GameProgress(List<Level> levels, long gameToken) throws IllegalStateException{
 		//if current level progress already exists, throw exception
 		if (this.created == false){
-			this.levelProgresses = new HashMap<Level, LevelProgress>();
 			this.currentLevelProgress = new LevelProgress();
-			currentLevelProgress.setPlaying(false);
+			this.currentLevelProgress.setPlaying(false);
+			this.progressLoader = new ProgressLoader();
+			
+			// load the levels from the loader
+			this.gameToken = gameToken;
+			this.levelProgresses = progressLoader.LoadLevelProgress(levels, gameToken);
 			this.created = true;
-		} else{
-			throw new IllegalStateException("The Game Progress Already Exists");
-		}
-	}
-
-	/**
-	 * Creates a new game progress from the given HashMap
-	 * Creates a currentLevelProgress with a null level and isPlaying equals false
-	 * @param storedProgress a HashMap of the current stored progress to be loaded
-	 * @throws IllegalStateException 
-	 */
-	public GameProgress(HashMap<Level, LevelProgress> storedProgress) throws IllegalStateException{
-		if (this.created == false){
-			this.levelProgresses = storedProgress;
-		//TODO Replace this with loading the storedProgress from file
-		this.currentLevelProgress = new LevelProgress();
-		currentLevelProgress.setPlaying(false);
-		this.created = true;
 		} else{
 			throw new IllegalStateException("The Game Progress Already Exists");
 		}
@@ -62,23 +51,19 @@ public class GameProgress {
 	}
 
 	/**
-	 * @param level the level to set the current level playing to 
-	 * @throws LevelNotUpdatedProperly
+	 * @return whether a level was unlocked
 	 */
-	public boolean setCurrentLevelProgress(Level level){
-		return this.currentLevelProgress.setLevel(level);
-	}
-
-	/**
-	 * This method removes the LevelProgress from LevelProgresses and returns true if the state has changed.
-	 * @return if the LevelProgress was added and if the state of LevelProgresses has changed
-	 */
-	public boolean removeLevelProgresses(LevelProgress lp) {
-		if(levelProgresses.remove(lp.getLevel()).equals(lp)){
-			return true;
-		}else{
-			return false;
+	public boolean unlockNextLevel() {
+		// go through all of the progresses and find the one whose level matches
+		// the current progress
+		for (int i = 0; i < levelProgresses.size() - 1; i++) {
+			if (getCurrentLevelProgress().getLevel() == levelProgresses.get(i).getLevel()) {
+				// unlock the next sequential level
+				return levelProgresses.get(i + 1).setUnlocked(true);
+			}
 		}
+		// we didn't find any levels to unlock
+		return false;
 	}
 
 	/**
@@ -87,23 +72,40 @@ public class GameProgress {
 	 * @return The progress for the given Level.
 	 */
 	public LevelProgress getProgressForLevel(Level level) {
-		return levelProgresses.get(level);
+		// go through all of the progresses until we find the one with the given level
+		for (LevelProgress progress : levelProgresses) {
+			if (progress.getLevel() == level) {
+				// found it!
+				return progress;
+			}
+		}
+		// couldn't find it
+		return null;
 	}
 
 	/**
-	 * This method adds the LevelProgress to LevelProgresses and returns true if the state has changed.
+	 * Replaces the level progress for the corresponding level with the given one.
 	 * @param lp
 	 * @return true if the LevelProgress was added and if the state of LevelProgresses has changed
 	 */
-	public boolean addLevelProgress(LevelProgress lp){
-		if(levelProgresses.get(lp.getLevel()).equals(lp)){
-			return false;
+	public boolean replaceLevelProgress(LevelProgress lp){
+		LevelProgress toReplace = getProgressForLevel(lp.getLevel());
+		
+		if (toReplace != null) {
+			// the given lp has a level that can be replaced
+			toReplace.setScore(lp.getScore());
+			return true;
 		}
-		if(levelProgresses.put(lp.getLevel(), lp).equals(null)){
-			return levelProgresses.get(lp.getLevel()).equals(lp);
-		}else{
-			return levelProgresses.get(lp.getLevel()).equals(lp);
-		}
+		// didn't find the level to replace
+		return false;
 	}
 	
+	
+	/**
+	 * Saves the level progress.
+	 * @return Whether any of the progress was saved.
+	 */
+	public boolean SaveProgress() {
+		return progressLoader.SaveLevelProgress(levelProgresses, gameToken);
+	}
 }

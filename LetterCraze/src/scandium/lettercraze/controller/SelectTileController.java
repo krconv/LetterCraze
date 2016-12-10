@@ -3,10 +3,7 @@ package scandium.lettercraze.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
-
-import scandium.common.model.BoardSquare;
-import scandium.common.model.Word;
+import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 
@@ -27,6 +24,8 @@ public class SelectTileController extends MouseAdapter{
 	 * that it may need. 
 	 */
     Application app;
+    int row;
+    int col;
 
     /**
      * This constructor instantiates a new SelectTileController. It accepts the LetterCraze model
@@ -34,9 +33,11 @@ public class SelectTileController extends MouseAdapter{
      * @param model The entire LetterCraze model.
      * @param app The entire LetterCraze GUI.
      */
-    public SelectTileController(Model model, Application app) {
+    public SelectTileController(Model model, Application app, int row, int col) {
         this.model = model;
         this.app = app;
+        this.row = row;
+        this.col = col;
     }
 
     /**
@@ -51,41 +52,16 @@ public class SelectTileController extends MouseAdapter{
      */
     @Override
     public void mousePressed(MouseEvent me){
+    	LevelProgress progress = model.getProgress().getCurrentLevelProgress();
     	/* Check that the game is being played */
-    	if(!model.getProgress().getCurrentLevelProgress().isPlaying()) return;
-    	/* AdjustView */
-    	JLabel label = (JLabel) me.getComponent();
-    	BoardSquare square = getLabelBoardSquare(label);
-    	/* Check that the board square is enabled */
-    	if(!square.isEnabled()) return;
-    	/* Highlight the square in the view */
-    	app.getLevelPlayer().getBoardView().highlight(label);
-    	/* Register the new Word in the model */
-    	Word word = new Word(square);
-    	model.getProgress().getCurrentLevelProgress().getLevel().getBoard().setSelectedWord(word);
+    	if(!progress.isPlaying()) return;
+
+    	// select the square
+    	progress.getLevel().getBoard().selectSquare(row, col);
+    	
+    	// refresh the display
+    	app.getLevelPlayer().getBoardView().refresh();
     }
-    
-    /**
-     * This function returns the BoardSquare that is associated with the given JLabel.
-     * It returns null if no square is associated with the label.
-     * @return BoardSquare the label's corresponding board square.
-     */
-    BoardSquare getLabelBoardSquare(JLabel label){
-    	int row = -1;
-    	int col = -1;
-    	for(int i = 0; i < 6; i++){
-    		for(int j = 0; j < 6; j++){
-    			if(app.getLevelPlayer().getBoardView().getJLabel(i, j).equals(label)){
-    				row = i;
-    				col = j;
-    				break;
-    			}
-    		}
-    	}
-    	if(row == -1 || col == -1) return null;
-    	return model.getProgress().getCurrentLevelProgress().getLevel().getBoard().getBoardSquare(col, row);
-    }
-    
 }
     
     

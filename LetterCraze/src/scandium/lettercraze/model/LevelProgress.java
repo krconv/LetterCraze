@@ -5,6 +5,7 @@
  */
 package scandium.lettercraze.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
@@ -18,6 +19,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
+import scandium.common.model.Star;
 
 /**
  * An object which contains information about a Player's progress in a Level.
@@ -34,29 +36,32 @@ public class LevelProgress {
 	@XmlTransient
 	private List<String> foundWords;
 	@XmlTransient
-	private boolean isPlaying = false;
+	private boolean isPlaying;
 	@XmlTransient
 	private Timer timer;
+	@XmlElement
+	private boolean isUnlocked;
 
 	/**
 	 * Creates a new Level progress with uninitialized information.
 	 */
-	@SuppressWarnings("unused") // only used for XML serializer
-    public LevelProgress() {
-		
+	public LevelProgress() {
+		isPlaying = false;
+		foundWords = new ArrayList<String>();
+		isUnlocked = false;
 	}
-
+	
 	/**
-	 * Creates a new LevelProgress to be associated with the given Level.
+	 * Creates a new Level progress with the given information.
 	 * 
 	 * @param level
-	 *            The Level to be associated with. pre-condition: LevelProgress
-	 *            doesn't exist post-condition: LevelProgress is initialized and
-	 *            constructed
-	 * @throws Exception
+	 *            The level that this progress will be tied to.
 	 */
-	public LevelProgress(Level level) throws IllegalStateException {
-		initialize(level);
+	public LevelProgress(Level level) {
+		this.level = level;
+		isPlaying = false;
+		foundWords = new ArrayList<String>();
+		isUnlocked = false;
 	}
 
 	/**
@@ -69,7 +74,7 @@ public class LevelProgress {
 	 * @throws GameProgressAlreadyRunning,
 	 *             timerNotInitializedProperly
 	 */
-	private void initialize(Level level) throws IllegalStateException {
+	private void initialize(Level level) {
 		this.timer = new Timer();
 		this.foundWords = new LinkedList<String>();
 		isPlaying = true;
@@ -77,12 +82,18 @@ public class LevelProgress {
 		starCount = 0;
 		score = 0;
 		this.level = level;
+		this.isUnlocked = false;
 		if (level == null) {
 			throw new IllegalStateException("Null Level");
 		}
 		if (level.getType().equals("lightning")) {
 			try {
-				timer.schedule(stopPlay(), ((LightningLevel) level).getTimeLimit());
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						setPlaying(false);;
+					}
+				}, ((LightningLevel) level).getTimeLimit());
 			} catch (Exception e) { // timer had a problem initializing
 				throw new IllegalStateException("Timer not initialized properly");
 			}
@@ -100,23 +111,8 @@ public class LevelProgress {
 	 * @throws GameProgressAlreadyRunning,
 	 *             timerNotInitializedProperly
 	 */
-	public boolean setLevel(Level level) throws IllegalStateException {
-		try {
-			initialize(level);
-		} catch (Exception e) {
-			throw e;
-		}
-		return true;
-	}
-
-	/**
-	 * @return null pre-condition: gameProgress is running post-condition:
-	 *         isPlaying has been set to false nothing should be able to be done
-	 *         to the board or anything in the LevelProgress
-	 */
-	private TimerTask stopPlay() {
-		isPlaying = false;
-		return null;
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
 	/**
@@ -127,12 +123,18 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Sets the score and updates the star count.
 	 * @param score
 	 *            the score to set
 	 */
 	public void setScore(int score) {
-		if (isPlaying == true) {
-			this.score = score;
+		this.score = score;
+		
+		// determine how many stars have been obtained
+		starCount = 0;
+		for (Star star : getLevel().getStars()) {
+			if (star.isObtained(score))
+				starCount++;
 		}
 	}
 
@@ -181,11 +183,10 @@ public class LevelProgress {
 	}
 
 	/**
-	 * @param star_count
-	 *            The new StarCount Value
+	 * @return the isUnlocked
 	 */
-	public void setStarCount(int star_count) {
-		this.starCount = star_count;
+	public boolean isUnlocked() {
+		return isUnlocked;
 	}
 
 	/**
@@ -204,13 +205,10 @@ public class LevelProgress {
 	 *         cleared
 	 */
 	public boolean reset() {
-		if (isPlaying == true) {
-			this.score = 0;
-			this.starCount = 0;
-			this.foundWords.clear();
-			return true;
-		}
-		return false;
+		this.score = 0;
+		this.starCount = 0;
+		this.foundWords.clear();
+		return true;
 	}
 
 	/**
@@ -232,7 +230,7 @@ public class LevelProgress {
 	}
 
 	/**
-	 * Updates the Player's score for this progress.
+	 * Updates the Player's score for this progress and updates the star count.
 	 * 
 	 * @param delta
 	 *            The amount to change the score by.
@@ -240,9 +238,8 @@ public class LevelProgress {
 	 *         score is a value post-condition: score is now what it was plus
 	 *         delta
 	 */
-	public boolean updateScore(int delta) {
-		score = score + delta;
-		return true;
+	public void updateScore(int delta) {
+		setScore(score + delta);
 	}
 
 	/**
@@ -253,5 +250,17 @@ public class LevelProgress {
 	 */
 	public void addFoundWord(String word) {
 		this.foundWords.add(word);
+	}
+	
+	/**
+	 * @param isUnlocked The new value of whether this progress is unlocked.
+	 * @return Whether the value was changed.
+	 */
+	public boolean setUnlocked(boolean isUnlocked) {
+		if (this.isUnlocked != isUnlocked) {
+			this.isUnlocked = isUnlocked;
+			return true;
+		} else
+			return false;
 	}
 }
