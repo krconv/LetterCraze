@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 
 import scandium.common.model.Word;
 import scandium.common.tool.LetterDictionary;
-import scandium.common.tool.WordDictionary;
 import scandium.lettercraze.action.RemoveWordAction;
 import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
@@ -33,11 +32,6 @@ public class RemoveWordController extends MouseAdapter{
 	 */
     Application app;
     /**
-     * The dictionary of possible words for puzzle and lightning levels. With this, the 
-     * controller has the ability to determine if a word is valid. 
-     */
-    WordDictionary dictionary;
-    /**
      * The Letter Dictionary of all letters and their respective frequencies and score. 
      * With this the controller has the ability to refill non-populated tiles.
      */
@@ -48,13 +42,11 @@ public class RemoveWordController extends MouseAdapter{
      * model, the LetterCraze GUI, and a word dictionary.
      * @param model The Entire LetterCraze model.
      * @param app The Entire LetterCraze GUI
-     * @param dictionary A word dictionary
      */
-    public RemoveWordController(Model model, Application app, WordDictionary dictionary) {
+    public RemoveWordController(Model model, Application app, LetterDictionary dictionary) {
         this.model = model;
         this.app = app;
-        this.dictionary = dictionary;
-        this.letter_dictionary = new LetterDictionary();
+        this.letter_dictionary = dictionary;
     }
 
     /**
@@ -81,7 +73,7 @@ public class RemoveWordController extends MouseAdapter{
 		Word selectedWord = progress.getLevel().getBoard().getSelectedWord();
 		// if the player has selected a word, see if it is valid
 		if (selectedWord != null) {
-			RemoveWordAction action = new RemoveWordAction(progress, selectedWord, dictionary, letter_dictionary);
+			RemoveWordAction action = new RemoveWordAction(progress, selectedWord, progress.getLevel().getWordDictionary(), letter_dictionary);
 			if (action.isValid()) { // try to execute the remove word and record it if anything changed
 				UndoManager.instance.recordAction(action);
 				action.execute();

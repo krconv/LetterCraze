@@ -21,7 +21,7 @@ public class LetterDictionary {
 	private String[] letters;
 	private double[] frequencies;
 	private int[] scores;
-    Random random;
+    private Random random;
 
     /**
      * Creates a new LetterDictionary.

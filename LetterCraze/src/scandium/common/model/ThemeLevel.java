@@ -12,6 +12,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import scandium.common.tool.IWordDictionary;
 
 /**
  * A type of Level with a predefined list of theme words.
@@ -24,6 +27,8 @@ public class ThemeLevel extends Level {
 	@XmlElementWrapper(name = "themeWords")
 	@XmlElement(name = "word")
 	private ArrayList<String> themeWords;
+	@XmlTransient
+	private IWordDictionary dictionary;
 
     /**
      * Creates a new Theme level with the default information.
@@ -32,6 +37,16 @@ public class ThemeLevel extends Level {
     	super();
     	theme = new String();
     	themeWords = new ArrayList<String>();
+    	dictionary = new IWordDictionary() {
+			@Override
+			public boolean isWord(String word) {
+				for (String string : themeWords) {
+					if (string.equalsIgnoreCase(word))
+						return true;
+				}
+				return false;
+			}
+    	};
     }
 
     /**
@@ -84,6 +99,23 @@ public class ThemeLevel extends Level {
 		return 1;
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see scandium.common.model.Level#isValidWord(scandium.common.model.Word)
+	 */
+	@Override
+	public boolean isValidWord(Word word) {
+		return dictionary.isWord(word.generateString());
+	}
+	
+	/* (non-Javadoc)
+	 * @see scandium.common.model.Level#getWordDictionary()
+	 */
+	@Override
+	public IWordDictionary getWordDictionary() {
+		return dictionary;
+	}
+
 	/* (non-Javadoc)
 	 * @see scandium.common.model.Level#getScoreUnits(boolean)
 	 */

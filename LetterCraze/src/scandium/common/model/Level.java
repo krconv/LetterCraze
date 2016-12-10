@@ -11,6 +11,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+import scandium.common.tool.IWordDictionary;
+import scandium.common.tool.WordDictionary;
+
 /**
  * A class which holds basic information about a Level.
  */
@@ -91,6 +94,23 @@ public abstract class Level {
 	 * @return The score of the found word.
 	 */
 	public abstract int determineScore(Word word);
+	
+	/**
+	 * Determines whether the given word is a word that can be played in this level.
+	 * @param word The word to check.
+	 * @return Whether the word is a valid word.
+	 */
+	public boolean isValidWord(Word word) {
+		return WordDictionary.instance.isWord(word.generateString());
+	}
+	
+	/**
+	 * Retrieves the dictionary that this level uses to validate words.
+	 * @return The word dictionary used to validate words for this level.
+	 */
+	public IWordDictionary getWordDictionary() {
+		return WordDictionary.instance;
+	}
 	
 	/**
 	 * Gets the units that the scores for this level are in.
