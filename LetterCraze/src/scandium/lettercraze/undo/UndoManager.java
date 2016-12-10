@@ -13,7 +13,7 @@ import scandium.lettercraze.action.IAction;
  * A tool for keeping track of actions that can be undone.
  */
 public class UndoManager {
-	public static UndoManager instance = new UndoManager();
+	public static final UndoManager instance = new UndoManager();
 	private Stack<IAction> undoStack;
 
     /**
