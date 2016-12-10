@@ -1,7 +1,11 @@
 package scandium.lettercraze.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.Timer;
 
 import scandium.common.model.Level;
 import scandium.common.tool.LetterDictionary;
@@ -63,66 +67,47 @@ public class OpenLevelController extends MouseAdapter{
     		Level level = progress.getLevel();
     		
     		// update the current level progress
-    		model.getProgress().getCurrentLevelProgress().setLevel(level);
+    		LevelProgress currentProgress = model.getProgress().getCurrentLevelProgress();
+    		currentProgress.setLevel(level);
     		
     		// generate the board if it should be regenerated
     		if (level.getBoard().shouldRegenerate())
     			level.getBoard().fillEmptySquares(dictionary);
     		
+    		// start a timer if the level has one
+    		Timer levelTimer = level.createTimer(new TimerExpiresController(model, app));
+    		
+    		if (levelTimer != null) {
+    			// update the time left for the level 
+    			currentProgress.setTimeLeft(levelTimer.getInitialDelay() / 1000);
+        		
+    			// create a second timer that will update the level progress every second
+    			Timer updateTimer = new Timer(1000, null);
+    			updateTimer.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (!levelTimer.isRunning()) { // stop updating if the original timer stopped
+							updateTimer.stop();
+							return;
+						}
+						currentProgress.setTimeLeft(currentProgress.getTimeLeft() - 1);
+						app.getLevelPlayer().refresh();
+					}
+    				
+    			});
+    			
+    			// start the timers
+    			levelTimer.start();
+    			updateTimer.start();
+    		}
+    		
     		// update the level to being played
-    		model.getProgress().getCurrentLevelProgress().setPlaying(true);
+    		currentProgress.setPlaying(true);
 
     		// set the view to the level player
         	app.getLevelPlayer().refresh();
         	app.setView(app.getLevelPlayer());
     	}
     }
-
-//    /** 
-//     * This function refreshes the view from the current state of the model
-//     */
-//    void refreshView(){
-//    	LevelProgress CLP = model.getProgress().getCurrentLevelProgress();
-//    	LevelPlayerView  level_player = app.getLevelPlayer();
-//    	/* Remove all found words */
-//    	level_player.getFoundWordsListModel().clear();
-//    	/* Load found words from model */
-//    	for(String word : CLP.getFoundWords()){
-//    		level_player.getFoundWordsListModel().addElement(word);
-//    	}
-//    	/* Refresh Score */
-//    	level_player.getScoreValueLabel().setText(CLP.getScore() + "");
-//    	/* Refresh Stars */
-//    	for(JLabel star : level_player.getStarLabels()){
-//    		star.setIcon(new ImageIcon(LevelPlayerView.class.getResource(
-//    				"/scandium/lettercraze/resources/star-icon-off.png")));
-//    	}
-//    	for(int i = 0; i < 3 && i < CLP.getStarCount(); i++){
-//    		level_player.getStarLabels()[i].setIcon(new ImageIcon(LevelPlayerView.class.getResource(
-//    				"/scandium/lettercraze/resources/star-icon-on.png")));
-//    	}
-//    	/* Refresh Board View */
-//    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-//    	for(int i = 0; i < 6; i++){
-//    		for(int j = 0; j < 6; j++){
-//    			if(board.getBoardSquare(j, i).isEnabled())
-//    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setText(board.getBoardSquare(j, i).getTile().getContent());
-//    			else 
-//    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setBackground(Color.BLACK);
-//    		}
-//    	}
-//    }
-    
-//    /**
-//     * This function regenerates the tiles on the board
-//     */
-//    void regenerateBoardTiles(){
-//    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-//    	for(int i = 0; i < 6; i++){
-//    		for(int j = 0; j < 6; j++){
-//    			if(board.getSquare(i, j).isEnabled())
-//    				board.getSquare(i, j).setTile(dictionary.getRandomTile());
-//    		}
-//    	}
-//    }
 }

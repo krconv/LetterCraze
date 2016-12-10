@@ -100,22 +100,27 @@ public class BoardView extends JPanel {
 			for (int row = 0; row < 6; row++) {
 				for (int col = 0; col < 6; col++) {
 					BoardSquare square = board.getSquare(row, col);
+					JLabel label = getBoardSquareLabel(row, col);
 					// update the square to reflect the tile in it
-					if (square.isEmpty()) {
-						getBoardSquareLabel(row, col).setText(null);
-					} else {
-						getBoardSquareLabel(row, col).setText(square.getTile().getContent());
-					}
+					if (square.isEmpty()) 
+						label.setText(null);
+					else 
+						label.setText(square.getTile().getContent());
+					
 					// highlight the square if it's highlighted
 					if (board.getSelectedWord() != null && board.getSelectedWord().getBoardSquares().contains(square)) {
-						getBoardSquareLabel(row, col).setBackground(Color.GRAY);
+						label.setBackground(Color.GRAY);
 					} else {
-						getBoardSquareLabel(row, col).setBackground(Color.WHITE);
+						label.setBackground(Color.WHITE);
 					}
 					
+					// make the square grey if the level isn't playing
+					if (!progress.isPlaying())
+						label.setBackground(Color.LIGHT_GRAY);
+						
 					// make disabled squares black
 					if (!square.isEnabled())
-						getBoardSquareLabel(row, col).setBackground(Color.BLACK);
+						label.setBackground(Color.BLACK);
 				}
 			}
 		}
