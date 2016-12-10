@@ -6,9 +6,15 @@
 package scandium.levelbuilder.view;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import scandium.common.model.Level;
 
@@ -27,6 +33,7 @@ public class LevelIconView extends JPanel {
 	public LevelIconView(Level l) {
 		this.level = l;
 		initialize();
+		refresh();
 	}
 
 	/**
@@ -67,7 +74,19 @@ public class LevelIconView extends JPanel {
 	 * Initializes the level icon view.
 	 */
 	private void initialize() {
+		setPreferredSize(new Dimension(300, 130));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setBorder(new EmptyBorder(10, 10, 10, 10));
+
+		// add the name label
 		levelNameLabel = new JLabel(level.getName());
+		levelNameLabel.setForeground(new Color(0, 0, 0));
+		levelNameLabel.setFont(levelNameLabel.getFont().deriveFont(levelNameLabel.getFont().getStyle() | Font.BOLD, levelNameLabel.getFont().getSize() + 20f));
+		levelNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		levelNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		levelNameLabel.setPreferredSize(new Dimension(250, 35));
+		levelNameLabel.setMaximumSize(new Dimension(300, 35));
+		add(levelNameLabel);
 	}
 
 	/**

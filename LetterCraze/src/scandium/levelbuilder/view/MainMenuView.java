@@ -50,6 +50,7 @@ public class MainMenuView extends JPanel{
 	 */
 	public MainMenuView() {
 		initializeView();
+		refresh();
 	}
 
 	/**
@@ -94,23 +95,26 @@ public class MainMenuView extends JPanel{
 		title_label.setFont(new Font(title_label.getFont().getName(), Font.BOLD, 36));
 		add(title_label);
 		/* Initialize Create New Level Button                                                    */
-		new_level_button.setBounds(1000, 100, 125, 50);
+		new_level_button.setBounds(1075, 100, 125, 50);
 		add(new_level_button);
 		/* Initialize Edit Level Button                                                          */
-		edit_level_button.setBounds(1000, 200,  125, 50);
+		edit_level_button.setBounds(1075, 200,  125, 50);
 		add(edit_level_button);
 		/* Initialize Delete Level Button                                                        */
-		delete_level_button.setBounds(1000,  300,  125,  50);
+		delete_level_button.setBounds(1075, 300,  125,  50);
 		add(delete_level_button);
 
 		// add the level panel
 		levelsPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		levelsPanel.setOpaque(false);
 		levelsPanel.setLayout(new WrapLayout());
+		add(levelsPanel);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(levelsPanel);
+		scrollPane.setBounds(25, 100, 1000, 500);
 		add(scrollPane, BorderLayout.CENTER);
+
 	}
 
 	/* ~~~~~                                                                               ~~~~~ *
@@ -174,7 +178,8 @@ public class MainMenuView extends JPanel{
 		List<Level> levels = model.getLevels();
 		for (int i = 0; i < levels.size(); i++) {
 			if (getLevelIcons().size() < i + 1) {
-				levelsPanel.add(new LevelIconView(levels.get(i)), i);
+				LevelIconView iconView = new LevelIconView(levels.get(i));
+				levelsPanel.add(iconView);
 			}
 		}
 

@@ -17,8 +17,6 @@ import scandium.common.tool.GameLoader;
 public class Model {
 	private Level selectedLevel;
 	private List<Level> levels;
-	//do we need this still even though the controllers control the view?
-	private LevelBuilderState state;
 	private EditProgress editProgress;
 	private GameLoader gameLoader;
 
@@ -46,19 +44,6 @@ public class Model {
 		this.selectedLevel = selectedLevel;
 	}
 
-	/**
-	 * @return the state
-	 */
-	public LevelBuilderState getState() {
-		return state;
-	}
-
-	/**
-	 * @param state the state to set
-	 */
-	public void setState(LevelBuilderState state) {
-		this.state = state;
-	}
 	/**
 	 * @return the editProgress
 	 */
