@@ -120,9 +120,30 @@ public class Board {
 	 * @exception IllegalArgumentException Thrown if the word consists of boards squares which are
 	 * not in this board.
 	 */
-	public boolean insertWord(Word word) throws IllegalArgumentException {
-		// TODO implement here
-		return false;
+	public boolean insertWord(Word word) {
+		// insert the tiles back in to the board by iterating row by row
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 6; col++) {
+				if (word.getBoardSquares().contains(getSquare(row, col))) {
+					// the current square needs to be inserted into, so we need to shift everything down
+					// we will do this by remembering the current tile, removing it, then replacing it on
+					// the next valid board square
+					Tile tile = getSquare(row, col).getTile();
+					getSquare(row, col).removeTile();
+					for (int i = 1; i + row < 6 && tile != null; i++) {
+						BoardSquare square = getSquare(row + i, col);
+						if (square.isEnabled()) {
+							Tile temp = square.getTile();
+							square.setTile(tile);
+							tile = temp;
+						}
+					}
+					// set the square that we emptied to the tile that is being inserted
+					getSquare(row, col).setTile(word.getTiles().get(word.getBoardSquares().indexOf(getSquare(row, col))));
+				}
+			}
+		}
+		return !word.getTiles().isEmpty();
 	}
 
 	/**

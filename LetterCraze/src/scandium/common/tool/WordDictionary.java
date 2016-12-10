@@ -14,7 +14,7 @@ import java.util.Iterator;
 /**
  * A tool to contain a list of words.
  */
-public class WordDictionary {
+public class WordDictionary implements IWordDictionary {
 	
 	/* Dictionary File                                                                           */
 	final static String dictionary_file  = "Dictionary.txt";

@@ -6,8 +6,10 @@ import java.awt.event.MouseEvent;
 import scandium.common.model.Word;
 import scandium.common.tool.LetterDictionary;
 import scandium.common.tool.WordDictionary;
+import scandium.lettercraze.action.RemoveWordAction;
 import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
+import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
 
 /**
@@ -76,28 +78,18 @@ public class RemoveWordController extends MouseAdapter{
     		return;
     	}
     	
-    	Word selectedWord = progress.getLevel().getBoard().getSelectedWord();
-    	// if the player has selected a word, see if it is valid
-    	if (selectedWord != null) {
-    		if (dictionary.isWord(selectedWord.generateString())) {
-    			// the selected word is a valid one
-    			// update the score
-    			progress.updateScore(progress.getLevel().determineScore(selectedWord));
-    			
-    			// add to found words
-    			progress.addFoundWord(selectedWord.generateString());
-    			
-    			// update the board
-        		progress.getLevel().getBoard().removeSelectedWord();
-        		progress.getLevel().getBoard().applyGravity();
-        		if (progress.getLevel().getBoard().shouldRegenerate()) {
-        			progress.getLevel().getBoard().fillEmptySquares(letter_dictionary);
-        		}
-    		} 
-    		progress.getLevel().getBoard().deselectWord();
-    		// refresh the player with the updates
-    		app.getLevelPlayer().refresh();
-    	}
+		Word selectedWord = progress.getLevel().getBoard().getSelectedWord();
+		// if the player has selected a word, see if it is valid
+		if (selectedWord != null) {
+			RemoveWordAction action = new RemoveWordAction(progress, selectedWord, dictionary, letter_dictionary);
+			if (action.isValid()) { // try to execute the remove word and record it if anything changed
+				UndoManager.instance.recordAction(action);
+				action.execute();
+			}
+			progress.getLevel().getBoard().deselectWord();
+			// refresh the player with the updates
+			app.getLevelPlayer().refresh();
+		}
     }
 //    
 //    /**

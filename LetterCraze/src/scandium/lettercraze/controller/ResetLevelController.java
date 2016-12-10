@@ -56,18 +56,18 @@ public class ResetLevelController extends MouseAdapter{
      */
     @Override
     public void mouseClicked(MouseEvent me) {
-    	// reset the players progress
-    	model.getProgress().getCurrentLevelProgress().reset();
-    	
     	// reset the board
     	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
     	if (board.shouldRegenerate()) {
     		board.clearExistingTiles();
     		board.fillEmptySquares(dictionary);
     	} else {
-    		UndoManager.getInstance().removeLastAction();
+    		UndoManager.instance.removeAllActions();
     	}
     	board.removeSelectedWord();
+    	
+    	// reset the players progress
+    	model.getProgress().getCurrentLevelProgress().reset();
     	
     	// refresh the player
     	app.getLevelPlayer().refresh();

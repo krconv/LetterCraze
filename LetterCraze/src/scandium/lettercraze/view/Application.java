@@ -141,10 +141,12 @@ public class Application extends JFrame {
 		for (LevelIconView view : mainMenu.getLevelIcons()) {
 			view.addMouseListener(new OpenLevelController(model, this, view.getModel()));
 		}
-		levelPlayer.getLeaveButton().addActionListener(new ExitLevelController(model,this));
-		
 		/* Create WordDictionary for the controllers */
 		WordDictionary dictionary = new WordDictionary();
+		
+		levelPlayer.getLeaveButton().addActionListener(new ExitLevelController(model,this));
+		levelPlayer.getUndoButton().addActionListener(new UndoController(model, this));
+		
 		/* Initialize controllers for the 'board squares' */
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < 6; j++){
