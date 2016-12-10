@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import scandium.common.tool.WordDictionary;
+import scandium.common.tool.LetterDictionary;
 import scandium.lettercraze.controller.*;
 import scandium.lettercraze.model.Model;
 
@@ -141,9 +141,8 @@ public class Application extends JFrame {
 		for (LevelIconView view : mainMenu.getLevelIcons()) {
 			view.addMouseListener(new OpenLevelController(model, this, view.getModel()));
 		}
-		/* Create WordDictionary for the controllers */
-		WordDictionary dictionary = new WordDictionary();
 		
+		LetterDictionary letterDictionary = new LetterDictionary();
 		levelPlayer.getLeaveButton().addActionListener(new ExitLevelController(model,this));
 		levelPlayer.getUndoButton().addActionListener(new UndoController(model, this));
 		
@@ -152,7 +151,7 @@ public class Application extends JFrame {
 			for(int j = 0; j < 6; j++){
 				
 				levelPlayer.getBoardView().getBoardSquareLabel(i, j).addMouseListener(new SelectTileController(model, this, i, j));
-				levelPlayer.getBoardView().getBoardSquareLabel(i, j).addMouseListener(new RemoveWordController(model, this, dictionary));
+				levelPlayer.getBoardView().getBoardSquareLabel(i, j).addMouseListener(new RemoveWordController(model, this, letterDictionary));
 				levelPlayer.getBoardView().getBoardSquareLabel(i, j).addMouseMotionListener(new WordDragController(model, this, i, j));
 				
 			}

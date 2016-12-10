@@ -30,13 +30,15 @@ public class UndoController implements ActionListener {
      * @param The event arguments.
      */
     public void actionPerformed(ActionEvent ae) {
-    	// undo the last action
-    	IAction action = UndoManager.instance.removeLastAction();
-    	if (action != null)
-    		action.undo();
-    	
-    	// refresh the view
-    	app.getLevelPlayer().refresh();
+    	if (model.getProgress().getCurrentLevelProgress().isPlaying()) {
+	    	// undo the last action
+	    	IAction action = UndoManager.instance.removeLastAction();
+	    	if (action != null)
+	    		action.undo();
+	    	
+	    	// refresh the view
+	    	app.getLevelPlayer().refresh();
+    	}
     }
 
 }
