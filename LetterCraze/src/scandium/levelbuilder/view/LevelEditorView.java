@@ -610,7 +610,7 @@ public class LevelEditorView extends JPanel{
 	public void setPuzzleLevelView(){
 		level_specific_label.setVisible(true);
 
-		/* Disable theme and lightning                                                           */
+		/* Disable theme and lightning*/
 		theme_name_label.setVisible(false);
 		theme_words_label.setVisible(false);
 		theme_name_textfield.setVisible(false);
@@ -618,12 +618,15 @@ public class LevelEditorView extends JPanel{
 		lightning_time_limit_label.setVisible(false);
 		lightning_time_limit_textfield.setVisible(false);
 
-		/* Enable puzzle                                                                         */
+		/* Enable puzzle*/
 		puzzle_max_num_words_label.setVisible(true);
 		puzzle_max_num_words_textfield.setVisible(true);
 
 		/* Set current view for reference later */
 		currentView = "puzzle";
+		
+		/* Set correct radio button as enabled*/
+		System.out.println("puzzle is selected");
 	}
 
 	/**
@@ -632,7 +635,7 @@ public class LevelEditorView extends JPanel{
 	public void setLightningLevelView(){
 		level_specific_label.setVisible(true);
 
-		/* Disable theme and puzzle                                                              */
+		/* Disable theme and puzzle*/
 		theme_name_label.setVisible(false);
 		theme_words_label.setVisible(false);
 		theme_name_textfield.setVisible(false);
@@ -640,12 +643,15 @@ public class LevelEditorView extends JPanel{
 		puzzle_max_num_words_label.setVisible(false);
 		puzzle_max_num_words_textfield.setVisible(false);
 
-		/* Enable lightning                                                                      */
+		/* Enable lightning*/
 		lightning_time_limit_label.setVisible(true);
 		lightning_time_limit_textfield.setVisible(true);
 
 		/* Set current view for reference later */
 		currentView = "lightning";
+		
+		/* Set correct radio button as enabled*/
+		System.out.println("lightning is selected");
 	}
 
 	/**
@@ -654,13 +660,13 @@ public class LevelEditorView extends JPanel{
 	public void setThemeLevelView(){
 		level_specific_label.setVisible(true);
 
-		/* Disable lightning and puzzle                                                          */
+		/* Disable lightning and puzzle*/
 		puzzle_max_num_words_label.setVisible(false);
 		puzzle_max_num_words_textfield.setVisible(false);
 		lightning_time_limit_label.setVisible(false);
 		lightning_time_limit_textfield.setVisible(false);
 
-		/* Enable theme                                                                          */
+		/* Enable theme*/
 		theme_name_label.setVisible(true);
 		theme_words_label.setVisible(true);
 		theme_name_textfield.setVisible(true);
@@ -668,6 +674,9 @@ public class LevelEditorView extends JPanel{
 
 		/* Set current view for reference later */
 		currentView = "theme";
+		
+		/* Set correct radio button as enabled*/
+		System.out.println("theme is selected");
 	}
 
 	/**
@@ -691,14 +700,17 @@ public class LevelEditorView extends JPanel{
 			case "lightning":
 				if(!currentView.equals("lightning")) {
 					setLightningLevelView();
+					System.out.println("setting view to lightning");
 				}
 			case "theme":
 				if(!currentView.equals("theme")) {
 					setThemeLevelView();
+					System.out.println("setting view to theme");
 				}
 			case "puzzle":
 				if(!currentView.equals("puzzle")) {
 					setPuzzleLevelView();
+					System.out.println("setting view to puzzle");
 				}
 			}
 		}
