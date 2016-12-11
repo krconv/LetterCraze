@@ -688,10 +688,6 @@ public class LevelEditorView extends JPanel{
 
 			//set view to be correct type
 			switch (modLevel.getType().toLowerCase()) {
-			case "puzzle":
-				if(!currentView.equals("puzzle")) {
-					setPuzzleLevelView();
-				}
 			case "lightning":
 				if(!currentView.equals("lightning")) {
 					setLightningLevelView();
@@ -699,6 +695,10 @@ public class LevelEditorView extends JPanel{
 			case "theme":
 				if(!currentView.equals("theme")) {
 					setThemeLevelView();
+				}
+			case "puzzle":
+				if(!currentView.equals("puzzle")) {
+					setPuzzleLevelView();
 				}
 			}
 		}
