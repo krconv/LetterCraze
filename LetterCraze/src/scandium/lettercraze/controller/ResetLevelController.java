@@ -3,15 +3,11 @@ package scandium.lettercraze.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import scandium.common.model.Board;
 import scandium.common.tool.LetterDictionary;
-import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
+import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
-import scandium.lettercraze.view.LevelPlayerView;
 
 /**
  * This class handles the reseting of the board in a LetterCraze Game. 
@@ -60,12 +56,23 @@ public class ResetLevelController extends MouseAdapter{
      */
     @Override
     public void mouseClicked(MouseEvent me) {
-    	/* Determine how to handle the reset of the board */
-        String level_type = model.getProgress().getCurrentLevelProgress().getLevel().getType();
-        if(level_type.equals("Puzzle")) resetPuzzleLevel();
-        else if(level_type.equals("Lightning")) resetLightningLevel();
-        else if(level_type.equals("Theme")) resetThemeLevel();
-        else System.out.println("Invalid Level Type: " + level_type);
+    	if (model.getProgress().getCurrentLevelProgress().isPlaying()) {
+	    	// reset the board
+	    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+	    	if (board.shouldRegenerate()) {
+	    		board.clearExistingTiles();
+	    		board.fillEmptySquares(dictionary);
+	    	} else {
+	    		UndoManager.instance.removeAllActions();
+	    	}
+	    	board.removeSelectedWord();
+	    	
+	    	// reset the players progress
+	    	model.getProgress().getCurrentLevelProgress().reset();
+	    	
+	    	// refresh the player
+	    	app.getLevelPlayer().refresh();
+    	}
     }
     
     /**
@@ -73,78 +80,78 @@ public class ResetLevelController extends MouseAdapter{
      * all found words, resets the score, resets the achieved stars, and 
      * generates new tiles for all enabled board squares. 
      */
-    public void resetPuzzleLevel(){
-    	/* Reset the model */
-    	LevelProgress current_level_progress = model.getProgress().getCurrentLevelProgress();
-    	current_level_progress.getFoundWords().clear();
-    	current_level_progress.setScore(0);
-    	current_level_progress.setStarCount(0);
-    	current_level_progress.setPlaying(true);
-    	regenerateBoardTiles();
-    	
-    	/* Reset View */
-    	refreshView();
-    	
-    }
+//    public void resetPuzzleLevel(){
+//    	/* Reset the model */
+//    	LevelProgress current_level_progress = model.getProgress().getCurrentLevelProgress();
+//    	current_level_progress.getFoundWords().clear();
+//    	current_level_progress.setScore(0);
+//    	current_level_progress.setStarCount(0);
+//    	current_level_progress.setPlaying(true);
+//    	regenerateBoardTiles();
+//    	
+//    	/* Reset View */
+//    	refreshView();
+//    	
+//    }
     
-    /**
-     * 
-     */
-    void resetLightningLevel(){
-    	
-    }
-    
-    /** 
-     * 
-     */
-    void resetThemeLevel(){
-    	
-    }
-    
-    
-    /**
-     * This function regenerates the tiles on the board
-     */
-    void regenerateBoardTiles(){
-    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-    	for(int i = 0; i < 6; i++){
-    		for(int j = 0; j < 6; j++){
-    			if(board.getBoardSquare(j, i).isEnabled())
-    				board.setBoardSquare(j, i, dictionary.getRandomTile());
-    		}
-    	}
-    }
-    
-    /** 
-     * This function refreshes the view from the current state of the model
-     */
-    void refreshView(){
-    	LevelProgress CLP = model.getProgress().getCurrentLevelProgress();
-    	LevelPlayerView  level_player = app.getLevelPlayer();
-    	/* Remove all found words */
-    	level_player.getFoundWordsListModel().clear();
-    	/* Load found words from model */
-    	for(String word : CLP.getFoundWords()){
-    		level_player.getFoundWordsListModel().addElement(word);
-    	}
-    	/* Refresh Score */
-    	level_player.getScoreValueLabel().setText(CLP.getScore() + "");
-    	/* Refresh Stars */
-    	for(JLabel star : level_player.getStarLabels()){
-    		star.setIcon(new ImageIcon(LevelPlayerView.class.getResource(
-    				"/scandium/lettercraze/resources/star-icon-off.png")));
-    	}
-    	for(int i = 0; i < 3 && i < CLP.getStarCount(); i++){
-    		level_player.getStarLabels()[i].setIcon(new ImageIcon(LevelPlayerView.class.getResource(
-    				"/scandium/lettercraze/resources/star-icon-on.png")));
-    	}
-    	/* Refresh Board View */
-    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
-    	for(int i = 0; i < 6; i++){
-    		for(int j = 0; j < 6; j++){
-    			if(board.getBoardSquare(j, i).isEnabled())
-    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setText(board.getBoardSquare(j, i).getTile().getContent());
-    		}
-    	}
-    }
+//    /**
+//     * 
+//     */
+//    void resetLightningLevel(){
+//    	
+//    }
+//    
+//    /** 
+//     * 
+//     */
+//    void resetThemeLevel(){
+//    	
+//    }
+//    
+//    
+////    /**
+////     * This function regenerates the tiles on the board
+////     */
+////    void regenerateBoardTiles(){
+////    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+////    	for(int i = 0; i < 6; i++){
+////    		for(int j = 0; j < 6; j++){
+////    			if(board.getBoardSquare(j, i).isEnabled())
+////    				board.setBoardSquare(j, i, dictionary.getRandomTile());
+////    		}
+////    	}
+////    }
+////    
+//    /** 
+////     * This function refreshes the view from the current state of the model
+////     */
+//    void refreshView(){
+//    	LevelProgress CLP = model.getProgress().getCurrentLevelProgress();
+//    	LevelPlayerView  level_player = app.getLevelPlayer();
+//    	/* Remove all found words */
+//    	level_player.getFoundWordsListModel().clear();
+//    	/* Load found words from model */
+//    	for(String word : CLP.getFoundWords()){
+//    		level_player.getFoundWordsListModel().addElement(word);
+//    	}
+//    	/* Refresh Score */
+//    	level_player.getScoreValueLabel().setText(CLP.getScore() + "");
+//    	/* Refresh Stars */
+//    	for(JLabel star : level_player.getStarLabels()){
+//    		star.setIcon(new ImageIcon(LevelPlayerView.class.getResource(
+//    				"/scandium/lettercraze/resources/star-icon-off.png")));
+//    	}
+//    	for(int i = 0; i < 3 && i < CLP.getStarCount(); i++){
+//    		level_player.getStarLabels()[i].setIcon(new ImageIcon(LevelPlayerView.class.getResource(
+//    				"/scandium/lettercraze/resources/star-icon-on.png")));
+//    	}
+//    	/* Refresh Board View */
+//    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+//    	for(int i = 0; i < 6; i++){
+//    		for(int j = 0; j < 6; j++){
+//    			if(board.getBoardSquare(j, i).isEnabled())
+//    				app.getLevelPlayer().getBoardView().getJLabel(i, j).setText(board.getBoardSquare(j, i).getTile().getContent());
+//    		}
+//    	}
+//    }
 }

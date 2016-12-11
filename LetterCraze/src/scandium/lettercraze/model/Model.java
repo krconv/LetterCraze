@@ -6,8 +6,10 @@
 package scandium.lettercraze.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import scandium.common.model.*;
+import scandium.common.tool.GameLoader;
 
 
 /**
@@ -16,54 +18,28 @@ import scandium.common.model.*;
 public class Model {
 	//do we still need this enum if the view is controlled by the controllers???
 	private LetterCrazeState state;
-	
-	private ArrayList<Level> levels;
+	private List<Level> levels;
 	private Level selectedLevel;
 	private GameProgress progress;
+	private GameLoader gameLoader;
 
     /**
-     * Creates a completely new Model.
+     * Creates a new Model.
      * @throws Exception 
      */
     public Model() throws IllegalArgumentException {
         initialize();
     }
-   
-    /**
-     * Creates the Model from file.
-     * @param ProgressFile file containing the GameProgress
-     * @param LevelFile file containing the Levels
-     */
-    public Model(Object ProgressFile, Object LevelFile){
-        initializeLevelsFromFile(LevelFile);
-        initializeProgressFromFile(ProgressFile);
-    }
-    
-	/**
-	 * initializes the levels from the level file
-	 * @param file file containing the Levels
-	 */
-	private void initializeProgressFromFile(Object file) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/**
-	 * initializes the GameProgress from the GameProgress file
-	 * @param file file containing the GameProgress
-	 */
-	private void initializeLevelsFromFile(Object file) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * Creates a completely new and clean Model
+	 * Creates a new Model from file using the GameLoader.
 	 * @throws Exception
 	 */
 	private void initialize() throws IllegalArgumentException {
-		this.levels = new ArrayList<Level>();
-		this.progress = new GameProgress();
+		// load the levels
+		this.gameLoader = new GameLoader();
+		this.levels = gameLoader.LoadLevels(new ArrayList<Level>());
+		this.progress = new GameProgress(levels, gameLoader.GetGameToken());
 	}
 
 	/**
@@ -97,7 +73,7 @@ public class Model {
 	/**
 	 * @return the levels
 	 */
-	public ArrayList<Level> getLevels() {
+	public List<Level> getLevels() {
 		return levels;
 	}
 

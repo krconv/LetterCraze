@@ -120,9 +120,30 @@ public class Board {
 	 * @exception IllegalArgumentException Thrown if the word consists of boards squares which are
 	 * not in this board.
 	 */
-	public boolean insertWord(Word word) throws IllegalArgumentException {
-		// TODO implement here
-		return false;
+	public boolean insertWord(Word word) {
+		// insert the tiles back in to the board by iterating row by row
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 6; col++) {
+				if (word.getBoardSquares().contains(getSquare(row, col))) {
+					// the current square needs to be inserted into, so we need to shift everything down
+					// we will do this by remembering the current tile, removing it, then replacing it on
+					// the next valid board square
+					Tile tile = getSquare(row, col).getTile();
+					getSquare(row, col).removeTile();
+					for (int i = 1; i + row < 6 && tile != null; i++) {
+						BoardSquare square = getSquare(row + i, col);
+						if (square.isEnabled()) {
+							Tile temp = square.getTile();
+							square.setTile(tile);
+							tile = temp;
+						}
+					}
+					// set the square that we emptied to the tile that is being inserted
+					getSquare(row, col).setTile(word.getTiles().get(word.getBoardSquares().indexOf(getSquare(row, col))));
+				}
+			}
+		}
+		return !word.getTiles().isEmpty();
 	}
 
 	/**
@@ -134,8 +155,16 @@ public class Board {
 	 * @return Whether a word was removed.
 	 */
 	public boolean removeSelectedWord() {
-		this.selectedWord = null;
-		return (this.selectedWord == null);
+		if (selectedWord != null) {
+			// a word was selected so remove it
+			for(BoardSquare bs : selectedWord.getBoardSquares()){
+				bs.setTile(null);
+			}
+			selectedWord = null;
+			return true;
+		} else
+			// no word was selected
+			return false;
 	}
 
 	/**
@@ -153,23 +182,20 @@ public class Board {
 		boolean moved_tiles = false;
 		/* Apply Upwards Gravity */
 		if(getGravityDirection() == GravityDirection.Up){
-			for(int row = 0; row < 6; row++){
-				boardSquareLoop:
-				for(int col = 0; col < 6; col++){
-					/* Get the current Square */
-					BoardSquare this_square = squares[row][col];
-					/* Determine if it needs to be filled */
-					if(this_square.isEnabled() && this_square.isEmpty()){
-						/* Determine if the lower squares have a tile to fill it with */
-						for(int i = row + 1; i < 6; i++){
-							BoardSquare possible_filler = squares[i][col];
-							if(possible_filler.isEnabled() && !possible_filler.isEmpty()){
-								/* Transfer Tile contents */
-								Tile t = possible_filler.getTile();
-								possible_filler.setTile(null);
-								this_square.setTile(t);
-								/* Continue to the next board Square in BoardQuareLoop */
-								continue boardSquareLoop;
+			// go through each column and apply gravity to it
+			for (int col = 0; col < 6; col++) {
+				for (int row = 0; row < 6; row++) {
+					BoardSquare square = getSquare(row, col);
+					if (square.isEnabled()) {
+						// we should try to fill this square
+						for (int i = 1; square.isEmpty() && i + row < 6; i++) {
+							// continue to look to the squares below until we find one that has a tile
+							BoardSquare filler = getSquare(row + i, col);
+							if (!filler.isEmpty()) {
+								// found a tile to fill with, so let's move it
+								square.setTile(filler.getTile());
+								filler.removeTile();
+								moved_tiles = true;
 							}
 						}
 					}
@@ -302,7 +328,7 @@ public class Board {
         for (int i = 0; i < squares.length; i++){
         	for (int j = 0; j < squares.length; j++){
         		if (squares[i][j].getTile() != null){
-        			squares[i][j].setTile(null);
+        			squares[i][j].removeTile();
         			indicator = 1;
         		}
         	}
@@ -315,25 +341,29 @@ public class Board {
 	}
 
 	/**
-	 * Selects a new square on the board.
-	 * Precondition: The given board square is on this board.
+	 * Selects a new square on the board. 
+	 * Precondition: The given position exists on the board.
 	 * Postcondition: The indicated square will be added to the selected word if the selection is
 	 * valid (e.g. the selection is consecutive, not repeating, and it contains a tile).
 	 * 
-	 * @param square
-	 *            The square to select.
+	 * @param square The square to select.
+	 * 
 	 * @return Whether the square was selected.
-	 * @throws IllegalArgumentException
-	 *             Thrown if the given square is not in this board.
 	 */
-	public boolean selectSquare(BoardSquare square) throws IllegalArgumentException {
-		if (selectedWord == null) return false;
-		if (selectedWord.addSelectedBoardSquare(square)){
-    		return true;
-    	}else{
-    		return false;
-    	}
-
+	public boolean selectSquare(BoardSquare square) {
+		if (square.isEmpty() || !square.isEnabled()) return false;
+		
+		if (selectedWord == null) {
+			selectedWord = new Word(square);
+			return true;
+		} else {
+			BoardSquare lastSelected = selectedWord.getLastSelectedSquare();
+			if (square.getRow() >= lastSelected.getRow() - 1 && square.getRow() <= lastSelected.getRow() + 1
+					&& square.getCol() >= lastSelected.getCol() - 1 && square.getCol() <= lastSelected.getCol() + 1)
+				return selectedWord.addSelectedBoardSquare(square);
+			else
+				return false;
+		}
 	}
 
 	/**
@@ -351,16 +381,9 @@ public class Board {
 	 *             Thrown if the given row or column is out of bounds.
 	 */
 	public boolean selectSquare(int row, int col) throws IndexOutOfBoundsException {
-	BoardSquare bs = getBoardSquare(row, col);
-
-        if (selectedWord.addSelectedBoardSquare(bs)){
-        	return true;
-        }else{
-        	return false;
-        }
+		return selectSquare(getSquare(row, col));
 	}
-
-
+	
 	/**
 	 * Deselects the selected word.
 	 * Precondition: None.
@@ -405,29 +428,4 @@ public class Board {
         }
         return indicator;
 	}
-	
-	/*-----Get Methods-----*/
-    public BoardSquare getBoardSquare(int row, int col){
-		BoardSquare bs = squares[row][col];
-		return bs;
-    }
-    
-
-	public boolean getShouldRegenerate(){
-		return this.shouldRegenerate;
-	}
-	
-	/*-----Set Methods-----*/
-    public void setBoardSquare(int row, int col, Tile tile){
-		this.squares[row][col].setTile(tile);
-    }
-    
-	public void setSelectedWord(Word word){
-		this.selectedWord = word;
-	}
-	
-	public void setShouldRegenerate(boolean regen){
-		this.shouldRegenerate = regen;
-	}
-	
 }

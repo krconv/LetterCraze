@@ -5,11 +5,17 @@
  */
 package scandium.common.model;
 
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSeeAlso;
+
+import scandium.common.tool.IWordDictionary;
+import scandium.common.tool.WordDictionary;
 
 /**
  * A class which holds basic information about a Level.
@@ -84,6 +90,52 @@ public abstract class Level {
 	public Star[] getStars() {
 		return stars;
 	}
+	
+	/**
+	 * Determines how many points should be gained for finding the given word.
+	 * @param word The word that is being scored.
+	 * @return The score of the found word.
+	 */
+	public abstract int determineScore(Word word);
+	
+	/**
+	 * Determines whether the given word is a word that can be played in this level.
+	 * @param word The word to check.
+	 * @return Whether the word is a valid word.
+	 */
+	public boolean isValidWord(Word word) {
+		return WordDictionary.instance.isWord(word.generateString());
+	}
+	
+	/**
+	 * Retrieves the dictionary that this level uses to validate words.
+	 * @return The word dictionary used to validate words for this level.
+	 */
+	public IWordDictionary getWordDictionary() {
+		return WordDictionary.instance;
+	}
+	
+	/**
+	 * Creates a timer for this level that will call the action listener once
+	 * the timer expires.
+	 * @param listener The listener to handle the timer expiring.
+	 * @return The timer if it was created, or null if it wasn't.
+	 */
+	public Timer createTimer(ActionListener listener) {
+		return null; // most of the levels won't create a timer
+	}
+	
+	/**
+	 * Stops any currently running timer.
+	 */
+	public void stopTimer() { }
+		
+	/**
+	 * Gets the units that the scores for this level are in.
+	 * @param plural Whether the unit should be pluralized.
+	 * @return The units for the scores in this level.
+	 */
+	public abstract String getScoreUnits(boolean plural);
 
 	/**
      * @return the user friendly type of the Level

@@ -14,19 +14,20 @@ import java.util.Iterator;
 /**
  * A tool to contain a list of words.
  */
-public class WordDictionary {
+public class WordDictionary implements IWordDictionary {
 	
 	/* Dictionary File                                                                           */
 	final static String dictionary_file  = "Dictionary.txt";
 	
 	/* Class Attributes                                                                          */
 	HashSet<String> words = new HashSet<String>();
+	public static final WordDictionary instance = new WordDictionary();
 
     /**
      * Create a new dictionary.
      * @param words The words in the dictionary.
      */
-    public WordDictionary() {
+    private WordDictionary() {
     	this.words = new HashSet<String>();
     	initialize();
     }
@@ -58,7 +59,7 @@ public class WordDictionary {
      */
     public boolean isWord(String word) {
 		word = word.toLowerCase();
-		return words.contains(word);
+		return word.length() >= 3 && words.contains(word);
     }
 }
 

@@ -5,36 +5,78 @@
  */
 package scandium.lettercraze.action;
 
-import scandium.lettercraze.model.Model;
+import scandium.lettercraze.model.LevelProgress;
+
 import scandium.common.model.Word;
+import scandium.common.tool.IWordDictionary;
+import scandium.common.tool.LetterDictionary;
 
 /**
  * Action where a word is removed from the level board.
  */
 public class RemoveWordAction implements IAction {
-	@SuppressWarnings("unused")
-	private Model model;
-	@SuppressWarnings("unused")
+	private LevelProgress progress;
 	private Word word;
+	private String generatedString;
+	private IWordDictionary dictionary;
+	private LetterDictionary letterDictionary;
 
     /**
      * Creates a new remove word action.
      * @param model The model.
      * @param word The word being removed.
      */
-    public RemoveWordAction(Model model, Word word) {
-    	this.model = model;
+    public RemoveWordAction(LevelProgress progress, Word word, IWordDictionary dictionary, LetterDictionary letterDictionary) {
+    	this.progress = progress;
     	this.word = word;
+    	this.dictionary = dictionary;
+    	this.letterDictionary = letterDictionary;
+    	this.generatedString = word.generateString();
     }
 
+    /* (non-Javadoc)
+     * @see scandium.lettercraze.action.IAction#execute()
+     */
+    @Override
+    public boolean execute() {
+		if (isValid()) {
+			// the selected word is a valid one
+			// update the score
+			progress.updateScore(progress.getLevel().determineScore(word));
+
+			// add to found words
+			progress.addFoundWord(generatedString);
+
+			// update the board
+			progress.getLevel().getBoard().removeSelectedWord();
+			progress.getLevel().getBoard().applyGravity();
+			if (progress.getLevel().getBoard().shouldRegenerate()) {
+				progress.getLevel().getBoard().fillEmptySquares(letterDictionary);
+			}
+	        return true;
+		}
+		return false;
+    }
 
     /* (non-Javadoc)
      * @see scandium.lettercraze.action.IAction#undo()
      */
     @Override
     public boolean undo() {
-        // TODO implement here
-        return false;
+		if (isValid()) {
+			// the action was able to be done so let's undo it
+			
+			// update the score
+			progress.updateScore(-1 * progress.getLevel().determineScore(word));
+
+			// remove the word from found words
+			progress.getFoundWords().remove(generatedString);
+
+			// update the board
+			progress.getLevel().getBoard().insertWord(word);
+	        return true;
+		}
+		return false;
     }
 
 	/* (non-Javadoc)
@@ -42,14 +84,8 @@ public class RemoveWordAction implements IAction {
 	 */
 	@Override
 	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
+		return dictionary.isWord(word.generateString());
 	}
 
-	@Override
-	public boolean execute() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

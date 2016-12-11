@@ -75,6 +75,13 @@ public class BoardSquare {
     }
 
     /**
+	 * @param tile the tile to set
+	 */
+	public void setTile(Tile tile) {
+		this.tile = tile;
+	}
+
+	/**
      * Removes any Tile from this square, if there is one. 
      * @return Whether any changes were made.
      */
@@ -86,48 +93,33 @@ public class BoardSquare {
         return false;
     }
 
-    /*-----Get Methods-----*/
-    public int getRow(){
-    	return this.row;
-    }
+	/**
+	 * @return the row
+	 */
+	public int getRow() {
+		return row;
+	}
+
+	/**
+	 * @return the col
+	 */
+	public int getCol() {
+		return col;
+	}
+
+	/**
+	 * @return the tile
+	 */
+	public Tile getTile() {
+		return tile;
+	}
+
+	/**
+	 * @param enabled the enabled to set
+	 */
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
     
-    public int getCol(){
-    	return this.col;
-    }
     
-    public Board getBoard(){
-    	return this.board;
-    }
-    
-    public Tile getTile(){
-    	return this.tile;
-    }
-    
-    //getEnabled() is redundant by isEnabled()
-    
-    
-    /*-----Set Methods-----*/
-    public void setRow(int row){
-    	this.row = row;
-    }
-    
-    public void setCol(int col){
-    	this.col = col;
-    }
-    public void setBoard(Board board){
-    	this.board = board;
-    }
-    
-    public void setTile(Tile tile){
-    	this.tile = tile;
-    	if (tile != null){
-    		setEnabled(true);
-    	}else{
-    		setEnabled(false);
-    	}
-    }
-    
-    public void setEnabled(boolean enabled){
-    	this.enabled = enabled;
-    }
 }
