@@ -124,13 +124,17 @@ public class LevelProgress {
 	 *            the score to set
 	 */
 	public void setScore(int score) {
-		this.score = score;
+		if (score >= 0){ //Checks to make sure a negative score is not being set
+			this.score = score;
 		
-		// determine how many stars have been obtained
-		starCount = 0;
-		for (Star star : getLevel().getStars()) {
-			if (star.isObtained(score))
-				starCount++;
+			// determine how many stars have been obtained
+			starCount = 0;
+			for (Star star : getLevel().getStars()) {
+				if (star != null){
+					if (star.isObtained(score))
+						starCount++;
+				}
+			}
 		}
 	}
 
