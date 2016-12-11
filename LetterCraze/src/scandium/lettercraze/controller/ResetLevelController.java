@@ -74,6 +74,9 @@ public class ResetLevelController extends MouseAdapter{
 	    	// reset the players progress
 	    	model.getProgress().getCurrentLevelProgress().reset();
 	    	
+	    	// Clear the Move actions from the undo manager
+	    	UndoManager.instance.forgetActions();
+	    	
 	    	// refresh the player
 	    	app.getLevelPlayer().refresh();
     	}
