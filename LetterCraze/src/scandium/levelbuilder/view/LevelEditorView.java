@@ -661,7 +661,7 @@ public class LevelEditorView extends JPanel{
 	 * Refreshes the Level Editor View based upon the EditProgress associated with that View.
 	 */
 	public void refresh(){
-		Level modLevel = editProgress.getModified();
+		Level modLevel = model.getEditProgress().getModified();
 		if(modLevel != null) {
 			for (int row = 0; row < 6; row++) {
 				for (int col = 0; col < 6; col++) {
@@ -672,22 +672,26 @@ public class LevelEditorView extends JPanel{
 					}
 				}
 			}
-
+			System.out.println(modLevel.getType().toLowerCase());
 			//set view to be correct type
 			switch (modLevel.getType().toLowerCase()) {
 			case "puzzle":
 				if(!currentView.equals("puzzle")) {
 					setPuzzleLevelView();
 				}
+				break;
 			case "lightning":
 				if(!currentView.equals("lightning")) {
 					setLightningLevelView();
 				}
+				break;
 			case "theme":
 				if(!currentView.equals("theme")) {
 					setThemeLevelView();
 				}
+				break;
 			}
+
 		}
 	}
 
