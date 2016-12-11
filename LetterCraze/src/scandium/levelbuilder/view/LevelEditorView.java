@@ -20,6 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import scandium.common.model.Level;
+import scandium.common.model.Tile;
 import scandium.common.view.BoardView;
 import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
@@ -667,12 +668,16 @@ public class LevelEditorView extends JPanel{
 				for (int col = 0; col < 6; col++) {
 					if(modLevel.getBoard().getSquare(row, col).isEnabled()){
 						board_view.getJLabel(row, col).setBackground(Color.WHITE);
+						Tile tile = modLevel.getBoard().getSquare(row, col).getTile();
+						if(tile != null)
+							board_view.getJLabel(row, col).setText(tile.getContent());
+						else 
+							board_view.getJLabel(row, col).setText("");
 					} else {
 						board_view.getJLabel(row, col).setBackground(Color.BLACK);
 					}
 				}
 			}
-			System.out.println(modLevel.getType().toLowerCase());
 			//set view to be correct type
 			switch (modLevel.getType().toLowerCase()) {
 			case "puzzle":
