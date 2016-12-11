@@ -6,6 +6,9 @@
 package scandium.levelbuilder.model;
 
 import scandium.common.model.Level;
+import scandium.common.model.PuzzleLevel;
+import scandium.common.model.LightningLevel;
+import scandium.common.model.ThemeLevel;
 
 /**
  * An object to track the changes to a level being edited.
@@ -36,5 +39,19 @@ public class EditProgress {
 	 */
 	public Level getModified() {
 		return modified;
+	}
+	
+	/**
+	 * @return the modified level
+	 */
+	public void setOrignial(Level o) {
+		this.original = o;
+	}
+	
+	/**
+	 * @return the modified level
+	 */
+	public void setModified(Level m) {
+		this.modified = m;
 	}
 }

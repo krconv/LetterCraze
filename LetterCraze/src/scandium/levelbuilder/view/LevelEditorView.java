@@ -20,6 +20,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import scandium.common.model.Level;
+import scandium.common.model.PuzzleLevel;
+import scandium.common.model.LightningLevel;
+import scandium.common.model.ThemeLevel;
 import scandium.common.view.BoardView;
 import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
@@ -155,6 +158,9 @@ public class LevelEditorView extends JPanel{
 
 		//instantiates the BoardView for the level Editor view
 		this.board_view = new BoardView();
+		
+		//instantiates the editProgress
+		this.editProgress = model.getEditProgress();
 	}
 
 	/**
@@ -591,6 +597,13 @@ public class LevelEditorView extends JPanel{
 	 * GUI Logic for Controllers                                                                 *
 	 * ~~~~~                                                                               ~~~~~ */
 
+	/**
+	 * This function sets the EditProgress
+	 */
+	public void setEditProgress(EditProgress ep){
+		this.editProgress = ep;
+	}
+	
 	/**
 	 * This function sets the LevelEditor View to represent a puzzle level
 	 */
