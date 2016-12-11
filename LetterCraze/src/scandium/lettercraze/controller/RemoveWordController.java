@@ -5,9 +5,10 @@ import java.awt.event.MouseEvent;
 
 import scandium.common.model.Word;
 import scandium.common.tool.LetterDictionary;
-import scandium.common.tool.WordDictionary;
+import scandium.lettercraze.action.RemoveWordAction;
 import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
+import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
 
 /**
@@ -31,11 +32,6 @@ public class RemoveWordController extends MouseAdapter{
 	 */
     Application app;
     /**
-     * The dictionary of possible words for puzzle and lightning levels. With this, the 
-     * controller has the ability to determine if a word is valid. 
-     */
-    WordDictionary dictionary;
-    /**
      * The Letter Dictionary of all letters and their respective frequencies and score. 
      * With this the controller has the ability to refill non-populated tiles.
      */
@@ -46,13 +42,11 @@ public class RemoveWordController extends MouseAdapter{
      * model, the LetterCraze GUI, and a word dictionary.
      * @param model The Entire LetterCraze model.
      * @param app The Entire LetterCraze GUI
-     * @param dictionary A word dictionary
      */
-    public RemoveWordController(Model model, Application app, WordDictionary dictionary) {
+    public RemoveWordController(Model model, Application app, LetterDictionary dictionary) {
         this.model = model;
         this.app = app;
-        this.dictionary = dictionary;
-        this.letter_dictionary = new LetterDictionary();
+        this.letter_dictionary = dictionary;
     }
 
     /**
@@ -71,33 +65,23 @@ public class RemoveWordController extends MouseAdapter{
     	
     	// don't do anything if the game isn't being played
     	if (!progress.isPlaying()) {
-    		progress.getLevel().getBoard().deselectWord();
-    		app.getLevelPlayer().refresh();
+    		if (progress.getLevel().getBoard().deselectWord())
+    			app.getLevelPlayer().refresh(); // update the board if a word was deselected
     		return;
     	}
     	
-    	Word selectedWord = progress.getLevel().getBoard().getSelectedWord();
-    	// if the player has selected a word, see if it is valid
-    	if (selectedWord != null) {
-    		if (dictionary.isWord(selectedWord.generateString())) {
-    			// the selected word is a valid one
-    			// update the score
-    			progress.updateScore(progress.getLevel().determineScore(selectedWord));
-    			
-    			// add to found words
-    			progress.addFoundWord(selectedWord.generateString());
-    			
-    			// update the board
-        		progress.getLevel().getBoard().removeSelectedWord();
-        		progress.getLevel().getBoard().applyGravity();
-        		if (progress.getLevel().getBoard().shouldRegenerate()) {
-        			progress.getLevel().getBoard().fillEmptySquares(letter_dictionary);
-        		}
-    		} 
-    		progress.getLevel().getBoard().deselectWord();
-    		// refresh the player with the updates
-    		app.getLevelPlayer().refresh();
-    	}
+		Word selectedWord = progress.getLevel().getBoard().getSelectedWord();
+		// if the player has selected a word, see if it is valid
+		if (selectedWord != null) {
+			RemoveWordAction action = new RemoveWordAction(progress, selectedWord, progress.getLevel().getWordDictionary(), letter_dictionary);
+			if (action.isValid()) { // try to execute the remove word and record it if anything changed
+				UndoManager.instance.recordAction(action);
+				action.execute();
+			}
+			progress.getLevel().getBoard().deselectWord();
+			// refresh the player with the updates
+			app.getLevelPlayer().refresh();
+		}
     }
 //    
 //    /**

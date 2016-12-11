@@ -6,10 +6,7 @@
 package scandium.lettercraze.model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import scandium.common.model.Level;
-import scandium.common.model.LightningLevel;
 import scandium.common.model.Star;
 
 /**
@@ -38,7 +34,7 @@ public class LevelProgress {
 	@XmlTransient
 	private boolean isPlaying;
 	@XmlTransient
-	private Timer timer;
+	private int timeLeft;
 	@XmlElement
 	private boolean isUnlocked;
 
@@ -62,6 +58,7 @@ public class LevelProgress {
 		isPlaying = false;
 		foundWords = new ArrayList<String>();
 		isUnlocked = false;
+		timeLeft = -1;
 	}
 
 	/**
@@ -71,36 +68,35 @@ public class LevelProgress {
 	 *            post-condition: if isPlaying is true, throws an exception
 	 *            otherwise initializes the levelProgress if it is a Lightning
 	 *            Level, sets game to stop after the proper amount of time
-	 * @throws GameProgressAlreadyRunning,
-	 *             timerNotInitializedProperly
+	 * @throws IllegalStateException
 	 */
-	private void initialize(Level level) {
-		this.timer = new Timer();
-		this.foundWords = new LinkedList<String>();
-		isPlaying = true;
-		foundWords.clear();
-		starCount = 0;
-		score = 0;
-		this.level = level;
-		this.isUnlocked = false;
-		if (level == null) {
-			throw new IllegalStateException("Null Level");
-		}
-		if (level.getType().equals("lightning")) {
-			try {
-				timer.schedule(new TimerTask() {
-					@Override
-					public void run() {
-						setPlaying(false);;
-					}
-				}, ((LightningLevel) level).getTimeLimit());
-			} catch (Exception e) { // timer had a problem initializing
-				throw new IllegalStateException("Timer not initialized properly");
-			}
-		} else { // timer isn't needed
-			timer = null;
-		}
-	}
+//	private void initialize(Level level) {
+//		this.timer = new Timer();
+//		this.foundWords = new LinkedList<String>();
+//		isPlaying = true;
+//		foundWords.clear();
+//		starCount = 0;
+//		score = 0;
+//		this.level = level;
+//		this.isUnlocked = false;
+//		if (level == null) {
+//			throw new IllegalStateException("Null Level");
+//		}
+//		if (level.getType().equals("lightning")) {
+//			try {
+//				timer.schedule(new TimerTask() {
+//					@Override
+//					public void run() {
+//						setPlaying(false);;
+//					}
+//				}, ((LightningLevel) level).getTimeLimit());
+//			} catch (Exception e) { // timer had a problem initializing
+//				throw new IllegalStateException("Timer not initialized properly");
+//			}
+//		} else { // timer isn't needed
+//			timer = null;
+//		}
+//	}
 
 	/**
 	 * @param level
@@ -154,18 +150,18 @@ public class LevelProgress {
 	}
 
 	/**
-	 * @return the timer
+	 * @return the time left in seconds
 	 */
-	protected Timer getTimer() {
-		return timer;
+	public int getTimeLeft() {
+		return timeLeft;
 	}
 
 	/**
 	 * @param timer
 	 *            the timer to set
 	 */
-	public void setTimer(Timer timer) {
-		this.timer = timer;
+	public void setTimeLeft(int timeLeft) {
+		this.timeLeft = timeLeft;
 	}
 
 	/**

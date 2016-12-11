@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import scandium.lettercraze.model.GameProgress;
 import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
+import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
 
 /**
@@ -44,6 +45,7 @@ public class ExitLevelController implements ActionListener{
 		
 		// the level isn't being played anymore
 		currentProgress.setPlaying(false);
+		currentProgress.getLevel().stopTimer();
 		
 		// replace the high score with the score that was just earned if it is higher
 		if (currentProgress.isHigherScore(gameProgress.getProgressForLevel(currentProgress.getLevel()))) {
@@ -61,6 +63,7 @@ public class ExitLevelController implements ActionListener{
 			gameProgress.SaveProgress();
 		
 		// reset the current level progress and open up the main menu
+		UndoManager.instance.removeAllActions();
 		gameProgress.getCurrentLevelProgress().reset();
 		app.getMainMenu().refresh();
 		app.setView(app.getMainMenu());

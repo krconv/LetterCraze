@@ -24,7 +24,7 @@ public class Model {
 	private GameLoader gameLoader;
 
     /**
-     * Creates a completely new Model.
+     * Creates a new Model.
      * @throws Exception 
      */
     public Model() throws IllegalArgumentException {
@@ -32,7 +32,7 @@ public class Model {
     }
 
 	/**
-	 * Creates a completely new and clean Model
+	 * Creates a new Model from file using the GameLoader.
 	 * @throws Exception
 	 */
 	private void initialize() throws IllegalArgumentException {
