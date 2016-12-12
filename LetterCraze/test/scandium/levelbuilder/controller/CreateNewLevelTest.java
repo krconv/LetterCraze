@@ -232,16 +232,16 @@ public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 		assertEquals(false,app.getSplashScreen().isVisible());
 		assertEquals(true,app.getLevelEditor().isVisible());
 		//assert top left BoardSquare in enabled
-		assertEquals(true,app.getModel().getEditProgress().getModified().getBoard().getBoardSquare(0, 0).isEnabled());
+		assertEquals(true,app.getModel().getEditProgress().getModified().getBoard().getSquare(0, 0).isEnabled());
 		//click on the top left Board Square
 		MouseEvent clickSquare = this.createClicked(app, app.getLevelEditor().getBoardView(), 21, 21);
 		app.getLevelEditor().getBoardView().dispatchEvent(clickSquare);
 		//assert top left Board Square is disabled
-		assertEquals(false,app.getModel().getEditProgress().getModified().getBoard().getBoardSquare(0, 0).isEnabled());
+		assertEquals(false,app.getModel().getEditProgress().getModified().getBoard().getSquare(0, 0).isEnabled());
 		//repeat click on top left BoardSquare
 		app.getLevelEditor().getBoardView().dispatchEvent(clickSquare);
 		//assert top left Board Square is enabled
-		assertEquals(true,app.getModel().getEditProgress().getModified().getBoard().getBoardSquare(0, 0).isEnabled());
+		assertEquals(true,app.getModel().getEditProgress().getModified().getBoard().getSquare(0, 0).isEnabled());
 	}
 
 }

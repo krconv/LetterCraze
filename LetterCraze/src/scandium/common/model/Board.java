@@ -122,6 +122,7 @@ public class Board {
 	 */
 	public boolean insertWord(Word word) {
 		// insert the tiles back in to the board by iterating row by row
+		if (word == null){ return false; }
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
 				if (word.getBoardSquares().contains(getSquare(row, col))) {
