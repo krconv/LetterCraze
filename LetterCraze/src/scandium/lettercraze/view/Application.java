@@ -100,13 +100,6 @@ public class Application extends JFrame {
 		setResizable(previousIsResizable);
 		setView(previousView);
 	}
-	
-	/**
-	 * Initialize the model.
-	 */
-	private void initializeModel() {
-		model = new Model();
-	}
 
 	/**
 	 * Initialize the view.

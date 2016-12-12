@@ -140,20 +140,6 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
-	 * @return the timerLabel
-	 */
-	public JLabel getTimerLabel() {
-		return null;
-	}
-
-	/**
-	 * @return the themeLabel
-	 */
-	public JLabel getThemeLabel() {
-		return null;
-	}
-
-	/**
 	 * @return the levelNameLabel
 	 */
 	public JLabel getLevelNameLabel() {
@@ -362,6 +348,10 @@ public class LevelPlayerView extends JPanel {
 				int i = 1;
 				for (String word : progress.getFoundWords())
 					foundWordsListModel.addElement((i++) + ". " + word);
+				if (progress.getFoundWords().size() == 0)
+					foundWordsLabel.setText("Found Words"); 
+				else
+					foundWordsLabel.setText("Found Words (" + progress.getFoundWords().size() + ")"); 
 			}
 			
 			// hide the level specific attributes
