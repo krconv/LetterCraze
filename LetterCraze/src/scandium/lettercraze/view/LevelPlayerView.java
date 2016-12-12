@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import scandium.common.model.Level;
+import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
 import scandium.lettercraze.model.LevelProgress;
 import javax.swing.Box;
@@ -49,6 +50,9 @@ public class LevelPlayerView extends JPanel {
 	private Box maxNumWordsBox;
 	private JLabel maxNumWordsLabel;
 	private JLabel maxNumWordsValueLabel;
+	private Box timeLeftBox;
+	private JLabel timeLeftLabel;
+	private JLabel timeLeftValueLabel;
 	private JScrollPane foundWordsScrollPane;
 	private JLabel foundWordsLabel;
 	private JList<String> foundWordsList;
@@ -116,6 +120,27 @@ public class LevelPlayerView extends JPanel {
 		return maxNumWordsValueLabel;
 	}
 	
+	/**
+	 * @return the timeLeftBox
+	 */
+	public Box getTimeLeftBox() {
+		return timeLeftBox;
+	}
+
+	/**
+	 * @return the timeLeftLabel
+	 */
+	public JLabel getTimeLeftLabel() {
+		return timeLeftLabel;
+	}
+
+	/**
+	 * @return the timeLeftValueLabel
+	 */
+	public JLabel getTimeLeftValueLabel() {
+		return timeLeftValueLabel;
+	}
+
 	/**
 	 * @return the timerLabel
 	 */
@@ -261,6 +286,7 @@ public class LevelPlayerView extends JPanel {
 				.setFont(nextStarValueLabel.getFont().deriveFont(nextStarValueLabel.getFont().getSize() + 15f));
 		nextStarValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		nextStarBox.add(nextStarValueLabel);
+		infoPanel.add(nextStarBox);
 
 		// set up max number of words
 		maxNumWordsBox = Box.createHorizontalBox();
@@ -279,6 +305,23 @@ public class LevelPlayerView extends JPanel {
 		maxNumWordsBox.setVisible(false);
 		infoPanel.add(maxNumWordsBox);
 
+		// set up time left
+		timeLeftBox = Box.createHorizontalBox();
+		timeLeftBox.setBorder(new EmptyBorder(7, 7, 7, 7));
+		// label for max number of words
+		timeLeftLabel = new JLabel("Time Left:");
+		timeLeftLabel.setFont(timeLeftLabel.getFont().deriveFont(timeLeftLabel.getFont().getSize() + 15f));
+		timeLeftBox.add(timeLeftLabel);
+
+		timeLeftBox.add(Box.createRigidArea(new Dimension(20, 20)));
+		// value for the max number of words
+		timeLeftValueLabel = new JLabel();
+		timeLeftValueLabel
+				.setFont(timeLeftValueLabel.getFont().deriveFont(timeLeftValueLabel.getFont().getSize() + 15f));
+		timeLeftBox.add(timeLeftValueLabel);
+		timeLeftBox.setVisible(false);
+		infoPanel.add(timeLeftBox);
+		
 		// set up the scroll pane for found words
 		foundWordsScrollPane = new JScrollPane();
 		foundWordsScrollPane.setBorder(new EmptyBorder(7, 7, 7, 7));
@@ -329,7 +372,8 @@ public class LevelPlayerView extends JPanel {
 			// update the next star score
 			if (progress.getStarCount() < 3) {
 				nextStarBox.setVisible(true);
-				nextStarValueLabel.setText(level.getStars()[progress.getStarCount()] + " " + level.getScoreUnits(progress.getScore() != 1));
+				int nextThreshold = level.getStars()[progress.getStarCount()].getThreshold();
+				nextStarValueLabel.setText(nextThreshold + " " + level.getScoreUnits(nextThreshold != 1));
 			} else
 				nextStarBox.setVisible(false);
 
@@ -343,12 +387,18 @@ public class LevelPlayerView extends JPanel {
 			
 			// hide the level specific attributes
 			maxNumWordsBox.setVisible(false);
+			timeLeftBox.setVisible(false);
 			
 			// update the level specific attributes
 			if (level instanceof PuzzleLevel) {
 				// update max num words
 				maxNumWordsValueLabel.setText("" + ((PuzzleLevel) level).getMaxNumWords());
 				maxNumWordsBox.setVisible(true);
+			} else if (level instanceof LightningLevel) {
+				// update the time left
+				int timeLeft = progress.getTimeLeft();
+				timeLeftValueLabel.setText("" + timeLeft + " second" + (timeLeft != 1 ? "s" : ""));
+				timeLeftBox.setVisible(true);
 			}
 			
 			// update the board
