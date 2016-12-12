@@ -12,15 +12,17 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import scandium.common.tool.LetterDictionary;
 import scandium.levelbuilder.controller.CreateNewLevelController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
+import scandium.levelbuilder.controller.PreviewBoardArrangementController;
 import scandium.levelbuilder.model.Model;
 
 public class Application extends JFrame{
 
 	/* Serial ID                                                                                 */
 	private static final long serialVersionUID = -7300085623783459664L;
-	
+
 	/* Game Window Width and Height                                                              */
 	private static final int WIDTH = 1280;
 	private static final int HEIGHT = 720;
@@ -28,37 +30,39 @@ public class Application extends JFrame{
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
-	Model model;
+	Model model = null;
 	MainMenuView main_menu;
 	LevelEditorView level_editor;
 	SplashScreenView splash_screen;
-	
+
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Constructors and Initialization                                                           *
 	 * ~~~~~                                                                               ~~~~~ */
-	
+
 	/**
 	 * Creates a new LevelBuilder application window without a model.
 	 */
 	public Application(){
-		initialize();
+		initializeView();
+		initializeControllers();
 	}
-	
+
 	/**
 	 * Creates a new LetterCraze application window with a model.
 	 * @param model The LevelBuilder Model
 	 */
 	public Application(Model model){
 		this.model = model;
-		initialize();
+		initializeView();
+		initializeControllers();
 	}
-	
+
 	/**
-	 * Initializes the LevelBuilder View and Controllers
+	 * Initializes the LevelBuilder View
 	 */
-	void initialize(){
-		this.main_menu = new MainMenuView();
-		this.level_editor = new LevelEditorView();
+	void initializeView(){
+		this.main_menu = new MainMenuView(model);
+		this.level_editor = new LevelEditorView(model);
 		this.splash_screen = new SplashScreenView();
 		/* Add both panels to the view                                                           */ 
 		getContentPane().add(main_menu);
@@ -73,16 +77,21 @@ public class Application extends JFrame{
 		setVisible(true);
 		setSize(WIDTH, HEIGHT);
 		pack();
-		
-		//controllers
-		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
-		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));
 	}
-	
+
+	/**
+	 * Initializes the LevelBuilder Controllers
+	 */
+	private void initializeControllers() {
+		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
+		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));	
+		level_editor.getGenerateButton().addMouseListener(new PreviewBoardArrangementController(model, this, new LetterDictionary()));
+	}
+
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Getter Methods                                                                            *
 	 * ~~~~~                                                                               ~~~~~ */
-	
+
 	/**
 	 * This function returns the MainMenuView for LevelBuilder
 	 * @return MainMenuView
@@ -90,7 +99,7 @@ public class Application extends JFrame{
 	public MainMenuView getMainMenu(){
 		return main_menu;
 	}
-	
+
 	/**
 	 * This function returns the LevelEditorView for LevelBuilder
 	 * @return LevelEditorView
@@ -98,7 +107,7 @@ public class Application extends JFrame{
 	public LevelEditorView getLevelEditor(){
 		return level_editor;
 	}
-	
+
 	/**
 	 * This function returns the SplashScreenView for LevelBuilder
 	 * @return SplashScreenView
@@ -106,15 +115,15 @@ public class Application extends JFrame{
 	public SplashScreenView getSplashScreen(){
 		return splash_screen;
 	}
-	
+
 	public Model getModel(){
 		return this.model;
 	}
-	
+
 	/* ~~~~~                                                                               ~~~~~ *
 	 * GUI Logic for Controllers                                                                 *
 	 * ~~~~~                                                                               ~~~~~ */
-	
+
 	/**
 	 * This function sets the application view to display the Main Menu View
 	 */
@@ -123,7 +132,7 @@ public class Application extends JFrame{
 		splash_screen.setVisible(false);
 		main_menu.setVisible(true);
 	}
-	
+
 	/** 
 	 * This function set the application view to display the Level Editor
 	 */
@@ -132,5 +141,5 @@ public class Application extends JFrame{
 		splash_screen.setVisible(false);
 		level_editor.setVisible(true);
 	}
-	
+
 }

@@ -51,6 +51,13 @@ public class GameProgress {
 	}
 
 	/**
+	 * @return The list of LevelProgresses
+	 */
+	public List<LevelProgress> getLevelProgresses(){
+		return levelProgresses;
+	}
+	
+	/**
 	 * @return whether a level was unlocked
 	 */
 	public boolean unlockNextLevel() {

@@ -40,7 +40,7 @@ public class BoardTest extends TestCase {
 		// validate that the squares got created
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
-				BoardSquare square = board.getBoardSquare(row, col);
+				BoardSquare square = board.getSquare(row, col);
 				assertNotNull(square);
 				assertTrue(square.isEnabled());
 				assertTrue(square.isEmpty());
@@ -49,12 +49,12 @@ public class BoardTest extends TestCase {
 		}
 		
 		// validate that the values that we passed in were saved
-		assertEquals(true, board.getShouldRegenerate());
+		assertEquals(true, board.shouldRegenerate());
 		assertEquals(GravityDirection.Down, board.getGravityDirection());
 		
 		// and with different values
 		board = new Board(false, GravityDirection.Up);
-		assertEquals(false, board.getShouldRegenerate());
+		assertEquals(false, board.shouldRegenerate());
 		assertEquals(GravityDirection.Up, board.getGravityDirection());
 	}
 
@@ -175,7 +175,7 @@ public class BoardTest extends TestCase {
 		
 		// test selecting a board square that is disabled
 		board.deselectWord();
-		board.getBoardSquare(1, 1).setEnabled(false);
+		board.getSquare(1, 1).setEnabled(false);
 		assertFalse(board.selectSquare(1, 1));
 		assertNull(board.getSelectedWord());
 		board.selectSquare(1, 0);
@@ -202,7 +202,7 @@ public class BoardTest extends TestCase {
 		board.fillEmptySquares(new LetterDictionary(1));
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
-				tiles[row][col] = board.getBoardSquare(row, col).getTile().getContent();
+				tiles[row][col] = board.getSquare(row, col).getTile().getContent();
 			}
 		}
 		board.selectSquare(3, 3);
@@ -230,8 +230,8 @@ public class BoardTest extends TestCase {
 		board.selectSquare(1, 2);
 		assertTrue(board.removeSelectedWord());
 		assertNull(board.getSelectedWord());
-		assertTrue(board.getBoardSquare(1, 1).isEmpty());
-		assertTrue(board.getBoardSquare(1, 2).isEmpty());
+		assertTrue(board.getSquare(1, 1).isEmpty());
+		assertTrue(board.getSquare(1, 2).isEmpty());
 		
 	}
 
@@ -259,10 +259,10 @@ public class BoardTest extends TestCase {
 		board.selectSquare(4, 3);
 		board.selectSquare(5, 3);
 		board.selectSquare(5, 2);
-		assertTrue(board.getBoardSquare(2, 2).isEmpty());
-		assertTrue(board.getBoardSquare(2, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 2).isEmpty());
+		assertTrue(board.getSquare(2, 2).isEmpty());
+		assertTrue(board.getSquare(2, 3).isEmpty());
+		assertTrue(board.getSquare(3, 3).isEmpty());
+		assertTrue(board.getSquare(3, 2).isEmpty());
 		assertEquals(board.getSelectedWord().generateString(), word.generateString());
 		board.clearExistingTiles();
 		
@@ -276,10 +276,10 @@ public class BoardTest extends TestCase {
 		board.selectSquare(2, 1);
 		board.selectSquare(3, 1);
 		board.selectSquare(3, 0);
-		assertTrue(board.getBoardSquare(2, 2).isEmpty());
-		assertTrue(board.getBoardSquare(2, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 2).isEmpty());
+		assertTrue(board.getSquare(2, 2).isEmpty());
+		assertTrue(board.getSquare(2, 3).isEmpty());
+		assertTrue(board.getSquare(3, 3).isEmpty());
+		assertTrue(board.getSquare(3, 2).isEmpty());
 		assertEquals(board.getSelectedWord().generateString(), word.generateString());
 		
 		// in up direction
@@ -292,10 +292,10 @@ public class BoardTest extends TestCase {
 		board.selectSquare(0, 3);
 		board.selectSquare(1, 3);
 		board.selectSquare(1, 2);
-		assertTrue(board.getBoardSquare(2, 2).isEmpty());
-		assertTrue(board.getBoardSquare(2, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 2).isEmpty());
+		assertTrue(board.getSquare(2, 2).isEmpty());
+		assertTrue(board.getSquare(2, 3).isEmpty());
+		assertTrue(board.getSquare(3, 3).isEmpty());
+		assertTrue(board.getSquare(3, 2).isEmpty());
 		assertEquals(board.getSelectedWord().generateString(), word.generateString());
 		
 		// in right direction
@@ -308,10 +308,10 @@ public class BoardTest extends TestCase {
 		board.selectSquare(2, 5);
 		board.selectSquare(3, 5);
 		board.selectSquare(3, 4);
-		assertTrue(board.getBoardSquare(2, 2).isEmpty());
-		assertTrue(board.getBoardSquare(2, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 2).isEmpty());
+		assertTrue(board.getSquare(2, 2).isEmpty());
+		assertTrue(board.getSquare(2, 3).isEmpty());
+		assertTrue(board.getSquare(3, 3).isEmpty());
+		assertTrue(board.getSquare(3, 2).isEmpty());
 		assertEquals(board.getSelectedWord().generateString(), word.generateString());
 		
 		// test that disabled squares in the middle of the board are skipped over
@@ -319,17 +319,17 @@ public class BoardTest extends TestCase {
 		board.deselectWord();
 		board.clearExistingTiles();
 		board.insertWord(word);
-		board.getBoardSquare(4, 2).setEnabled(false);
+		board.getSquare(4, 2).setEnabled(false);
 		assertTrue(board.applyGravity());
-		board.getBoardSquare(4, 2).setEnabled(true);
+		board.getSquare(4, 2).setEnabled(true);
 		board.selectSquare(3, 2);
 		board.selectSquare(4, 3);
 		board.selectSquare(5, 3);
 		board.selectSquare(5, 2);
-		assertTrue(board.getBoardSquare(2, 2).isEmpty());
-		assertTrue(board.getBoardSquare(2, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 3).isEmpty());
-		assertTrue(board.getBoardSquare(4, 2).isEmpty());
+		assertTrue(board.getSquare(2, 2).isEmpty());
+		assertTrue(board.getSquare(2, 3).isEmpty());
+		assertTrue(board.getSquare(3, 3).isEmpty());
+		assertTrue(board.getSquare(4, 2).isEmpty());
 		assertEquals(board.getSelectedWord().generateString(), word.generateString());
 		
 		// test that disabled squares on the edges act like a barrier
@@ -337,16 +337,16 @@ public class BoardTest extends TestCase {
 		board.deselectWord();
 		board.clearExistingTiles();
 		board.insertWord(word);
-		board.getBoardSquare(5, 2).setEnabled(false);
+		board.getSquare(5, 2).setEnabled(false);
 		assertTrue(board.applyGravity());
 		board.selectSquare(3, 2);
 		board.selectSquare(4, 3);
 		board.selectSquare(5, 3);
 		board.selectSquare(4, 2);
-		assertTrue(board.getBoardSquare(2, 2).isEmpty());
-		assertTrue(board.getBoardSquare(2, 3).isEmpty());
-		assertTrue(board.getBoardSquare(3, 3).isEmpty());
-		assertTrue(board.getBoardSquare(5, 2).isEmpty());
+		assertTrue(board.getSquare(2, 2).isEmpty());
+		assertTrue(board.getSquare(2, 3).isEmpty());
+		assertTrue(board.getSquare(3, 3).isEmpty());
+		assertTrue(board.getSquare(5, 2).isEmpty());
 		assertEquals(board.getSelectedWord().generateString(), word.generateString());
 	}
 
@@ -359,7 +359,7 @@ public class BoardTest extends TestCase {
 		// make sure every square has a tile
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
-				assertFalse(board.getBoardSquare(row, col).isEmpty());
+				assertFalse(board.getSquare(row, col).isEmpty());
 			}
 		}
 				
@@ -370,7 +370,7 @@ public class BoardTest extends TestCase {
 		board.fillEmptySquares(new LetterDictionary(1));
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
-				tiles[row][col] = board.getBoardSquare(row, col).getTile().getContent();
+				tiles[row][col] = board.getSquare(row, col).getTile().getContent();
 			}
 		}
 		
@@ -397,16 +397,16 @@ public class BoardTest extends TestCase {
 		board.removeSelectedWord();
 		assertTrue(board.fillEmptySquares(dictionary));
 		// now make sure the board is full, and only the empty squares have new tiles
-		tiles[1][1] = board.getBoardSquare(1, 1).getTile().getContent();
-		tiles[1][2] = board.getBoardSquare(1, 2).getTile().getContent();
-		tiles[2][1] = board.getBoardSquare(2, 1).getTile().getContent();
+		tiles[1][1] = board.getSquare(1, 1).getTile().getContent();
+		tiles[1][2] = board.getSquare(1, 2).getTile().getContent();
+		tiles[2][1] = board.getSquare(2, 1).getTile().getContent();
 		assertBoardTiles(tiles, board, true);
 		
 		// test that filling the board doesn't add to disabled board squares
-		board.getBoardSquare(1,  1).setEnabled(false);
+		board.getSquare(1,  1).setEnabled(false);
 		board.clearExistingTiles();
 		board.fillEmptySquares(dictionary);
-		assertTrue(board.getBoardSquare(1, 1).isEmpty());
+		assertTrue(board.getSquare(1, 1).isEmpty());
 	}
 
 	/**
@@ -422,7 +422,7 @@ public class BoardTest extends TestCase {
 		// make sure all of the squares are now empty
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
-				assertTrue(board.getBoardSquare(row, col).isEmpty());
+				assertTrue(board.getSquare(row, col).isEmpty());
 			}
 		}
 		
@@ -437,16 +437,16 @@ public class BoardTest extends TestCase {
 		// make sure all of the squares are now empty
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
-				assertTrue(board.getBoardSquare(row, col).isEmpty());
+				assertTrue(board.getSquare(row, col).isEmpty());
 			}
 		}
 		
 		// test that clearing clears out disabled squares
 		board.fillEmptySquares(dictionary);
-		board.getBoardSquare(1, 1).setEnabled(false);
-		assertFalse(board.getBoardSquare(1, 1).isEmpty());
+		board.getSquare(1, 1).setEnabled(false);
+		assertFalse(board.getSquare(1, 1).isEmpty());
 		board.clearExistingTiles();
-		assertTrue(board.getBoardSquare(1, 1).isEmpty());
+		assertTrue(board.getSquare(1, 1).isEmpty());
 	}
 
 	/**
@@ -492,8 +492,8 @@ public class BoardTest extends TestCase {
 	private void assertBoardTiles(String[][] tiles, Board board, boolean same) {
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
-				assertFalse(board.getBoardSquare(row, col).isEmpty());
-				assertEquals(same, tiles[row][col].equals(board.getBoardSquare(row, col).getTile().getContent()));
+				assertFalse(board.getSquare(row, col).isEmpty());
+				assertEquals(same, tiles[row][col].equals(board.getSquare(row, col).getTile().getContent()));
 			}
 		}
 	}

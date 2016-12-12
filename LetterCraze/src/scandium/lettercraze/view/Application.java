@@ -44,7 +44,6 @@ public class Application extends JFrame {
 	public Application(Model model) {
 		this.model = model;
 
-		initializeModel();
 		initializeView();
 		initializeControllers();
 		setView(mainMenu);
@@ -158,6 +157,7 @@ public class Application extends JFrame {
 			}
 		}
 		levelPlayer.getResetButton().addMouseListener(new ResetLevelController(model, this));
+		mainMenu.getResetButton().addMouseListener(new ResetTotalProgressController(model, this, model.getProgress()));
 	}
 }
 

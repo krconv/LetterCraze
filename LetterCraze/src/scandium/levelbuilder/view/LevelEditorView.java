@@ -8,6 +8,7 @@
  */
 package scandium.levelbuilder.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.TextArea;
 
@@ -18,13 +19,17 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import scandium.common.model.Level;
+import scandium.common.model.Tile;
 import scandium.common.view.BoardView;
+import scandium.levelbuilder.model.EditProgress;
+import scandium.levelbuilder.model.Model;
 
 public class LevelEditorView extends JPanel{
-	
+
 	/* Serial ID                                                                                 */
 	private static final long serialVersionUID = -6718767832989688466L;
-	
+
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
@@ -43,7 +48,7 @@ public class LevelEditorView extends JPanel{
 	JLabel lightning_time_limit_label;
 	JLabel theme_name_label;
 	JLabel theme_words_label;
-	
+
 	JTextField level_name_textfield;
 	JTextField one_star_textfield;
 	JTextField two_star_textfield;
@@ -52,11 +57,11 @@ public class LevelEditorView extends JPanel{
 	JTextField lightning_time_limit_textfield;
 	JTextField theme_name_textfield;
 	TextArea theme_words_textarea;
-	
+
 	JButton save_button;
 	JButton generate_button;
 	JButton main_menu_button;
-	
+
 	JRadioButton puzzle_level_button;
 	JRadioButton lightning_level_button;
 	JRadioButton theme_level_button;
@@ -64,48 +69,47 @@ public class LevelEditorView extends JPanel{
 	JRadioButton gravity_down_button;
 	JRadioButton gravity_left_button;
 	JRadioButton gravity_right_button;
-	
+
 	ButtonGroup level_type_group;
 	ButtonGroup gravity_group;
-	
+
 	BoardView board_view;
-	
+
+	Model model;
+	EditProgress editProgress;
+
+	String currentView;
+
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Constructors And Initialization                                                           *
 	 * ~~~~~                                                                               ~~~~~ */
-	
+
 	/**
-	 * Creates a new LevelEditorView
+	 * Creates a new LevelEditorView based upon the given Model.
+	 * @param m the Model to be associated with this Level Editor View
 	 */
-	public LevelEditorView() {
+	public LevelEditorView(Model m) {
+		this.model = m;
 		initialize();
 	}
-	
+
 	/**
-	 * This Function Initializes the LevelEditorView. It initializes the GUI and Controllers
+	 * This function initializes the view/GUI of the Level Editor View
 	 */
 	void initialize(){
-		initializeView();
-		initializeControllers();
-	}
-	
-	/**
-	 * This function initializes the view/GUI of the level Editor
-	 */
-	void initializeView(){
 		instantiateAttributes();
 		initializeAttributes();
-		
+
 		/* Manage JPanel                                                                         */
 		setLayout(null);
 		setBounds(0,0,1280, 720);
-		
 	}
-	
+
 	/**
 	 * This function instantiates copies of all of the class attributes.
 	 */
 	void instantiateAttributes(){
+		//instantiates all labels for the level Editor view
 		this.title_label = new JLabel("LevelBuilder: LevelEditor");
 		this.level_name_label = new JLabel("Level Name:");
 		this.thresholds_title_label = new JLabel("Enter Thresholds:");
@@ -121,7 +125,8 @@ public class LevelEditorView extends JPanel{
 		this.lightning_time_limit_label = new JLabel("Time Limit:");
 		this.theme_name_label = new JLabel("Theme Name:");
 		this.theme_words_label = new JLabel("Theme Words:");
-		
+
+		//instantiates all of the TextFields for the level Editor View
 		this.level_name_textfield = new JTextField();
 		this.one_star_textfield = new JTextField();
 		this.two_star_textfield = new JTextField();
@@ -130,28 +135,34 @@ public class LevelEditorView extends JPanel{
 		this.lightning_time_limit_textfield = new JTextField();
 		this.theme_name_textfield = new JTextField();
 		this.theme_words_textarea = new TextArea();
-		
+
+		//instantiates all Buttons for the level Editor View
 		this.save_button = new JButton("Save Level");
 		this.generate_button = new JButton("Generate Tiles");
 		this.main_menu_button = new JButton("Main Menu");
-		
+
+		//instantiates all RadioButtons and RadioButtonGroups for the level Editor View
 		this.puzzle_level_button = new JRadioButton("Puzzle Level");
 		this.lightning_level_button = new JRadioButton("Lightning Level");
 		this.theme_level_button = new JRadioButton("Theme Level");
-		
+
 		this.gravity_up_button = new JRadioButton("Up");
 		this.gravity_down_button = new JRadioButton("Down");
 		this.gravity_left_button = new JRadioButton("Left");
 		this.gravity_right_button = new JRadioButton("Right");
-		
+
 		this.level_type_group = new ButtonGroup();
 		this.gravity_group = new ButtonGroup();
-		
+
+		//instantiates the BoardView for the level Editor view
 		this.board_view = new BoardView();
 	}
-	
+
 	/**
-	 * This function initializes all of the attributes within the level editor
+	 * This function initializes all of the attributes within the level editor.
+	 * 
+	 * entryCondition: Must be called after instantiateAttributes() or will fail.
+	 * exitCondition: All attributes have been initialized properly
 	 */
 	void initializeAttributes(){
 		/* Initialize Title Label                                                                */
@@ -201,7 +212,7 @@ public class LevelEditorView extends JPanel{
 		theme_words_label.setBounds(950, 450, 125, 30);
 		add(theme_words_label);
 		theme_words_label.setVisible(false);
-		
+
 		/* Initialize Level name TextField                                                       */
 		level_name_textfield.setBounds(1000, 20, 250, 30);
 		add(level_name_textfield);
@@ -230,7 +241,7 @@ public class LevelEditorView extends JPanel{
 		theme_words_textarea.setBounds(1075, 450, 150, 200);
 		add(theme_words_textarea);
 		theme_words_textarea.setVisible(false);
-		
+
 		/* Initialize Save Level Button                                                          */
 		save_button.setBounds(600, 450, 150, 50);
 		add(save_button);
@@ -240,7 +251,7 @@ public class LevelEditorView extends JPanel{
 		/* Initialize Main Menu Button                                                           */
 		main_menu_button.setBounds(600, 600, 150, 50);
 		add(main_menu_button);
-		
+
 		/* Initialize Puzzle Level Button                                                        */
 		puzzle_level_button.setBounds(10, 75, 150, 50);
 		add(puzzle_level_button);
@@ -259,7 +270,7 @@ public class LevelEditorView extends JPanel{
 		add(gravity_left_button);
 		gravity_right_button.setBounds(715,265,100,30);
 		add(gravity_right_button);
-		
+
 		/* Initialize Level Type Button Group                                                    */
 		level_type_group.add(puzzle_level_button);
 		level_type_group.add(lightning_level_button);
@@ -269,22 +280,15 @@ public class LevelEditorView extends JPanel{
 		gravity_group.add(gravity_up_button);
 		gravity_group.add(gravity_left_button);
 		gravity_group.add(gravity_right_button);
-		
+
 		/* Initialize BoardView                                                                  */
 		add(board_view);
-	}
-	
-	/**
-	 * This function initializes the controllers of the level editor
-	 */
-	void initializeControllers(){
-		// TODO implement here
 	}
 
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Getter Methods                                                                            *
 	 * ~~~~~                                                                               ~~~~~ */
-	
+
 	/**
 	 * This function returns the JLabel representing the Title
 	 * @return JLabel
@@ -292,7 +296,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getTitleLabel(){
 		return title_label;
 	}
-	
+
 	/** 
 	 * This function returns the JLabel representing the Level Name Label
 	 * @return JLabel
@@ -300,7 +304,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getLevelNameLabel(){
 		return level_name_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the Threshold Label
 	 * @return JLabel
@@ -308,7 +312,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getThresholdsTitleLabel(){
 		return thresholds_title_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the one star label
 	 * @return JLabel
@@ -316,7 +320,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getOneStarLabel(){
 		return one_star_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the two star label
 	 * @return JLabel
@@ -324,7 +328,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getTwoStarLabel(){
 		return two_star_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the three star label   
 	 * @return JLabel
@@ -332,7 +336,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getThreeStarLabel(){
 		return three_star_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the one star unit label
 	 * @return JLabel
@@ -340,7 +344,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getOneStarUnitLabel(){
 		return one_star_unit_label;
 	}
-	
+
 	/** 
 	 * This function returns the JLabel representing the two star unit label
 	 * @return JLabel
@@ -348,7 +352,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getTwoStarUnitLabel(){
 		return two_star_unit_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the three star unit label
 	 * @return JLabel
@@ -356,7 +360,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getThreeStarUnitLabel(){
 		return three_star_unit_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the gravity label
 	 * @return JLabel
@@ -364,7 +368,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getGravityLabel(){
 		return gravity_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the level specific label 
 	 * @return JLabel
@@ -372,7 +376,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getLevelSpecificLabel(){
 		return level_specific_label;
 	}
-	
+
 
 	/**
 	 * This function returns the JLabel representing the puzzle level's maximum number of words
@@ -382,7 +386,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getPuzzleMaxNumWordsLabel(){
 		return puzzle_max_num_words_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the lightnint level's time limit label
 	 * @return JLabel
@@ -390,7 +394,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getLightningTimeLimitLabel(){
 		return lightning_time_limit_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the theme level's theme name label
 	 * @return JLabel
@@ -398,7 +402,7 @@ public class LevelEditorView extends JPanel{
 	public JLabel getThemeNameLabel(){
 		return theme_name_label;
 	}
-	
+
 	/**
 	 * This function returns the JLabel representing the theme level's theme words label 
 	 * @return JLabel
@@ -414,7 +418,7 @@ public class LevelEditorView extends JPanel{
 	public JTextField getLevelNameTextField(){
 		return level_name_textfield;
 	}
-	
+
 	/**
 	 * This function returns the JTextField that stores the user's entered value for the first
 	 * star's threshold
@@ -423,7 +427,7 @@ public class LevelEditorView extends JPanel{
 	public JTextField getOneStarTextField(){
 		return one_star_textfield;
 	}
-	
+
 	/**
 	 * This function returns the JTextField that stores the user's entered value for the second
 	 * star's threshold
@@ -432,7 +436,7 @@ public class LevelEditorView extends JPanel{
 	public JTextField getTwoStarTextField(){
 		return two_star_textfield;
 	}
-	
+
 	/**
 	 * This function returns the JTextField that stores the user's entered value for the third
 	 * star's threshold
@@ -441,7 +445,7 @@ public class LevelEditorView extends JPanel{
 	public JTextField getThreeStarTextField(){
 		return three_star_textfield;
 	}
-	
+
 	/**
 	 * This function returns the JTextField taht stores the user's entered value for a puzzle
 	 * level's maximum number of words.
@@ -450,7 +454,7 @@ public class LevelEditorView extends JPanel{
 	public JTextField getPuzzleMaxNumWordsTextField(){
 		return puzzle_max_num_words_textfield;
 	}
-	
+
 	/**
 	 * This function returns the JTextField that stores the user's entered value for a theme
 	 * level's theme name
@@ -459,7 +463,7 @@ public class LevelEditorView extends JPanel{
 	public JTextField getThemeNameTextField(){
 		return theme_name_textfield;
 	}
-	
+
 	/**
 	 * This function returns the TextArea that stores the user's entered value for a theme
 	 * level's theme words
@@ -468,7 +472,7 @@ public class LevelEditorView extends JPanel{
 	public TextArea getThemeWordsTextArea(){
 		return theme_words_textarea;
 	}
-	
+
 	/**
 	 * This function returns the JButton that is used to save the current level
 	 * @return JButton
@@ -476,7 +480,7 @@ public class LevelEditorView extends JPanel{
 	public JButton getSaveButton(){
 		return save_button;
 	}
-	
+
 	/** 
 	 * This function returns the JButton that is used to generate tiles on the board
 	 * @return JButton
@@ -484,7 +488,7 @@ public class LevelEditorView extends JPanel{
 	public JButton getGenerateButton(){
 		return generate_button;
 	}
-	
+
 	/**
 	 * This function returns the JButton that is used to return to the main menu
 	 * @return JButton
@@ -492,7 +496,7 @@ public class LevelEditorView extends JPanel{
 	public JButton getMainMenuButton(){
 		return main_menu_button;
 	}
-	
+
 	/** 
 	 * This function returns the JRadioButton that is used to specify that this level is a 
 	 * puzzle level
@@ -501,7 +505,7 @@ public class LevelEditorView extends JPanel{
 	public JRadioButton getPuzzleLevelButton(){
 		return puzzle_level_button;
 	}
-	
+
 	/**
 	 * This function returns the JRadioButton that is used to specify that this level is a 
 	 * lightning level
@@ -510,7 +514,7 @@ public class LevelEditorView extends JPanel{
 	public JRadioButton getLightningLevelButton(){
 		return lightning_level_button;
 	}
-	
+
 	/**
 	 * This function return the JRadioButton that is used to specify that this level is a 
 	 * theme level
@@ -519,7 +523,7 @@ public class LevelEditorView extends JPanel{
 	public JRadioButton getThemeLevelButton(){
 		return theme_level_button;
 	}
-	
+
 	/**
 	 * This function returns the JRadioButton that is used to specify that the direction of 
 	 * gravity is up.
@@ -528,7 +532,7 @@ public class LevelEditorView extends JPanel{
 	public JRadioButton getGravityUpButton(){
 		return gravity_up_button;
 	}
-	
+
 	/** 
 	 * This function returns the JRadioButton that is used to specify that the direction of
 	 * gravity is down
@@ -537,7 +541,7 @@ public class LevelEditorView extends JPanel{
 	public JRadioButton getGravityDownButton(){
 		return gravity_down_button;
 	}
-	
+
 	/**
 	 * This function returns the JRadioButton that is used to specify that the direction of 
 	 * gravity is left
@@ -546,7 +550,7 @@ public class LevelEditorView extends JPanel{
 	public JRadioButton getGravityLeftButton(){
 		return gravity_left_button;
 	}
-	
+
 	/**
 	 * This function returns the JRadioButton that is used to specify that the direction of 
 	 * gravity is right
@@ -555,7 +559,7 @@ public class LevelEditorView extends JPanel{
 	public JRadioButton getGravityRightButton(){
 		return gravity_right_button;
 	}
-	
+
 	/**
 	 * This function returns the Button Group representing the puzzle level, lightning level,
 	 * and theme level buttons
@@ -564,7 +568,7 @@ public class LevelEditorView extends JPanel{
 	public ButtonGroup getLevelTypeGroup(){
 		return level_type_group;
 	}
-	
+
 	/**
 	 * This function returns the Button Group representing the up, down, left, and right gravity
 	 * buttons
@@ -573,7 +577,7 @@ public class LevelEditorView extends JPanel{
 	public ButtonGroup getGravityGroup(){
 		return level_type_group;
 	}
-	
+
 
 	/**
 	 * This function returns the Board View containing all the board squares
@@ -582,17 +586,18 @@ public class LevelEditorView extends JPanel{
 	public BoardView getBoardView(){
 		return board_view;
 	}
-	
-	
+
+
 	/* ~~~~~                                                                               ~~~~~ *
 	 * GUI Logic for Controllers                                                                 *
 	 * ~~~~~                                                                               ~~~~~ */
-	
+
 	/**
 	 * This function sets the LevelEditor View to represent a puzzle level
 	 */
 	public void setPuzzleLevelView(){
 		level_specific_label.setVisible(true);
+
 		/* Disable theme and lightning                                                           */
 		theme_name_label.setVisible(false);
 		theme_words_label.setVisible(false);
@@ -600,16 +605,21 @@ public class LevelEditorView extends JPanel{
 		theme_words_textarea.setVisible(false);
 		lightning_time_limit_label.setVisible(false);
 		lightning_time_limit_textfield.setVisible(false);
+
 		/* Enable puzzle                                                                         */
 		puzzle_max_num_words_label.setVisible(true);
 		puzzle_max_num_words_textfield.setVisible(true);
+
+		/* Set current view for reference later */
+		currentView = "puzzle";
 	}
-	
+
 	/**
 	 * This function sets the LevelEditor view to represent a lightning level
 	 */
 	public void setLightningLevelView(){
 		level_specific_label.setVisible(true);
+
 		/* Disable theme and puzzle                                                              */
 		theme_name_label.setVisible(false);
 		theme_words_label.setVisible(false);
@@ -617,32 +627,79 @@ public class LevelEditorView extends JPanel{
 		theme_words_textarea.setVisible(false);
 		puzzle_max_num_words_label.setVisible(false);
 		puzzle_max_num_words_textfield.setVisible(false);
-		
+
 		/* Enable lightning                                                                      */
 		lightning_time_limit_label.setVisible(true);
 		lightning_time_limit_textfield.setVisible(true);
+
+		/* Set current view for reference later */
+		currentView = "lightning";
 	}
-	
+
 	/**
 	 * This function sets the LevelEditor view to represent a Theme level
 	 */
 	public void setThemeLevelView(){
 		level_specific_label.setVisible(true);
+
 		/* Disable lightning and puzzle                                                          */
 		puzzle_max_num_words_label.setVisible(false);
 		puzzle_max_num_words_textfield.setVisible(false);
 		lightning_time_limit_label.setVisible(false);
 		lightning_time_limit_textfield.setVisible(false);
-		
+
 		/* Enable theme                                                                          */
 		theme_name_label.setVisible(true);
 		theme_words_label.setVisible(true);
 		theme_name_textfield.setVisible(true);
 		theme_words_textarea.setVisible(true);
+
+		/* Set current view for reference later */
+		currentView = "theme";
 	}
-	
-	
-	
-	
+
+	/**
+	 * Refreshes the Level Editor View based upon the EditProgress associated with that View.
+	 */
+	public void refresh(){
+		Level modLevel = model.getEditProgress().getModified();
+		if(modLevel != null) {
+			for (int row = 0; row < 6; row++) {
+				for (int col = 0; col < 6; col++) {
+					if(modLevel.getBoard().getSquare(row, col).isEnabled()){
+						board_view.getJLabel(row, col).setBackground(Color.WHITE);
+						Tile tile = modLevel.getBoard().getSquare(row, col).getTile();
+						if(tile != null)
+							board_view.getJLabel(row, col).setText(tile.getContent());
+						else 
+							board_view.getJLabel(row, col).setText("");
+					} else {
+						board_view.getJLabel(row, col).setBackground(Color.BLACK);
+					}
+				}
+			}
+			//set view to be correct type
+			switch (modLevel.getType().toLowerCase()) {
+			case "puzzle":
+				if(!currentView.equals("puzzle")) {
+					setPuzzleLevelView();
+				}
+				break;
+			case "lightning":
+				if(!currentView.equals("lightning")) {
+					setLightningLevelView();
+				}
+				break;
+			case "theme":
+				if(!currentView.equals("theme")) {
+					setThemeLevelView();
+				}
+				break;
+			}
+
+		}
+	}
+
+
 }
 

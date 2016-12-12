@@ -47,6 +47,7 @@ public class ThemeLevel extends Level {
 				return false;
 			}
     	};
+		super.setBoard(new Board(false, GravityDirection.Up));
     }
 
     /**

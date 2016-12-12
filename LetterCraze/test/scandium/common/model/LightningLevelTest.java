@@ -55,10 +55,13 @@ public class LightningLevelTest extends TestCase {
 	 * Test method for {@link scandium.common.model.LightningLevel#copy()}.
 	 */
 	public void testCopy() {
+		LightningLevel levelCopy = level.copy();
+		assertEquals("", levelCopy.getName());
+		assertEquals(0, levelCopy.getTimeLimit());
 		level.setName("This is a level");
 		level.setTimeLimit(5000);
 		level.setBoard(board);
-		LightningLevel levelCopy = level.copy();
+		levelCopy = level.copy();
 		assertEquals("This is a level", levelCopy.getName());
 		assertEquals(board, levelCopy.getBoard());
 		assertEquals(5000, levelCopy.getTimeLimit());
@@ -96,13 +99,7 @@ public class LightningLevelTest extends TestCase {
 		level.setTimeLimit(5000);
 		level.setName("This is a level");
 		level.setBoard(board);
-		for (int i = 0; i < 6; i++){
-			for (int j = 0; j < 2; j++){
-				board.setBoardSquare(i, j, new Tile("a", 1));
-				board.fillEmptySquares(dictionary);
-				//board.getBoardSquare(i, j).setEnabled(true);
-			}
-		}
+		board.fillEmptySquares(dictionary);
 		assertTrue(level.isValid());
 	}
 

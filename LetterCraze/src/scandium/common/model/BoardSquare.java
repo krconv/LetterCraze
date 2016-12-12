@@ -113,6 +113,13 @@ public class BoardSquare {
 	public Tile getTile() {
 		return tile;
 	}
+	
+	/**
+	 * @return the board
+	 */
+	public Board getBoard(){
+		return board;
+	}
 
 	/**
 	 * @param enabled the enabled to set
