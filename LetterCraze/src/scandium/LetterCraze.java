@@ -15,9 +15,12 @@ import scandium.lettercraze.view.Application;
  * The main class for LetterCraze.
  */
 public class LetterCraze {
-	
+
 	/**
 	 * Starts the LetterCraze application.
+	 * 
+	 * @param args
+	 *            The program arguments (unused).
 	 */
 	public static void main(String[] args) {
 		Application app = new Application(new Model());

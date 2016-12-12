@@ -43,6 +43,9 @@ public class Board {
 	 * Creates a new Board with the given information.
 	 * Precondition: None.
 	 * Postcondition: The board is created with the given information.
+	 * 
+	 * @param shouldRegenerate Whether new tiles should ever be regenerated.
+	 * @param gravityDirection The direction of gravity
 	 */
 	public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
 		this.shouldRegenerate = shouldRegenerate;

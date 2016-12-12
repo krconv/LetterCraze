@@ -25,17 +25,15 @@ public class Model {
 
     /**
      * Creates a new Model.
-     * @throws Exception 
      */
-    public Model() throws IllegalArgumentException {
+    public Model() {
         initialize();
     }
 
 	/**
 	 * Creates a new Model from file using the GameLoader.
-	 * @throws Exception
 	 */
-	private void initialize() throws IllegalArgumentException {
+	private void initialize() {
 		// load the levels
 		this.gameLoader = new GameLoader();
 		this.levels = gameLoader.LoadLevels(new ArrayList<Level>());
