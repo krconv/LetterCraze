@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelContainer>
-    <token>0</token>
-	<levels>
+    <token>9195715759465373875</token>
+    <levels>
         <level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="puzzleLevel">
             <name>Puzzled</name>
             <board>
@@ -213,9 +213,9 @@
                     <threshold>20</threshold>
                 </star>
             </stars>
-            <maxNumWords>0</maxNumWords>
+            <maxNumWords>5</maxNumWords>
         </level>
-		<level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="lightningLevel">
+        <level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="lightningLevel">
             <name>Fast!</name>
             <board>
                 <rows>
@@ -441,26 +441,29 @@
                         <item>
                             <row>0</row>
                             <col>1</col>
+                            <tile>
+<content>R</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>R</content>
-							</tile>
                         </item>
                         <item>
                             <row>0</row>
                             <col>2</col>
+                            <tile>
+<content>R</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>R</content>
-							</tile>
                         </item>
                         <item>
                             <row>0</row>
                             <col>3</col>
+                            <tile>
+<content>G</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>G</content>
-							</tile>
                         </item>
                         <item>
                             <row>0</row>
@@ -482,26 +485,29 @@
                         <item>
                             <row>1</row>
                             <col>1</col>
+                            <tile>
+<content>E</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>E</content>
-							</tile>
                         </item>
                         <item>
                             <row>1</row>
                             <col>2</col>
+                            <tile>
+<content>E</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>E</content>
-							</tile>
                         </item>
                         <item>
                             <row>1</row>
                             <col>3</col>
+                            <tile>
+<content>B</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>B</content>
-							</tile>
                         </item>
                         <item>
                             <row>1</row>
@@ -523,26 +529,29 @@
                         <item>
                             <row>2</row>
                             <col>1</col>
+                            <tile>
+<content>E</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>E</content>
-							</tile>
                         </item>
                         <item>
                             <row>2</row>
                             <col>2</col>
+                            <tile>
+<content>L</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>L</content>
-							</tile>
                         </item>
                         <item>
                             <row>2</row>
                             <col>3</col>
+                            <tile>
+<content>D</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>D</content>
-							</tile>
                         </item>
                         <item>
                             <row>2</row>
@@ -564,10 +573,11 @@
                         <item>
                             <row>3</row>
                             <col>1</col>
+                            <tile>
+<content>N</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>N</content>
-							</tile>
                         </item>
                         <item>
                             <row>3</row>
@@ -577,18 +587,20 @@
                         <item>
                             <row>3</row>
                             <col>3</col>
+                            <tile>
+<content>U</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>U</content>
-							</tile>
                         </item>
                         <item>
                             <row>3</row>
                             <col>4</col>
+                            <tile>
+<content>E</content>
+<score>0</score>
+                            </tile>
                             <enabled>true</enabled>
-							<tile>
-								<content>E</content>
-							</tile>
                         </item>
                         <item>
                             <row>3</row>
