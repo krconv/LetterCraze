@@ -124,7 +124,7 @@ public class LevelProgressTest extends TestCase {
 		lp.setScore(500);
 		assertEquals(500, lp.getScore());
 		
-		assertTrue(lp.reset());
+		lp.reset();
 		assertEquals(new ArrayList<String>(), lp.getFoundWords());
 		assertEquals(0, lp.getScore());
 		assertEquals(0, lp.getStarCount());
