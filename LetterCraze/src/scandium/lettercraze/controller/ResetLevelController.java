@@ -60,14 +60,7 @@ public class ResetLevelController extends MouseAdapter{
      */
     @Override
     public void mouseClicked(MouseEvent me) {
-    	boolean reset = true;
-    	//Only don't allow reset if level is lightning and the lightning level is not being played.
-    	if(model.getProgress().getCurrentLevelProgress().getLevel().getType().equals("Theme")){
-    		if(!model.getProgress().getCurrentLevelProgress().isPlaying()){
-    			reset = false;
-    		}
-    	}
-    	if (reset) {
+    	if (model.getProgress().getCurrentLevelProgress().isPlaying()) {
 	    	// reset the board
 	    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
 	    	if (board.shouldRegenerate()) {

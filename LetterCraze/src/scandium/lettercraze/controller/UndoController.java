@@ -44,14 +44,8 @@ public class UndoController implements ActionListener {
      * 
      * @param ae The action Event representing the user's mouse click on the undo button.
      */
-    public void actionPerformed(ActionEvent ae) {
-    	boolean update = true;
-    	/* Lightning level is the only level type that cant undo while not playing */
-    	if(model.getProgress().getCurrentLevelProgress().getLevel().getType().equals("Lightning")){
-    		if (model.getProgress().getCurrentLevelProgress().isPlaying()) update = false;
-    	}
-    	
-    	if (update) {
+    public void actionPerformed(ActionEvent ae) {    	
+    	if (model.getProgress().getCurrentLevelProgress().isPlaying()) {
 	    	// undo the last action
 	    	IAction action = UndoManager.instance.removeLastAction();
 	    	if (action != null)
