@@ -46,7 +46,7 @@ public class EditProgressTest extends TestCase {
 	 */
 	public void testGetModified() {
 		assertEquals(board, ep.getModified().getBoard());
-		assertEquals(5000, ep.getModified().getTimeLimit()); //GetTimeLimit Not defined for type Level
+		assertEquals(5000, ((LightningLevel) ep.getModified()).getTimeLimit()); //GetTimeLimit Not defined for type Level
 		assertEquals("Hello", ep.getModified().getName());
 	}
 

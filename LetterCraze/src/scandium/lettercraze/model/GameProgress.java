@@ -22,8 +22,9 @@ public class GameProgress {
 	private long gameToken;
 
 	/**
-	 * Creates a completely new game progress with nothing stored in it
-	 * Creates a currentLevelProgress with a null level and isPlaying equals false
+	 * Creates a new game progress which will be for the given levels.
+	 * @param levels The levels in the current game.
+	 * @param gameToken The unique game token for the game save.
 	 * @throws IllegalStateException if the current level progress is already running, 
 	 * 						or if one of the LevelProgress initializations fails
 	 */
@@ -92,7 +93,7 @@ public class GameProgress {
 
 	/**
 	 * Replaces the level progress for the corresponding level with the given one.
-	 * @param lp
+	 * @param lp The level progress to add and replace with.
 	 * @return true if the LevelProgress was added and if the state of LevelProgresses has changed
 	 */
 	public boolean replaceLevelProgress(LevelProgress lp){

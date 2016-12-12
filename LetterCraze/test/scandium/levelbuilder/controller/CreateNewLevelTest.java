@@ -1,23 +1,17 @@
 package scandium.levelbuilder.controller;
 
-
-import java.awt.Event;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JComponent;
-
 import scandium.common.testresources.ScandiumLevelBuilderTestCase;
+import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 	Application app;
 
 	protected void setUp() throws Exception {
-		app = new Application();
-		try{Thread.sleep(5000);}catch(Exception e){};
+		app = new Application(new Model());
 		app.setViewMainMenu();
-		try{Thread.sleep(1000);}catch(Exception e){};
 	}
 
 	protected void tearDown() throws Exception {

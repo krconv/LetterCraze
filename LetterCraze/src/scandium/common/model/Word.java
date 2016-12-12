@@ -95,6 +95,7 @@ public class Word {
 	 *                Thrown if the given square is null.
 	 */
     public boolean addSelectedBoardSquare(BoardSquare square) throws NullPointerException {
+    	if (square == null) throw new NullPointerException();
     	if (!selection.contains(square)) {
     		selection.add(square);
     		if (!square.isEmpty()) {

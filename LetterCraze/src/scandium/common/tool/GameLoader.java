@@ -55,7 +55,7 @@ public class GameLoader {
 	 * @return The list of levels loaded from file, or an empty list of no
 	 *         levels were loaded.
 	 */
-	public List<Level> LoadLevels() throws JAXBException {
+	public List<Level> LoadLevels() {
 		return LoadLevels(new ArrayList<Level>());
 	}
 

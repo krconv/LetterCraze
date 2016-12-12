@@ -62,50 +62,12 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Updates the level which this progress is based on.
+	 * Precondition: The given level is not null.
+	 * Postcondition: This progress represents the given level.
+	 * 
 	 * @param level
-	 *            The level that is being played right now pre-condition: a
-	 *            level progress has been asked to be initialized
-	 *            post-condition: if isPlaying is true, throws an exception
-	 *            otherwise initializes the levelProgress if it is a Lightning
-	 *            Level, sets game to stop after the proper amount of time
-	 * @throws IllegalStateException
-	 */
-//	private void initialize(Level level) {
-//		this.timer = new Timer();
-//		this.foundWords = new LinkedList<String>();
-//		isPlaying = true;
-//		foundWords.clear();
-//		starCount = 0;
-//		score = 0;
-//		this.level = level;
-//		this.isUnlocked = false;
-//		if (level == null) {
-//			throw new IllegalStateException("Null Level");
-//		}
-//		if (level.getType().equals("lightning")) {
-//			try {
-//				timer.schedule(new TimerTask() {
-//					@Override
-//					public void run() {
-//						setPlaying(false);;
-//					}
-//				}, ((LightningLevel) level).getTimeLimit());
-//			} catch (Exception e) { // timer had a problem initializing
-//				throw new IllegalStateException("Timer not initialized properly");
-//			}
-//		} else { // timer isn't needed
-//			timer = null;
-//		}
-//	}
-
-	/**
-	 * @param level
-	 *            the level that the LetterCraze is running on
-	 * @return whether the method ran post-condition: the LevelProgress's level
-	 *         has been set to the correct level, all attributes are at initial
-	 *         values, timer is running if is LightningLevel
-	 * @throws GameProgressAlreadyRunning,
-	 *             timerNotInitializedProperly
+	 *            The level to update using.
 	 */
 	public void setLevel(Level level) {
 		this.level = level;
@@ -119,7 +81,7 @@ public class LevelProgress {
 	}
 
 	/**
-	 * Sets the score and updates the star count.
+	 * Sets the score and updates the star count accordingly
 	 * @param score
 	 *            the score to set
 	 */
@@ -161,8 +123,8 @@ public class LevelProgress {
 	}
 
 	/**
-	 * @param timer
-	 *            the timer to set
+	 * @param timeLeft
+	 *            the time left to set
 	 */
 	public void setTimeLeft(int timeLeft) {
 		this.timeLeft = timeLeft;
@@ -198,52 +160,39 @@ public class LevelProgress {
 
 	/**
 	 * Resets the progress.
-	 * 
-	 * @return returns boolean for whether ran or not pre-condition: progress
-	 *         has some value stored for foundWords, score, and starCount
-	 *         post-condition: starCound and score are 0 and foundWords is
-	 *         cleared
 	 */
-	public boolean reset() {
+	public void reset() {
 		this.score = 0;
 		this.starCount = 0;
 		this.foundWords.clear();
-		return true;
 	}
 
 	/**
 	 * Determines whether this progress has a higher score than the stored high
 	 * score for this level.
+	 * Precondition: None.
+	 * Postcondition: Determines whether this progress is a higher score.
 	 * 
-	 * @param gameProgress
-	 *            The game progress currently running.
-	 * @return Whether this progress has a higher score. pre-condition: can call
-	 *         whenever, but should be calling upon exit of levelPlayer
-	 *         post-condition: no state has changed
+	 * @param lp The level progress to compare to.
+	 *           
+	 * @return Whether this progress has a higher score. 
 	 */
 	public boolean isHigherScore(LevelProgress lp) {
-		if (lp.getScore() < this.score) {
-			return true;
-		} else {
-			return false;
-		}
+		return lp.getScore() < this.score;
 	}
 
 	/**
-	 * Updates the Player's score for this progress and updates the star count.
+	 * Updates the score and the star count for this progress.
 	 * 
 	 * @param delta
 	 *            The amount to change the score by.
-	 * @return boolean as to whether the score was updated or not pre-condition:
-	 *         score is a value post-condition: score is now what it was plus
-	 *         delta
 	 */
 	public void updateScore(int delta) {
 		setScore(score + delta);
 	}
 
 	/**
-	 * This function adds a word to the list of found words
+	 * Adds a word to the list of found words
 	 * 
 	 * @param word
 	 *            The found word
@@ -253,6 +202,7 @@ public class LevelProgress {
 	}
 	
 	/**
+	 * Updates this progress's unlocked status.
 	 * @param isUnlocked The new value of whether this progress is unlocked.
 	 * @return Whether the value was changed.
 	 */
