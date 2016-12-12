@@ -26,16 +26,6 @@ public class Application extends JFrame {
 	private LevelPlayerView levelPlayer;
 
 	/**
-	 * Creates a new LetterCraze application window without a model.
-	 */
-	public Application() {
-		initializeModel();
-		initializeView();
-		initializeControllers();
-		setView(mainMenu);
-	}
-
-	/**
 	 * Creates a new LetterCraze application window.
 	 * 
 	 * @param model
