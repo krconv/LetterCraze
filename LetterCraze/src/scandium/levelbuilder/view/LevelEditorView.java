@@ -20,6 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import scandium.common.model.Level;
+import scandium.common.model.Tile;
 import scandium.common.view.BoardView;
 import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
@@ -661,33 +662,41 @@ public class LevelEditorView extends JPanel{
 	 * Refreshes the Level Editor View based upon the EditProgress associated with that View.
 	 */
 	public void refresh(){
-		Level modLevel = editProgress.getModified();
+		Level modLevel = model.getEditProgress().getModified();
 		if(modLevel != null) {
 			for (int row = 0; row < 6; row++) {
 				for (int col = 0; col < 6; col++) {
 					if(modLevel.getBoard().getSquare(row, col).isEnabled()){
 						board_view.getJLabel(row, col).setBackground(Color.WHITE);
+						Tile tile = modLevel.getBoard().getSquare(row, col).getTile();
+						if(tile != null)
+							board_view.getJLabel(row, col).setText(tile.getContent());
+						else 
+							board_view.getJLabel(row, col).setText("");
 					} else {
 						board_view.getJLabel(row, col).setBackground(Color.BLACK);
 					}
 				}
 			}
-
 			//set view to be correct type
 			switch (modLevel.getType().toLowerCase()) {
 			case "puzzle":
 				if(!currentView.equals("puzzle")) {
 					setPuzzleLevelView();
 				}
+				break;
 			case "lightning":
 				if(!currentView.equals("lightning")) {
 					setLightningLevelView();
 				}
+				break;
 			case "theme":
 				if(!currentView.equals("theme")) {
 					setThemeLevelView();
 				}
+				break;
 			}
+
 		}
 	}
 
