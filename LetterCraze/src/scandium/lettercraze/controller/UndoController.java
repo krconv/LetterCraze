@@ -12,7 +12,6 @@ import scandium.lettercraze.view.Application;
  * This controller handles the undoing of an IAction object. It allows the player to undo their 
  * previous move when the undo button is clicked.
  * @author Scandium
- * @date 12/10/2016
  */
 public class UndoController implements ActionListener {
 	/** 

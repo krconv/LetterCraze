@@ -16,7 +16,6 @@ import scandium.lettercraze.view.Application;
  * tiles are regenerated but the timer is not refreshed. For a puzzle level, 
  * the tiles are regenerated. 
  * @author Scandium
- * @date 12/6/2016
  */
 public class ResetLevelController extends MouseAdapter{
 

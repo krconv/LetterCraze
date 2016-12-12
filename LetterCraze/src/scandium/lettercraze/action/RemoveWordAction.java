@@ -18,7 +18,7 @@ public class RemoveWordAction implements IAction {
 	private LevelProgress progress;
 	private Word word;
 	private String generatedString;
-	private IWordDictionary dictionary;
+	private IWordDictionary wordDictionary;
 	private LetterDictionary letterDictionary;
 
     /**
@@ -26,10 +26,17 @@ public class RemoveWordAction implements IAction {
      * @param model The model.
      * @param word The word being removed.
      */
-    public RemoveWordAction(LevelProgress progress, Word word, IWordDictionary dictionary, LetterDictionary letterDictionary) {
+    /**
+     * Creates a new action which is capable of removing a word from a board and undoing it.
+     * @param progress The current play progress.
+     * @param word The word to remove.
+     * @param wordDictionary The dictionary to determine whether a word is valid.
+     * @param letterDictionary The dictionary used to refill board tiles.
+     */
+    public RemoveWordAction(LevelProgress progress, Word word, IWordDictionary wordDictionary, LetterDictionary letterDictionary) {
     	this.progress = progress;
     	this.word = word;
-    	this.dictionary = dictionary;
+    	this.wordDictionary = wordDictionary;
     	this.letterDictionary = letterDictionary;
     	this.generatedString = word.generateString();
     }
@@ -100,7 +107,7 @@ public class RemoveWordAction implements IAction {
 	 */
 	@Override
 	public boolean isValid() {
-		return dictionary.isWord(word.generateString());
+		return wordDictionary.isWord(generatedString);
 	}
 
 }

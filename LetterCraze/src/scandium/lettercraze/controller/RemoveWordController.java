@@ -17,7 +17,6 @@ import scandium.lettercraze.view.Application;
  * from the board and new tiles are inserted to fill its place (dependent on level type). 
  * Both the model and the GUI are updated to reflect these changes. 
  * @author Scandium
- * @date 12/5/2016
  */
 public class RemoveWordController extends MouseAdapter{
 
@@ -42,6 +41,7 @@ public class RemoveWordController extends MouseAdapter{
      * model, the LetterCraze GUI, and a word dictionary.
      * @param model The Entire LetterCraze model.
      * @param app The Entire LetterCraze GUI
+     * @param dictionary The dictionary to generate new tiles using.
      */
     public RemoveWordController(Model model, Application app, LetterDictionary dictionary) {
         this.model = model;

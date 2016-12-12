@@ -60,8 +60,8 @@ public class LevelPlayerView extends JPanel {
 	/**
 	 * Creates a new view for the Level Player screen.
 	 * 
-	 * @param model
-	 *            The model.
+	 * @param progress
+	 *            The level progress which will hold information about the player's progress.
 	 */
 	public LevelPlayerView(LevelProgress progress) {
 		this.progress = progress;
@@ -147,7 +147,8 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
-	 * @return the starOneLabel
+	 * @param index The index of the star label to get.
+	 * @return The star label at the given index.
 	 */
 	public JLabel getStarLabel(int index) {
 		return (JLabel) starBox.getComponent(index);
@@ -155,7 +156,6 @@ public class LevelPlayerView extends JPanel {
 
 	/**
 	 * @return the scoreValueLabel
-	 * @return
 	 */
 	public JLabel getScoreValueLabel(){
 		return scoreValueLabel;

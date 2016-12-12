@@ -65,9 +65,10 @@ public class LevelIconView extends JPanel {
 	public JLabel getHighScoreLabel() {
 		return highScoreLabel;
 	}	
-
+	
 	/**
-	 * @return the starOneLabel
+	 * @param index The index of the star label to get.
+	 * @return The star label at the given index.
 	 */
 	public JLabel getStarLabel(int index) {
 		return (JLabel) starBox.getComponent(index);

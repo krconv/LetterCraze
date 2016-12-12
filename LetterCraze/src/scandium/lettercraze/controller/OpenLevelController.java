@@ -17,7 +17,6 @@ import scandium.lettercraze.view.Application;
  * This class handles the opening of a level in LetterCraze. It Transitions the view from the Main 
  * Menu to the Level Player for the specific level.
  * @author Scandium
- * @date 12/5/16
  */
 public class OpenLevelController extends MouseAdapter{
 	
@@ -41,7 +40,8 @@ public class OpenLevelController extends MouseAdapter{
      * and GUI. 
 	 * @param model The entire LetterCraze Model.
 	 * @param app The entire LetterCraze GUI.
-	 */
+     * @param progress The level progress which will be opened.
+     */
     public OpenLevelController(Model model, Application app, LevelProgress progress) {
         this.model = model;
         this.app = app;

@@ -14,7 +14,6 @@ import scandium.lettercraze.view.Application;
  * is better than the previous progress of the game, and if so, it saves the new progress to the 
  * GameProgress object and to file. 
  * @author Scandium
- * @date 12/10/2016
  */
 public class ExitLevelController implements ActionListener{
 	/** 
@@ -44,7 +43,7 @@ public class ExitLevelController implements ActionListener{
 	 * and updates the progress (if the current progress is better than the old saved progress.
 	 * <p>entry condition: the button this controller is attached to is pressed.</p>
 	 * <p>exit condition: the View has been set to the Main Menu and progress in the level has been saved if needed.</p>
-	 * @param ActionEvent ae The mouse is clicked on the button
+	 * @param ae The mouse is clicked on the button
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
