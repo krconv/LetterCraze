@@ -288,7 +288,7 @@ public class Board {
 		return didItWork;
 		*/
 	}
-	
+
 	/**
 	 * Fills empty squares on the Board with random tiles from the given
 	 * dictionary. 
@@ -407,21 +407,17 @@ public class Board {
 	 * @return Whether the Board is valid.
 	 */
 	public boolean isValid() {
-		boolean isItValid = true;
-		
-		if(this.squares == null){isItValid = false;}
-		if(this.gravityDirection == null){isItValid = false;}
-		if(getNumEnabled(this.squares) < 9){isItValid = false;};
-		
-		return isItValid;
+		return squares != null && getNumEnabled() >= 9;
 	}
 	
-	//helper for isValid()
-	//gets the number of enabled squares
-	public int getNumEnabled(BoardSquare[][] squares) {
+	/**
+	 * Counts how many squares on the board are enabled.
+	 * @return The number of squares on the board that are enabled.
+	 */
+	private int getNumEnabled() {
 		int indicator = 0;
         for (int i = 0; i < squares.length; i++){
-        	for (int j = 0; j < squares.length; j++){
+        	for (int j = 0; j < squares[i].length; j++){
         		if (squares[i][j].isEnabled()){
         			indicator++;
         		}
