@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
+import scandium.common.model.ThemeLevel;
 import scandium.lettercraze.model.LevelProgress;
 import javax.swing.Box;
 import javax.swing.border.EmptyBorder;
-import java.awt.Component;
 import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -42,17 +42,15 @@ public class LevelPlayerView extends JPanel {
 	private JButton undoButton;
 	private Box starBox;
 	private Box scoreBox;
-	private JLabel scoreLabel;
 	private JLabel scoreValueLabel;
 	private Box nextStarBox;
-	private JLabel nextStarLabel;
 	private JLabel nextStarValueLabel;
 	private Box maxNumWordsBox;
-	private JLabel maxNumWordsLabel;
 	private JLabel maxNumWordsValueLabel;
 	private Box timeLeftBox;
-	private JLabel timeLeftLabel;
 	private JLabel timeLeftValueLabel;
+	private Box themeWordBox;
+	private JLabel themeWordValueLabel;
 	private JScrollPane foundWordsScrollPane;
 	private JLabel foundWordsLabel;
 	private JList<String> foundWordsList;
@@ -106,13 +104,6 @@ public class LevelPlayerView extends JPanel {
 		return boardView;
 	}
 
-	/**
-	 * @return the maxNumWordsLabel
-	 */
-	public JLabel getMaxNumWordsLabel() {
-		return maxNumWordsLabel;
-	}
-	
 	/** 
 	 * @return the maxNumWordsValueLabel
 	 */
@@ -128,13 +119,6 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
-	 * @return the timeLeftLabel
-	 */
-	public JLabel getTimeLeftLabel() {
-		return timeLeftLabel;
-	}
-
-	/**
 	 * @return the timeLeftValueLabel
 	 */
 	public JLabel getTimeLeftValueLabel() {
@@ -142,17 +126,17 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
-	 * @return the timerLabel
+	 * @return the themeWordBox
 	 */
-	public JLabel getTimerLabel() {
-		return null;
+	public Box getThemeWordBox() {
+		return themeWordBox;
 	}
 
 	/**
-	 * @return the themeLabel
+	 * @return the themeWordValueLabel
 	 */
-	public JLabel getThemeLabel() {
-		return null;
+	public JLabel getThemeWordValueLabel() {
+		return themeWordValueLabel;
 	}
 
 	/**
@@ -169,13 +153,6 @@ public class LevelPlayerView extends JPanel {
 		return (JLabel) starBox.getComponent(index);
 	}
 
-	/**
-	 * @return the scoreLabel
-	 */
-	public JLabel getScoreLabel() {
-		return scoreLabel;
-	}
-	
 	/**
 	 * @return the scoreValueLabel
 	 * @return
@@ -254,73 +231,30 @@ public class LevelPlayerView extends JPanel {
 		}
 		infoPanel.add(starBox);
 
-		// set up the score
-		scoreBox = Box.createHorizontalBox();
-		scoreBox.setBorder(new EmptyBorder(7, 7, 7, 7));
-		// the label for the score
-		scoreLabel = new JLabel("Score:");
-		scoreLabel.setFont(scoreLabel.getFont().deriveFont(scoreLabel.getFont().getSize() + 15f));
-		scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		scoreBox.add(scoreLabel);
-
-		scoreBox.add(Box.createRigidArea(new Dimension(20, 20)));
-		// the value for the score
-		scoreValueLabel = new JLabel();
-		scoreValueLabel.setFont(scoreValueLabel.getFont().deriveFont(scoreValueLabel.getFont().getSize() + 15f));
-		scoreValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		scoreBox.add(scoreValueLabel);
-		infoPanel.add(scoreBox);
-
 		// set up next star score
-		nextStarBox = Box.createHorizontalBox();
-		// the label for the next star
-		nextStarLabel = new JLabel("Next Star:");
-		nextStarLabel.setFont(nextStarLabel.getFont().deriveFont(nextStarLabel.getFont().getSize() + 15f));
-		nextStarLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		nextStarBox.add(nextStarLabel);
-
-		nextStarBox.add(Box.createRigidArea(new Dimension(20, 20)));
-		// the value for the next star
-		nextStarValueLabel = new JLabel();
-		nextStarValueLabel
-				.setFont(nextStarValueLabel.getFont().deriveFont(nextStarValueLabel.getFont().getSize() + 15f));
-		nextStarValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		nextStarBox.add(nextStarValueLabel);
+		scoreBox = createLabelValueBox("Score", true);
+		scoreValueLabel = (JLabel) scoreBox.getComponent(2);
+		infoPanel.add(scoreBox);
+		
+		// set up next star score
+		nextStarBox = createLabelValueBox("Next Star", true);
+		nextStarValueLabel = (JLabel) nextStarBox.getComponent(2);
 		infoPanel.add(nextStarBox);
 
 		// set up max number of words
-		maxNumWordsBox = Box.createHorizontalBox();
-		maxNumWordsBox.setBorder(new EmptyBorder(7, 7, 7, 7));
-		// label for max number of words
-		maxNumWordsLabel = new JLabel("Max Number of Words:");
-		maxNumWordsLabel.setFont(maxNumWordsLabel.getFont().deriveFont(maxNumWordsLabel.getFont().getSize() + 15f));
-		maxNumWordsBox.add(maxNumWordsLabel);
-
-		maxNumWordsBox.add(Box.createRigidArea(new Dimension(20, 20)));
-		// value for the max number of words
-		maxNumWordsValueLabel = new JLabel();
-		maxNumWordsValueLabel
-				.setFont(maxNumWordsValueLabel.getFont().deriveFont(maxNumWordsValueLabel.getFont().getSize() + 15f));
-		maxNumWordsBox.add(maxNumWordsValueLabel);
-		maxNumWordsBox.setVisible(false);
+		maxNumWordsBox = createLabelValueBox("Max Number of Words", false);
+		maxNumWordsValueLabel = (JLabel) maxNumWordsBox.getComponent(2);
 		infoPanel.add(maxNumWordsBox);
 
 		// set up time left
-		timeLeftBox = Box.createHorizontalBox();
-		timeLeftBox.setBorder(new EmptyBorder(7, 7, 7, 7));
-		// label for max number of words
-		timeLeftLabel = new JLabel("Time Left:");
-		timeLeftLabel.setFont(timeLeftLabel.getFont().deriveFont(timeLeftLabel.getFont().getSize() + 15f));
-		timeLeftBox.add(timeLeftLabel);
-
-		timeLeftBox.add(Box.createRigidArea(new Dimension(20, 20)));
-		// value for the max number of words
-		timeLeftValueLabel = new JLabel();
-		timeLeftValueLabel
-				.setFont(timeLeftValueLabel.getFont().deriveFont(timeLeftValueLabel.getFont().getSize() + 15f));
-		timeLeftBox.add(timeLeftValueLabel);
-		timeLeftBox.setVisible(false);
+		timeLeftBox = createLabelValueBox("Time Left", false);
+		timeLeftValueLabel = (JLabel) timeLeftBox.getComponent(2);
 		infoPanel.add(timeLeftBox);
+
+		// set up theme word
+		themeWordBox = createLabelValueBox("Theme", false);
+		themeWordValueLabel = (JLabel) themeWordBox.getComponent(2);
+		infoPanel.add(themeWordBox);
 		
 		// set up the scroll pane for found words
 		foundWordsScrollPane = new JScrollPane();
@@ -345,6 +279,37 @@ public class LevelPlayerView extends JPanel {
 		boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
 		boardView.setPreferredSize(new Dimension(750, 750));
 		add(boardView, BorderLayout.CENTER);
+	}
+	
+	/**
+	 * Creates a box which holds a label and its value. The caller can retrieve
+	 * the labels by getting the first and third components in the box.
+	 * 
+	 * @param labelText
+	 *            The text that the label should have.
+	 * @param visible
+	 *            Whether the box should be initially visible.
+	 * @return The created box with the given specifications.
+	 */
+	private Box createLabelValueBox(String labelText, boolean visible) {
+		// create the box
+		Box box = Box.createHorizontalBox();
+		box.setBorder(new EmptyBorder(7, 7, 7, 7));
+		
+		// create the label
+		JLabel label = new JLabel(labelText + ":");
+		label.setFont(label.getFont().deriveFont(label.getFont().getSize() + 15f));
+		box.add(label);
+
+		// add a spacer between the label and value
+		box.add(Box.createRigidArea(new Dimension(20, 20)));
+		
+		// create the value
+		JLabel value = new JLabel();
+		value.setFont(value.getFont().deriveFont(value.getFont().getSize() + 15f));
+		box.add(value);
+		box.setVisible(visible);
+		return box;
 	}
 
 	/**
@@ -383,11 +348,16 @@ public class LevelPlayerView extends JPanel {
 				int i = 1;
 				for (String word : progress.getFoundWords())
 					foundWordsListModel.addElement((i++) + ". " + word);
+				if (progress.getFoundWords().size() == 0)
+					foundWordsLabel.setText("Found Words"); 
+				else
+					foundWordsLabel.setText("Found Words (" + progress.getFoundWords().size() + ")"); 
 			}
 			
 			// hide the level specific attributes
 			maxNumWordsBox.setVisible(false);
 			timeLeftBox.setVisible(false);
+			themeWordBox.setVisible(false);
 			
 			// update the level specific attributes
 			if (level instanceof PuzzleLevel) {
@@ -399,6 +369,10 @@ public class LevelPlayerView extends JPanel {
 				int timeLeft = progress.getTimeLeft();
 				timeLeftValueLabel.setText("" + timeLeft + " second" + (timeLeft != 1 ? "s" : ""));
 				timeLeftBox.setVisible(true);
+			} else if (level instanceof ThemeLevel) {
+				// update the theme word
+				themeWordValueLabel.setText(((ThemeLevel) level).getTheme());
+				themeWordBox.setVisible(true);
 			}
 			
 			// update the board
