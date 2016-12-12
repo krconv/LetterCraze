@@ -35,6 +35,9 @@ public class OpenLevelController extends MouseAdapter{
      * A instance of a LetterDictionary. With this, the controller can populate the board's tiles.
      */
     LetterDictionary dictionary;
+    /**
+     * The current progress of this level.
+     */
     LevelProgress progress;
 
     /**

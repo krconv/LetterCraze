@@ -12,8 +12,10 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import scandium.common.tool.LetterDictionary;
 import scandium.levelbuilder.controller.CreateNewLevelController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
+import scandium.levelbuilder.controller.PreviewBoardArrangementController;
 import scandium.levelbuilder.model.Model;
 
 public class Application extends JFrame{
@@ -82,7 +84,8 @@ public class Application extends JFrame{
 	 */
 	private void initializeControllers() {
 		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
-		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));		
+		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));	
+		level_editor.getGenerateButton().addMouseListener(new PreviewBoardArrangementController(model, this, new LetterDictionary()));
 	}
 
 	/* ~~~~~                                                                               ~~~~~ *
