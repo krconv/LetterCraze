@@ -74,8 +74,8 @@ public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 		assertEquals(false,app.getSplashScreen().isVisible());
 		assertEquals(false,app.getLevelEditor().isVisible());
 		MouseEvent clickEditButton = this.createClicked(app, app.getMainMenu().getNewLevelButton(), 0, 0);
-		MouseEvent clickLevel = this.createClicked(app, app.getLevelIconView(0), 0, 0);
-		app.getMainMenu().getLevelIconView(0).dispatchEvent(clickEditButton);
+		MouseEvent clickLevel = this.createClicked(app, app.getMainMenu().getLevelIconView(0), 0, 0);
+		app.getMainMenu().getLevelIconView(0).dispatchEvent(clickLevel);
 		app.getMainMenu().getEditLevelButton().dispatchEvent(clickEditButton);
 		//check that correct panel is visible
 		assertEquals(false,app.getMainMenu().isVisible());
@@ -118,8 +118,8 @@ public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 		assertEquals(false,app.getSplashScreen().isVisible());
 		assertEquals(false,app.getLevelEditor().isVisible());
 		MouseEvent clickEditButton = this.createClicked(app, app.getMainMenu().getNewLevelButton(), 0, 0);
-		MouseEvent clickLevel = this.createClicked(app, app.getLevelIconView(1), 0, 0);
-		app.getMainMenu().getLevelIconView(1).dispatchEvent(clickEditButton);
+		MouseEvent clickLevel = this.createClicked(app, app.getMainMenu().getLevelIconView(1), 0, 0);
+		app.getMainMenu().getLevelIconView(1).dispatchEvent(clickLevel);
 		app.getMainMenu().getEditLevelButton().dispatchEvent(clickEditButton);
 		//check that correct panel is visible
 		assertEquals(false,app.getMainMenu().isVisible());
@@ -162,8 +162,8 @@ public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 		assertEquals(false,app.getSplashScreen().isVisible());
 		assertEquals(false,app.getLevelEditor().isVisible());
 		MouseEvent clickEditButton = this.createClicked(app, app.getMainMenu().getNewLevelButton(), 0, 0);
-		MouseEvent clickLevel = this.createClicked(app, app.getLevelIconView(2), 0, 0);
-		app.getMainMenu().getLevelIconView(2).dispatchEvent(clickEditButton);
+		MouseEvent clickLevel = this.createClicked(app, app.getMainMenu().getLevelIconView(2), 0, 0);
+		app.getMainMenu().getLevelIconView(2).dispatchEvent(clickLevel);
 		app.getMainMenu().getEditLevelButton().dispatchEvent(clickEditButton);
 		//check that correct panel is visible
 		assertEquals(false,app.getMainMenu().isVisible());
@@ -204,8 +204,8 @@ public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 		assertEquals(false,app.getSplashScreen().isVisible());
 		assertEquals(false,app.getLevelEditor().isVisible());
 		MouseEvent clickEditButton = this.createClicked(app, app.getMainMenu().getNewLevelButton(), 0, 0);
-		MouseEvent clickLevel = this.createClicked(app, app.getLevelIconView(0), 0, 0);
-		app.getMainMenu().getLevelIconView(0).dispatchEvent(clickEditButton);
+		MouseEvent clickLevel = this.createClicked(app, app.getMainMenu().getLevelIconView(0), 0, 0);
+		app.getMainMenu().getLevelIconView(0).dispatchEvent(clickLevel);
 		app.getMainMenu().getEditLevelButton().dispatchEvent(clickEditButton);
 		//check that correct panel is visible
 		assertEquals(false,app.getMainMenu().isVisible());
@@ -213,7 +213,7 @@ public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 		assertEquals(true,app.getLevelEditor().isVisible());
 		//click on the Main Menu Button to return to Main Menu
 		MouseEvent clickExit = this.createClicked(app, app.getLevelEditor().getMainMenuButton(), 0, 0);
-		app.getLevelEditor().getMainMenuButton().dispatchEvent(clickEditButton);
+		app.getLevelEditor().getMainMenuButton().dispatchEvent(clickExit);
 		//check that correct panel is visible
 		assertEquals(true,app.getMainMenu().isVisible());
 		assertEquals(false,app.getSplashScreen().isVisible());
