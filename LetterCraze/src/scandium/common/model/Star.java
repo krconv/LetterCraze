@@ -38,8 +38,6 @@ public class Star {
 	 * 
 	 * @param threshold
 	 *            The score threshold needed to obtain the star.
-	 * @exception IllegalArgumentException
-	 *                Thrown if the threshold is negative.
 	 */
     public Star(int threshold) throws IllegalArgumentException {
     	this.threshold = threshold;
@@ -63,8 +61,6 @@ public class Star {
 	 * 
 	 * @param threshold
 	 *            The integer threshold value
-	 * @exception IllegalArgumentException
-	 *                Thrown if the threshold is negative.
 	 */
 	public void setThreshold(int threshold) throws IllegalArgumentException {
 		this.threshold = threshold;

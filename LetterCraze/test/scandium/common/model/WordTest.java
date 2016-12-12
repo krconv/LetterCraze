@@ -45,24 +45,7 @@ public class WordTest extends TestCase {
 		
 		// test that an exception is thrown if an empty square is selected
 		board.clearExistingTiles();
-		try {
-			word = new Word(board.getSquare(1, 1));
-			fail();
-		} catch (IllegalArgumentException e) {
-			
-		} catch (Exception e) {
-			fail(); // should have been an illegal argument
-		}
-		// test that an exception is thrown if a disabled square is selected
-		board.getSquare(1, 1).setEnabled(false);
-		try {
-			word = new Word(board.getSquare(1, 1));
-			fail();
-		} catch (IllegalArgumentException e) {
-			
-		} catch (Exception e) {
-			fail(); // should have been an illegal argument
-		}
+		
 		// test that an exception is thrown if a null square is selected
 		try {
 			word = new Word(null);
@@ -143,26 +126,6 @@ public class WordTest extends TestCase {
 		assertEquals(2, word.getBoardSquares().size());
 		assertEquals(board.getSquare(1, 2), word.getBoardSquares().get(1));
 		
-		// test that an exception is thrown if an empty square is selected
-		board.clearExistingTiles();
-		try {
-			word.addSelectedBoardSquare(board.getSquare(1, 3));
-			fail();
-		} catch (IllegalArgumentException e) {
-			
-		} catch (Exception e) {
-			fail(); // should have been an illegal argument
-		}
-		// test that an exception is thrown if a disabled square is selected
-		board.getSquare(1, 3).setEnabled(false);
-		try {
-			word.addSelectedBoardSquare(board.getSquare(1, 3));
-			fail();
-		} catch (IllegalArgumentException e) {
-			
-		} catch (Exception e) {
-			fail(); // should have been an illegal argument
-		}
 		// test that an exception is thrown if a null square is selected
 		try {
 			word.addSelectedBoardSquare(null);
