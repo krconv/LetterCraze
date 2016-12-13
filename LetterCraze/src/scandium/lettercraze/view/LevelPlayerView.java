@@ -70,9 +70,9 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
-	 * @return the model
+	 * @return the level Progress associated with this level
 	 */
-	public LevelProgress getModel() {
+	public LevelProgress getLevelProgress() {
 		return progress;
 	}
 
@@ -167,6 +167,34 @@ public class LevelPlayerView extends JPanel {
 	public JLabel getStarThresholdLabel() {
 		return nextStarValueLabel;
 	}
+	
+	/**
+	 * @return the star box for this view
+	 */
+	public Box getStarBox() {
+		return starBox;
+	}
+	
+	/**
+	 * @return the score box for this view
+	 */
+	public Box getScoreBox() {
+		return scoreBox;
+	}
+	
+	/**
+	 * @return the next star box for this view
+	 */
+	public Box getNextStarBox() {
+		return nextStarBox;
+	}
+	
+	/**
+	 * @return the next star's value label for this level
+	 */
+	public JLabel getNextStarValueLabel() {
+		return nextStarValueLabel;
+	}
 
 	/**
 	 * @return the foundWordsLabel
@@ -180,6 +208,10 @@ public class LevelPlayerView extends JPanel {
 	 */
 	public DefaultListModel<String> getFoundWordsListModel(){
 		return foundWordsListModel;
+	}
+	
+	public JScrollPane getFoundWordsScrollPane(){
+		return foundWordsScrollPane;
 	}
 	
 	/**

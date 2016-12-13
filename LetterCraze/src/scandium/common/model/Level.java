@@ -85,10 +85,18 @@ public abstract class Level {
 	}
 
 	/**
-	 * @return the stars
+	 * @return an array of the Stars in the level
 	 */
 	public Star[] getStars() {
 		return stars;
+	}
+	
+	/**
+	 * @param index the star that you want (must be under 3 of will throw error)
+	 * @return returns the star at the index
+	 */
+	public Star getStar(int index) {
+		return getStars()[index];
 	}
 	
 	/**
