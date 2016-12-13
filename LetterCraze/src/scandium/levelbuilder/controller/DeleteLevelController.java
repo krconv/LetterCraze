@@ -1,5 +1,7 @@
 package scandium.levelbuilder.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import scandium.levelbuilder.model.Model;
@@ -8,7 +10,7 @@ import scandium.levelbuilder.view.Application;
 /**
  * @author Felix
  */
-public class DeleteLevelController {
+public class DeleteLevelController implements ActionListener{
 
 	//attributes
     Model model;
@@ -24,12 +26,13 @@ public class DeleteLevelController {
         this.app = a;
     }
 
-    
+
     /**
-     * @param MouseEvent me
+     * @param ActionEvent ae
      */
-    public void mousePressed(MouseEvent me) {
-    	//delete level
-    }
+	public void actionPerformed(ActionEvent ae) {
+		//model.deleteLevel( model.getSelectedLevel() );
+		app.getMainMenu().refresh();
+	}
 
 }
