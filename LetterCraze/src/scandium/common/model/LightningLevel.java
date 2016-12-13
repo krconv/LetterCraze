@@ -5,14 +5,13 @@
  */
 package scandium.common.model;
 
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
+import scandium.common.tool.LevelRestrictor;
+import scandium.common.tool.TimeLevelRestrictor;
 
 /**
  * A type of Level which has a time limit.
@@ -22,8 +21,6 @@ import javax.xml.bind.annotation.XmlTransient;
 public class LightningLevel extends Level {
 	@XmlElement
     private int timeLimit;
-	@XmlTransient
-	private Timer timer;
     
     /**
      * Creates a new Lightning Level with the default information.
@@ -59,24 +56,12 @@ public class LightningLevel extends Level {
 		this.timeLimit = timeLimit;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see scandium.common.model.Level#createTimer(java.util.concurrent.Callable)
+	 * @see scandium.common.model.Level#getRestrictor()
 	 */
 	@Override
-	public Timer createTimer(ActionListener listener) {
-		Timer timer = new Timer(timeLimit, listener);
-		timer.setRepeats(false);
-		return this.timer = timer;
-	}
-
-	/* (non-Javadoc)
-	 * @see scandium.common.model.Level#stopTimer()
-	 */
-	@Override
-	public void stopTimer() {
-		if (timer != null)
-			timer.stop();
+	public LevelRestrictor getRestrictor() {
+		return new TimeLevelRestrictor(timeLimit);
 	}
 
 	/* (non-Javadoc)

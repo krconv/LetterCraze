@@ -1,44 +1,48 @@
 package scandium.levelbuilder.controller;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import scandium.common.model.Level;
+import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium
+ * @author Felix
  */
-public class OpenLevelEditorController {
+public class OpenLevelEditorController extends MouseAdapter{
 
-    /**
-     * Default constructor
-     */
-    public OpenLevelEditorController() {
-    }
-
-    /**
-     * 
-     */
+	//attributes
     Model model;
-
-    /**
-     * 
-     */
     Application app;
+    Level l;
+    EditProgress progress;
 
+    
     /**
      * @param model 
      * @param app
      */
-    public OpenLevelEditorController(Model model, Application app) {
-        // TODO implement here
+    public OpenLevelEditorController(Model m, Application a) {
+        this.model = m;
+        this.app = a;
+        this.l = model.getSelectedLevel();
+        this.progress = new EditProgress(l);
     }
 
+    
     /**
-     * @param ActionEvent ae
+     * @param MouseEvent me
      */
-    public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
+    public void mousePressed(MouseEvent me) {
+    	//load selected level
+    	model.setSelectedLevel(l);
+    	model.setEditProgress(progress);
+    	app.getLevelEditor().setEditProgress(progress);
+    	
+    	//change view
+    	app.setViewLevelEditor();
     }
 
 }

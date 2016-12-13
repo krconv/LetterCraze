@@ -1,44 +1,37 @@
 package scandium.levelbuilder.controller;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium
+ * @author Felix
  */
-public class DeleteLevelController {
+public class DeleteLevelController extends MouseAdapter{
 
-    /**
-     * Default constructor
-     */
-    public DeleteLevelController() {
-    }
-
-    /**
-     * 
-     */
+	//attributes
     Model model;
-
-    /**
-     * 
-     */
     Application app;
 
+    
     /**
      * @param model 
      * @param app
      */
-    public DeleteLevelController(Model model, Application app) {
-        // TODO implement here
+    public DeleteLevelController(Model m, Application a) {
+        this.model = m;
+        this.app = a;
     }
 
+
     /**
-     * @param ActionEvent ae
+     * @param MouseEvent me
      */
-    public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
-    }
+	public void mouseClicked(MouseEvent me) {
+		//model.deleteLevel( model.getSelectedLevel() );
+		app.getMainMenu().refresh();
+	}
 
 }
