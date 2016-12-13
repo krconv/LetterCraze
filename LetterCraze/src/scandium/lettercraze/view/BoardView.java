@@ -29,7 +29,8 @@ public class BoardView extends JPanel {
 	LevelProgress progress;
 	
 	/**
-	 * Instantiates a copy of the boardView 
+	 * Creates a new board view.
+	 * @param progress The current level progress which will be updated with player progress.
 	 */
 	public BoardView(LevelProgress progress) {
 		this.progress = progress;
@@ -50,8 +51,12 @@ public class BoardView extends JPanel {
 	}
 	
 	/**
-	 * This function returns the JLabel at the given row and column of the BoardView 
-	 * Indexed by 0
+	 * Gets the board square label at the given row and column.
+	 * 
+	 * @param row The row of the square.
+	 * @param col The column of the square.
+	 * @return The label at the given row and col, or null if the index
+	 * is out of bounds.
 	 */
 	public JLabel getBoardSquareLabel(int row, int col){
 		if (row >= 6 || col >= 6 || row < 0 || col < 0) return null;

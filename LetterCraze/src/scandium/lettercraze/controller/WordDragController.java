@@ -13,7 +13,6 @@ import scandium.lettercraze.view.BoardView;
  * This class handles the selection of a word through the dragging of the mouse across the 
  * board squares. It shows updates the view and the model to reflect the selection of letters. 
  * @author Scandium
- * @date 12/5/2016
  */
 public class WordDragController extends MouseMotionAdapter{
 
@@ -35,6 +34,8 @@ public class WordDragController extends MouseMotionAdapter{
      * model and the entire LetterCraze GUI.
      * @param model The entire LetterCraze model.
      * @param app The entire LetterCraze GUI.
+     * @param row The row of the square which this controller is for.
+     * @param col The column of the square which this controller is for.
      */
     public WordDragController(Model model, Application app, int row, int col) {
         this.model = model;

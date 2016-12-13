@@ -10,6 +10,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import scandium.common.tool.LevelRestrictor;
+import scandium.common.tool.WordLevelRestrictor;
+
 /**
  * A type of level which has a maximum number of words.
  */
@@ -67,6 +70,14 @@ public class PuzzleLevel extends Level {
 	@Override
 	public String getScoreUnits(boolean plural) {
 		return "point" + (plural ? "s" : "");
+	}
+
+	/* (non-Javadoc)
+	 * @see scandium.common.model.Level#getRestrictor()
+	 */
+	@Override
+	public LevelRestrictor getRestrictor() {
+		return new WordLevelRestrictor(maxNumWords);
 	}
 
 	/* (non-Javadoc)
