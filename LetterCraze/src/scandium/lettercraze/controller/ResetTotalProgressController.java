@@ -12,7 +12,6 @@ import scandium.lettercraze.view.Application;
  * This class handles the reseting of the entire game progress. It clears
  * the players progress for all levels. Used to replay the game. 
  * @author Scandium
- * @date 12/10/2016
  */
 public class ResetTotalProgressController extends MouseAdapter{
 	
@@ -37,6 +36,7 @@ public class ResetTotalProgressController extends MouseAdapter{
      * the entire LetterCraze model and GUI. 
      * @param model The entire LetterCraze Model
      * @param app The entire LetterCraze Application(GUI)
+     * @param total_progress The game progress which would be reset.
      */
     public ResetTotalProgressController(Model model, Application app, GameProgress total_progress){
     	this.model = model;
@@ -57,7 +57,6 @@ public class ResetTotalProgressController extends MouseAdapter{
      */
     @Override
     public void mouseClicked(MouseEvent me) {
-    	System.out.println("Hello world");
     	for(LevelProgress level_progress : total_progress.getLevelProgresses()){
     		/* Reset and lock all levels */
     		level_progress.reset();

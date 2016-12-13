@@ -11,9 +11,8 @@ import scandium.lettercraze.view.Application;
  * This class handles the timer expiring during a lighting level. It makes the level not playable
  * until the player exits to the main menu and returns.
  * @author Scandium
- * @date 12/10/16
  */
-public class TimerExpiresController implements ActionListener {
+public class EndLevelController implements ActionListener {
     private Model model;
     private Application app;
 
@@ -22,7 +21,7 @@ public class TimerExpiresController implements ActionListener {
      * @param model The model.
      * @param app The application.
      */
-    public TimerExpiresController(Model model, Application app) {
+    public EndLevelController(Model model, Application app) {
     	this.model = model;
     	this.app = app;
     }
@@ -38,8 +37,8 @@ public class TimerExpiresController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		LevelProgress currentProgress = model.getProgress().getCurrentLevelProgress();
+		currentProgress.getRestrictor().stop();
 		currentProgress.setPlaying(false);
-		currentProgress.setTimeLeft(0);
 		app.getLevelPlayer().refresh();
 	}
 

@@ -426,7 +426,7 @@
                     <threshold>5</threshold>
                 </star>
             </stars>
-            <timeLimit>10000</timeLimit>
+            <timeLimit>10</timeLimit>
         </level>
         <level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="themeLevel">
             <name>Colors...</name>
