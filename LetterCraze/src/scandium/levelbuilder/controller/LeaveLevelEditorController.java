@@ -28,5 +28,6 @@ public class LeaveLevelEditorController extends MouseAdapter{
      */
     public void mouseClicked(MouseEvent me) {
     	app.setViewMainMenu();
+    	app.getLevelEditor().refresh();
     }
 }
