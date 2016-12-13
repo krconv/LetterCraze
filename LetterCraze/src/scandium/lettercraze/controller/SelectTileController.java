@@ -11,7 +11,6 @@ import scandium.lettercraze.view.Application;
  * This class handles the beginning of the user's word selection in LetterCraze. It uses 
  * a mouse press event to determine which tile starts the currently selected word. 
  * @author Scandium
- * @date 12/5/16
  */
 public class SelectTileController extends MouseAdapter{
 	/** 
@@ -32,6 +31,8 @@ public class SelectTileController extends MouseAdapter{
      * and the LetterCraze GUI.
      * @param model The entire LetterCraze model.
      * @param app The entire LetterCraze GUI.
+     * @param row The row of the square which this controller is for.
+     * @param col The column of the square which this controller is for.
      */
     public SelectTileController(Model model, Application app, int row, int col) {
         this.model = model;

@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import scandium.common.model.Board;
 import scandium.common.tool.LetterDictionary;
+import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
@@ -16,7 +17,6 @@ import scandium.lettercraze.view.Application;
  * tiles are regenerated but the timer is not refreshed. For a puzzle level, 
  * the tiles are regenerated. 
  * @author Scandium
- * @date 12/6/2016
  */
 public class ResetLevelController extends MouseAdapter{
 
@@ -60,9 +60,10 @@ public class ResetLevelController extends MouseAdapter{
      */
     @Override
     public void mouseClicked(MouseEvent me) {
-    	if (model.getProgress().getCurrentLevelProgress().isPlaying()) {
+    	LevelProgress progress = model.getProgress().getCurrentLevelProgress();
+    	if (progress.isPlaying()) {
 	    	// reset the board
-	    	Board board = model.getProgress().getCurrentLevelProgress().getLevel().getBoard();
+	    	Board board = progress.getLevel().getBoard();
 	    	if (board.shouldRegenerate()) {
 	    		board.clearExistingTiles();
 	    		board.fillEmptySquares(dictionary);
@@ -70,12 +71,15 @@ public class ResetLevelController extends MouseAdapter{
 	    		UndoManager.instance.removeAllActions();
 	    	}
 	    	board.removeSelectedWord();
+
+	    	// reset the players progress
+	    	progress.reset();
 	    	
 	    	// set the board to be playing 
-	    	model.getProgress().getCurrentLevelProgress().setPlaying(true);
+	    	progress.setPlaying(true);
 	    	
-	    	// reset the players progress
-	    	model.getProgress().getCurrentLevelProgress().reset();
+	    	// start up the restrictor again
+	    	progress.getRestrictor().start();
 	    	
 	    	// Clear the Move actions from the undo manager
 	    	UndoManager.instance.forgetActions();

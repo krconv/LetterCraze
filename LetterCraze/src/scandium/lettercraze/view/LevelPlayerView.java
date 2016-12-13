@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
-import scandium.common.model.PuzzleLevel;
 import scandium.common.model.ThemeLevel;
+import scandium.common.tool.LevelRestrictor;
 import scandium.lettercraze.model.LevelProgress;
 import javax.swing.Box;
 import javax.swing.border.EmptyBorder;
@@ -39,16 +39,16 @@ public class LevelPlayerView extends JPanel {
 	private Box buttonsBox;
 	private JButton leaveButton;
 	private JButton resetButton;
+	private Box undoButtonBox;
 	private JButton undoButton;
 	private Box starBox;
 	private Box scoreBox;
 	private JLabel scoreValueLabel;
 	private Box nextStarBox;
 	private JLabel nextStarValueLabel;
-	private Box maxNumWordsBox;
-	private JLabel maxNumWordsValueLabel;
-	private Box timeLeftBox;
-	private JLabel timeLeftValueLabel;
+	private Box restrictorBox;
+	private JLabel restrictorLabel;
+	private JLabel restrictorValueLabel;
 	private Box themeWordBox;
 	private JLabel themeWordValueLabel;
 	private JScrollPane foundWordsScrollPane;
@@ -60,8 +60,8 @@ public class LevelPlayerView extends JPanel {
 	/**
 	 * Creates a new view for the Level Player screen.
 	 * 
-	 * @param model
-	 *            The model.
+	 * @param progress
+	 *            The level progress which will hold information about the player's progress.
 	 */
 	public LevelPlayerView(LevelProgress progress) {
 		this.progress = progress;
@@ -91,6 +91,13 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * @return the undoButtonBox
+	 */
+	public Box getUndoButtonBox() {
+		return undoButtonBox;
+	}
+	
+	/**
 	 * @return the undoButton
 	 */
 	public JButton getUndoButton() {
@@ -104,25 +111,26 @@ public class LevelPlayerView extends JPanel {
 		return boardView;
 	}
 
-	/** 
-	 * @return the maxNumWordsValueLabel
-	 */
-	public JLabel getMaxNumWordsValueLabel(){
-		return maxNumWordsValueLabel;
-	}
 	
 	/**
-	 * @return the timeLeftBox
+	 * @return the restrictor box
 	 */
-	public Box getTimeLeftBox() {
-		return timeLeftBox;
+	public Box getRestrictorBox() {
+		return restrictorBox;
 	}
 
 	/**
-	 * @return the timeLeftValueLabel
+	 * @return the restrictor label
 	 */
-	public JLabel getTimeLeftValueLabel() {
-		return timeLeftValueLabel;
+	public JLabel getRestrictorLabel() {
+		return restrictorLabel;
+	}
+	
+	/**
+	 * @return the restrictor value label
+	 */
+	public JLabel getRestrictorValueLabel() {
+		return restrictorValueLabel;
 	}
 
 	/**
@@ -147,7 +155,8 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
-	 * @return the starOneLabel
+	 * @param index The index of the star label to get.
+	 * @return The star label at the given index.
 	 */
 	public JLabel getStarLabel(int index) {
 		return (JLabel) starBox.getComponent(index);
@@ -155,7 +164,6 @@ public class LevelPlayerView extends JPanel {
 
 	/**
 	 * @return the scoreValueLabel
-	 * @return
 	 */
 	public JLabel getScoreValueLabel(){
 		return scoreValueLabel;
@@ -248,11 +256,13 @@ public class LevelPlayerView extends JPanel {
 		resetButton.setFont(resetButton.getFont().deriveFont(resetButton.getFont().getSize() + 10f));
 		buttonsBox.add(resetButton);
 
-		buttonsBox.add(Box.createRigidArea(new Dimension(20, 20)));
+		undoButtonBox = Box.createHorizontalBox();
+		undoButtonBox.add(Box.createRigidArea(new Dimension(20, 20)));
 		// undo button
 		undoButton = new JButton("Undo");
 		undoButton.setFont(undoButton.getFont().deriveFont(undoButton.getFont().getSize() + 10f));
-		buttonsBox.add(undoButton);
+		undoButtonBox.add(undoButton);
+		buttonsBox.add(undoButtonBox);
 
 		infoPanel.add(buttonsBox);
 
@@ -273,15 +283,11 @@ public class LevelPlayerView extends JPanel {
 		nextStarValueLabel = (JLabel) nextStarBox.getComponent(2);
 		infoPanel.add(nextStarBox);
 
-		// set up max number of words
-		maxNumWordsBox = createLabelValueBox("Max Number of Words", false);
-		maxNumWordsValueLabel = (JLabel) maxNumWordsBox.getComponent(2);
-		infoPanel.add(maxNumWordsBox);
-
-		// set up time left
-		timeLeftBox = createLabelValueBox("Time Left", false);
-		timeLeftValueLabel = (JLabel) timeLeftBox.getComponent(2);
-		infoPanel.add(timeLeftBox);
+		// set up the restrictor information
+		restrictorBox = createLabelValueBox(null, true);
+		restrictorLabel = (JLabel) restrictorBox.getComponent(0);
+		restrictorValueLabel = (JLabel) restrictorBox.getComponent(2);
+		infoPanel.add(restrictorBox);
 
 		// set up theme word
 		themeWordBox = createLabelValueBox("Theme", false);
@@ -350,6 +356,10 @@ public class LevelPlayerView extends JPanel {
 	public void refresh() {
 		Level level = progress.getLevel();
 		if (level != null) {
+			// disable the undo and reset buttons if the level is over
+			undoButton.setEnabled(progress.isPlaying());
+			resetButton.setEnabled(progress.isPlaying());
+			
 			// update the level name
 			levelNameLabel.setText(level.getName());
 			
@@ -386,25 +396,22 @@ public class LevelPlayerView extends JPanel {
 					foundWordsLabel.setText("Found Words (" + progress.getFoundWords().size() + ")"); 
 			}
 			
-			// hide the level specific attributes
-			maxNumWordsBox.setVisible(false);
-			timeLeftBox.setVisible(false);
-			themeWordBox.setVisible(false);
+			// show the restrictor value
+			LevelRestrictor restrictor = progress.getRestrictor();
+			restrictorLabel.setText(restrictor.getLabel() + ":");
+			restrictorValueLabel.setText(restrictor.getValue() + " " + restrictor.getValueUnit());
 			
-			// update the level specific attributes
-			if (level instanceof PuzzleLevel) {
-				// update max num words
-				maxNumWordsValueLabel.setText("" + ((PuzzleLevel) level).getMaxNumWords());
-				maxNumWordsBox.setVisible(true);
-			} else if (level instanceof LightningLevel) {
-				// update the time left
-				int timeLeft = progress.getTimeLeft();
-				timeLeftValueLabel.setText("" + timeLeft + " second" + (timeLeft != 1 ? "s" : ""));
-				timeLeftBox.setVisible(true);
-			} else if (level instanceof ThemeLevel) {
+			// hide the level specific attributes
+			themeWordBox.setVisible(false);
+			undoButtonBox.setVisible(true);
+			
+			if (level instanceof ThemeLevel) {
 				// update the theme word
 				themeWordValueLabel.setText(((ThemeLevel) level).getTheme());
 				themeWordBox.setVisible(true);
+			} else if (level instanceof LightningLevel) {
+				// hide the undo button
+				undoButtonBox.setVisible(false);
 			}
 			
 			// update the board

@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import scandium.common.tool.IWordDictionary;
+import scandium.common.tool.LevelRestrictor;
+import scandium.common.tool.WordLevelRestrictor;
 
 /**
  * A type of Level with a predefined list of theme words.
@@ -100,7 +102,6 @@ public class ThemeLevel extends Level {
 		return 1;
 	}
 	
-	
 	/* (non-Javadoc)
 	 * @see scandium.common.model.Level#isValidWord(scandium.common.model.Word)
 	 */
@@ -123,6 +124,14 @@ public class ThemeLevel extends Level {
 	@Override
 	public String getScoreUnits(boolean plural) {
 		return "word" + (plural ? "s" : "");
+	}
+
+	/* (non-Javadoc)
+	 * @see scandium.common.model.Level#getRestrictor()
+	 */
+	@Override
+	public LevelRestrictor getRestrictor() {
+		return new WordLevelRestrictor(themeWords.size());
 	}
 
 	/* (non-Javadoc)
@@ -156,19 +165,7 @@ public class ThemeLevel extends Level {
      * @return Whether the word was added.
      */
     public boolean addThemeWord(String word) {
-    	//int wordFound = 0;
-    	//if (themeWords.size() > 0){
-    		//for (int i = 0; i < themeWords.size(); i++){
-    			//if (themeWords.get(i) == word){
-    				//wordFound = 1;
-    			//}
-    		//}
-    	//}
-    	//if (wordFound == 1){
-    		//return false;
-    	//}else{
-    		return themeWords.add(word);
-    	//}
+		return themeWords.add(word);
     }
 
     /**

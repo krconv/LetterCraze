@@ -73,6 +73,7 @@ public class Application extends JFrame {
 
 	/**
 	 * Gets the main view of the application.
+	 * @return The view that is currently being displayed.
 	 */
 	public JPanel getView() {
 		return (JPanel) getContentPane().getComponents()[0];
