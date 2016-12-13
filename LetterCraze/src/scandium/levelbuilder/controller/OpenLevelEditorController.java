@@ -1,5 +1,6 @@
 package scandium.levelbuilder.controller;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import scandium.common.model.Level;
@@ -8,9 +9,9 @@ import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium WORK ON THIS
+ * @author Felix
  */
-public class OpenLevelEditorController {
+public class OpenLevelEditorController extends MouseAdapter{
 
 	//attributes
     Model model;
