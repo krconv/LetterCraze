@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import scandium.levelbuilder.controller.CreateNewLevelController;
+import scandium.levelbuilder.controller.SpecifyLevelTypeController;
 import scandium.levelbuilder.model.LevelBuilderState;
 import scandium.levelbuilder.model.Model;
 
@@ -85,11 +86,11 @@ public class Application extends JFrame{
 		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
 //		main_menu.getDeleteLevelButton().addMouseListener(new DeleteLevelController(model,this));
 //		//main_menu.getEditLevelButton().addMouseListener(new OpenLevelEditorController(model,this));
-//			
-//		/* Initialize controllers for SpecifyLevelType*/
-//		level_editor.getPuzzleLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
-//		level_editor.getLightningLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
-//		level_editor.getThemeLevelButton().addActionListener(new SpecifyLevelTypeController(model, this));
+			
+		/* Initialize controllers for SpecifyLevelType*/
+		level_editor.getPuzzleLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
+		level_editor.getLightningLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
+		level_editor.getThemeLevelButton().addActionListener(new SpecifyLevelTypeController(model, this));
 //		
 //		/* Initialize controllers for level editor buttons*/
 //		level_editor.getSaveButton().addActionListener(new SaveLevelController(model,this));

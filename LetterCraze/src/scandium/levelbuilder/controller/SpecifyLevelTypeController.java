@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JRadioButton;
 
-import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
 import scandium.common.model.ThemeLevel;
@@ -14,18 +13,26 @@ import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Scandium WORK ON THIS
+ * This class handles the the user's selection of the level type.
+ * @author Scandium 
+ * @date 13/12/16
  */
 public class SpecifyLevelTypeController implements ActionListener{
-	//attributes
+	/** 
+	 * The entire LevelBuilder model. With this, the controller has access to all entities
+	 * that it may need. 
+	 */
 	Model model;
-	Application app;
-    Level l;
-    EditProgress progress;
+	/** 
+	 * The entire LevelBuilder GUI. With this, the controller has access to all widgets
+	 * that it may need. 
+	 */
+    Application app;
 
     /**
-     * @param model 
-     * @param app
+     * This constructor creates a new SpecifyLevelTypeController.
+     * @param model The entire LevelBuilder Model
+     * @param app The entire LevelBuilder application
      */
     public SpecifyLevelTypeController(Model m, Application a) {
         this.model = m;
@@ -33,34 +40,28 @@ public class SpecifyLevelTypeController implements ActionListener{
     }
 
     /**
-     * @param ActionEvent ae
+     * This function handles the user's selection of the level type
+     * @param ae The ActionEvent representing the user's selection of the level type.
      */
     public void actionPerformed(ActionEvent ae) {
-    	System.out.println("level type button pressed");
-    	
+    	/* Get Buttons from View */
     	JRadioButton puzzle = app.getLevelEditor().getPuzzleLevelButton();
     	JRadioButton lightning = app.getLevelEditor().getLightningLevelButton();
     	JRadioButton theme = app.getLevelEditor().getThemeLevelButton();
     	
-    	
-        if(puzzle.isSelected() == true){
-        	app.getLevelEditor().setPuzzleLevelView();
-        	l = new PuzzleLevel();
-        	this.progress = new EditProgress(l);
-        	System.out.println("changing level to puzzle");
+    	/* Determine Which Button was pressed */
+        if(puzzle.isSelected()){
+        	PuzzleLevel level = new PuzzleLevel();
+        	model.setEditProgress(new EditProgress(level));
+        }else if(lightning.isSelected()){
+        	LightningLevel level = new LightningLevel();
+        	model.setEditProgress(new EditProgress(level));
+        }else if(theme.isSelected()){
+        	ThemeLevel level = new ThemeLevel();
+        	model.setEditProgress(new EditProgress(level));
         }
-        if(lightning.isSelected() == true){
-        	app.getLevelEditor().setLightningLevelView();
-        	l = new LightningLevel();
-        	this.progress = new EditProgress(l);
-        	System.out.println("changing level to lightning");
-        }
-        if(theme.isSelected() == true){
-        	app.getLevelEditor().setThemeLevelView();
-        	l = new ThemeLevel();
-        	this.progress = new EditProgress(l);
-        	System.out.println("changing level to theme");
-        }
+        
+        app.refresh();
     }
 
 }
