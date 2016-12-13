@@ -5,10 +5,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JRadioButton;
 
+import scandium.common.model.Board;
+import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
 import scandium.common.model.ThemeLevel;
-import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
@@ -49,16 +50,29 @@ public class SpecifyLevelTypeController implements ActionListener{
     	JRadioButton lightning = app.getLevelEditor().getLightningLevelButton();
     	JRadioButton theme = app.getLevelEditor().getThemeLevelButton();
     	
+    	Level orig_level = model.getEditProgress().getModified();
     	/* Determine Which Button was pressed */
-        if(puzzle.isSelected()){
+        if(puzzle.isSelected() && !(orig_level instanceof PuzzleLevel)){
         	PuzzleLevel level = new PuzzleLevel();
-        	model.setEditProgress(new EditProgress(level));
-        }else if(lightning.isSelected()){
+        	/*retain old board */
+        	Board board = model.getEditProgress().getModified().getBoard();
+        	board.setShouldRegenerate(true);
+        	level.setBoard(board);
+        	model.getEditProgress().setModified(level);
+        }else if(lightning.isSelected() && !(orig_level instanceof LightningLevel)){
         	LightningLevel level = new LightningLevel();
-        	model.setEditProgress(new EditProgress(level));
-        }else if(theme.isSelected()){
+        	/*retain old board */
+        	Board board = model.getEditProgress().getModified().getBoard();
+        	board.setShouldRegenerate(true);
+        	level.setBoard(board);
+        	model.getEditProgress().setModified(level);
+        }else if(theme.isSelected() && !(orig_level instanceof ThemeLevel)){
         	ThemeLevel level = new ThemeLevel();
-        	model.setEditProgress(new EditProgress(level));
+        	/*retain old board */
+        	Board board = model.getEditProgress().getModified().getBoard();
+        	board.setShouldRegenerate(false);
+        	level.setBoard(board);
+        	model.getEditProgress().setModified(level);
         }
         
         app.refresh();

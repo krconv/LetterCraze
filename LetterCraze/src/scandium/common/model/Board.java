@@ -109,6 +109,14 @@ public class Board {
 	public boolean shouldRegenerate() {
 		return shouldRegenerate;
 	}
+	
+	/**
+	 * This function sets whether a board should regenerate.
+	 * @param value Whether the board should regenerate or not.
+	 */
+	public void setShouldRegenerate(boolean value){
+		shouldRegenerate = value;
+	}
 
 	/**
 	 * Insert a Word into the Board, shifting tiles in the direction opposite to

@@ -3,7 +3,6 @@ package scandium.levelbuilder.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import scandium.common.model.Level;
 import scandium.common.model.PuzzleLevel;
 import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.LevelBuilderState;
@@ -50,10 +49,12 @@ public class CreateNewLevelController extends MouseAdapter{
      * @param me The MouseEvent representing the user's mousePress.
      */
     public void mousePressed(MouseEvent me) {
+    	/* Initialize to puzzle level */
     	PuzzleLevel level = new PuzzleLevel();
     	EditProgress progress = new EditProgress(level);
     	model.setEditProgress(progress);
     	model.setLevelBuilderState(LevelBuilderState.Editor);
+    	/* refresh view */
     	app.refresh();
     }
 
