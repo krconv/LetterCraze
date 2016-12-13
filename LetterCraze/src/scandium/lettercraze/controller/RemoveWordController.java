@@ -76,6 +76,7 @@ public class RemoveWordController extends MouseAdapter{
 			RemoveWordAction action = new RemoveWordAction(progress, selectedWord, progress.getLevel().getWordDictionary(), letter_dictionary);
 			if (action.isValid()) { // try to execute the remove word and record it if anything changed
 				UndoManager.instance.recordAction(action);
+				progress.getRestrictor().recordAction(action);
 				action.execute();
 			}
 			progress.getLevel().getBoard().deselectWord();

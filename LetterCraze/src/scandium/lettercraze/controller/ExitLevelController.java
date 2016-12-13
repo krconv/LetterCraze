@@ -52,8 +52,8 @@ public class ExitLevelController implements ActionListener{
 		boolean shouldSave = false; // whether the progress needs to be saved again
 		
 		// the level isn't being played anymore
+		currentProgress.getRestrictor().stop();
 		currentProgress.setPlaying(false);
-		currentProgress.getLevel().stopTimer();
 		
 		// replace the high score with the score that was just earned if it is higher
 		if (currentProgress.isHigherScore(gameProgress.getProgressForLevel(currentProgress.getLevel()))) {

@@ -1,11 +1,8 @@
 package scandium.lettercraze.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.Timer;
+import java.util.concurrent.Callable;
 
 import scandium.common.model.Level;
 import scandium.common.tool.LetterDictionary;
@@ -67,41 +64,25 @@ public class OpenLevelController extends MouseAdapter{
     		// update the current level progress
     		LevelProgress currentProgress = model.getProgress().getCurrentLevelProgress();
     		currentProgress.setLevel(level);
+    		currentProgress.setPlaying(true);
     		
     		// generate the board if it should be regenerated
     		if (level.getBoard().shouldRegenerate()){
     			level.getBoard().clearExistingTiles();
     			level.getBoard().fillEmptySquares(new LetterDictionary());
-    		}
-    		
-    		// start a timer if the level has one
-    		Timer levelTimer = level.createTimer(new TimerExpiresController(model, app));
-    		
-    		if (levelTimer != null) {
-    			// update the time left for the level 
-    			currentProgress.setTimeLeft(levelTimer.getInitialDelay() / 1000);
-        		
-    			// create a second timer that will update the level progress every second
-    			Timer updateTimer = new Timer(1000, null);
-    			updateTimer.addActionListener(new ActionListener() {
+			}
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (!levelTimer.isRunning()) { // stop updating if the original timer stopped
-							updateTimer.stop();
-							return;
-						}
-						currentProgress.setTimeLeft(currentProgress.getTimeLeft() - 1);
-						app.getLevelPlayer().refresh();
-					}
-    				
-    			});
-    			
-    			// start the timers
-    			levelTimer.start();
-    			updateTimer.start();
-    		}
-    		
+			// start the level restrictor
+			currentProgress.getRestrictor().addActionListener(new EndLevelController(model, app));
+			currentProgress.getRestrictor().setOnValueChanged(new Callable<Void>() {
+				@Override
+				public Void call() {
+					app.getLevelPlayer().refresh();
+					return null;
+				}
+			});
+			currentProgress.getRestrictor().start();
+
     		// update the level to being played
     		currentProgress.setPlaying(true);
 

@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import scandium.common.model.Level;
 import scandium.common.model.Star;
+import scandium.common.tool.LevelRestrictor;
 
 /**
  * An object which contains information about a Player's progress in a Level.
@@ -33,10 +34,10 @@ public class LevelProgress {
 	private List<String> foundWords;
 	@XmlTransient
 	private boolean isPlaying;
-	@XmlTransient
-	private int timeLeft;
 	@XmlElement
 	private boolean isUnlocked;
+	@XmlTransient
+	private LevelRestrictor restrictor;
 
 	/**
 	 * Creates a new Level progress with uninitialized information.
@@ -58,7 +59,6 @@ public class LevelProgress {
 		isPlaying = false;
 		foundWords = new ArrayList<String>();
 		isUnlocked = false;
-		timeLeft = -1;
 	}
 
 	/**
@@ -71,6 +71,7 @@ public class LevelProgress {
 	 */
 	public void setLevel(Level level) {
 		this.level = level;
+		restrictor = level.getRestrictor();
 	}
 
 	/**
@@ -112,22 +113,7 @@ public class LevelProgress {
 	 *            the isPlaying to set
 	 */
 	public void setPlaying(boolean isPlaying) {
-		this.isPlaying = isPlaying;
-	}
-
-	/**
-	 * @return the time left in seconds
-	 */
-	public int getTimeLeft() {
-		return timeLeft;
-	}
-
-	/**
-	 * @param timeLeft
-	 *            the time left to set
-	 */
-	public void setTimeLeft(int timeLeft) {
-		this.timeLeft = timeLeft;
+		this.isPlaying = isPlaying;		
 	}
 
 	/**
@@ -135,6 +121,13 @@ public class LevelProgress {
 	 */
 	public Level getLevel() {
 		return level;
+	}
+
+	/**
+	 * @return the restrictor
+	 */
+	public LevelRestrictor getRestrictor() {
+		return restrictor;
 	}
 
 	/**

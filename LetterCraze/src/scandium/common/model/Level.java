@@ -5,9 +5,6 @@
  */
 package scandium.common.model;
 
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -15,6 +12,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import scandium.common.tool.IWordDictionary;
+import scandium.common.tool.LevelRestrictor;
 import scandium.common.tool.WordDictionary;
 
 /**
@@ -116,19 +114,10 @@ public abstract class Level {
 	}
 	
 	/**
-	 * Creates a timer for this level that will call the action listener once
-	 * the timer expires.
-	 * @param listener The listener to handle the timer expiring.
-	 * @return The timer if it was created, or null if it wasn't.
+	 * Gets a new level restrictor for this level.
+	 * @return A new level restrictor for this level.
 	 */
-	public Timer createTimer(ActionListener listener) {
-		return null; // most of the levels won't create a timer
-	}
-	
-	/**
-	 * Stops any currently running timer.
-	 */
-	public void stopTimer() { }
+	public abstract LevelRestrictor getRestrictor();
 		
 	/**
 	 * Gets the units that the scores for this level are in.
