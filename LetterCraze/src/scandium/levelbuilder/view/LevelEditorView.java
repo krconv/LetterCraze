@@ -20,7 +20,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import scandium.common.model.Level;
-import scandium.common.model.Tile;
+import scandium.common.model.PuzzleLevel;
+import scandium.common.model.LightningLevel;
+import scandium.common.model.ThemeLevel;
 import scandium.common.view.BoardView;
 import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
@@ -156,6 +158,9 @@ public class LevelEditorView extends JPanel{
 
 		//instantiates the BoardView for the level Editor view
 		this.board_view = new BoardView();
+		
+		//instantiates the editProgress
+		this.editProgress = model.getEditProgress();
 	}
 
 	/**
@@ -593,12 +598,19 @@ public class LevelEditorView extends JPanel{
 	 * ~~~~~                                                                               ~~~~~ */
 
 	/**
+	 * This function sets the EditProgress
+	 */
+	public void setEditProgress(EditProgress ep){
+		this.editProgress = ep;
+	}
+	
+	/**
 	 * This function sets the LevelEditor View to represent a puzzle level
 	 */
 	public void setPuzzleLevelView(){
 		level_specific_label.setVisible(true);
 
-		/* Disable theme and lightning                                                           */
+		/* Disable theme and lightning*/
 		theme_name_label.setVisible(false);
 		theme_words_label.setVisible(false);
 		theme_name_textfield.setVisible(false);
@@ -606,12 +618,15 @@ public class LevelEditorView extends JPanel{
 		lightning_time_limit_label.setVisible(false);
 		lightning_time_limit_textfield.setVisible(false);
 
-		/* Enable puzzle                                                                         */
+		/* Enable puzzle*/
 		puzzle_max_num_words_label.setVisible(true);
 		puzzle_max_num_words_textfield.setVisible(true);
 
 		/* Set current view for reference later */
 		currentView = "puzzle";
+		
+		/* Set correct radio button as enabled*/
+		System.out.println("puzzle is selected");
 	}
 
 	/**
@@ -620,7 +635,7 @@ public class LevelEditorView extends JPanel{
 	public void setLightningLevelView(){
 		level_specific_label.setVisible(true);
 
-		/* Disable theme and puzzle                                                              */
+		/* Disable theme and puzzle*/
 		theme_name_label.setVisible(false);
 		theme_words_label.setVisible(false);
 		theme_name_textfield.setVisible(false);
@@ -628,12 +643,15 @@ public class LevelEditorView extends JPanel{
 		puzzle_max_num_words_label.setVisible(false);
 		puzzle_max_num_words_textfield.setVisible(false);
 
-		/* Enable lightning                                                                      */
+		/* Enable lightning*/
 		lightning_time_limit_label.setVisible(true);
 		lightning_time_limit_textfield.setVisible(true);
 
 		/* Set current view for reference later */
 		currentView = "lightning";
+		
+		/* Set correct radio button as enabled*/
+		System.out.println("lightning is selected");
 	}
 
 	/**
@@ -642,13 +660,13 @@ public class LevelEditorView extends JPanel{
 	public void setThemeLevelView(){
 		level_specific_label.setVisible(true);
 
-		/* Disable lightning and puzzle                                                          */
+		/* Disable lightning and puzzle*/
 		puzzle_max_num_words_label.setVisible(false);
 		puzzle_max_num_words_textfield.setVisible(false);
 		lightning_time_limit_label.setVisible(false);
 		lightning_time_limit_textfield.setVisible(false);
 
-		/* Enable theme                                                                          */
+		/* Enable theme*/
 		theme_name_label.setVisible(true);
 		theme_words_label.setVisible(true);
 		theme_name_textfield.setVisible(true);
@@ -656,47 +674,45 @@ public class LevelEditorView extends JPanel{
 
 		/* Set current view for reference later */
 		currentView = "theme";
+		
+		/* Set correct radio button as enabled*/
+		System.out.println("theme is selected");
 	}
 
 	/**
 	 * Refreshes the Level Editor View based upon the EditProgress associated with that View.
 	 */
 	public void refresh(){
-		Level modLevel = model.getEditProgress().getModified();
+		Level modLevel = editProgress.getModified();
 		if(modLevel != null) {
 			for (int row = 0; row < 6; row++) {
 				for (int col = 0; col < 6; col++) {
 					if(modLevel.getBoard().getSquare(row, col).isEnabled()){
 						board_view.getJLabel(row, col).setBackground(Color.WHITE);
-						Tile tile = modLevel.getBoard().getSquare(row, col).getTile();
-						if(tile != null)
-							board_view.getJLabel(row, col).setText(tile.getContent());
-						else 
-							board_view.getJLabel(row, col).setText("");
 					} else {
 						board_view.getJLabel(row, col).setBackground(Color.BLACK);
 					}
 				}
 			}
+
 			//set view to be correct type
 			switch (modLevel.getType().toLowerCase()) {
-			case "puzzle":
-				if(!currentView.equals("puzzle")) {
-					setPuzzleLevelView();
-				}
-				break;
 			case "lightning":
 				if(!currentView.equals("lightning")) {
 					setLightningLevelView();
+					System.out.println("setting view to lightning");
 				}
-				break;
 			case "theme":
 				if(!currentView.equals("theme")) {
 					setThemeLevelView();
+					System.out.println("setting view to theme");
 				}
-				break;
+			case "puzzle":
+				if(!currentView.equals("puzzle")) {
+					setPuzzleLevelView();
+					System.out.println("setting view to puzzle");
+				}
 			}
-
 		}
 	}
 

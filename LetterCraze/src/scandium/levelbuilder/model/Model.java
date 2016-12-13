@@ -24,10 +24,10 @@ public class Model {
 	 * Creates a new model for the LevelBuilder application from file using the GameLoader.
 	 */
 	public Model() {
-		selectedLevel = null;
+		this.selectedLevel = null;
 		// load the levels
 		this.gameLoader = new GameLoader();
-		this.levels = gameLoader.LoadLevels(new ArrayList<Level>());       
+		this.levels = gameLoader.LoadLevels(new ArrayList<Level>());
 	}
 
 	/**

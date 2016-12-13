@@ -6,9 +6,9 @@
 package scandium.levelbuilder.model;
 
 import scandium.common.model.Level;
+import scandium.common.model.PuzzleLevel;
+import scandium.common.model.LightningLevel;
 import scandium.common.model.ThemeLevel;
-import scandium.common.tool.ThemeLevelTileGenerationAlgorithm;
-import scandium.levelbuilder.view.Application;
 
 /**
  * An object to track the changes to a level being edited.
@@ -42,13 +42,16 @@ public class EditProgress {
 	}
 	
 	/**
-	 * This generates the tiles on the board for a theme level. It uses the Theme words to 
-	 * generate the tiles. 
+	 * @return the modified level
 	 */
-	public void generateThemeTiles(Application app){
-		if(!modified.getType().equals("Theme"))return;
-		ThemeLevel level = (ThemeLevel) modified;
-		/* Fill Board */
-		ThemeLevelTileGenerationAlgorithm.populateThemeLevelWithTiles(level);
+	public void setOrignial(Level o) {
+		this.original = o;
+	}
+	
+	/**
+	 * @return the modified level
+	 */
+	public void setModified(Level m) {
+		this.modified = m;
 	}
 }
