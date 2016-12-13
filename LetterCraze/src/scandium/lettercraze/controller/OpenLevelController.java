@@ -32,9 +32,8 @@ public class OpenLevelController extends MouseAdapter{
 	 */
     Application app;
     /**
-     * A instance of a LetterDictionary. With this, the controller can populate the board's tiles.
+     * The current progress of this level.
      */
-    LetterDictionary dictionary;
     LevelProgress progress;
 
     /**
@@ -47,7 +46,6 @@ public class OpenLevelController extends MouseAdapter{
         this.model = model;
         this.app = app;
         this.progress = progress;
-        this.dictionary = new LetterDictionary();
     }
 
     /**
@@ -71,8 +69,10 @@ public class OpenLevelController extends MouseAdapter{
     		currentProgress.setLevel(level);
     		
     		// generate the board if it should be regenerated
-    		if (level.getBoard().shouldRegenerate())
-    			level.getBoard().fillEmptySquares(dictionary);
+    		if (level.getBoard().shouldRegenerate()){
+    			level.getBoard().clearExistingTiles();
+    			level.getBoard().fillEmptySquares(new LetterDictionary());
+    		}
     		
     		// start a timer if the level has one
     		Timer levelTimer = level.createTimer(new TimerExpiresController(model, app));

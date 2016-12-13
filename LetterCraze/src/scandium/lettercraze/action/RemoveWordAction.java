@@ -5,11 +5,11 @@
  */
 package scandium.lettercraze.action;
 
-import scandium.lettercraze.model.LevelProgress;
-
+import scandium.common.model.PuzzleLevel;
 import scandium.common.model.Word;
 import scandium.common.tool.IWordDictionary;
 import scandium.common.tool.LetterDictionary;
+import scandium.lettercraze.model.LevelProgress;
 
 /**
  * Action where a word is removed from the level board.
@@ -46,6 +46,14 @@ public class RemoveWordAction implements IAction {
 
 			// add to found words
 			progress.addFoundWord(generatedString);
+			
+			// If puzzle level and max num words is reached
+			if(progress.getLevel().getType().equals("Puzzle")){
+				PuzzleLevel level = (PuzzleLevel) progress.getLevel();
+				if(level.getMaxNumWords() <= progress.getFoundWords().size()){
+					progress.setPlaying(false);
+				}
+			}
 
 			// update the board
 			progress.getLevel().getBoard().removeSelectedWord();
@@ -71,6 +79,14 @@ public class RemoveWordAction implements IAction {
 
 			// remove the word from found words
 			progress.getFoundWords().remove(generatedString);
+			
+			// If puzzle level and max num words is reached
+			if(progress.getLevel().getType().equals("Puzzle")){
+				PuzzleLevel level = (PuzzleLevel) progress.getLevel();
+				if(level.getMaxNumWords() > progress.getFoundWords().size()){
+					progress.setPlaying(true);
+				}
+			}
 
 			// update the board
 			progress.getLevel().getBoard().insertWord(word);

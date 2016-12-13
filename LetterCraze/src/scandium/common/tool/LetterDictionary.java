@@ -42,10 +42,10 @@ public class LetterDictionary {
     	initialize();
     }
     
-    /** 
-     * This function initializes the letter dictionary. It adds all letters, their scores, 
-     * and their frequencies. 
-     */
+	/**
+	 * Initializes the letter dictionary. It adds all letters, their scores, and
+	 * their frequencies.
+	 */
     void initialize(){
     	/* Add A                                                                                 */
     	letters[0] = "A";
@@ -204,13 +204,13 @@ public class LetterDictionary {
 		return tile;
     }
     
-    /** 
-     * This function returns the score of the given letter 
-     * returns -1 if an error occurred
-     * @return int
+    /**
+     * Determines the score for the given letter.
+     * @param letter The letter to lookup.
+     * @return The score of the letter, or zero if the letter wasn't found.
      */
     public int getLetterScore(String letter){
-    	int score = -1;
+    	int score = 0;
     	for(int i = 0; i < 26; i++){
     		if(letters[i].equals(letter)){
     			score = scores[i];
@@ -218,22 +218,5 @@ public class LetterDictionary {
     		}
     	}
     	return score;
-    }
- 
-
-    /**
-     * This function returns the frequency of the given letter
-     * returns -1 if an error occurred
-     * @return double
-     */
-    public double getLetterFrequency(String letter){
-    	double frequency = -1;
-    	for(int i = 0; i < 26; i++){
-    		if(letters[i].equals(letter)){
-    			frequency = frequencies[i];
-    			break;
-    		}
-    	}
-    	return frequency;
     }
 }

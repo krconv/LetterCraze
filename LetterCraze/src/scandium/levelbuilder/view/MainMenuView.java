@@ -165,6 +165,10 @@ public class MainMenuView extends JPanel{
 		}
 		return levelIcons;
 	}
+	
+	public LevelIconView getLevelIconView(int number){
+		return getLevelIcons().get(number);
+	}
 
 	/* ~~~~~                                                                               ~~~~~ *
 	 * GUI Logic for Controllers                                                                 *

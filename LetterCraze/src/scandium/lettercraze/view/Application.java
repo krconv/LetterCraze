@@ -26,16 +26,6 @@ public class Application extends JFrame {
 	private LevelPlayerView levelPlayer;
 
 	/**
-	 * Creates a new LetterCraze application window without a model.
-	 */
-	public Application() {
-		initializeModel();
-		initializeView();
-		initializeControllers();
-		setView(mainMenu);
-	}
-
-	/**
 	 * Creates a new LetterCraze application window.
 	 * 
 	 * @param model
@@ -110,13 +100,6 @@ public class Application extends JFrame {
 		setResizable(previousIsResizable);
 		setView(previousView);
 	}
-	
-	/**
-	 * Initialize the model.
-	 */
-	private void initializeModel() {
-		model = new Model();
-	}
 
 	/**
 	 * Initialize the view.
@@ -157,6 +140,7 @@ public class Application extends JFrame {
 			}
 		}
 		levelPlayer.getResetButton().addMouseListener(new ResetLevelController(model, this));
+		mainMenu.getResetButton().addMouseListener(new ResetTotalProgressController(model, this, model.getProgress()));
 	}
 }
 

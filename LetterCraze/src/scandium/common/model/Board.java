@@ -43,6 +43,9 @@ public class Board {
 	 * Creates a new Board with the given information.
 	 * Precondition: None.
 	 * Postcondition: The board is created with the given information.
+	 * 
+	 * @param shouldRegenerate Whether new tiles should ever be regenerated.
+	 * @param gravityDirection The direction of gravity
 	 */
 	public Board(boolean shouldRegenerate, GravityDirection gravityDirection) {
 		this.shouldRegenerate = shouldRegenerate;
@@ -122,6 +125,7 @@ public class Board {
 	 */
 	public boolean insertWord(Word word) {
 		// insert the tiles back in to the board by iterating row by row
+		if (word == null){ return false; }
 		for (int row = 0; row < 6; row++) {
 			for (int col = 0; col < 6; col++) {
 				if (word.getBoardSquares().contains(getSquare(row, col))) {
@@ -287,7 +291,7 @@ public class Board {
 		return didItWork;
 		*/
 	}
-	
+
 	/**
 	 * Fills empty squares on the Board with random tiles from the given
 	 * dictionary. 
@@ -406,21 +410,17 @@ public class Board {
 	 * @return Whether the Board is valid.
 	 */
 	public boolean isValid() {
-		boolean isItValid = true;
-		
-		if(this.squares == null){isItValid = false;}
-		if(this.gravityDirection == null){isItValid = false;}
-		if(getNumEnabled(this.squares) < 9){isItValid = false;};
-		
-		return isItValid;
+		return squares != null && getNumEnabled() >= 9;
 	}
 	
-	//helper for isValid()
-	//gets the number of enabled squares
-	public int getNumEnabled(BoardSquare[][] squares) {
+	/**
+	 * Counts how many squares on the board are enabled.
+	 * @return The number of squares on the board that are enabled.
+	 */
+	private int getNumEnabled() {
 		int indicator = 0;
         for (int i = 0; i < squares.length; i++){
-        	for (int j = 0; j < squares.length; j++){
+        	for (int j = 0; j < squares[i].length; j++){
         		if (squares[i][j].isEnabled()){
         			indicator++;
         		}

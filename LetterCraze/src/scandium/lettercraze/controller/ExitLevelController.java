@@ -10,20 +10,27 @@ import scandium.lettercraze.undo.UndoManager;
 import scandium.lettercraze.view.Application;
 
 /**
- * @author Richard Cole
+ * This class handles the exiting of a level. It determines if the current progress of the game 
+ * is better than the previous progress of the game, and if so, it saves the new progress to the 
+ * GameProgress object and to file. 
+ * @author Scandium
+ * @date 12/10/2016
  */
 public class ExitLevelController implements ActionListener{
-	private Model model;
-	private Application app;
-
-	/**
-	 * Default constructor
+	/** 
+	 * The entire LetterCraze model. With this, the controller has access to all entities
+	 * that it may need. 
 	 */
-	public ExitLevelController() {
-	}
-
+	Model model;
+	/** 
+	 * The entire LetterCraze GUI. With this, the controller has access to all widgets
+	 * that it may need. 
+	 */
+    Application app;
 
 	/**
+	 * This constructor instantiates a new instance of the ExitLevelController. It accepts 
+	 * the entire model and the entire application(GUI).
 	 * @param m The Model the current game is running on
 	 * @param app The current application being run
 	 */
@@ -33,9 +40,11 @@ public class ExitLevelController implements ActionListener{
 	}
 	
 	/**
+	 * This function handles the mouse click on the exit level button. It returns the view to the main menu
+	 * and updates the progress (if the current progress is better than the old saved progress.
+	 * <p>entry condition: the button this controller is attached to is pressed.</p>
+	 * <p>exit condition: the View has been set to the Main Menu and progress in the level has been saved if needed.</p>
 	 * @param ActionEvent ae The mouse is clicked on the button
-	 * entry condition: the button this controller is attached to is pressed
-	 * exit condition: the View has been set to the Main Menu and progress in the level has been saved if needed
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
@@ -56,7 +65,7 @@ public class ExitLevelController implements ActionListener{
 		// unlock the next level if the player got a star on the level that was just played
 		if (currentProgress.getStarCount() > 0)
 			// save the progress if the next level wasn't already unlocked
-			shouldSave = gameProgress.unlockNextLevel();
+			gameProgress.unlockNextLevel();
 		
 		// save the progress if it was changed
 		if (shouldSave)

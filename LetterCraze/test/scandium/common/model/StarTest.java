@@ -19,23 +19,19 @@ public class StarTest extends TestCase {
 	 * Test method for {@link scandium.common.model.Star#Star()}.
 	 */
 	public void testStar() {
-		// test that the default constructor sets the threshold to be uninitialized
+		// test that the default constructor sets the threshold to be valid
 		Star star = new Star();
-		assertFalse(star.isValid());
+		assertTrue(star.isValid());
 		
 		// test that the threshold constructor sets the threshold
 		star = new Star(1);
 		assertEquals(1, star.getThreshold());
+		assertTrue(star.isValid());
 		
-		// test that giving the constructor a negative threshold throws an exception
-		try {
-			star = new Star(-1);
-			fail();
-		} catch (IllegalArgumentException e) {
-			
-		} catch (Exception e) {
-			fail(); // threw the wrong exception
-		}
+		// test that giving the constructor a negative threshold sets the valid and is invalid
+		star = new Star(-1);
+		assertEquals(-1, star.getThreshold());
+		assertFalse(star.isValid());
 	}
 
 	/**
@@ -47,26 +43,13 @@ public class StarTest extends TestCase {
 		star.setThreshold(0);
 		assertEquals(0, star.getThreshold());
 		
-		// test that getting an uninitialized threshold throws an exception
-		star = new Star();
-		try {
-			star.getThreshold();
-			fail();
-		} catch (IllegalStateException e) {
-			
-		} catch (Exception e) {
-			fail(); // threw the wrong exception
-		}
+		// test that you can set a positive threshold
+		star.setThreshold(1);
+		assertEquals(1, star.getThreshold());
 		
-		// test that setting a negative threshold throws an exception
-		try {
-			star.setThreshold(-1);
-			fail();
-		} catch (IllegalArgumentException e) {
-			
-		} catch (Exception e) {
-			fail(); // threw the wrong exception
-		}
+		// test that you can set a negative threshold
+		star.setThreshold(-1);
+		assertEquals(-1, star.getThreshold());
 		
 	}
 
@@ -83,16 +66,9 @@ public class StarTest extends TestCase {
 		assertFalse(star.isObtained(4));
 		assertFalse(star.isObtained(-1));
 		
-		// test that checking is obtained when the threshold is uninitialized throws an exception
-		star = new Star();
-		try {
-			star.isObtained(1);
-			fail();
-		} catch (IllegalStateException e) {
-			
-		} catch (Exception e) {
-			fail(); // threw the wrong exception
-		}
+		// test that checking is obtained when the threshold is negative is correct
+		star.setThreshold(-1);
+		assertTrue(star.isObtained(0));
 	}
 
 	/**
@@ -104,7 +80,7 @@ public class StarTest extends TestCase {
 		assertTrue(star.isValid());
 		
 		// test that an uninitialized threshold is invalid
-		star = new Star();
+		star = new Star(-1);
 		assertFalse(star.isValid());
 	}
 }
