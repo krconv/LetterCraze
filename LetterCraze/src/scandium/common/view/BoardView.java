@@ -157,7 +157,7 @@ public class BoardView extends JPanel{
         int indicator = 0;
         for (int i = 0; i < squares.length; i++){
         	for (int j = 0; j < squares.length; j++){
-        		if ((squares[i][j].getText() == "") && (squares[i][j].isEnabled() == true)){
+        		if ((squares[i][j].getText() == "") && (squares[i][j].getBackground() == Color.WHITE)){
         			squares[i][j].setText(dictionary.getRandomTile().getContent());
         			indicator = 1;
         		}
