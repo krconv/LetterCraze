@@ -90,7 +90,7 @@ public class Application extends JFrame{
 		/* Initialize controllers for entering and leaving level editor*/
 		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
 		main_menu.getDeleteLevelButton().addMouseListener(new DeleteLevelController(model,this));
-		main_menu.getEditLevelButton().addMouseListener(new OpenLevelEditorController(model,this));
+		//main_menu.getEditLevelButton().addMouseListener(new OpenLevelEditorController(model,this));
 			
 		/* Initialize controllers for SpecifyLevelType*/
 		level_editor.getPuzzleLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
