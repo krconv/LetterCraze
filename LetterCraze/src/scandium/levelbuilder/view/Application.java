@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 
 import scandium.levelbuilder.controller.CreateNewLevelController;
 import scandium.levelbuilder.controller.GenerateBoardArrangementController;
+import scandium.levelbuilder.controller.LeaveLevelEditorController;
 import scandium.levelbuilder.controller.SpecifyLevelTypeController;
 import scandium.levelbuilder.controller.ToggleEnableController;
 import scandium.levelbuilder.model.LevelBuilderState;
@@ -96,7 +97,7 @@ public class Application extends JFrame{
 //		
 //		/* Initialize controllers for level editor buttons*/
 //		level_editor.getSaveButton().addActionListener(new SaveLevelController(model,this));
-//		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));
+		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));
 		level_editor.getGenerateButton().addMouseListener(new GenerateBoardArrangementController(model,this));
 		
 		/* Initialize controllers for the 'board squares' */
