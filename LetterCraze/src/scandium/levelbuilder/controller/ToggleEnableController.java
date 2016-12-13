@@ -59,6 +59,9 @@ public class ToggleEnableController extends MouseAdapter{
     	Level current = progress.getModified();
     	BoardSquare board_square = current.getBoard().getSquare(row, col);
     	
+    	/* Remove all tiles when editing the board */
+    	current.getBoard().clearExistingTiles();
+    	
     	//enable/disable toggle logic
     	if(board_square.isEnabled() == true){
     		board_square.setEnabled(false);

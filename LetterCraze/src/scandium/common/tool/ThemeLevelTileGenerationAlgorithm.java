@@ -1,6 +1,7 @@
 package scandium.common.tool;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import scandium.common.model.Board;
 import scandium.common.model.BoardSquare;
@@ -14,19 +15,27 @@ public class ThemeLevelTileGenerationAlgorithm {
 	 * below to embed the theme words into the boards. 
 	 * @param level The ThemeLevel to be populated
 	 */
-	public static void populateThemeLevelWithTiles(ThemeLevel level){
+	public static void populateThemeLevelWithTiles(ThemeLevel level, long seed){
 		/* Get the Board */
 		Board board = level.getBoard();
+		
+		/* Remove existing tiles from board */
+		board.clearExistingTiles();
+		
 		/* Get The Theme Words and sort them */
 		ArrayList<String> words = level.getThemeWords();
-		words = sortWordsByLength(words);
-		
-		/* Insert First Word */
-		while(!insertFirstWord(words.remove(0), board));
-		
-		/* Insert remaining words */
-		for(String w : words){
-			insertWord(w, board);
+		if(!words.isEmpty()){
+			System.out.println(words);
+			words = sortWordsByLength(words);
+			System.out.println(words);
+			/* Insert First Word */
+			while(!words.isEmpty() && !insertFirstWord(words.remove(0), board));
+			
+			Random random = new Random(seed);
+			/* Insert remaining words */
+			for(String w : words){
+				insertWord(w, board, random);
+			}
 		}
 		/* Populate empty squares with random tiles */
 		board.fillEmptySquares(new LetterDictionary());
@@ -70,12 +79,13 @@ public class ThemeLevelTileGenerationAlgorithm {
 	 * @param board The Board to insert the word into.
 	 * @return boolean Whether the word was inserted or not.
 	 */
-	static boolean insertWord(String word, Board board){
+	static boolean insertWord(String word, Board board, Random random){
 		ArrayList<Tile> tiles = convertToTiles(word);
 		if(numberOfEmptySquares(board) < tiles.size()) return false;
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < 6; j++){
 				boolean[][] word_inserts = new boolean[6][6];
+				if(random.nextBoolean() || random.nextBoolean()) continue;
 				for(int m = 0; m < 6; m++){
 					for(int n = 0; n < 6; n++){
 						word_inserts[m][n] = false;
