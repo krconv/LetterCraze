@@ -24,6 +24,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import scandium.common.tool.LetterDictionary;
+
 public class BoardView extends JPanel{
 
 	/* Serial ID                                                                                 */
@@ -144,5 +146,48 @@ public class BoardView extends JPanel{
 	 */
 	public void setBoardSquareText(String letter, int row, int col){
 		squares[row][col].setText(letter);
+	}
+	
+	
+	/** 
+	 * This function randomly sets the letter for all JLabels on a BoardView's squares[][].
+	 * @param dictionary The LetterDictionary used to get random letters
+	 */
+	public boolean fillEmptySquares(LetterDictionary dictionary) {
+        int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if ((squares[i][j].getText() == "") && (squares[i][j].getBackground() == Color.WHITE)){
+        			squares[i][j].setText(dictionary.getRandomTile().getContent());
+        			indicator = 1;
+        		}
+        	}
+        }
+        if (indicator == 1){
+        	return true;
+        }else{
+        	return false;
+        }
+    }
+	
+	
+	/** 
+	 * This function clears the letters for all JLabels on a BoardView's squares[][].
+	 */
+	public boolean clearExistingLetters() {
+		int indicator = 0;
+        for (int i = 0; i < squares.length; i++){
+        	for (int j = 0; j < squares.length; j++){
+        		if (squares[i][j].getText() != ""){
+        			squares[i][j].setText("");
+        			indicator = 1;
+        		}
+        	}
+        }
+        if (indicator == 1){
+        	return true;
+        }else{
+        	return false;
+        }
 	}
 }

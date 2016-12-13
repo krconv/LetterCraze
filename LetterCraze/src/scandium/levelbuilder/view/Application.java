@@ -12,10 +12,14 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import scandium.common.tool.LetterDictionary;
 import scandium.levelbuilder.controller.CreateNewLevelController;
+import scandium.levelbuilder.controller.DeleteLevelController;
+import scandium.levelbuilder.controller.GenerateBoardArrangementController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
-import scandium.levelbuilder.controller.PreviewBoardArrangementController;
+import scandium.levelbuilder.controller.OpenLevelEditorController;
+import scandium.levelbuilder.controller.SaveLevelController;
+import scandium.levelbuilder.controller.SpecifyLevelTypeController;
+import scandium.levelbuilder.controller.ToggleEnableController;
 import scandium.levelbuilder.model.Model;
 
 public class Application extends JFrame{
@@ -83,9 +87,27 @@ public class Application extends JFrame{
 	 * Initializes the LevelBuilder Controllers
 	 */
 	private void initializeControllers() {
+		/* Initialize controllers for entering and leaving level editor*/
 		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
-		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));	
-		level_editor.getGenerateButton().addMouseListener(new PreviewBoardArrangementController(model, this, new LetterDictionary()));
+		main_menu.getDeleteLevelButton().addMouseListener(new DeleteLevelController(model,this));
+		//main_menu.getEditLevelButton().addMouseListener(new OpenLevelEditorController(model,this));
+			
+		/* Initialize controllers for SpecifyLevelType*/
+		level_editor.getPuzzleLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
+		level_editor.getLightningLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
+		level_editor.getThemeLevelButton().addActionListener(new SpecifyLevelTypeController(model, this));
+		
+		/* Initialize controllers for level editor buttons*/
+		level_editor.getSaveButton().addActionListener(new SaveLevelController(model,this));
+		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));
+		level_editor.getGenerateButton().addMouseListener(new GenerateBoardArrangementController(model,this));
+		
+		/* Initialize controllers for the 'board squares' */
+		for(int i = 0; i < 6; i++){
+			for(int j = 0; j < 6; j++){
+				level_editor.getBoardView().getJLabel(i, j).addMouseListener(new ToggleEnableController(model, this, i, j));
+			}
+		}
 	}
 
 	/* ~~~~~                                                                               ~~~~~ *

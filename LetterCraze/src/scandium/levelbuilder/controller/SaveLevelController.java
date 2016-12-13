@@ -1,44 +1,36 @@
 package scandium.levelbuilder.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
  * @author Scandium
  */
-public class SaveLevelController {
+public class SaveLevelController implements ActionListener{
 
-    /**
-     * Default constructor
-     */
-    public SaveLevelController() {
-    }
-
-    /**
-     * 
-     */
+	//attributes
     Model model;
-
-    /**
-     * 
-     */
     Application app;
 
     /**
      * @param model 
      * @param app
      */
-    public SaveLevelController(Model model, Application app) {
-        // TODO implement here
+    public SaveLevelController(Model m, Application a) {
+        this.model = m;
+        this.app = a;
     }
 
     /**
      * @param ActionEvent ae
      */
     public void actionPerformed(ActionEvent ae) {
-        // TODO implement here
+    	EditProgress progress = model.getEditProgress();
+    	//progress.saveProgress();
     }
 
 }
