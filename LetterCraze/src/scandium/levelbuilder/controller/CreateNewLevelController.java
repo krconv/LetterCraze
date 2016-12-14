@@ -36,11 +36,11 @@ public class CreateNewLevelController extends MouseAdapter{
     /**
      * @param MouseEvent me
      */
-    public void mousePressed(MouseEvent me) {
+    public void mouseClicked(MouseEvent me) {
     	model.setSelectedLevel(l);
     	model.setEditProgress(progress);
     	app.getLevelEditor().setEditProgress(progress);
-    	app.getLevelEditor().getPuzzleLevelButton().setSelected(true);
+    	app.getLevelEditor().setPuzzleLevelView();
     	app.setViewLevelEditor();
     	app.getLevelEditor().refresh();
     }
