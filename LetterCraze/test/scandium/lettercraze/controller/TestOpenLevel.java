@@ -1,5 +1,6 @@
 package scandium.lettercraze.controller;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 import scandium.common.testresources.ScandiumLetterCrazeTestCase;
@@ -12,7 +13,10 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 
 	protected void setUp() throws Exception {
 		app = new Application(new Model());
+		app.setVisible(true);
 		app.setView(app.getMainMenu());
+		app.getModel().getProgress().getProgressForLevel(app.getModel().getLevels().get(1)).setUnlocked(true);
+		app.getModel().getProgress().getProgressForLevel(app.getModel().getLevels().get(2)).setUnlocked(true);
 	}
 
 	protected void tearDown() throws Exception {
@@ -67,16 +71,16 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 
 		assertEquals(true,app.getLevelPlayer().getStarBox().isVisible());
 		assertEquals(0,app.getLevelPlayer().getLevelProgress().getStarCount());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(0).isVisible());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(1).isVisible());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(2).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(0).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(1).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(2).isVisible());
 
 		assertEquals(true,app.getLevelPlayer().getNextStarBox().isVisible());
 		assertEquals(true,app.getLevelPlayer().getNextStarValueLabel().isVisible());
 		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getLevel().getStar(0).getThreshold()) + " point",app.getLevelPlayer().getNextStarValueLabel().getText());
 
 		assertEquals(true,app.getLevelPlayer().getScoreBox().isVisible());		
-		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getScore()) + " points",app.getLevelPlayer().getScoreValueLabel());
+		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getScore()) + " points",app.getLevelPlayer().getScoreValueLabel().getText());
 
 		assertEquals(true,app.getLevelPlayer().getRestrictorBox().isVisible());
 		assertEquals("Words Left:",app.getLevelPlayer().getRestrictorLabel().getText());
@@ -85,12 +89,12 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 		assertEquals(true,app.getLevelPlayer().getBoardView().isVisible());	
 		for(int row = 0; row < 6; row++){
 			for(int col = 0; col < 6; col++){
-				if((row==2 && (col == 3 || col == 4)) || (row == 3 && (col == 3 || col == 4)) 
-						|| (row == 5 && (col == 3 || col == 4 || col == 5 || col == 6)) 
-						|| (row == 6 && (col == 3 || col == 4 || col == 5 || col == 6))) {
-					assertEquals(false, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).isEnabled());
+				if((row==1 && (col == 2 || col == 3)) || (row == 2 && (col == 2 || col == 3)) 
+						|| (row == 4 && (col == 2 || col == 3 || col == 4 || col == 5)) 
+						|| (row == 5 && (col == 2 || col == 3 || col == 4 || col == 5))) {
+					assertEquals(Color.BLACK, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).getBackground());
 				} else {
-					assertEquals(true, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).isEnabled());
+					assertEquals(Color.WHITE, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).getBackground());
 				}
 			}
 		}
@@ -129,33 +133,35 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 
 		assertEquals(true,app.getLevelPlayer().getStarBox().isVisible());
 		assertEquals(0,app.getLevelPlayer().getLevelProgress().getStarCount());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(0).isVisible());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(1).isVisible());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(2).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(0).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(1).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(2).isVisible());
 
 		assertEquals(true,app.getLevelPlayer().getNextStarBox().isVisible());
 		assertEquals(true,app.getLevelPlayer().getNextStarValueLabel().isVisible());
 		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getLevel().getStar(0).getThreshold()) + " word",app.getLevelPlayer().getNextStarValueLabel().getText());
 
 		assertEquals(true,app.getLevelPlayer().getScoreBox().isVisible());		
-		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getScore()) + " words",app.getLevelPlayer().getScoreValueLabel());
+		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getScore()) + " words",app.getLevelPlayer().getScoreValueLabel().getText());
 
 		assertEquals(true,app.getLevelPlayer().getRestrictorBox().isVisible());
 		assertEquals("Time Left:",app.getLevelPlayer().getRestrictorLabel().getText());
 		//have no way to check what the timer label has because we don't know how long it took to get here
 
 		assertEquals(true,app.getLevelPlayer().getBoardView().isVisible());	
-		for(int row = 0; row < 6; row++){
-			for(int col = 0; col < 6; col++){
-				if((row == 1 && (col == 1 || col == 2)) 
-						|| (row == 2 && (col == 5 || col == 6))
-						|| (row == 3 && (col == 1 || col == 2)) 
-						|| (row == 4 && (col == 5 || col == 6))
-						|| (row == 5 && (col == 1 || col == 2))
-						|| (row == 6 && (col == 5 || col == 6))) {
-					assertEquals(false, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).isEnabled());
+		for(int row = 0; row < 6; row++) {
+			for(int col = 0; col < 6; col++) {
+				if((row == 0 && (col == 0 || col == 1)) 
+						|| (row == 1 && (col == 4 || col == 5))
+						|| (row == 2 && (col == 0 || col == 1)) 
+						|| (row == 3 && (col == 4 || col == 5))
+						|| (row == 4 && (col == 0 || col == 1))
+						|| (row == 5 && (col == 4 || col == 5))) {
+					//System.out.println("col: " + col + " row: " + row + " " + app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).getBackground());
+					assertEquals(Color.BLACK, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).getBackground());
 				} else {
-					assertEquals(true, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).isEnabled());
+					//System.out.println("col: " + col + " row: " + row + " " + app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).getBackground());
+					assertEquals(Color.WHITE, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).getBackground());
 				}
 			}
 		}
@@ -194,16 +200,16 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 
 		assertEquals(true,app.getLevelPlayer().getStarBox().isVisible());
 		assertEquals(0,app.getLevelPlayer().getLevelProgress().getStarCount());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(0).isVisible());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(1).isVisible());
-		assertEquals(false,app.getLevelPlayer().getStarLabel(2).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(0).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(1).isVisible());
+		assertEquals(true,app.getLevelPlayer().getStarLabel(2).isVisible());
 
 		assertEquals(true,app.getLevelPlayer().getNextStarBox().isVisible());
 		assertEquals(true,app.getLevelPlayer().getNextStarValueLabel().isVisible());
 		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getLevel().getStar(0).getThreshold()) + " word",app.getLevelPlayer().getNextStarValueLabel().getText());
 
 		assertEquals(true,app.getLevelPlayer().getScoreBox().isVisible());		
-		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getScore()) + " words",app.getLevelPlayer().getScoreValueLabel());
+		assertEquals(Integer.toString(app.getLevelPlayer().getLevelProgress().getScore()) + " words",app.getLevelPlayer().getScoreValueLabel().getText());
 
 		assertEquals(true,app.getLevelPlayer().getRestrictorBox().isVisible());
 		assertEquals("Words Left:",app.getLevelPlayer().getRestrictorLabel().getText());
@@ -212,15 +218,15 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 		assertEquals(true,app.getLevelPlayer().getBoardView().isVisible());	
 		for(int row = 0; row < 6; row++){
 			for(int col = 0; col < 6; col++){
-				if((row == 1 && (col == 1 || col == 5 || col == 6)) 
-						|| (row == 2 && (col == 1 || col == 5 || col == 6))
-						|| (row == 3 && (col == 1 || col == 5 || col == 6)) 
-						|| (row == 4 && (col == 1 || col == 6))
-						|| (row == 5 && (col == 1 || col == 6))
-						|| (row == 6)) {
-					assertEquals(false, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).isEnabled());
+				if((row == 0 && (col == 0 || col == 4 || col == 5)) 
+						|| (row == 1 && (col == 0 || col == 4 || col == 5))
+						|| (row == 2 && (col == 0 || col == 4 || col == 5)) 
+						|| (row == 3 && (col == 0 || col == 5))
+						|| (row == 4 && (col == 0 || col == 5))
+						|| (row == 5)) {
+					assertEquals(Color.BLACK, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).getBackground());
 				} else {
-					assertEquals(true, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).isEnabled());
+					assertEquals(Color.WHITE, app.getLevelPlayer().getBoardView().getBoardSquareLabel(row, col).getBackground());
 				}
 			}
 		}

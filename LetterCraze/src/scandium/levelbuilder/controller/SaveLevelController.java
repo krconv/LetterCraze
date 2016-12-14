@@ -10,6 +10,8 @@ import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
 import scandium.common.model.ThemeLevel;
+import scandium.lettercraze.model.LevelProgress;
+import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 import scandium.levelbuilder.view.LevelEditorView;
@@ -140,6 +142,7 @@ public class SaveLevelController implements ActionListener{
     		return;
     	}
     	
+    	/* Prepare level */
     	Level level = model.getEditProgress().getModified();
     	level.setName(level_name);
     	level.getStars()[0].setThreshold(star1);
@@ -153,12 +156,31 @@ public class SaveLevelController implements ActionListener{
     		((ThemeLevel) level).setTheme(theme_name);
     		((ThemeLevel) level).setThemeWords(theme_words);
     	}
+    	/* Prepare Levels and level progresses */
     	int index = model.getLevels().indexOf(model.getEditProgress().getOriginal());
     	model.getLevels().remove(model.getEditProgress().getOriginal());
     	if(index == -1){
     		model.addLevel(level);
+    		/* Check if should unlock */
+    		LevelProgress progress = new LevelProgress(level);
+    		if(model.getLevelProgresses().get(model.getLevelProgresses().size() - 1).getStarCount() > 0){
+    			progress.setUnlocked(true);
+    		}
+    		model.getLevelProgresses().add(progress);
     	}else{
+    		model.getLevelProgresses().remove(index);
     		model.getLevels().add(index, level);
+    		/* Check if should unlock */
+    		LevelProgress progress = new LevelProgress(level);
+    		if(model.getLevelProgresses().get(index - 1).getStarCount() > 0){
+    			progress.setUnlocked(true);
+    			for(int i = index; i < model.getLevelProgresses().size(); i++){
+    				model.getLevelProgresses().remove(i);
+    				model.getLevelProgresses().add(i, new LevelProgress(level));
+    			}
+    		}
+    		model.getLevelProgresses().add(index, progress);
+    		model.setEditProgress(new EditProgress(level));
     	}
     	
     	/* Save levels to File */
