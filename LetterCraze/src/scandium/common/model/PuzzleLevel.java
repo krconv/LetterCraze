@@ -93,7 +93,7 @@ public class PuzzleLevel extends Level {
      */
     @Override
     public PuzzleLevel copy() {
-    	PuzzleLevel levelCopy = new PuzzleLevel(super.getName(), super.getBoard(), super.getStars(), maxNumWords);
+    	PuzzleLevel levelCopy = new PuzzleLevel(super.getName(), super.getBoard().copy(), super.getStars(), maxNumWords);
         return levelCopy;
     }
 

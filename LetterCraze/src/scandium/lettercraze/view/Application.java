@@ -75,6 +75,13 @@ public class Application extends JFrame {
 		getContentPane().removeAll();
 		getContentPane().add(view);
 		getContentPane().revalidate();
+		if(view.equals(levelPlayer)) {
+			mainMenu.setVisible(false);
+			levelPlayer.setVisible(true);
+		} else if (view.equals(mainMenu)) {
+			mainMenu.setVisible(true);
+			levelPlayer.setVisible(false);
+		}
 		getContentPane().repaint();
 	}
 

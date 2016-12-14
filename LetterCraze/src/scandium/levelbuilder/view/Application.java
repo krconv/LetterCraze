@@ -20,6 +20,7 @@ import scandium.levelbuilder.controller.LeaveLevelEditorController;
 import scandium.levelbuilder.controller.SaveLevelController;
 import scandium.levelbuilder.controller.SpecifyLevelTypeController;
 import scandium.levelbuilder.controller.ToggleEnableController;
+import scandium.levelbuilder.model.LevelBuilderState;
 import scandium.levelbuilder.model.Model;
 
 public class Application extends JFrame{

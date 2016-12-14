@@ -5,54 +5,73 @@ import java.awt.event.MouseEvent;
 
 import scandium.common.model.BoardSquare;
 import scandium.common.model.Level;
-import scandium.common.model.PuzzleLevel;
-import scandium.common.model.LightningLevel;
-import scandium.common.model.ThemeLevel;
 import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * @author Felix
+ * This controller handles the toggling of board squares in the level builder. 
+ * @author Scandium
+ * @date 12/13/16
  */
 public class ToggleEnableController extends MouseAdapter{
-	//attributes
-    Model model;
+	/** 
+	 * The entire LevelBuilder model. With this, the controller has access to all entities
+	 * that it may need. 
+	 */
+	Model model;
+	/** 
+	 * The entire LevelBuilder GUI. With this, the controller has access to all widgets
+	 * that it may need. 
+	 */
     Application app;
+    /**
+     * The row of this board square
+     */
     int row;
+    /**
+     * The column of this board square
+     */
     int col;
     
     /**
-     * @param m 
-     * @param a
+     * This constructor instantiates a new ToggleEnableController.
+     * @param model The entire LevelBuilder model.
+     * @param app The entire LevelBuilder application.
+     * @param row The row of this BoardSquare.
+     * @param col The Column of this BoardSquare.
      */
-    public ToggleEnableController(Model m, Application a, int r, int c) {
-    	this.model = m;
-    	this.app = a;
-    	this.row = r;
-    	this.col = c;
+    public ToggleEnableController(Model model, Application app, int row, int col) {
+    	this.model = model;
+    	this.app = app;
+    	this.row = row;
+    	this.col = col;
     }
 
     /**
-     * @param MouseEvent me
+     * This function handles the user's mouse click on a board square. It toggles
+     * the selected board square.
+     * @param Mme The MouseEvent representing the mouseClick
      */
     public void mouseClicked(MouseEvent me) {
     	//finding boardSquare
     	EditProgress progress = model.getEditProgress();
     	Level current = progress.getModified();
-    	BoardSquare bs = current.getBoard().getSquare(row, col);
+    	BoardSquare board_square = current.getBoard().getSquare(row, col);
+    	
+    	/* Remove all tiles when editing the board */
+    	current.getBoard().clearExistingTiles();
     	
     	//enable/disable toggle logic
-    	if(bs.isEnabled() == true){
-    		bs.setEnabled(false);
+    	if(board_square.isEnabled() == true){
+    		board_square.setEnabled(false);
     	}
     	else{
-    		bs.setEnabled(true);
+    		board_square.setEnabled(true);
     	}
     	
     	//refresh the display
-    	app.getLevelEditor().refresh();
-    	System.out.println("refreshing");
+    	app.refresh();
     }
     
 }

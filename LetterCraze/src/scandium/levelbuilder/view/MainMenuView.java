@@ -28,7 +28,6 @@ import scandium.common.model.Level;
 import scandium.common.view.WrapLayout;
 import scandium.levelbuilder.controller.SelectLevelController;
 import scandium.levelbuilder.model.Model;
-import scandium.levelbuilder.view.LevelIconView;
 
 public class MainMenuView extends JPanel{
 
@@ -59,14 +58,14 @@ public class MainMenuView extends JPanel{
 	public MainMenuView(Model model, Application app) {
 		this.model = model;
 		this.app = app;
-		initialize();
+		initializeView();
 		refresh();
 	}
 
 	/**
 	 * This function initializes the GUI widgets (attributes).
 	 */
-	void initialize(){
+	void initializeView(){
 		// set the background color and layout manager
 		setBackground(new Color(0, 191, 255));
 		setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -191,6 +190,9 @@ public class MainMenuView extends JPanel{
 	public void refresh() {
 		// update the level icons
 		List<Level> levels = model.getLevels();
+		for(LevelIconView liv : getLevelIcons()){
+			levels_panel.remove(liv);
+		}
 		for (int i = 0; i < levels.size(); i++) {
 			if (getLevelIcons().size() < i + 1) {
 				LevelIconView iconView = new LevelIconView(model, levels.get(i));
@@ -202,7 +204,6 @@ public class MainMenuView extends JPanel{
 		// refresh the icon views
 		for (LevelIconView iconView : getLevelIcons())
 			iconView.refresh();
-		
 		repaint();
 	}
 

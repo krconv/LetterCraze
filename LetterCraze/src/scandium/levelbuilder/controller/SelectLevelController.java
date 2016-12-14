@@ -1,7 +1,7 @@
 /**
  * SelectLevelController.java
  * 
- * @author Kodey Converse (kodey@krconv.com)
+ * @author Scandium
  */
 package scandium.levelbuilder.controller;
 
@@ -13,39 +13,46 @@ import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 
 /**
- * A controller that handles the event of a builder selecting a level in the main menu.
+ * This class handles the user's mouse click on a level icon. 
  */
-public class SelectLevelController extends MouseAdapter {
-	//attributes
-    private Model model;
-    private Application app;
-    private Level level;
+public class SelectLevelController extends MouseAdapter{
+
+	/** 
+	 * The entire LevelBuilder model. With this, the controller has access to all entities
+	 * that it may need. 
+	 */
+	Model model;
+	/** 
+	 * The entire LevelBuilder GUI. With this, the controller has access to all widgets
+	 * that it may need. 
+	 */
+    Application app;
+    /** 
+     * The level that this controller is tied to.
+     */
+    Level level;
     
     /**
-     * Creates a new controller which will select a level in the main menu.
-     * @param model The model.
-     * @param app The application.
-     * @param level The level this controller is for.
+     * This constructor instantiates a new SelectLevelController.
+     * @param model The entire LevelBuilder model.
+     * @param app The entire LevelBuilder application.
      */
-    public SelectLevelController(Model model, Application app, Level level) {
-        this.model = model;
-        this.app = app;
+    public SelectLevelController(Model m, Application a, Level level) {
+        this.model = m;
+        this.app = a;
         this.level = level;
     }
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// select the level and refresh the display
-		if (model.getSelectedLevel() == level)
-			// deselect it
-			model.setSelectedLevel(null);
-		else
-			model.setSelectedLevel(level);
-		app.getMainMenu().refresh();
-	}
-
     
+    /**
+     * This function handles the mouse click on a level icon.
+     * @param me The MouseEvent representing the user's mouse click on the level icon.
+     */
+    public void mouseClicked(MouseEvent me) {
+    	if(model.getSelectedLevel() == null || !model.getSelectedLevel().equals(level))
+    		model.setSelectedLevel(level);
+    	else model.setSelectedLevel(null);
+    	app.getMainMenu().refresh();
+    }
+
 }
