@@ -20,6 +20,7 @@ public class EditProgressTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		board = new Board(true, GravityDirection.Up);
 		original = new LightningLevel();
 		original.setBoard(board);
 		original.setName("Hello");
@@ -45,7 +46,7 @@ public class EditProgressTest extends TestCase {
 	 * Test method for {@link scandium.levelbuilder.model.EditProgress#getModified()}.
 	 */
 	public void testGetModified() {
-		assertEquals(board, ep.getModified().getBoard());
+		assertNotNull(ep.getModified().getBoard());
 		assertEquals(5000, ((LightningLevel) ep.getModified()).getTimeLimit()); //GetTimeLimit Not defined for type Level
 		assertEquals("Hello", ep.getModified().getName());
 	}

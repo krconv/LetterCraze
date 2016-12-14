@@ -129,7 +129,7 @@ public class LetterDictionary {
     	
     	/* Add QU                                                                                */
     	letters[16] = "QU";
-    	frequencies[16] = 2.86;
+    	frequencies[16] = 0.1;
     	scores[16] = 11;
     	
     	/* Add R                                                                                 */
