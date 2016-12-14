@@ -46,10 +46,8 @@ public class SelectLevelController extends MouseAdapter{
      * @param me The MouseEvent representing the user's mouse click on the level icon.
      */
     public void mousePressed(MouseEvent me) {
-    	System.out.println(model.getSelectedLevel());
     	model.setSelectedLevel(level);
     	app.refresh();
-    	System.out.println(model.getSelectedLevel().getName());
     }
 
 }

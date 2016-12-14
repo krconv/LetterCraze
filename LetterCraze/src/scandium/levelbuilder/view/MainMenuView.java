@@ -24,7 +24,6 @@ import javax.swing.border.LineBorder;
 import scandium.common.model.Level;
 import scandium.common.view.WrapLayout;
 import scandium.levelbuilder.model.Model;
-import scandium.levelbuilder.view.LevelIconView;
 
 public class MainMenuView extends JPanel{
 
@@ -190,6 +189,10 @@ public class MainMenuView extends JPanel{
 		// refresh the level icons
 		for (LevelIconView icon : getLevelIcons()){
 			icon.refresh();
+			if(icon.getLevel().equals(model.getSelectedLevel()))
+				icon.setBorder(new LineBorder(Color.BLACK, 5, true));
+			else 
+				icon.setBorder(null);
 		}
 		repaint();
 	}
