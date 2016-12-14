@@ -66,9 +66,9 @@ public class ProgressLoaderTest extends TestCase {
 		/* Save the Level Progresses */
 		long gameToken = 25;
 		List<LevelProgress> loaded_progresses;
-		loader.SaveLevelProgress(progresses, gameToken);
+		loader.SaveLevelProgress(progresses);
 		/* Load the Level Progresses */
-		loaded_progresses = loader.LoadLevelProgress(levels, gameToken);
+		loaded_progresses = loader.LoadLevelProgress(levels);
 		
 		/* Confirm that save and load occurred properly */
 		LevelProgress actual = loaded_progresses.get(0);
@@ -83,7 +83,7 @@ public class ProgressLoaderTest extends TestCase {
 		assertEquals(loaded_progresses.size(), 3);
 		
 		/* Test Loading with Invalid Cookie, Should generate completely new level progresses */
-		loaded_progresses = loader.LoadLevelProgress(levels, gameToken + 10);
+		loaded_progresses = loader.LoadLevelProgress(levels);
 		
 		assertEquals(loaded_progresses.size(), 3);
 		assertEquals(loaded_progresses.get(0).getScore(), 0);
