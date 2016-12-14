@@ -35,7 +35,7 @@ public class OpenLevelEditorController extends MouseAdapter{
     /**
      * @param MouseEvent me
      */
-    public void mousePressed(MouseEvent me) {
+    public void mouseClicked(MouseEvent me) {
     	//load selected level
     	model.setSelectedLevel(l);
     	model.setEditProgress(progress);
