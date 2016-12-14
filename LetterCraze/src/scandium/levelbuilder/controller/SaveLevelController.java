@@ -10,6 +10,7 @@ import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
 import scandium.common.model.ThemeLevel;
+import scandium.lettercraze.model.LevelProgress;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 import scandium.levelbuilder.view.LevelEditorView;
@@ -140,6 +141,7 @@ public class SaveLevelController implements ActionListener{
     		return;
     	}
     	
+    	/* Prepare level */
     	Level level = model.getEditProgress().getModified();
     	level.setName(level_name);
     	level.getStars()[0].setThreshold(star1);
@@ -153,12 +155,16 @@ public class SaveLevelController implements ActionListener{
     		((ThemeLevel) level).setTheme(theme_name);
     		((ThemeLevel) level).setThemeWords(theme_words);
     	}
+    	/* Prepare Levels and level progresses */
     	int index = model.getLevels().indexOf(model.getEditProgress().getOriginal());
     	model.getLevels().remove(model.getEditProgress().getOriginal());
     	if(index == -1){
     		model.addLevel(level);
+    		model.getLevelProgresses().add(new LevelProgress(level));
     	}else{
+    		model.getLevelProgresses().remove(index);
     		model.getLevels().add(index, level);
+    		model.getLevelProgresses().add(index, new LevelProgress(level));
     	}
     	
     	/* Save levels to File */
