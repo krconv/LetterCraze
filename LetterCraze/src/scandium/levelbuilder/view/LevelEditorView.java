@@ -631,6 +631,9 @@ public class LevelEditorView extends JPanel{
 		/* Enable puzzle*/
 		puzzle_max_num_words_label.setVisible(true);
 		puzzle_max_num_words_textfield.setVisible(true);
+		
+		//sets Puzzle Level Button to be selected
+    	getPuzzleLevelButton().setSelected(true);
 
 		/* Set current view for reference later */
 		currentView = "puzzle";
@@ -658,6 +661,9 @@ public class LevelEditorView extends JPanel{
 		/* Enable lightning*/
 		lightning_time_limit_label.setVisible(true);
 		lightning_time_limit_textfield.setVisible(true);
+		
+		//sets Lightning Level Button to be selected
+    	getLightningLevelButton().setSelected(true);
 
 		/* Set current view for reference later */
 		currentView = "lightning";
@@ -685,6 +691,9 @@ public class LevelEditorView extends JPanel{
 		theme_words_label.setVisible(true);
 		theme_name_textfield.setVisible(true);
 		theme_words_textarea.setVisible(true);
+		
+		//sets Theme Level Button to be selected
+    	getThemeLevelButton().setSelected(true);
 
 		/* Set current view for reference later */
 		currentView = "theme";
