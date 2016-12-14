@@ -147,7 +147,7 @@ public class ThemeLevel extends Level {
      */
     @Override
     public ThemeLevel copy() {
-    	ThemeLevel levelCopy = new ThemeLevel(super.getName(), super.getBoard(), super.getStars(), theme, new ArrayList<String>(themeWords));
+    	ThemeLevel levelCopy = new ThemeLevel(super.getName(), super.getBoard().copy(), super.getStars(), theme, new ArrayList<String>(themeWords));
         return levelCopy;
     }
 

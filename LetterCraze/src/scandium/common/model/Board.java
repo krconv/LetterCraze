@@ -300,6 +300,8 @@ public class Board {
 		*/
 	}
 
+
+	
 	/**
 	 * Fills empty squares on the Board with random tiles from the given
 	 * dictionary. 
@@ -435,5 +437,18 @@ public class Board {
         	}
         }
         return indicator;
+	}
+	
+	/**
+	 * This function copies the board object.
+	 */
+	public Board copy(){
+		Board copy = new Board(shouldRegenerate, gravityDirection);
+		for(int i = 0; i < 6; i++){
+			for(int j = 0; j < 6; j++){
+				copy.getSquare(i, j).setEnabled(getSquare(i,j).isEnabled());
+			}
+		}
+		return copy;
 	}
 }

@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import scandium.levelbuilder.controller.CreateNewLevelController;
 import scandium.levelbuilder.controller.GenerateBoardArrangementController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
+import scandium.levelbuilder.controller.OpenLevelEditorController;
+import scandium.levelbuilder.controller.SelectLevelController;
 import scandium.levelbuilder.controller.SpecifyLevelTypeController;
 import scandium.levelbuilder.controller.ToggleEnableController;
 import scandium.levelbuilder.model.LevelBuilderState;
@@ -88,7 +90,7 @@ public class Application extends JFrame{
 		/* Initialize controllers for entering and leaving level editor*/
 		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
 //		main_menu.getDeleteLevelButton().addMouseListener(new DeleteLevelController(model,this));
-//		//main_menu.getEditLevelButton().addMouseListener(new OpenLevelEditorController(model,this));
+		main_menu.getEditLevelButton().addMouseListener(new OpenLevelEditorController(model,this));
 			
 		/* Initialize controllers for SpecifyLevelType*/
 		level_editor.getPuzzleLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
@@ -105,6 +107,11 @@ public class Application extends JFrame{
 			for(int j = 0; j < 6; j++){
 				level_editor.getBoardView().getJLabel(i, j).addMouseListener(new ToggleEnableController(model, this, i, j));
 			}
+		}
+		
+		/* Initialize Controllers for Main Menu Level Icons */
+		for(LevelIconView liv : main_menu.getLevelIcons()){
+			liv.addMouseListener(new SelectLevelController(model, this, liv.getLevel()));
 		}
 	}
 
