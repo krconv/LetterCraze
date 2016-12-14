@@ -179,11 +179,12 @@ public class MainMenuView extends JPanel{
 	public void refresh(){
 		// update the level icons
 		List<Level> levels = model.getLevels();
+		for(LevelIconView liv : getLevelIcons()){
+			levelsPanel.remove(liv);
+		}
 		for (int i = 0; i < levels.size(); i++) {
-			if (getLevelIcons().size() < i + 1) {
-				LevelIconView iconView = new LevelIconView(levels.get(i));
-				levelsPanel.add(iconView);
-			}
+			LevelIconView iconView = new LevelIconView(levels.get(i));
+			levelsPanel.add(iconView);
 		}
 
 		// refresh the level icons

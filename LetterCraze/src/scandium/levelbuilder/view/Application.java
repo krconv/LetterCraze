@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import scandium.levelbuilder.controller.CreateNewLevelController;
+import scandium.levelbuilder.controller.DeleteLevelController;
 import scandium.levelbuilder.controller.GenerateBoardArrangementController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
 import scandium.levelbuilder.controller.OpenLevelEditorController;
@@ -89,7 +90,7 @@ public class Application extends JFrame{
 	private void initializeControllers() {
 		/* Initialize controllers for entering and leaving level editor*/
 		main_menu.getNewLevelButton().addMouseListener(new CreateNewLevelController(model,this));
-//		main_menu.getDeleteLevelButton().addMouseListener(new DeleteLevelController(model,this));
+		main_menu.getDeleteLevelButton().addMouseListener(new DeleteLevelController(model,this));
 		main_menu.getEditLevelButton().addMouseListener(new OpenLevelEditorController(model,this));
 			
 		/* Initialize controllers for SpecifyLevelType*/
