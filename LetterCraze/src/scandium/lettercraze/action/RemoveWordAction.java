@@ -15,11 +15,11 @@ import scandium.lettercraze.model.LevelProgress;
  * Action where a word is removed from the level board.
  */
 public class RemoveWordAction implements IAction {
-	private LevelProgress progress;
-	private Word word;
-	private String generatedString;
-	private IWordDictionary wordDictionary;
-	private LetterDictionary letterDictionary;
+	LevelProgress progress;
+	Word word;
+	String generatedString;
+	IWordDictionary wordDictionary;
+	LetterDictionary letterDictionary;
 
     /**
      * Creates a new remove word action.
@@ -109,5 +109,6 @@ public class RemoveWordAction implements IAction {
 	public boolean isValid() {
 		return wordDictionary.isWord(generatedString);
 	}
+
 
 }

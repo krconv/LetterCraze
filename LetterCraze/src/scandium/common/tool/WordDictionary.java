@@ -36,7 +36,6 @@ public class WordDictionary implements IWordDictionary {
      * This function initializes the dictionary to hold the words stored in Dictionary.txt
      */
     void initialize(){
-     	
 		Iterator<String> it = null;
 		try {
 	    	URL url = getClass().getResource("Dictionary.txt");
@@ -52,6 +51,11 @@ public class WordDictionary implements IWordDictionary {
 		}
     }
 
+    /**
+     * Force loads the dictionary.
+     */
+    public static void load() {}
+    
     /**
      * Check whether a word is contained in the dictionary.
      * @param word The word to check.

@@ -6,6 +6,7 @@
 package scandium.common.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -28,7 +29,7 @@ public class ThemeLevel extends Level {
 	private String theme;
 	@XmlElementWrapper(name = "themeWords")
 	@XmlElement(name = "word")
-	private ArrayList<String> themeWords;
+	private List<String> themeWords;
 	@XmlTransient
 	private IWordDictionary dictionary;
 
@@ -83,15 +84,15 @@ public class ThemeLevel extends Level {
 	/**
 	 * @return the themeWords
 	 */
-	public ArrayList<String> getThemeWords() {
+	public List<String> getThemeWords() {
 		return themeWords;
 	}
 
 	/**
-	 * @param themeWords the themeWords to set
+	 * @param theme_words the themeWords to set
 	 */
-	public void setThemeWords(ArrayList<String> themeWords) {
-		this.themeWords = themeWords;
+	public void setThemeWords(List<String> theme_words) {
+		this.themeWords = theme_words;
 	}
 	
 	/* (non-Javadoc)
@@ -147,7 +148,7 @@ public class ThemeLevel extends Level {
      */
     @Override
     public ThemeLevel copy() {
-    	ThemeLevel levelCopy = new ThemeLevel(super.getName(), super.getBoard(), super.getStars(), theme, new ArrayList<String>(themeWords));
+    	ThemeLevel levelCopy = new ThemeLevel(super.getName(), super.getBoard().copy(), super.getStars(), theme, new ArrayList<String>(themeWords));
         return levelCopy;
     }
 

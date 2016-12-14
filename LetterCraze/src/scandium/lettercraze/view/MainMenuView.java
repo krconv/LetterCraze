@@ -15,12 +15,13 @@ import scandium.lettercraze.model.LevelProgress;
 import scandium.lettercraze.model.Model;
 
 import java.awt.BorderLayout;
-import javax.swing.Box;
+import javax.swing.BoxLayout;
+
 import java.awt.Component;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -75,6 +76,15 @@ public class MainMenuView extends JPanel {
 	}
 	
 	/**
+	 * Gets the level icon at the given index.
+	 * @param index The index.
+	 * @return The level icon at the given index.
+	 */
+	public LevelIconView getLevelIcon(int index) {
+		return (LevelIconView) levelsPanel.getComponent(index);
+	}
+	
+	/**
      * Initializes the view.
      */
     private void initialize() {
@@ -88,21 +98,29 @@ public class MainMenuView extends JPanel {
 		titleLabel.setFont(titleLabel.getFont().deriveFont(titleLabel.getFont().getSize() + 50f));
 		add(titleLabel, BorderLayout.NORTH);
 		
+		// add the side panel
+		JPanel sidePanel = new JPanel();
+		sidePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		sidePanel.setLayout(new BorderLayout());
+		sidePanel.setOpaque(false);
+				
 		// add the button panel
 		buttonPanel = new JPanel();
 		buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 		buttonPanel.setOpaque(false);
+		Dimension buttonSize = new Dimension(200, 40);
 		
 		// add the reset button
 		resetButton = new JButton("Reset Progress");
-		resetButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		resetButton.setPreferredSize(buttonSize);
+		resetButton.setMaximumSize(buttonSize);
 		resetButton.setFont(resetButton.getFont().deriveFont(resetButton.getFont().getSize() + 10f));
 		buttonPanel.add(resetButton);
 		
-		Component verticalStrut = Box.createVerticalStrut(10);
-		buttonPanel.add(verticalStrut);
-		add(buttonPanel, BorderLayout.EAST);
+		sidePanel.add(buttonPanel, BorderLayout.SOUTH);
+		
+		add(sidePanel, BorderLayout.EAST);
 		
 		// add the level panel
 		levelsPanel = new JPanel();

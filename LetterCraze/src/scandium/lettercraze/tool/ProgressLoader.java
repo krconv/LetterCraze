@@ -33,7 +33,7 @@ public class ProgressLoader {
 	 * Creates a new progress loader which will load and save to the default save file.
 	 */
 	public ProgressLoader() {
-		savePath = Paths.get(System.getProperty("user.home"), "LetterCrazeProgress.xml").toString();
+		savePath = Paths.get("LetterCrazeProgress.xml").toString();
 	}
 	
 	/**
@@ -54,13 +54,11 @@ public class ProgressLoader {
 	 * 
 	 * @param levels
 	 *              The levels that the progresses are for.
-	 * @param gameToken
-	 *              The unique game token used to determine whether the progresses are valid.
 	 * 
 	 * @return The progress loaded from file or an empty list if the file couldn't be loaded.
 	 */
-	public List<LevelProgress> LoadLevelProgress(List<Level> levels, long gameToken) {
-		return LoadLevelProgress(levels, gameToken, new ArrayList<LevelProgress>());
+	public List<LevelProgress> LoadLevelProgress(List<Level> levels) {
+		return LoadLevelProgress(levels, new ArrayList<LevelProgress>());
 	}
 
 	/**
@@ -70,14 +68,12 @@ public class ProgressLoader {
 	 *
 	 * @param levels
 	 *              The levels that the progresses are for.
-	 * @param gameToken
-	 *              The unique game token used to determine whether the progresses are valid.
 	 * @param list
 	 *            The list object to add all the loaded levels to.
 	 * 
 	 * @return The progress loaded from file or an empty list if the file couldn't be loaded.
 	 */
-	public List<LevelProgress> LoadLevelProgress(List<Level> levels, long gameToken, List<LevelProgress> list) {
+	public List<LevelProgress> LoadLevelProgress(List<Level> levels, List<LevelProgress> list) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(ProgressContainer.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -87,25 +83,34 @@ public class ProgressLoader {
 			if (file.exists() && !file.isDirectory()) {
 				ProgressContainer unmarshalled = (ProgressContainer) unmarshaller.unmarshal(file);
 	
-				if (unmarshalled.getToken() == gameToken) {
-					// add the results to the passed in list
-					int pos = 0;
-					for (LevelProgress progress : unmarshalled.getProgress()) {
-						progress.setLevel(levels.get(pos++));
-						list.add(progress);
+				// add the results to the passed in list
+				boolean dirty = false;
+				for (int i = 0; i < levels.size(); i++) {
+					Level level = levels.get(i);
+					LevelProgress progress;
+					// get the progress for this level
+					if (unmarshalled.getProgress().size() > i) { // there are enough progresses
+						progress = unmarshalled.getProgress().get(i);
+						// invalidate the progress if the tokens don't match
+						if (level.getToken() != progress.getToken())
+							dirty = true;
+						
+						progress.setLevel(level);
+					} else {
+						dirty = true;
+						progress = new LevelProgress(level);
 					}
-				} else {
-					// the token doesn't match so the progress is reset
-					boolean first = true;
-					// add brand new progresses with the first one set to unlocked
-					for (Level level : levels) {
-						LevelProgress progress = new LevelProgress(level);
-						if (first) {
-							progress.setUnlocked(true);
-							first = false;
-						}
-						list.add(progress);
+					
+					// reset the progress if it doesn't match the level
+					if (dirty) {
+						progress.reset();
 					}
+					
+					// unlock the level if it should be unlocked
+					progress.setUnlocked(i == 0 || unmarshalled.getProgress().get(i - 1).getStarCount() > 0);
+					
+					// add the progress
+					list.add(progress);
 				}
 			} else {
 				// the progress file doesn't exist
@@ -137,12 +142,10 @@ public class ProgressLoader {
 	 * 
 	 * @param progress
 	 *            The progress to save.
-	 * @param gameToken
-	 *              The unique game token.
 	 * 
 	 * @return Whether any progress was saved.
 	 */
-	public boolean SaveLevelProgress(List<LevelProgress> progress, long gameToken) {
+	public boolean SaveLevelProgress(List<LevelProgress> progress) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(ProgressContainer.class);
 			Marshaller marshaller = context.createMarshaller();
@@ -150,7 +153,7 @@ public class ProgressLoader {
 			File file = new File(savePath);
 
 			// save the levels
-			marshaller.marshal(new ProgressContainer(progress, gameToken), file);
+			marshaller.marshal(new ProgressContainer(progress), file);
 
 		} catch (JAXBException e) {
 			System.err.println("Could not save progress to \"" + savePath + "\"!");
@@ -174,8 +177,6 @@ public class ProgressLoader {
 	@XmlRootElement
 	@XmlAccessorType(XmlAccessType.FIELD)
 	private static class ProgressContainer {
-		@XmlElement
-		private long token;
 		@XmlElementWrapper(name = "progresses")
 		@XmlElement(name = "progress")
 		private List<LevelProgress> progress;
@@ -194,12 +195,9 @@ public class ProgressLoader {
 		 * 
 		 * @param progress
 		 *            The progress to be contained.
-		 * @param gameToken
-		 *            The game token for the levels the progresses are for.
 		 */
-		public ProgressContainer(List<LevelProgress> progress, long gameToken) {
+		public ProgressContainer(List<LevelProgress> progress) {
 			this.progress = progress;
-			token = gameToken;
 		}
 
 		/**
@@ -207,13 +205,6 @@ public class ProgressLoader {
 		 */
 		public List<LevelProgress> getProgress() {
 			return progress;
-		}
-
-		/**
-		 * @return the token
-		 */
-		public long getToken() {
-			return token;
 		}
 	}
 }
