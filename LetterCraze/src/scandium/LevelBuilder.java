@@ -27,6 +27,5 @@ public class LevelBuilder {
 			// don't care if we can't wait 5 seconds for the splash screen
 		}
 		app.setViewMainMenu();
-		app.getLevelEditor().setPuzzleLevelView();
 	}
 }

@@ -23,8 +23,8 @@ import javax.swing.border.LineBorder;
 
 import scandium.common.model.Level;
 import scandium.common.view.WrapLayout;
+import scandium.levelbuilder.controller.SelectLevelController;
 import scandium.levelbuilder.model.Model;
-import scandium.levelbuilder.view.LevelIconView;
 
 public class MainMenuView extends JPanel{
 
@@ -35,6 +35,7 @@ public class MainMenuView extends JPanel{
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
 	Model model;
+  Application app;
 	JLabel title_label;
 	JButton new_level_button;
 	JButton edit_level_button;
@@ -49,8 +50,9 @@ public class MainMenuView extends JPanel{
 	 * Creates the view for the Main Menu screen with the given Model.
 	 * @param model The model.
 	 */
-	public MainMenuView(Model model) {
+	public MainMenuView(Model model, Application app) {
 		this.model = model;
+		this.app = app;
 		initializeView();
 		refresh();
 	}
@@ -172,16 +174,22 @@ public class MainMenuView extends JPanel{
 	public void refresh(){
 		// update the level icons
 		List<Level> levels = model.getLevels();
+		for(LevelIconView liv : getLevelIcons()){
+			levelsPanel.remove(liv);
+		}
 		for (int i = 0; i < levels.size(); i++) {
-			if (getLevelIcons().size() < i + 1) {
-				LevelIconView iconView = new LevelIconView(levels.get(i));
-				levelsPanel.add(iconView);
-			}
+			LevelIconView iconView = new LevelIconView(levels.get(i));
+			iconView.addMouseListener(new SelectLevelController(model, app, iconView.getLevel()));
+			levelsPanel.add(iconView);
 		}
 
 		// refresh the level icons
 		for (LevelIconView icon : getLevelIcons()){
 			icon.refresh();
+			if(icon.getLevel().equals(model.getSelectedLevel()))
+				icon.setBorder(new LineBorder(Color.BLACK, 5, true));
+			else 
+				icon.setBorder(null);
 		}
 		repaint();
 	}
