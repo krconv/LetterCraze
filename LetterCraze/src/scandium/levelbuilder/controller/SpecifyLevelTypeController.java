@@ -63,7 +63,13 @@ public class SpecifyLevelTypeController implements ActionListener {
     	modified_level.setBoard(orig_level.getBoard());
     	for (int i = 0; i < 3; i++)
     		modified_level.getStar(i).setThreshold(orig_level.getStar(i).getThreshold());
-    	        
+    	
+    	// update should regenerate
+    	if (modified_level instanceof ThemeLevel) 
+    		modified_level.getBoard().setShouldRegenerate(false);
+    	else
+    		modified_level.getBoard().setShouldRegenerate(true);
+    		
     	// update the modified copy
     	model.getEditProgress().setModified(modified_level);
     	app.getLevelEditor().clearFields();
