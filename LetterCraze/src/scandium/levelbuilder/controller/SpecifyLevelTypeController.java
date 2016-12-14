@@ -3,9 +3,6 @@ package scandium.levelbuilder.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JRadioButton;
-
-import scandium.common.model.Board;
 import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
@@ -18,7 +15,7 @@ import scandium.levelbuilder.view.Application;
  * @author Scandium 
  * @date 13/12/16
  */
-public class SpecifyLevelTypeController implements ActionListener{
+public class SpecifyLevelTypeController implements ActionListener {
 	/** 
 	 * The entire LevelBuilder model. With this, the controller has access to all entities
 	 * that it may need. 
@@ -45,37 +42,32 @@ public class SpecifyLevelTypeController implements ActionListener{
      * @param ae The ActionEvent representing the user's selection of the level type.
      */
     public void actionPerformed(ActionEvent ae) {
-    	/* Get Buttons from View */
-    	JRadioButton puzzle = app.getLevelEditor().getPuzzleLevelButton();
-    	JRadioButton lightning = app.getLevelEditor().getLightningLevelButton();
-    	JRadioButton theme = app.getLevelEditor().getThemeLevelButton();
-    	
     	Level orig_level = model.getEditProgress().getModified();
-    	/* Determine Which Button was pressed */
-        if(puzzle.isSelected() && !(orig_level instanceof PuzzleLevel)){
-        	PuzzleLevel level = new PuzzleLevel();
-        	/*retain old board */
-        	Board board = model.getEditProgress().getModified().getBoard();
-        	board.setShouldRegenerate(true);
-        	level.setBoard(board);
-        	model.getEditProgress().setModified(level);
-        }else if(lightning.isSelected() && !(orig_level instanceof LightningLevel)){
-        	LightningLevel level = new LightningLevel();
-        	/*retain old board */
-        	Board board = model.getEditProgress().getModified().getBoard();
-        	board.setShouldRegenerate(true);
-        	level.setBoard(board);
-        	model.getEditProgress().setModified(level);
-        }else if(theme.isSelected() && !(orig_level instanceof ThemeLevel)){
-        	ThemeLevel level = new ThemeLevel();
-        	/*retain old board */
-        	Board board = model.getEditProgress().getModified().getBoard();
-        	board.setShouldRegenerate(false);
-        	level.setBoard(board);
-        	model.getEditProgress().setModified(level);
-        }
-        
-        app.refresh();
+    	Level modified_level = null;
+    	
+    	// create the new level
+    	switch (((String) app.getLevelEditor().getLevelTypeComboBox().getSelectedItem()).toLowerCase()) {
+    	case "puzzle":
+    		modified_level = new PuzzleLevel();
+    		break;
+    	case "lightning":
+    		modified_level = new LightningLevel();
+    		break;
+    	case "theme":
+    		modified_level = new ThemeLevel();
+    		break;
+    	}
+    	
+    	// copy over the old attributes
+    	modified_level.setName(orig_level.getName());
+    	modified_level.setBoard(orig_level.getBoard());
+    	for (int i = 0; i < 3; i++)
+    		modified_level.getStar(i).setThreshold(orig_level.getStar(i).getThreshold());
+    	        
+    	// update the modified copy
+    	model.getEditProgress().setModified(modified_level);
+    	app.getLevelEditor().clearFields();
+        app.getLevelEditor().refresh();
     }
 
 }

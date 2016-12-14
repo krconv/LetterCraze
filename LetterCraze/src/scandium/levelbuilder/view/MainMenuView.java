@@ -189,21 +189,25 @@ public class MainMenuView extends JPanel{
 	 */
 	public void refresh() {
 		// update the level icons
+		levels_panel.removeAll();
 		List<Level> levels = model.getLevels();
-		for(LevelIconView liv : getLevelIcons()){
-			levels_panel.remove(liv);
-		}
 		for (int i = 0; i < levels.size(); i++) {
-			if (getLevelIcons().size() < i + 1) {
-				LevelIconView iconView = new LevelIconView(model, levels.get(i));
-				iconView.addMouseListener(new SelectLevelController(model, app, levels.get(i)));				
-				levels_panel.add(iconView);
-			}
+			LevelIconView iconView = new LevelIconView(model, levels.get(i));
+			iconView.addMouseListener(new SelectLevelController(model, app, levels.get(i)));	
+			iconView.refresh();			
+			levels_panel.add(iconView);
 		}
 		
-		// refresh the icon views
-		for (LevelIconView iconView : getLevelIcons())
-			iconView.refresh();
+		// disable/enable level specific buttons
+		if (model.getSelectedLevel() != null) {
+			edit_level_button.setEnabled(true);
+			delete_level_button.setEnabled(true);
+		} else {
+			edit_level_button.setEnabled(false);
+			delete_level_button.setEnabled(false);
+		}
+		// need to revalidate because we re-added icons
+		revalidate();
 		repaint();
 	}
 

@@ -17,7 +17,6 @@ import scandium.common.model.LightningLevel;
 import scandium.common.model.ThemeLevel;
 import scandium.common.tool.LevelRestrictor;
 import scandium.lettercraze.model.LevelProgress;
-import scandium.levelbuilder.view.BoardView;
 
 import javax.swing.Box;
 import javax.swing.border.EmptyBorder;
@@ -323,7 +322,8 @@ public class LevelPlayerView extends JPanel {
 		add(infoPanel, BorderLayout.WEST);
 
 		// add the board view
-		boardView = new BoardView(progress);
+		boardView = new BoardView();
+		boardView.setProgress(progress);
 		boardView.setBorder(new EmptyBorder(10, 10, 10, 10));
 		boardView.setPreferredSize(new Dimension(750, 750));
 		add(boardView, BorderLayout.CENTER);

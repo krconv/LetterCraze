@@ -11,7 +11,6 @@ package scandium.levelbuilder.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -92,9 +92,9 @@ public class LevelEditorView extends JPanel{
 		setLayout(new BorderLayout(0, 0));
 		
 		/* Initialize Title Label                                                                */
-		title_label = new JLabel();
-		title_label.setBounds(10, 10, 1280, 40);
-		title_label.setFont(new Font(title_label.getFont().getName(), Font.BOLD, 36));
+		title_label = new JLabel("Editor");
+		title_label.setForeground(Color.BLACK);
+		title_label.setFont(title_label.getFont().deriveFont(title_label.getFont().getSize() + 50f));
 		add(title_label, BorderLayout.NORTH);
 		
 		// create the side panel
@@ -104,6 +104,8 @@ public class LevelEditorView extends JPanel{
 		side_panel.setOpaque(false);
 		
 		JPanel fields_panel = new JPanel();
+		fields_panel.setLayout(new BoxLayout(fields_panel, BoxLayout.Y_AXIS));
+		fields_panel.setOpaque(false);
 		
 		// create the level type combo box
 		Box level_type_box = createLabelTextFieldBox("Type", true);
@@ -113,18 +115,19 @@ public class LevelEditorView extends JPanel{
 				"Lightning",
 				"Theme"
 		});
+		level_type_combo_box.setFont(level_type_combo_box.getFont().deriveFont(level_type_combo_box.getFont().getSize() + 15f));
+		level_type_combo_box.setPreferredSize(new Dimension(250, 35));
+		level_type_combo_box.setMaximumSize(new Dimension(250, 35));
 		level_type_box.add(level_type_combo_box);
-		fields_panel.add(level_type_box);		
+		fields_panel.add(level_type_box);
 		
 		// create the level name text box
 		Box level_name_box = createLabelTextFieldBox("Name", true);
 		level_name_textfield = (JTextField) level_name_box.getComponent(2);
 		fields_panel.add(level_name_box);
-		
+				
 		// create the star threshold area
 		Box star_threshold_area_box = Box.createVerticalBox();
-		JLabel thresholds_title_label = new JLabel("Score Thresholds");
-		star_threshold_area_box.add(thresholds_title_label);
 		
 		// create the star thresholds
 		star_unit_label = new JLabel();
@@ -151,18 +154,12 @@ public class LevelEditorView extends JPanel{
 		/* Initialize Puzzle Max Num Words Label                                                 */
 		max_num_words_box = createLabelTextFieldBox("Word Limit", false);
 		max_num_words_textfield = (JTextField) max_num_words_box.getComponent(2);
-		JLabel max_num_words_unit_label = new JLabel("words");
-		max_num_words_unit_label.setFont(max_num_words_unit_label.getFont().deriveFont(max_num_words_unit_label.getFont().getSize() + 15f));
-		max_num_words_box.add(max_num_words_unit_label);
 		fields_panel.add(max_num_words_box);
 		
 		/* Initialize Lightning Time Limit Label                                                 */
 		time_limit_box = createLabelTextFieldBox("Time Limit", false);
 		time_limit_textfield = (JTextField) time_limit_box.getComponent(2);
-		JLabel time_limit_unit_label = new JLabel("seconds");
-		time_limit_unit_label.setFont(time_limit_unit_label.getFont().deriveFont(time_limit_unit_label.getFont().getSize() + 15f));
-		time_limit_box.add(time_limit_unit_label);
-		fields_panel.add(max_num_words_box);
+		fields_panel.add(time_limit_box);
 		
 		/* Initialize Theme Name Label                                                           */
 		theme_name_box = createLabelTextFieldBox("Theme", false);
@@ -170,13 +167,19 @@ public class LevelEditorView extends JPanel{
 		fields_panel.add(theme_name_box);
 		
 		/* Initialize Theme Words Label                                                          */
-		theme_words_box = createLabelTextFieldBox("Theme Words", false);
+		theme_words_box = createLabelTextFieldBox("Words", false);
 		theme_words_textarea = new JTextArea();
+		theme_words_textarea.setPreferredSize(new Dimension(250, 100));
+		theme_words_textarea.setMaximumSize(new Dimension(250, 100));
+		theme_words_textarea.setFont(theme_name_textfield.getFont().deriveFont(theme_name_textfield.getFont().getSize() - 10f));
 		theme_words_box.remove(2);
-		theme_words_box.add(theme_words_textarea);
+		JScrollPane theme_words_scrollpane = new JScrollPane(theme_words_textarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		theme_words_scrollpane.setPreferredSize(new Dimension(250, 100));
+		theme_words_scrollpane.setMaximumSize(new Dimension(250, 500));
+		theme_words_box.add(theme_words_scrollpane);
 		fields_panel.add(theme_words_box);
 		
-		side_panel.add(fields_panel, BorderLayout.CENTER);
+		side_panel.add(fields_panel);
 		
 		// add the button panel
 		JPanel button_panel = new JPanel();
@@ -188,6 +191,7 @@ public class LevelEditorView extends JPanel{
 		save_button = new JButton("Save");
 		save_button.setPreferredSize(buttonSize);
 		save_button.setMaximumSize(buttonSize);
+		save_button.setAlignmentX(CENTER_ALIGNMENT);
 		save_button.setFont(save_button.getFont().deriveFont(save_button.getFont().getSize() + 10f));
 		button_panel.add(save_button);
 		button_panel.add(Box.createVerticalStrut(15));
@@ -196,14 +200,16 @@ public class LevelEditorView extends JPanel{
 		generate_button = new JButton("Preview");
 		generate_button.setPreferredSize(buttonSize);
 		generate_button.setMaximumSize(buttonSize);
+		generate_button.setAlignmentX(CENTER_ALIGNMENT);
 		generate_button.setFont(generate_button.getFont().deriveFont(generate_button.getFont().getSize() + 10f));
 		button_panel.add(generate_button);
 		button_panel.add(Box.createVerticalStrut(15));
 		
 		/* Initialize Delete Level Button                                                        */
-		main_menu_button = new JButton("Maun Menu");
+		main_menu_button = new JButton("Main Menu");
 		main_menu_button.setPreferredSize(buttonSize);
 		main_menu_button.setMaximumSize(buttonSize);
+		main_menu_button.setAlignmentX(CENTER_ALIGNMENT);
 		main_menu_button.setFont(main_menu_button.getFont().deriveFont(main_menu_button.getFont().getSize() + 10f));
 		button_panel.add(main_menu_button);
 		button_panel.add(Box.createVerticalStrut(15));
@@ -213,7 +219,7 @@ public class LevelEditorView extends JPanel{
 		add(side_panel, BorderLayout.EAST);
 				
 		/* Initialize BoardView                                                                  */
-		board_view = new BoardView();
+		board_view = new BoardView(model, app);
 		add(board_view, BorderLayout.CENTER);
 	}
 
@@ -230,6 +236,7 @@ public class LevelEditorView extends JPanel{
 	private Box createLabelTextFieldBox(String labelText, boolean visible) {
 		// create the box
 		Box box = Box.createHorizontalBox();
+		box.setAlignmentX(RIGHT_ALIGNMENT);
 		box.setBorder(new EmptyBorder(7, 7, 7, 7));
 		
 		// create the label
@@ -243,6 +250,8 @@ public class LevelEditorView extends JPanel{
 		// create the text field
 		JTextField value = new JTextField();
 		value.setFont(value.getFont().deriveFont(value.getFont().getSize() + 15f));
+		value.setPreferredSize(new Dimension(250, 35));
+		value.setMaximumSize(new Dimension(250, 35));
 		box.add(value);
 		box.setVisible(visible);
 		return box;
@@ -276,35 +285,45 @@ public class LevelEditorView extends JPanel{
 	/**
 	 * @return the level_type_combo_box
 	 */
-	public JComboBox<String> getLevel_type_combo_box() {
+	public JComboBox<String> getLevelTypeComboBox() {
 		return level_type_combo_box;
 	}
 
 	/**
+	 * Sets the selected level in the combo box.
+	 */
+	public void setSelectedLevel(String levelType) {
+		for (int i = 0; i < level_type_combo_box.getItemCount(); i++)
+			if (level_type_combo_box.getItemAt(i).equalsIgnoreCase(levelType))
+				level_type_combo_box.setSelectedItem(level_type_combo_box.getItemAt(i));
+		level_type_combo_box.repaint();
+	}
+	
+	/**
 	 * @return the level_name_textfield
 	 */
-	public JTextField getLevelNameTextfield() {
+	public JTextField getLevelNameTextField() {
 		return level_name_textfield;
 	}
 
 	/**
 	 * @return the star_one_textfield
 	 */
-	public JTextField getStarOneTextfield() {
+	public JTextField getStarOneTextField() {
 		return star_one_textfield;
 	}
 
 	/**
 	 * @return the star_two_textfield
 	 */
-	public JTextField getStarTwoTextfield() {
+	public JTextField getStarTwoTextField() {
 		return star_two_textfield;
 	}
 
 	/**
 	 * @return the star_three_textfield
 	 */
-	public JTextField getStarThreeTextfield() {
+	public JTextField getStarThreeTextField() {
 		return star_three_textfield;
 	}
 
@@ -325,7 +344,7 @@ public class LevelEditorView extends JPanel{
 	/**
 	 * @return the max_num_words_textfield
 	 */
-	public JTextField getMaxNumWordsTextfield() {
+	public JTextField getMaxNumWordsTextField() {
 		return max_num_words_textfield;
 	}
 
@@ -339,7 +358,7 @@ public class LevelEditorView extends JPanel{
 	/**
 	 * @return the time_limit_textfield
 	 */
-	public JTextField getTimeLimitTextfield() {
+	public JTextField getTimeLimitTextField() {
 		return time_limit_textfield;
 	}
 
@@ -353,7 +372,7 @@ public class LevelEditorView extends JPanel{
 	/**
 	 * @return the theme_name_textfield
 	 */
-	public JTextField getThemeNameTextfield() {
+	public JTextField getThemeNameTextField() {
 		return theme_name_textfield;
 	}
 
@@ -367,7 +386,7 @@ public class LevelEditorView extends JPanel{
 	/**
 	 * @return the theme_words_textarea
 	 */
-	public JTextArea getThemeWordsTextarea() {
+	public JTextArea getThemeWordsTextArea() {
 		return theme_words_textarea;
 	}
 
@@ -435,6 +454,20 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Clears all of the fields that can be edited by the user.
+	 */
+	public void clearFields() {
+		level_name_textfield.setText(null);
+		star_one_textfield.setText(null);
+		star_two_textfield.setText(null);
+		star_three_textfield.setText(null);
+		max_num_words_textfield.setText(null);
+		time_limit_textfield.setText(null);
+		theme_name_textfield.setText(null);
+		theme_words_textarea.setText(null);
+	}
+	
+	/**
 	 * Refreshes the Level Editor View based upon the EditProgress associated with that View.
 	 */
 	public void refresh(){
@@ -443,20 +476,25 @@ public class LevelEditorView extends JPanel{
 		theme_name_box.setVisible(false);
 		theme_words_box.setVisible(false);
 		
-		if (editProgress != null) {
-			Level level = editProgress.getModified();
+		EditProgress progress = model.getEditProgress();
+		if (progress != null) {
+			Level level = progress.getModified();
 			if(level != null) {	
 				// set view to be correct type
 				if (level instanceof PuzzleLevel) {
-					max_num_words_box.setVisible(false);
+					max_num_words_box.setVisible(true);
+					generate_button.setText("Preview");
 				} else if (level instanceof LightningLevel) {
 					time_limit_box.setVisible(true);
+					generate_button.setText("Preview");
 				} else if (level instanceof ThemeLevel) {
 					theme_name_box.setVisible(true);
 					theme_words_box.setVisible(true);
+					generate_button.setText("Generate");
 				}
 			}
 		}
+		
 		board_view.refresh();
 		repaint();
 	}

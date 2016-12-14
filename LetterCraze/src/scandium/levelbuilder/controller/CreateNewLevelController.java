@@ -14,7 +14,6 @@ import scandium.levelbuilder.view.Application;
  * It creates a new level and and new EditProgress for the model. 
  * It updates the view to show the levelEditor view.
  * @author Scandium
- * @Date 13/12/16
  */
 public class CreateNewLevelController extends MouseAdapter{
 
@@ -53,8 +52,10 @@ public class CreateNewLevelController extends MouseAdapter{
     	PuzzleLevel level = new PuzzleLevel();
     	EditProgress progress = new EditProgress(level);
     	model.setEditProgress(progress);
+    	app.getLevelEditor().setSelectedLevel(level.getType());
+    	app.getLevelEditor().clearFields();
+    	app.getLevelEditor().setEditProgress(progress);
     	model.setLevelBuilderState(LevelBuilderState.Editor);
-    	model.setSelectedLevel(null);
     	/* refresh view */
     	app.refresh();
     }

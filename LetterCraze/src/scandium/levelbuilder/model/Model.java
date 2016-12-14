@@ -136,7 +136,10 @@ public class Model {
 	 * @return Whether the model was changed
 	 */
 	public boolean replaceLevel(Level original, Level replacement) {
-		levels.set(levels.indexOf(original), replacement);
+		if (!levels.contains(original))
+			levels.add(replacement);
+		else
+			levels.set(levels.indexOf(original), replacement);
 		return true;
 	}
 	

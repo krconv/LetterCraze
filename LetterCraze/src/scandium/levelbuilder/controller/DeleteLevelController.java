@@ -51,7 +51,7 @@ public class DeleteLevelController extends MouseAdapter{
 		/* Remove Level from File */
     	model.SaveLevels();
 		
-		app.refresh();
+		app.getMainMenu().refresh();
 	}
 
 }
