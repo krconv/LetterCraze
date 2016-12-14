@@ -1,6 +1,7 @@
 package scandium.common.tool;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import scandium.common.model.Board;
@@ -23,7 +24,7 @@ public class ThemeLevelTileGenerationAlgorithm {
 		board.clearExistingTiles();
 		
 		/* Get The Theme Words and sort them */
-		ArrayList<String> words = level.getThemeWords();
+		List<String> words = level.getThemeWords();
 		if(!words.isEmpty()){
 			words = sortWordsByLength(words);
 			/* Insert First Word */
@@ -49,8 +50,8 @@ public class ThemeLevelTileGenerationAlgorithm {
 	 * @param words An ArrayList of Strings to be sorted
 	 * @return An ArrayList of strings representing the the theme words
 	 */
-	static ArrayList<String> sortWordsByLength(ArrayList<String> words){
-		ArrayList<String> sorted = new ArrayList<String>();
+	static List<String> sortWordsByLength(List<String> words){
+		List<String> sorted = new ArrayList<String>();
 		while(!words.isEmpty()){
 			int length = -1;
 			String smallest_word = "";

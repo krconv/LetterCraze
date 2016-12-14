@@ -2,7 +2,6 @@ package scandium.levelbuilder.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
@@ -17,7 +16,6 @@ import scandium.levelbuilder.view.Application;
  * This class handles the users mouse click the open level button. It opens the selected
  * level, and in doing so, allows the user to edit an existing level. 
  * @author Scandium
- * @date 13/12/16
  */
 public class OpenLevelEditorController extends MouseAdapter{
 
@@ -56,6 +54,8 @@ public class OpenLevelEditorController extends MouseAdapter{
     	/* Make new edit progress */
     	EditProgress progress = new EditProgress(level);
     	model.setEditProgress(progress);
+    	app.getLevelEditor().clearFields();
+    	app.getLevelEditor().setEditProgress(progress);
     	/* change state of model */
     	model.setLevelBuilderState(LevelBuilderState.Editor);
     	/* unselect the level */
@@ -64,22 +64,18 @@ public class OpenLevelEditorController extends MouseAdapter{
     	app.refresh();
     	
     	/* Preset textfield values */
+    	app.getLevelEditor().setSelectedLevel(level.getType());
     	app.getLevelEditor().getLevelNameTextField().setText(level.getName());
-    	app.getLevelEditor().getOneStarTextField().setText(level.getStars()[0].getThreshold() + "");
-    	app.getLevelEditor().getTwoStarTextField().setText(level.getStars()[1].getThreshold() + "");
-    	app.getLevelEditor().getThreeStarTextField().setText(level.getStars()[2].getThreshold() + "");
+    	app.getLevelEditor().getStarOneTextField().setText(level.getStars()[0].getThreshold() + "");
+    	app.getLevelEditor().getStarTwoTextField().setText(level.getStars()[1].getThreshold() + "");
+    	app.getLevelEditor().getStarThreeTextField().setText(level.getStars()[2].getThreshold() + "");
     	if(level instanceof PuzzleLevel){
-    		app.getLevelEditor().getPuzzleMaxNumWordsTextField().setText(((PuzzleLevel) level).getMaxNumWords() + "");
+    		app.getLevelEditor().getMaxNumWordsTextField().setText(((PuzzleLevel) level).getMaxNumWords() + "");
     	}else if(level instanceof LightningLevel){
-    		app.getLevelEditor().getLightningTimeLimitTextField().setText(((LightningLevel) level).getTimeLimit() + "");
+    		app.getLevelEditor().getTimeLimitTextField().setText(((LightningLevel) level).getTimeLimit() + "");
     	}else{
     		app.getLevelEditor().getThemeNameTextField().setText(((ThemeLevel) level).getTheme());
-    		ArrayList<String> theme_words = ((ThemeLevel) level).getThemeWords();
-    		String words = "";
-    		for(String s : theme_words){
-    			words += s + "\n";
-    		}
-    		app.getLevelEditor().getThemeWordsTextArea().setText(words);
+    		app.getLevelEditor().setThemeWords(((ThemeLevel) level).getThemeWords());
     	}
     }
 

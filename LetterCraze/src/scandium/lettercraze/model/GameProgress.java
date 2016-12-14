@@ -19,16 +19,14 @@ public class GameProgress {
 	private ProgressLoader progressLoader;
 	//to create a flag so that the GameProgress is a singleton
 	private boolean created = false;
-	private long gameToken;
 
 	/**
 	 * Creates a new game progress which will be for the given levels.
 	 * @param levels The levels in the current game.
-	 * @param gameToken The unique game token for the game save.
 	 * @throws IllegalStateException if the current level progress is already running, 
 	 * 						or if one of the LevelProgress initializations fails
 	 */
-	public GameProgress(List<Level> levels, long gameToken) throws IllegalStateException{
+	public GameProgress(List<Level> levels) throws IllegalStateException{
 		//if current level progress already exists, throw exception
 		if (this.created == false){
 			this.currentLevelProgress = new LevelProgress();
@@ -36,8 +34,7 @@ public class GameProgress {
 			this.progressLoader = new ProgressLoader();
 			
 			// load the levels from the loader
-			this.gameToken = gameToken;
-			this.levelProgresses = progressLoader.LoadLevelProgress(levels, gameToken);
+			this.levelProgresses = progressLoader.LoadLevelProgress(levels);
 			this.created = true;
 		} else{
 			throw new IllegalStateException("The Game Progress Already Exists");
@@ -114,6 +111,6 @@ public class GameProgress {
 	 * @return Whether any of the progress was saved.
 	 */
 	public boolean SaveProgress() {
-		return progressLoader.SaveLevelProgress(levelProgresses, gameToken);
+		return progressLoader.SaveLevelProgress(levelProgresses);
 	}
 }

@@ -1,3 +1,8 @@
+/**
+ * SelectLevelController.java
+ * 
+ * @author Scandium
+ */
 package scandium.levelbuilder.controller;
 
 import java.awt.event.MouseAdapter;
@@ -9,8 +14,6 @@ import scandium.levelbuilder.view.Application;
 
 /**
  * This class handles the user's mouse click on a level icon. 
- * @author Scandium
- * @date 13/12/16
  */
 public class SelectLevelController extends MouseAdapter{
 
@@ -49,7 +52,7 @@ public class SelectLevelController extends MouseAdapter{
     	if(model.getSelectedLevel() == null || !model.getSelectedLevel().equals(level))
     		model.setSelectedLevel(level);
     	else model.setSelectedLevel(null);
-    	app.refresh();
+    	app.getMainMenu().refresh();
     }
 
 }

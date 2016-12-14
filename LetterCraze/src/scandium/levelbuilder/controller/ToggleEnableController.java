@@ -54,7 +54,7 @@ public class ToggleEnableController extends MouseAdapter{
      * @param Mme The MouseEvent representing the mouseClick
      */
     public void mouseClicked(MouseEvent me) {
-    	//finding boardSquare
+    	//finding boardSquare 
     	EditProgress progress = model.getEditProgress();
     	Level current = progress.getModified();
     	BoardSquare board_square = current.getBoard().getSquare(row, col);
@@ -63,15 +63,13 @@ public class ToggleEnableController extends MouseAdapter{
     	current.getBoard().clearExistingTiles();
     	
     	//enable/disable toggle logic
-    	if(board_square.isEnabled() == true){
+    	if (board_square.isEnabled())
     		board_square.setEnabled(false);
-    	}
-    	else{
+    	else
     		board_square.setEnabled(true);
-    	}
     	
     	//refresh the display
-    	app.refresh();
+    	app.getLevelEditor().getBoardView().refresh();
     }
     
 }

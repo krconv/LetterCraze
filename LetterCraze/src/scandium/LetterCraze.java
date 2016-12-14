@@ -8,6 +8,7 @@ package scandium;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import scandium.common.tool.WordDictionary;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
 
@@ -28,7 +29,13 @@ public class LetterCraze {
 		app.setMinimumSize(new Dimension(640, 480));
 		app.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
 		app.setLocationRelativeTo(null);
-		app.showSplashScreen();
 		app.setVisible(true);
+		try {
+			WordDictionary.load();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			// don't care if we can't wait 5 seconds for the splash screen
+		}
+		app.setViewMainMenu();
 	}
 }

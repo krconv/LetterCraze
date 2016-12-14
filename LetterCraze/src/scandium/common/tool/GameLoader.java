@@ -9,7 +9,6 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -76,21 +75,6 @@ public class GameLoader {
 			list.addAll(container.getLevels());
 		
 		return list;
-	}
-
-	/**
-	 * Gets the game token which is unique to the level save.
-	 * Precondition: None.
-	 * Postcondition: Loads the token of this game save.
-	 *  
-	 * @return The game token loaded from file, or zero if the token couldn't be loaded.
-	 */
-	public long GetGameToken() {
-		LevelContainer container = LoadLevelContainer();
-		if (container != null)
-			return container.getToken();
-		else
-			return 0;
 	}
 	
 	/**
@@ -182,8 +166,6 @@ public class GameLoader {
 	@XmlRootElement
 	@XmlAccessorType(XmlAccessType.FIELD)
 	private static class LevelContainer {
-		@XmlElement
-		private long token;
 		@XmlElementWrapper(name = "levels")
 		@XmlElement(name = "level")
 		private List<Level> levels;
@@ -204,11 +186,6 @@ public class GameLoader {
 		 */
 		public LevelContainer(List<Level> levels) {
 			this.levels = levels;
-			// generate a random token that is not zero
-			Random random = new Random();			
-			do {
-				token = random.nextLong();
-			} while (token == 0);
 		}
 
 		/**
@@ -216,13 +193,6 @@ public class GameLoader {
 		 */
 		public List<Level> getLevels() {
 			return levels;
-		}
-
-		/**
-		 * @return the token
-		 */
-		public long getToken() {
-			return token;
 		}
 	}	
 }
