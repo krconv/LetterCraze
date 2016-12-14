@@ -76,6 +76,15 @@ public class MainMenuView extends JPanel {
 	}
 	
 	/**
+	 * Gets the level icon at the given index.
+	 * @param index The index.
+	 * @return The level icon at the given index.
+	 */
+	public LevelIconView getLevelIcon(int index) {
+		return (LevelIconView) levelsPanel.getComponent(index);
+	}
+	
+	/**
      * Initializes the view.
      */
     private void initialize() {

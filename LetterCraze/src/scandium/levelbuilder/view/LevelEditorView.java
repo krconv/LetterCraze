@@ -92,7 +92,7 @@ public class LevelEditorView extends JPanel{
 		setLayout(new BorderLayout(0, 0));
 		
 		/* Initialize Title Label                                                                */
-		title_label = new JLabel("Editor");
+		title_label = new JLabel("Level Editor");
 		title_label.setForeground(Color.BLACK);
 		title_label.setFont(title_label.getFont().deriveFont(title_label.getFont().getSize() + 50f));
 		add(title_label, BorderLayout.NORTH);

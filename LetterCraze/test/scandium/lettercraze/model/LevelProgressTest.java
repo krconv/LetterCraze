@@ -6,9 +6,6 @@ package scandium.lettercraze.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-
 import junit.framework.TestCase;
 import scandium.common.model.*;
 
@@ -74,14 +71,6 @@ public class LevelProgressTest extends TestCase {
 		assertFalse(lp.isPlaying());
 		lp.setPlaying(true);
 		assertTrue(lp.isPlaying());
-	}
-
-	/**
-	 * Test method for {@link scandium.lettercraze.model.LevelProgress#getTimeLeft()} and {@link scandium.lettercraze.model.LevelProgress#setTimeLeft(int)}.
-	 */
-	public void testGetSetTimeLeft() {
-		lp.setTimeLeft(timeLeft);
-		assertEquals(timeLeft, lp.getTimeLeft());
 	}
 
 	/**

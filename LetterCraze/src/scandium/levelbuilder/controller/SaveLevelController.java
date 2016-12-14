@@ -54,17 +54,17 @@ public class SaveLevelController implements ActionListener{
 		try {
 	    	modified.getStar(0).setThreshold(Integer.parseInt(levelEditorView.getStarOneTextField().getText()));
 		} catch (NumberFormatException e) {
-			errors.append("The threshold for Star One is not a number!");
+			errors.append("The threshold for Star One is not a number!").append("\n");
 		}
 		try {
 	    	modified.getStar(1).setThreshold(Integer.parseInt(levelEditorView.getStarTwoTextField().getText()));
 		} catch (NumberFormatException e) {
-			errors.append("The threshold for Star Two is not a number!");
+			errors.append("The threshold for Star Two is not a number!").append("\n");
 		}
 		try {
 	    	modified.getStar(2).setThreshold(Integer.parseInt(levelEditorView.getStarThreeTextField().getText()));
 		} catch (NumberFormatException e) {
-			errors.append("The threshold for Star Three is not a number!");
+			errors.append("The threshold for Star Three is not a number!").append("\n");
 		}
 		
 		// set the level specific settings
@@ -72,13 +72,13 @@ public class SaveLevelController implements ActionListener{
     		try {
     			((PuzzleLevel) modified).setMaxNumWords(Integer.parseInt(levelEditorView.getMaxNumWordsTextField().getText()));
     		} catch (NumberFormatException e) {
-    			errors.append("The Word Limit is not a number!");
+    			errors.append("The Word Limit is not a number!").append("\n");
     		}
     	if (modified instanceof LightningLevel)
     		try {
     			((LightningLevel) modified).setTimeLimit(Integer.parseInt(levelEditorView.getTimeLimitTextField().getText()));
     		} catch (NumberFormatException e) {
-    			errors.append("The Time Limit is not a number!");
+    			errors.append("The Time Limit is not a number!").append("\n");
     		}
     	if (modified instanceof ThemeLevel) {
 			((ThemeLevel) modified).setTheme(levelEditorView.getThemeNameTextField().getText());
