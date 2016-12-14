@@ -447,6 +447,7 @@ public class Board {
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < 6; j++){
 				copy.getSquare(i, j).setEnabled(getSquare(i,j).isEnabled());
+				copy.getSquare(i, j).setTile(getSquare(i,j).getTile());
 			}
 		}
 		return copy;
