@@ -3,6 +3,8 @@
  */
 package scandium.lettercraze.model;
 
+import java.util.*;
+import scandium.common.model.*;
 import junit.framework.TestCase;
 
 /**
@@ -11,6 +13,10 @@ import junit.framework.TestCase;
  */
 public class GameProgressTest extends TestCase {
 	private LevelProgress lp;
+	private GameProgress gp;
+	private List<Level> levels;
+	private LightningLevel ll;
+	private long gameToken;
 	
 
 	/* (non-Javadoc)
@@ -18,6 +24,13 @@ public class GameProgressTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		levels = new ArrayList<Level>();
+		ll = new LightningLevel();
+		lp = new LevelProgress();
+		levels.add(ll);
+		gameToken = 5;
+		lp.setLevel(ll);
+		gp = new GameProgress(levels, gameToken);
 	}
 
 	/* (non-Javadoc)
@@ -28,45 +41,46 @@ public class GameProgressTest extends TestCase {
 	}
 
 	/**
-	 * Test method for {@link scandium.lettercraze.model.GameProgress#GameProgress(java.util.List, long)}.
-	 */
-	public void testGameProgress() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#getCurrentLevelProgress()}.
 	 */
 	public void testGetCurrentLevelProgress() {
-		fail("Not yet implemented");
+		assertEquals(new LevelProgress(), gp.getCurrentLevelProgress());
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#unlockNextLevel()}.
 	 */
 	public void testUnlockNextLevel() {
-		fail("Not yet implemented");
+		gp.getCurrentLevelProgress().setLevel(ll);
+		assertTrue(gp.unlockNextLevel());
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#getProgressForLevel(scandium.common.model.Level)}.
 	 */
 	public void testGetProgressForLevel() {
-		fail("Not yet implemented");
+		assertNull(gp.getProgressForLevel(ll));
+		gp.getCurrentLevelProgress().setLevel(ll);
+		assertNotNull(gp.getProgressForLevel(ll));
+		
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#replaceLevelProgress(scandium.lettercraze.model.LevelProgress)}.
 	 */
 	public void testReplaceLevelProgress() {
-		fail("Not yet implemented");
+		assertTrue(gp.replaceLevelProgress(lp));
+		lp = null;
+		assertFalse(gp.replaceLevelProgress(lp));
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#SaveProgress()}.
 	 */
 	public void testSaveProgress() {
-		fail("Not yet implemented");
+		assertTrue(gp.SaveProgress());
+		gp.getCurrentLevelProgress().setLevel(null);
+		assertTrue(gp.SaveProgress());
 	}
 
 }
