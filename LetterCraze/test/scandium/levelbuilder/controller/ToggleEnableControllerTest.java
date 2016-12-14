@@ -25,7 +25,7 @@ public class ToggleEnableControllerTest extends ScandiumLevelBuilderTestCase {
 	
 	public void testEnableToggle(){
 		/* Create Simulated click */
-		MouseEvent click = this.createClicked(app, app.getLevelEditor().getBoardView().getJLabel(0, 0), 0, 0);
+		MouseEvent click = this.createClicked(app, app.getLevelEditor().getBoardView().getBoardSquareLabel(0, 0), 0, 0);
 		/* populate the boardSquares with tiles */
 		Board board = app.getModel().getEditProgress().getModified().getBoard();
 		board.fillEmptySquares(new LetterDictionary());
@@ -37,7 +37,7 @@ public class ToggleEnableControllerTest extends ScandiumLevelBuilderTestCase {
 			}
 		}
 		/* Simulate click on square */
-		app.getLevelEditor().getBoardView().getJLabel(0, 0).dispatchEvent(click);
+		app.getLevelEditor().getBoardView().getBoardSquareLabel(0, 0).dispatchEvent(click);
 		
 		/* Veryify that the board Square is now enabled, and that the square tiles are now null */
 		assertFalse(board.getSquare(0, 0).isEnabled());
@@ -51,7 +51,7 @@ public class ToggleEnableControllerTest extends ScandiumLevelBuilderTestCase {
 		board.fillEmptySquares(new LetterDictionary());
 		
 		/* Simulate click on square */
-		app.getLevelEditor().getBoardView().getJLabel(0, 0).dispatchEvent(click);
+		app.getLevelEditor().getBoardView().getBoardSquareLabel(0, 0).dispatchEvent(click);
 		
 		/* Validate that the board is empty and that this square is enabled */
 		assertTrue(board.getSquare(0, 0).isEnabled());
