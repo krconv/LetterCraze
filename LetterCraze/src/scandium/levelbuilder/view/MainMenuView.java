@@ -34,8 +34,8 @@ public class MainMenuView extends JPanel{
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
-	Model model = null;
-	Application app = null;
+	Model model;
+  Application app;
 	JLabel title_label;
 	JButton new_level_button;
 	JButton edit_level_button;
@@ -45,14 +45,6 @@ public class MainMenuView extends JPanel{
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Constructors And Initialization                                                           *
 	 * ~~~~~                                                                               ~~~~~ */
-
-	/**
-	 * Creates a new MainMenuView object without a Model.
-	 */
-	public MainMenuView() {
-		initializeView();
-		refresh();
-	}
 
 	/**
 	 * Creates the view for the Main Menu screen with the given Model.
