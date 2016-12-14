@@ -63,3 +63,9 @@ $RECYCLE.BIN/
 *.lnk
 
 *.prefs
+LetterCraze/src/scandium/levelbuilder/view/Application.java
+LetterCraze/src/scandium/levelbuilder/view/LevelEditorView.java
+LetterCraze/src/scandium/levelbuilder/model/EditProgress.java
+LetterCraze/LetterCrazeGame.xml
+LetterCraze/LetterCrazeGame.xml
+LetterCraze/LetterCrazeProgress.xml

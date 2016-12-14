@@ -38,6 +38,8 @@ public class LevelProgress {
 	private boolean isUnlocked;
 	@XmlTransient
 	private LevelRestrictor restrictor;
+	@XmlElement
+	private long token;
 
 	/**
 	 * Creates a new Level progress with uninitialized information.
@@ -59,6 +61,7 @@ public class LevelProgress {
 		isPlaying = false;
 		foundWords = new ArrayList<String>();
 		isUnlocked = false;
+		token = level.getToken();
 	}
 
 	/**
@@ -72,6 +75,7 @@ public class LevelProgress {
 	public void setLevel(Level level) {
 		this.level = level;
 		restrictor = level.getRestrictor();
+		token = level.getToken();
 	}
 
 	/**
@@ -149,6 +153,14 @@ public class LevelProgress {
 	 */
 	public List<String> getFoundWords() {
 		return foundWords;
+	}
+
+	
+	/**
+	 * @return the token
+	 */
+	public long getToken() {
+		return token;
 	}
 
 	/**

@@ -93,7 +93,7 @@ public class LightningLevel extends Level {
      */
     @Override
     public LightningLevel copy() {
-    	LightningLevel levelCopy = new LightningLevel(super.getName(), super.getBoard(), super.getStars(), timeLimit);
+    	LightningLevel levelCopy = new LightningLevel(super.getName(), super.getBoard().copy(), super.getStars(), timeLimit);
         return levelCopy;
     }
 

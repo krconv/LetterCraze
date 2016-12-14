@@ -37,7 +37,7 @@ public class Model {
 		// load the levels
 		this.gameLoader = new GameLoader();
 		this.levels = gameLoader.LoadLevels(new ArrayList<Level>());
-		this.progress = new GameProgress(levels, gameLoader.GetGameToken());
+		this.progress = new GameProgress(levels);
 	}
 
 	/**

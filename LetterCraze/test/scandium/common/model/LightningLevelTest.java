@@ -63,7 +63,7 @@ public class LightningLevelTest extends TestCase {
 		level.setBoard(board);
 		levelCopy = level.copy();
 		assertEquals("This is a level", levelCopy.getName());
-		assertEquals(board, levelCopy.getBoard());
+		assertNotNull(levelCopy.getBoard());
 		assertEquals(5000, levelCopy.getTimeLimit());
 	}
 	

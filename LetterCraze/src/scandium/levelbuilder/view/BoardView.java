@@ -3,7 +3,7 @@
  * 
  * @author Scandium
  */
-package scandium.lettercraze.view;
+package scandium.levelbuilder.view;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -18,31 +18,36 @@ import javax.swing.border.LineBorder;
 
 import scandium.common.model.Board;
 import scandium.common.model.BoardSquare;
-import scandium.lettercraze.model.LevelProgress;
+import scandium.levelbuilder.controller.ToggleEnableController;
+import scandium.levelbuilder.model.Model;
 
 /**
  * 
  */
 public class BoardView extends JPanel {
 	private static final long serialVersionUID = 8871823801671988312L;
-	private LevelProgress progress;
+	private Board board;
 	
 	/**
 	 * Creates a new board view.
+	 * @param model The model.
+	 * @param app The application.
 	 */
-	public BoardView() {
+	public BoardView(Model model, Application app) {
 		setLayout(new GridLayout(6, 6, 0, 0));
 		setOpaque(false);
 		
 		/* Intialize each View */
-		for(int i = 0; i < 36; i++){
-			JLabel label = new JLabel();
-			label.setOpaque(true);
-			label.setHorizontalAlignment(SwingConstants.CENTER);
-			label.setFont(label.getFont().deriveFont(label.getFont().getSize() + 20f));
-			label.setBorder(new LineBorder(new Color(0, 0, 0), 1));
-			label.setBackground(Color.WHITE);
-			add(label);
+		for(int i = 0; i < 6; i++){
+			for(int j = 0; j < 6; j++){
+				JLabel label = new JLabel();
+				label.setOpaque(true);
+				label.setHorizontalAlignment(SwingConstants.CENTER);
+				label.setFont(label.getFont().deriveFont(label.getFont().getSize() + 20f));
+				label.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+				label.addMouseListener(new ToggleEnableController(model, app, i, j));
+				add(label);
+			}
 		}
 		refresh();
 	}
@@ -86,27 +91,26 @@ public class BoardView extends JPanel {
 			return null;
 		
 		// return the square at the given position
-		return progress.getLevel().getBoard().getSquare((position.y - borderInsets.top) / squareSize.y,
+		return board.getSquare((position.y - borderInsets.top) / squareSize.y,
 				(position.x - borderInsets.left) / squareSize.x);
 	}
 	
 	/**
-	 * Sets the progress for the board view.
-	 * @param progress The progress.
+	 * Sets the board for the board view.
+	 * @param board The board.
 	 */
-	public void setProgress(LevelProgress progress) {
-		this.progress = progress;
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 	
 	/**
 	 * Refreshes the data of the board from the model.
 	 */
 	public void refresh() {		
-		if (progress != null) {
+		if (board != null) {
 			// go through every square and update it according to the model
 			for (int row = 0; row < 6; row++) {
 				for (int col = 0; col < 6; col++) {
-					Board board = progress.getLevel().getBoard();
 					BoardSquare square = board.getSquare(row, col);
 					JLabel label = getBoardSquareLabel(row, col);
 					// update the square to reflect the tile in it
@@ -114,21 +118,12 @@ public class BoardView extends JPanel {
 						label.setText(null);
 					else 
 						label.setText(square.getTile().getContent());
-					
-					// highlight the square if it's highlighted
-					if (board.getSelectedWord() != null && board.getSelectedWord().getBoardSquares().contains(square)) {
-						label.setBackground(Color.GRAY);
-					} else {
-						label.setBackground(Color.WHITE);
-					}
-					
-					// lock the board if not playing
-					if (!progress.isPlaying())
-						label.setBackground(Color.LIGHT_GRAY);
-						
+											
 					// make disabled squares black
 					if (!square.isEnabled())
 						label.setBackground(Color.BLACK);
+					else
+						label.setBackground(Color.WHITE);
 				}
 			}
 		}

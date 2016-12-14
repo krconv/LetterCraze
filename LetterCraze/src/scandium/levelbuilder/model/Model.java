@@ -8,7 +8,7 @@ package scandium.levelbuilder.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import scandium.common.model.*;
+import scandium.common.model.Level;
 import scandium.common.tool.GameLoader;
 
 /**
@@ -19,15 +19,17 @@ public class Model {
 	private List<Level> levels;
 	private EditProgress editProgress;
 	private GameLoader gameLoader;
+	private LevelBuilderState state;
 
 	/**
 	 * Creates a new model for the LevelBuilder application from file using the GameLoader.
 	 */
 	public Model() {
-		selectedLevel = null;
+		this.selectedLevel = null;
 		// load the levels
 		this.gameLoader = new GameLoader();
-		this.levels = gameLoader.LoadLevels(new ArrayList<Level>());       
+		this.levels = gameLoader.LoadLevels(new ArrayList<Level>());
+		state = LevelBuilderState.MainMenu;
 	}
 
 	/**
@@ -64,6 +66,22 @@ public class Model {
 	public List<Level> getLevels() {
 		return levels;
 	}
+	
+	/**
+	 * @return state
+	 */
+	public LevelBuilderState getLevelBuilderState(){
+		return state;
+	}
+	
+	/** 
+	 * This function sets the levelBuilderState.
+	 * @param state The new LevelBuilderState.
+	 */
+	public void setLevelBuilderState(LevelBuilderState state){
+		this.state = state;
+	}
+	
 
 	/**
 	 * Adds a level to the model.
@@ -118,8 +136,19 @@ public class Model {
 	 * @return Whether the model was changed
 	 */
 	public boolean replaceLevel(Level original, Level replacement) {
-		levels.set(levels.indexOf(original), replacement);
+		if (!levels.contains(original))
+			levels.add(replacement);
+		else
+			levels.set(levels.indexOf(original), replacement);
 		return true;
+	}
+	
+	/**
+	 * Saves the levels.
+	 * @return Whether any of the levels were saved.
+	 */
+	public boolean SaveLevels() {
+		return gameLoader.SaveLevels(levels);
 	}
 
 }

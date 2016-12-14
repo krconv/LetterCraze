@@ -11,20 +11,23 @@ package scandium.levelbuilder.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import scandium.common.model.Level;
 import scandium.common.view.WrapLayout;
+import scandium.levelbuilder.controller.SelectLevelController;
 import scandium.levelbuilder.model.Model;
-import scandium.levelbuilder.view.LevelIconView;
 
 public class MainMenuView extends JPanel{
 
@@ -34,84 +37,95 @@ public class MainMenuView extends JPanel{
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
-	Model model = null;
+	Model model;
+	Application app;
 	JLabel title_label;
+	JPanel levels_panel;
+	JPanel button_panel;
 	JButton new_level_button;
 	JButton edit_level_button;
 	JButton delete_level_button;
-	JPanel levelsPanel;
 
 	/* ~~~~~                                                                               ~~~~~ *
 	 * Constructors And Initialization                                                           *
 	 * ~~~~~                                                                               ~~~~~ */
 
 	/**
-	 * Creates a new MainMenuView object without a Model.
-	 */
-	public MainMenuView() {
-		initializeView();
-		refresh();
-	}
-
-	/**
 	 * Creates the view for the Main Menu screen with the given Model.
 	 * @param model The model.
+	 * @param app The application.
 	 */
-	public MainMenuView(Model model) {
+	public MainMenuView(Model model, Application app) {
 		this.model = model;
+		this.app = app;
 		initializeView();
 		refresh();
-	}
-
-	/** 
-	 * This function initializes the main menu gui.
-	 */
-	void initializeView(){
-		instantiateAttributes();
-		initializeAttributes();
-
-		/* JPanel Management                                                                     */
-		setLayout(null);
-		setBounds(0,0,1280,720);
-	}
-
-	/**
-	 * This function instantiates new instances of all the objects.
-	 */
-	void instantiateAttributes(){
-		this.title_label = new JLabel("LevelBuilder: MainMenu");
-		this.new_level_button = new JButton("New Level");
-		this.edit_level_button = new JButton("Edit Level");
-		this.delete_level_button = new JButton("Delete Level");
-		this.levelsPanel = new JPanel();
 	}
 
 	/**
 	 * This function initializes the GUI widgets (attributes).
 	 */
-	void initializeAttributes(){
+	void initializeView(){
+		// set the background color and layout manager
+		setBackground(new Color(0, 191, 255));
+		setBorder(new EmptyBorder(20, 20, 20, 20));
+		setLayout(new BorderLayout(0, 0));
+		
 		/* Initialize Title Label                                                                */
-		title_label.setBounds(10, 10, 1280, 40);
-		title_label.setFont(new Font(title_label.getFont().getName(), Font.BOLD, 36));
-		add(title_label);
-		/* Initialize Create New Level Button                                                    */
-		new_level_button.setBounds(1075, 100, 125, 50);
-		add(new_level_button);
-		/* Initialize Edit Level Button                                                          */
-		edit_level_button.setBounds(1075, 200,  125, 50);
-		add(edit_level_button);
-		/* Initialize Delete Level Button                                                        */
-		delete_level_button.setBounds(1075, 300,  125,  50);
-		add(delete_level_button);
+		title_label = new JLabel("LetterCraze Level Builder");
+		title_label.setForeground(new Color(0, 0, 0));
+		title_label.setFont(title_label.getFont().deriveFont(title_label.getFont().getSize() + 50f));
+		add(title_label, BorderLayout.NORTH);
 
+		// add the side panel
+		JPanel side_panel = new JPanel();
+		side_panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		side_panel.setLayout(new BorderLayout());
+		side_panel.setOpaque(false);
+		
+		// add the button panel
+		JPanel button_panel = new JPanel();
+		button_panel.setLayout(new BoxLayout(button_panel, BoxLayout.Y_AXIS));
+		button_panel.setOpaque(false);
+		Dimension buttonSize = new Dimension(200, 40);
+		
+		/* Initialize Create New Level Button                                                    */
+		new_level_button = new JButton("New Level");
+		new_level_button.setPreferredSize(buttonSize);
+		new_level_button.setMaximumSize(buttonSize);
+		new_level_button.setFont(new_level_button.getFont().deriveFont(new_level_button.getFont().getSize() + 10f));
+		button_panel.add(new_level_button);
+		button_panel.add(Box.createVerticalStrut(15));
+		
+		/* Initialize Edit Level Button                                                          */
+		edit_level_button = new JButton("Edit Level");
+		edit_level_button.setPreferredSize(buttonSize);
+		edit_level_button.setMaximumSize(buttonSize);
+		edit_level_button.setFont(edit_level_button.getFont().deriveFont(edit_level_button.getFont().getSize() + 10f));
+		button_panel.add(edit_level_button);
+		button_panel.add(Box.createVerticalStrut(15));
+		
+		/* Initialize Delete Level Button                                                        */
+		delete_level_button = new JButton("Delete Level");
+		delete_level_button.setPreferredSize(buttonSize);
+		delete_level_button.setMaximumSize(buttonSize);
+		delete_level_button.setFont(delete_level_button.getFont().deriveFont(delete_level_button.getFont().getSize() + 10f));
+		button_panel.add(delete_level_button);
+		button_panel.add(Box.createVerticalStrut(15));
+		
+		side_panel.add(button_panel, BorderLayout.SOUTH);
+		
+		add(side_panel, BorderLayout.EAST);
+		
 		// add the level panel
-		levelsPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		levelsPanel.setOpaque(false);
-		levelsPanel.setLayout(new WrapLayout());
-		add(levelsPanel);
+		levels_panel = new JPanel();
+		levels_panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		levels_panel.setOpaque(false);
+		levels_panel.setLayout(new WrapLayout());
+		add(levels_panel);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportView(levelsPanel);
+		scrollPane.setViewportView(levels_panel);
 		scrollPane.setBounds(25, 100, 1000, 500);
 		add(scrollPane, BorderLayout.CENTER);
 
@@ -159,17 +173,22 @@ public class MainMenuView extends JPanel{
 	 */
 	public List<LevelIconView> getLevelIcons() {
 		// convert the components from the level panel to level icons
-		List<LevelIconView> levelIcons = new ArrayList<LevelIconView>(levelsPanel.getComponentCount());
-		for (Component icon : levelsPanel.getComponents()) {
+		List<LevelIconView> levelIcons = new ArrayList<LevelIconView>(levels_panel.getComponentCount());
+		for (Component icon : levels_panel.getComponents()) {
 			levelIcons.add((LevelIconView) icon);
 		}
 		return levelIcons;
 	}
-	
-	public LevelIconView getLevelIconView(int number){
-		return getLevelIcons().get(number);
-	}
 
+	/**
+	 * Gets the level icon at the given index.
+	 * @param index The index.
+	 * @return The level icon at the given index.
+	 */
+	public LevelIconView getLevelIcon(int index) {
+		return (LevelIconView) levels_panel.getComponent(index);
+	}
+	
 	/* ~~~~~                                                                               ~~~~~ *
 	 * GUI Logic for Controllers                                                                 *
 	 * ~~~~~                                                                               ~~~~~ */
@@ -177,20 +196,27 @@ public class MainMenuView extends JPanel{
 	/**
 	 * Refreshes and repaints the Main Menu View based upon the Model associated with it.
 	 */
-	public void refresh(){
+	public void refresh() {
 		// update the level icons
+		levels_panel.removeAll();
 		List<Level> levels = model.getLevels();
 		for (int i = 0; i < levels.size(); i++) {
-			if (getLevelIcons().size() < i + 1) {
-				LevelIconView iconView = new LevelIconView(levels.get(i));
-				levelsPanel.add(iconView);
-			}
+			LevelIconView iconView = new LevelIconView(model, levels.get(i));
+			iconView.addMouseListener(new SelectLevelController(model, app, levels.get(i)));	
+			iconView.refresh();			
+			levels_panel.add(iconView);
 		}
-
-		// refresh the level icons
-		for (LevelIconView icon : getLevelIcons()){
-			icon.refresh();
+		
+		// disable/enable level specific buttons
+		if (model.getSelectedLevel() != null) {
+			edit_level_button.setEnabled(true);
+			delete_level_button.setEnabled(true);
+		} else {
+			edit_level_button.setEnabled(false);
+			delete_level_button.setEnabled(false);
 		}
+		// need to revalidate because we re-added icons
+		revalidate();
 		repaint();
 	}
 

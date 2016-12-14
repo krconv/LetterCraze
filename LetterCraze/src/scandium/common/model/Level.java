@@ -5,6 +5,8 @@
  */
 package scandium.common.model;
 
+import java.util.Random;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -28,6 +30,8 @@ public abstract class Level {
     @XmlElementWrapper(name = "stars")
     @XmlElement(name = "star")
     private Star[] stars;
+    @XmlElement
+    private long token;
     
     /**
      * Creates a new Level with the default information.
@@ -40,6 +44,11 @@ public abstract class Level {
     			new Star(),
     			new Star()
     	};
+		// generate a random token that is not zero
+		Random random = new Random();			
+		do {
+			token = random.nextLong();
+		} while (token == 0);
     }
 
     /**
@@ -52,6 +61,11 @@ public abstract class Level {
     	this.name = name;
     	this.board = board;
     	this.stars = stars;
+		// generate a random token that is not zero
+		Random random = new Random();			
+		do {
+			token = random.nextLong();
+		} while (token == 0);
     }
 
     /**
@@ -83,12 +97,27 @@ public abstract class Level {
 	}
 
 	/**
-	 * @return the stars
+	 * @return an array of the Stars in the level
 	 */
 	public Star[] getStars() {
 		return stars;
 	}
 	
+	/**
+	 * @param index the star that you want (must be under 3 of will throw error)
+	 * @return returns the star at the index
+	 */
+	public Star getStar(int index) {
+		return getStars()[index];
+	}
+	
+	/**
+	 * @return the token
+	 */
+	public long getToken() {
+		return token;
+	}
+		
 	/**
 	 * Determines how many points should be gained for finding the given word.
 	 * @param word The word that is being scored.
