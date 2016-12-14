@@ -161,11 +161,25 @@ public class SaveLevelController implements ActionListener{
     	model.getLevels().remove(model.getEditProgress().getOriginal());
     	if(index == -1){
     		model.addLevel(level);
-    		model.getLevelProgresses().add(new LevelProgress(level));
+    		/* Check if should unlock */
+    		LevelProgress progress = new LevelProgress(level);
+    		if(model.getLevelProgresses().get(model.getLevelProgresses().size() - 1).getStarCount() > 0){
+    			progress.setUnlocked(true);
+    		}
+    		model.getLevelProgresses().add(progress);
     	}else{
     		model.getLevelProgresses().remove(index);
     		model.getLevels().add(index, level);
-    		model.getLevelProgresses().add(index, new LevelProgress(level));
+    		/* Check if should unlock */
+    		LevelProgress progress = new LevelProgress(level);
+    		if(model.getLevelProgresses().get(index - 1).getStarCount() > 0){
+    			progress.setUnlocked(true);
+    			for(int i = index; i < model.getLevelProgresses().size(); i++){
+    				model.getLevelProgresses().remove(i);
+    				model.getLevelProgresses().add(i, new LevelProgress(level));
+    			}
+    		}
+    		model.getLevelProgresses().add(index, progress);
     		model.setEditProgress(new EditProgress(level));
     	}
     	
