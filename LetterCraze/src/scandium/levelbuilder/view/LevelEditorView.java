@@ -453,7 +453,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
-	 * This function returns the JTextField taht stores the user's entered value for a puzzle
+	 * This function returns the JTextField that stores the user's entered value for a puzzle
 	 * level's maximum number of words.
 	 * @return JTextField
 	 */
@@ -461,6 +461,15 @@ public class LevelEditorView extends JPanel{
 		return puzzle_max_num_words_textfield;
 	}
 
+	/**
+	 * This function returns the JTextField that stores the user's entered value for a lightning
+	 * level's time limit.
+	 * @return JTextField
+	 */
+	public JTextField getLightningTimeLimitTextField(){
+		return lightning_time_limit_textfield;
+	}
+	
 	/**
 	 * This function returns the JTextField that stores the user's entered value for a theme
 	 * level's theme name

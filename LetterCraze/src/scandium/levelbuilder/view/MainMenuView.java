@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 
 import scandium.common.model.Level;
 import scandium.common.view.WrapLayout;
+import scandium.levelbuilder.controller.SelectLevelController;
 import scandium.levelbuilder.model.Model;
 
 public class MainMenuView extends JPanel{
@@ -34,6 +35,7 @@ public class MainMenuView extends JPanel{
 	 * Class Attributes                                                                          *
 	 * ~~~~~                                                                               ~~~~~ */
 	Model model = null;
+	Application app = null;
 	JLabel title_label;
 	JButton new_level_button;
 	JButton edit_level_button;
@@ -56,8 +58,9 @@ public class MainMenuView extends JPanel{
 	 * Creates the view for the Main Menu screen with the given Model.
 	 * @param model The model.
 	 */
-	public MainMenuView(Model model) {
+	public MainMenuView(Model model, Application app) {
 		this.model = model;
+		this.app = app;
 		initializeView();
 		refresh();
 	}
@@ -184,6 +187,7 @@ public class MainMenuView extends JPanel{
 		}
 		for (int i = 0; i < levels.size(); i++) {
 			LevelIconView iconView = new LevelIconView(levels.get(i));
+			iconView.addMouseListener(new SelectLevelController(model, app, iconView.getLevel()));
 			levelsPanel.add(iconView);
 		}
 

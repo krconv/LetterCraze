@@ -17,6 +17,7 @@ import scandium.levelbuilder.controller.DeleteLevelController;
 import scandium.levelbuilder.controller.GenerateBoardArrangementController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
 import scandium.levelbuilder.controller.OpenLevelEditorController;
+import scandium.levelbuilder.controller.SaveLevelController;
 import scandium.levelbuilder.controller.SelectLevelController;
 import scandium.levelbuilder.controller.SpecifyLevelTypeController;
 import scandium.levelbuilder.controller.ToggleEnableController;
@@ -66,7 +67,7 @@ public class Application extends JFrame{
 	 * Initializes the LevelBuilder View
 	 */
 	void initializeView(){
-		this.main_menu = new MainMenuView(model);
+		this.main_menu = new MainMenuView(model, this);
 		this.level_editor = new LevelEditorView(model);
 		this.splash_screen = new SplashScreenView();
 		/* Add both panels to the view                                                           */ 
@@ -97,9 +98,9 @@ public class Application extends JFrame{
 		level_editor.getPuzzleLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
 		level_editor.getLightningLevelButton().addActionListener(new SpecifyLevelTypeController(model,this));
 		level_editor.getThemeLevelButton().addActionListener(new SpecifyLevelTypeController(model, this));
-//		
-//		/* Initialize controllers for level editor buttons*/
-//		level_editor.getSaveButton().addActionListener(new SaveLevelController(model,this));
+		
+		/* Initialize controllers for level editor buttons*/
+		level_editor.getSaveButton().addActionListener(new SaveLevelController(model,this));
 		level_editor.getMainMenuButton().addMouseListener(new LeaveLevelEditorController(model,this));
 		level_editor.getGenerateButton().addMouseListener(new GenerateBoardArrangementController(model,this));
 		

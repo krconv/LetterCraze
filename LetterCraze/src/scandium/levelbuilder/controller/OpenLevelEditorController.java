@@ -2,8 +2,12 @@ package scandium.levelbuilder.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import scandium.common.model.Level;
+import scandium.common.model.LightningLevel;
+import scandium.common.model.PuzzleLevel;
+import scandium.common.model.ThemeLevel;
 import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.LevelBuilderState;
 import scandium.levelbuilder.model.Model;
@@ -57,6 +61,25 @@ public class OpenLevelEditorController extends MouseAdapter{
     	model.setSelectedLevel(null);
     	/* Refresh */
     	app.refresh();
+    	
+    	/* Preset textfield values */
+    	app.getLevelEditor().getLevelNameTextField().setText(level.getName());
+    	app.getLevelEditor().getOneStarTextField().setText(level.getStars()[0].getThreshold() + "");
+    	app.getLevelEditor().getTwoStarTextField().setText(level.getStars()[1].getThreshold() + "");
+    	app.getLevelEditor().getThreeStarTextField().setText(level.getStars()[2].getThreshold() + "");
+    	if(level instanceof PuzzleLevel){
+    		app.getLevelEditor().getPuzzleMaxNumWordsTextField().setText(((PuzzleLevel) level).getMaxNumWords() + "");
+    	}else if(level instanceof LightningLevel){
+    		app.getLevelEditor().getLightningTimeLimitTextField().setText(((LightningLevel) level).getTimeLimit() + "");
+    	}else{
+    		app.getLevelEditor().getThemeNameTextField().setText(((ThemeLevel) level).getTheme());
+    		ArrayList<String> theme_words = ((ThemeLevel) level).getThemeWords();
+    		String words = "";
+    		for(String s : theme_words){
+    			words += s + "\n";
+    		}
+    		app.getLevelEditor().getThemeWordsTextArea().setText(words);
+    	}
     }
 
 }
