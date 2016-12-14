@@ -18,7 +18,6 @@ import scandium.levelbuilder.controller.GenerateBoardArrangementController;
 import scandium.levelbuilder.controller.LeaveLevelEditorController;
 import scandium.levelbuilder.controller.OpenLevelEditorController;
 import scandium.levelbuilder.controller.SaveLevelController;
-import scandium.levelbuilder.controller.SelectLevelController;
 import scandium.levelbuilder.controller.SpecifyLevelTypeController;
 import scandium.levelbuilder.controller.ToggleEnableController;
 import scandium.levelbuilder.model.LevelBuilderState;
@@ -111,10 +110,6 @@ public class Application extends JFrame{
 			}
 		}
 		
-		/* Initialize Controllers for Main Menu Level Icons */
-		for(LevelIconView liv : main_menu.getLevelIcons()){
-			liv.addMouseListener(new SelectLevelController(model, this, liv.getLevel()));
-		}
 	}
 
 	/* ~~~~~                                                                               ~~~~~ *

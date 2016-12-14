@@ -120,6 +120,18 @@ public class SaveLevelController implements ActionListener{
     			is_saveable = false;
     			error += "Number of Theme Words for Theme Level must be Greater than 0.\n";
     		}
+    		boolean has_generated = true;
+    		for(int i = 0; i < 6; i++){
+    			for(int j = 0; j < 6; j++){
+    				if(model.getEditProgress().getModified().getBoard().getSquare(i, j).getTile() == null){
+    					has_generated = false;
+    				}
+    			}
+    		}
+    		if(!has_generated){
+				is_saveable = false;
+				error += "Tiles need to be Generated for a ThemeLevel Before Save.\n";
+    		}
     	}
     	
     	if(!is_saveable){

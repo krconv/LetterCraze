@@ -48,7 +48,7 @@ public class OpenLevelEditorController extends MouseAdapter{
      * This function handles the opening of the selected level.
      * @param MouseEvent me
      */
-    public void mousePressed(MouseEvent me) {
+    public void mouseClicked(MouseEvent me) {
     	/* get selected level if it exits */
     	Level level = model.getSelectedLevel();
     	if(level == null) return;

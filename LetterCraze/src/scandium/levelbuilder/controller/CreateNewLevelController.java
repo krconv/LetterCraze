@@ -48,12 +48,13 @@ public class CreateNewLevelController extends MouseAdapter{
      * It creates a new level and a new edit progress for the model and updates the view accordingly. 
      * @param me The MouseEvent representing the user's mousePress.
      */
-    public void mousePressed(MouseEvent me) {
+    public void mouseClicked(MouseEvent me) {
     	/* Initialize to puzzle level */
     	PuzzleLevel level = new PuzzleLevel();
     	EditProgress progress = new EditProgress(level);
     	model.setEditProgress(progress);
     	model.setLevelBuilderState(LevelBuilderState.Editor);
+    	model.setSelectedLevel(null);
     	/* refresh view */
     	app.refresh();
     }
