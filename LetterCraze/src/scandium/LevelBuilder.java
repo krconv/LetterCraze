@@ -30,7 +30,7 @@ public class LevelBuilder {
 		app.setLocationRelativeTo(null);
 		app.setVisible(true);
 		try {
-			//Thread.sleep(5000);
+			Thread.sleep(5000);
 		} catch (Exception e) {
 			// don't care if we can't wait 5 seconds for the splash screen
 		}
