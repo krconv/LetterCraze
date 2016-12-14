@@ -123,7 +123,8 @@ public class SaveLevelController implements ActionListener{
     		boolean has_generated = true;
     		for(int i = 0; i < 6; i++){
     			for(int j = 0; j < 6; j++){
-    				if(model.getEditProgress().getModified().getBoard().getSquare(i, j).getTile() == null){
+    				if(model.getEditProgress().getModified().getBoard().getSquare(i, j).getTile() == null &&
+    						model.getEditProgress().getModified().getBoard().getSquare(i, j).isEnabled()){
     					has_generated = false;
     				}
     			}

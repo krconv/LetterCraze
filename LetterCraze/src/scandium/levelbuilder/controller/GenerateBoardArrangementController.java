@@ -54,13 +54,14 @@ public class GenerateBoardArrangementController extends MouseAdapter{
      */
     public void mouseClicked(MouseEvent me) {
     	Level level = model.getEditProgress().getModified();
-    	
+    	model.getEditProgress().getModified().getBoard().clearExistingTiles();
     	if(level instanceof ThemeLevel){ //if theme level);
     		String theme_words_str = app.getLevelEditor().getThemeWordsTextArea().getText();
     		ArrayList<String> theme_words = parseThemeWords(theme_words_str);
     		ThemeLevel level2 = (ThemeLevel) level;
     		level2.setThemeWords(theme_words);
     		ThemeLevelTileGenerationAlgorithm.populateThemeLevelWithTiles(level2, new Random().nextLong());
+    	}else{
     		model.getEditProgress().getModified().getBoard().fillEmptySquares(dictionary);
     	}
     	

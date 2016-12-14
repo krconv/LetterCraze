@@ -25,9 +25,7 @@ public class ThemeLevelTileGenerationAlgorithm {
 		/* Get The Theme Words and sort them */
 		ArrayList<String> words = level.getThemeWords();
 		if(!words.isEmpty()){
-			System.out.println(words);
 			words = sortWordsByLength(words);
-			System.out.println(words);
 			/* Insert First Word */
 			while(!words.isEmpty() && !insertFirstWord(words.remove(0), board));
 			
@@ -138,7 +136,7 @@ public class ThemeLevelTileGenerationAlgorithm {
 		/* Determine if its okay to add a tile to this BoardSquare */
 		if(row < 0 || row > 5 || col < 0 || col > 5) return false;
 		if(word_inserts[row][col]) return false;
-		BoardSquare square = board.getSquare(col, row);
+		BoardSquare square = board.getSquare(row, col);
 		if(!square.isEnabled()) return false;
 		if(!canInsertIntoSquare(row, col, board)) return false;
 		
@@ -197,7 +195,7 @@ public class ThemeLevelTileGenerationAlgorithm {
 		if(tiles.isEmpty()) return true;
 		/* Determine if its okay to add a tile to this boardSquare */
 		if(row < 0 || row > 5 || col < 0 || col > 5) return false;
-		BoardSquare square = board.getSquare(col, row);
+		BoardSquare square = board.getSquare(row, col);
 		if(!square.isEnabled()) return false;
 		if(!square.isEmpty()) return false;
 		
@@ -239,10 +237,10 @@ public class ThemeLevelTileGenerationAlgorithm {
 	 */
 	static void applyGravity(int row, int col, Board board, boolean[][] word_inserts){
 		for(int i = 5; i > row; i--){
-			BoardSquare insertee = board.getSquare(col, i);
+			BoardSquare insertee = board.getSquare(i, col);
 			if(insertee.isEnabled() && !word_inserts[i][col]){
 				for(int j = i-1; j >= row; j--){
-					BoardSquare inserter = board.getSquare(col, j);
+					BoardSquare inserter = board.getSquare(j, col);
 					if(inserter.isEnabled() && !word_inserts[j][col]){
 						Tile tile = inserter.getTile();
 						inserter.setTile(null);
@@ -263,10 +261,10 @@ public class ThemeLevelTileGenerationAlgorithm {
 	 */
 	static void removeGravity(int row, int col, Board board, boolean[][] word_inserts){
 		for(int i = row; i < 5; i++){
-			BoardSquare insertee = board.getSquare(col, i);
+			BoardSquare insertee = board.getSquare(i, col);
 			if(insertee.isEnabled() && !word_inserts[i][col]){
 				for(int j = i+1; j < 6; j++){
-					BoardSquare inserter = board.getSquare(col, j);
+					BoardSquare inserter = board.getSquare(j, col);//thing
 					if(inserter.isEnabled() && !word_inserts[j][col]){
 						Tile tile = inserter.getTile();
 						inserter.setTile(null);
@@ -290,7 +288,7 @@ public class ThemeLevelTileGenerationAlgorithm {
 	 */
 	static boolean canInsertIntoSquare(int row, int col, Board board){
 		for(int i = row; i < 6; i++){
-			BoardSquare square = board.getSquare(col, i);
+			BoardSquare square = board.getSquare(i, col);
 			if(square.isEmpty() && square.isEnabled()) return true;
 		}
 		return false;
