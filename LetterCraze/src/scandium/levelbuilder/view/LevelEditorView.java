@@ -198,6 +198,7 @@ public class LevelEditorView extends JPanel{
 		/* Initialize Gravity Direction Label                                                    */
 		gravity_label.setBounds(600, 130, 200, 30);
 		add(gravity_label);
+		gravity_label.setVisible(false);
 		/* Initialize Level Specific Label                                                       */
 		level_specific_label.setBounds(900, 350, 250, 30);
 		add(level_specific_label);
@@ -270,12 +271,16 @@ public class LevelEditorView extends JPanel{
 		/* Initialize Gravity Buttons                                                            */
 		gravity_up_button.setBounds(650,180,100,30);
 		add(gravity_up_button);
+		gravity_up_button.setVisible(false);
 		gravity_down_button.setBounds(650,350,100,30);
 		add(gravity_down_button);
+		gravity_down_button.setVisible(false);
 		gravity_left_button.setBounds(575,265,100,30);
 		add(gravity_left_button);
+		gravity_left_button.setVisible(false);
 		gravity_right_button.setBounds(715,265,100,30);
 		add(gravity_right_button);
+		gravity_right_button.setVisible(false);
 
 		/* Initialize Level Type Button Group                                                    */
 		level_type_group.add(puzzle_level_button);
