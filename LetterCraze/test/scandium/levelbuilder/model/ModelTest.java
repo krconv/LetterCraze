@@ -3,6 +3,7 @@
  */
 package scandium.levelbuilder.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -60,35 +61,48 @@ public class ModelTest extends TestCase {
 	 * Test method for {@link scandium.levelbuilder.model.Model#getLevels()}.
 	 */
 	public void testGetLevels() {
-		fail("Not yet implemented");
+		assertNotNull(model.getLevels());
 	}
 
 	/**
 	 * Test method for {@link scandium.levelbuilder.model.Model#addLevel(scandium.common.model.Level)}.
 	 */
 	public void testAddLevel() {
-		fail("Not yet implemented");
+		assertTrue(model.addLevel(selectedLevel));
+		assertTrue(model.getLevels().contains(selectedLevel));
 	}
 
 	/**
 	 * Test method for {@link scandium.levelbuilder.model.Model#removeLevel(scandium.common.model.Level)}.
 	 */
 	public void testRemoveLevel() {
-		fail("Not yet implemented");
+		assertTrue(model.addLevel(selectedLevel));
+		assertTrue(model.getLevels().contains(selectedLevel));
+		assertTrue(model.removeLevel(selectedLevel));
+		assertFalse(model.getLevels().contains(selectedLevel));
 	}
 
 	/**
 	 * Test method for {@link scandium.levelbuilder.model.Model#moveLevel(scandium.common.model.Level, int)}.
 	 */
 	public void testMoveLevel() {
-		fail("Not yet implemented");
+		assertTrue(model.addLevel(selectedLevel));
+		assertTrue(model.getLevels().contains(selectedLevel));
+		assertTrue(model.moveLevel(selectedLevel, 0));
+		assertEquals(selectedLevel, model.getLevels().get(0));
 	}
 
 	/**
 	 * Test method for {@link scandium.levelbuilder.model.Model#replaceLevel(scandium.common.model.Level, scandium.common.model.Level)}.
 	 */
 	public void testReplaceLevel() {
-		fail("Not yet implemented");
+		assertTrue(model.addLevel(selectedLevel));
+		assertTrue(model.getLevels().contains(selectedLevel));
+		assertTrue(model.moveLevel(selectedLevel, 0)); //This is done so I know the exact index of selectedLevel
+		assertEquals(selectedLevel, model.getLevels().get(0)); 
+		ThemeLevel newLevel = new ThemeLevel();
+		assertTrue(model.replaceLevel(selectedLevel, newLevel));
+		assertEquals(newLevel, model.getLevels().get(0));
 	}
 
 }

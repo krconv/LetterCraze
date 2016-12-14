@@ -15,7 +15,6 @@ import scandium.common.tool.GameLoader;
  *
  */
 public class ModelTest extends TestCase {
-	private LetterCrazeState state;
 	private List<Level> levels;
 	private LightningLevel selectedLevel;
 	private GameProgress progress;
@@ -63,14 +62,14 @@ public class ModelTest extends TestCase {
 	 * Test method for {@link scandium.lettercraze.model.Model#getLevels()}.
 	 */
 	public void testGetLevels() {
-		fail("Not yet implemented");
+		assertNotNull(model.getLevels());
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.Model#getProgress()}.
 	 */
 	public void testGetProgress() {
-		fail("Not yet implemented");
+		assertNotNull(model.getProgress());
 	}
 
 }
