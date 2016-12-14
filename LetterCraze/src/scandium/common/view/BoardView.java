@@ -111,7 +111,7 @@ public class BoardView extends JPanel{
 	 * @param col The col index
 	 * @return JLabel
 	 */
-	public JLabel getJLabel(int row, int col){
+	public JLabel getJLabel(int col, int row){
 		return squares[row][col];
 		
 	}

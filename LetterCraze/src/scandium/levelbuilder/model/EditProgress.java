@@ -6,9 +6,6 @@
 package scandium.levelbuilder.model;
 
 import scandium.common.model.Level;
-import scandium.common.model.PuzzleLevel;
-import scandium.common.model.LightningLevel;
-import scandium.common.model.ThemeLevel;
 
 /**
  * An object to track the changes to a level being edited.
