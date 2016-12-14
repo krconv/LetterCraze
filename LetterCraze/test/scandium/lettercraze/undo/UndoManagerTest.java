@@ -56,6 +56,7 @@ public class UndoManagerTest extends TestCase {
 		lp = new LevelProgress(level);
 		lp.setPlaying(true);
 		action = new RemoveWordAction(lp, word, wd, dictionary);
+		um = UndoManager.instance;
 	}
 
 	/* (non-Javadoc)
@@ -63,7 +64,6 @@ public class UndoManagerTest extends TestCase {
 	 */
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		um = UndoManager.instance;
 	}
 
 	/**
@@ -72,6 +72,7 @@ public class UndoManagerTest extends TestCase {
 	public void testRecordRemoveAction() {
 		um.recordAction(action);
 		assertEquals(action, um.removeLastAction());
+		assertNull(um.removeLastAction());
 	}
 
 	/**

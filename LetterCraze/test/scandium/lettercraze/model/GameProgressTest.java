@@ -24,6 +24,7 @@ public class GameProgressTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		levels = new ArrayList<Level>();
 		ll = new LightningLevel();
 		lp = new LevelProgress();
 		levels.add(ll);
