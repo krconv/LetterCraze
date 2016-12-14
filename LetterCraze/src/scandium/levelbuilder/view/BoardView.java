@@ -3,7 +3,7 @@
  * 
  * @author Scandium
  */
-package scandium.lettercraze.view;
+package scandium.levelbuilder.view;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -18,22 +18,18 @@ import javax.swing.border.LineBorder;
 
 import scandium.common.model.Board;
 import scandium.common.model.BoardSquare;
-import scandium.common.model.Level;
-import scandium.lettercraze.model.LevelProgress;
 
 /**
  * 
  */
 public class BoardView extends JPanel {
 	private static final long serialVersionUID = 8871823801671988312L;
-	LevelProgress progress;
+	private Board board;
 	
 	/**
 	 * Creates a new board view.
-	 * @param progress The current level progress which will be updated with player progress.
 	 */
-	public BoardView(LevelProgress progress) {
-		this.progress = progress;
+	public BoardView() {
 		setLayout(new GridLayout(6, 6, 0, 0));
 		setOpaque(false);
 		
@@ -89,18 +85,23 @@ public class BoardView extends JPanel {
 			return null;
 		
 		// return the square at the given position
-		return progress.getLevel().getBoard().getSquare((position.y - borderInsets.top) / squareSize.y,
+		return board.getSquare((position.y - borderInsets.top) / squareSize.y,
 				(position.x - borderInsets.left) / squareSize.x);
+	}
+	
+	/**
+	 * Sets the board for the board view.
+	 * @param board The board.
+	 */
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 	
 	/**
 	 * Refreshes the data of the board from the model.
 	 */
-	public void refresh() {
-		Level level = progress.getLevel();
-		
-		if (level != null) {
-			Board board = level.getBoard();
+	public void refresh() {		
+		if (board != null) {
 			// go through every square and update it according to the model
 			for (int row = 0; row < 6; row++) {
 				for (int col = 0; col < 6; col++) {
@@ -118,10 +119,6 @@ public class BoardView extends JPanel {
 					} else {
 						label.setBackground(Color.WHITE);
 					}
-					
-					// make the square grey if the level isn't playing
-					if (!progress.isPlaying())
-						label.setBackground(Color.LIGHT_GRAY);
 						
 					// make disabled squares black
 					if (!square.isEnabled())

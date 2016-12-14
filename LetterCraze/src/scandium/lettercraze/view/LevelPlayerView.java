@@ -17,6 +17,8 @@ import scandium.common.model.LightningLevel;
 import scandium.common.model.ThemeLevel;
 import scandium.common.tool.LevelRestrictor;
 import scandium.lettercraze.model.LevelProgress;
+import scandium.levelbuilder.view.BoardView;
+
 import javax.swing.Box;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -209,18 +211,24 @@ public class LevelPlayerView extends JPanel {
 		infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		infoPanel.setOpaque(false);
-
+		
 		// set up the buttons
 		buttonsBox = Box.createHorizontalBox();
 		buttonsBox.setBorder(new EmptyBorder(10, 10, 10, 10));
+		Dimension buttonSize = new Dimension(100, 40);
+		
 		// leave button
 		leaveButton = new JButton("Leave");
+		leaveButton.setPreferredSize(buttonSize);
+		leaveButton.setMaximumSize(buttonSize);
 		leaveButton.setFont(leaveButton.getFont().deriveFont(leaveButton.getFont().getSize() + 10f));
 		buttonsBox.add(leaveButton);
 
 		buttonsBox.add(Box.createRigidArea(new Dimension(20, 20)));
 		// reset button
 		resetButton = new JButton("Reset");
+		resetButton.setPreferredSize(buttonSize);
+		resetButton.setMaximumSize(buttonSize);
 		resetButton.setFont(resetButton.getFont().deriveFont(resetButton.getFont().getSize() + 10f));
 		buttonsBox.add(resetButton);
 
@@ -228,6 +236,8 @@ public class LevelPlayerView extends JPanel {
 		undoButtonBox.add(Box.createRigidArea(new Dimension(20, 20)));
 		// undo button
 		undoButton = new JButton("Undo");
+		undoButton.setPreferredSize(buttonSize);
+		undoButton.setMaximumSize(buttonSize);
 		undoButton.setFont(undoButton.getFont().deriveFont(undoButton.getFont().getSize() + 10f));
 		undoButtonBox.add(undoButton);
 		buttonsBox.add(undoButtonBox);

@@ -7,7 +7,7 @@ import java.awt.event.MouseMotionAdapter;
 import scandium.common.model.BoardSquare;
 import scandium.lettercraze.model.Model;
 import scandium.lettercraze.view.Application;
-import scandium.lettercraze.view.BoardView;
+import scandium.levelbuilder.view.BoardView;
 
 /**
  * This class handles the selection of a word through the dragging of the mouse across the 
