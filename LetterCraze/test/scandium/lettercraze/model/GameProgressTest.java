@@ -30,7 +30,7 @@ public class GameProgressTest extends TestCase {
 		levels.add(ll);
 		gameToken = 5;
 		lp.setLevel(ll);
-		gp = new GameProgress(levels, gameToken);
+		gp = new GameProgress(levels);
 	}
 
 	/* (non-Javadoc)
