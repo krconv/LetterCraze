@@ -11,6 +11,7 @@ import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
 import scandium.common.model.ThemeLevel;
 import scandium.lettercraze.model.LevelProgress;
+import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 import scandium.levelbuilder.view.LevelEditorView;
@@ -165,6 +166,7 @@ public class SaveLevelController implements ActionListener{
     		model.getLevelProgresses().remove(index);
     		model.getLevels().add(index, level);
     		model.getLevelProgresses().add(index, new LevelProgress(level));
+    		model.setEditProgress(new EditProgress(level));
     	}
     	
     	/* Save levels to File */
