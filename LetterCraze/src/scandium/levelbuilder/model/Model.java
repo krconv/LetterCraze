@@ -8,7 +8,7 @@ package scandium.levelbuilder.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import scandium.common.model.*;
+import scandium.common.model.Level;
 import scandium.common.tool.GameLoader;
 
 /**
@@ -138,6 +138,14 @@ public class Model {
 	public boolean replaceLevel(Level original, Level replacement) {
 		levels.set(levels.indexOf(original), replacement);
 		return true;
+	}
+	
+	/**
+	 * Saves the levels.
+	 * @return Whether any of the progress was saved.
+	 */
+	public boolean SaveLevels() {
+		return gameLoader.SaveLevels(levels);
 	}
 
 }

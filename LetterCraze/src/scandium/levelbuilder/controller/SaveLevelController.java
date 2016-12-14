@@ -142,10 +142,14 @@ public class SaveLevelController implements ActionListener{
     	}
     	int index = model.getLevels().indexOf(model.getEditProgress().getOriginal());
     	model.getLevels().remove(model.getEditProgress().getOriginal());
-    	model.getLevels().add(index, level);
+    	if(index == -1){
+    		model.addLevel(level);
+    	}else{
+    		model.getLevels().add(index, level);
+    	}
     	
     	/* Save levels to File */
-    	//TODO
+    	model.SaveLevels();
     	
     	app.refresh();
     	
