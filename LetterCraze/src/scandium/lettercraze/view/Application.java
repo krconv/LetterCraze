@@ -5,9 +5,7 @@
  */
 package scandium.lettercraze.view;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -24,6 +22,7 @@ public class Application extends JFrame {
 	private Model model;
 	private MainMenuView mainMenu;
 	private LevelPlayerView levelPlayer;
+	private SplashScreenView splashScreen;
 
 	/**
 	 * Creates a new LetterCraze application window.
@@ -36,7 +35,7 @@ public class Application extends JFrame {
 
 		initializeView();
 		initializeControllers();
-		setView(mainMenu);
+		setSplashScreenView();
 	}
 
 	/**
@@ -59,6 +58,14 @@ public class Application extends JFrame {
 	public LevelPlayerView getLevelPlayer() {
 		return levelPlayer;
 	}
+	
+	/**
+	 * This function returns the SplashScreenView for LetterCraze.
+	 * @return The splash screen.
+	 */
+	public SplashScreenView getSplashScreen(){
+		return splashScreen;
+	}
 
 	/**
 	 * Sets the main view of the application.
@@ -79,36 +86,26 @@ public class Application extends JFrame {
 	}
 
 	/**
-	 * Gets the main view of the application.
-	 * @return The view that is currently being displayed.
+	 * This function sets the application view to display the Main Menu View
 	 */
-	public JPanel getView() {
-		return (JPanel) getContentPane().getComponents()[0];
-	}
-	
-	/**
-	 * Shows the splash screen.
-	 */
-	public void showSplashScreen() {
-		boolean previousIsVisible = isVisible();
-		boolean previousIsResizable = isResizable();
-		JPanel previousView = getView();
-		JPanel splashScreen = new JPanel();
-		splashScreen.add(new JLabel(new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/lettercraze-splash.gif"))));
-		setView(splashScreen);
-		setResizable(false);
-		setVisible(true);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		setVisible(previousIsVisible);
-		setResizable(previousIsResizable);
-		setView(previousView);
+	public void setViewMainMenu(){
+		setView(mainMenu);
 	}
 
+	/** 
+	 * This function set the application view to display the Level Editor
+	 */
+	public void setViewLevelEditor(){
+		setView(levelPlayer);
+	}
+	
+	/** 
+	 * This function set the application view to display the Splash Screen.
+	 */
+	public void setSplashScreenView(){
+		setView(splashScreen);
+	}
+	
 	/**
 	 * Initialize the view.
 	 */
@@ -123,6 +120,7 @@ public class Application extends JFrame {
 		}
 		this.mainMenu = new MainMenuView(model);
 		this.levelPlayer = new LevelPlayerView(model.getProgress().getCurrentLevelProgress());
+		this.splashScreen = new SplashScreenView();
 	}
 
 	/**

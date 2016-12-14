@@ -6,9 +6,6 @@ package scandium.lettercraze.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-
 import junit.framework.TestCase;
 import scandium.common.model.*;
 

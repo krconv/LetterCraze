@@ -3,6 +3,7 @@ package scandium.levelbuilder.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import scandium.common.model.Level;
@@ -56,8 +57,7 @@ public class GenerateBoardArrangementController extends MouseAdapter{
     	Level level = model.getEditProgress().getModified();
     	model.getEditProgress().getModified().getBoard().clearExistingTiles();
     	if(level instanceof ThemeLevel){ //if theme level);
-    		String theme_words_str = app.getLevelEditor().getThemeWordsTextArea().getText();
-    		ArrayList<String> theme_words = parseThemeWords(theme_words_str);
+    		List<String> theme_words = app.getLevelEditor().getThemeWords();
     		ThemeLevel level2 = (ThemeLevel) level;
     		level2.setThemeWords(theme_words);
     		ThemeLevelTileGenerationAlgorithm.populateThemeLevelWithTiles(level2, new Random().nextLong());
@@ -65,7 +65,7 @@ public class GenerateBoardArrangementController extends MouseAdapter{
     		model.getEditProgress().getModified().getBoard().fillEmptySquares(dictionary);
     	}
     	
-    	app.refresh();
+    	app.getLevelEditor().refresh();
     }
     
     /**
