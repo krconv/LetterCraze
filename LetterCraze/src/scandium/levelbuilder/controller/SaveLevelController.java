@@ -8,6 +8,7 @@ import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
 import scandium.common.model.PuzzleLevel;
 import scandium.common.model.ThemeLevel;
+import scandium.levelbuilder.model.EditProgress;
 import scandium.levelbuilder.model.Model;
 import scandium.levelbuilder.view.Application;
 import scandium.levelbuilder.view.LevelEditorView;
@@ -97,6 +98,9 @@ public class SaveLevelController implements ActionListener{
 
     	// replace the level
     	model.replaceLevel(model.getEditProgress().getOriginal(), modified);
+    	
+		// update the editor to start editing the new level
+    	model.setEditProgress(new EditProgress(modified)); 
     	    	
     	/* Save levels to File */
     	model.SaveLevels();

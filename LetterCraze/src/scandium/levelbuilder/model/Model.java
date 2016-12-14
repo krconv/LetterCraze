@@ -10,8 +10,6 @@ import java.util.List;
 
 import scandium.common.model.Level;
 import scandium.common.tool.GameLoader;
-import scandium.lettercraze.model.LevelProgress;
-import scandium.lettercraze.tool.ProgressLoader;
 
 /**
  * The top level model container for the LevelBuilder application.
@@ -22,8 +20,6 @@ public class Model {
 	private EditProgress editProgress;
 	private GameLoader gameLoader;
 	private LevelBuilderState state;
-	private ProgressLoader progressLoader;
-	private List<LevelProgress> progresses;
 
 	/**
 	 * Creates a new model for the LevelBuilder application from file using the GameLoader.
@@ -32,10 +28,8 @@ public class Model {
 		this.selectedLevel = null;
 		// load the levels
 		this.gameLoader = new GameLoader();
-		this.progressLoader = new ProgressLoader();
 		this.levels = gameLoader.LoadLevels(new ArrayList<Level>());
 		state = LevelBuilderState.MainMenu;
-		this.progresses = progressLoader.LoadLevelProgress(levels, gameLoader.GetGameToken());
 	}
 
 	/**
@@ -71,13 +65,6 @@ public class Model {
 	 */
 	public List<Level> getLevels() {
 		return levels;
-	}
-	
-	/**
-	 * @return the levelProgresses
-	 */
-	public List<LevelProgress> getLevelProgresses(){
-		return progresses;
 	}
 	
 	/**
@@ -158,12 +145,10 @@ public class Model {
 	
 	/**
 	 * Saves the levels.
-	 * @return Whether any of the progress was saved.
+	 * @return Whether any of the levels were saved.
 	 */
 	public boolean SaveLevels() {
-		boolean result = gameLoader.SaveLevels(levels);
-		result = result && progressLoader.SaveLevelProgress(progresses, gameLoader.GetGameToken());
-		return result;
+		return gameLoader.SaveLevels(levels);
 	}
 
 }

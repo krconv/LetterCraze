@@ -46,9 +46,7 @@ public class DeleteLevelController extends MouseAdapter{
 		if(level == null) return;
 		
 		/* Remove Level from Model */
-		int index = model.getLevels().indexOf(level);
 		model.getLevels().remove(level);
-		model.getLevelProgresses().remove(index);
 		model.setSelectedLevel(null);
 		/* Remove Level from File */
     	model.SaveLevels();
