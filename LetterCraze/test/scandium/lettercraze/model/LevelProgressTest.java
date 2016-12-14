@@ -77,14 +77,6 @@ public class LevelProgressTest extends TestCase {
 	}
 
 	/**
-	 * Test method for {@link scandium.lettercraze.model.LevelProgress#getTimeLeft()} and {@link scandium.lettercraze.model.LevelProgress#setTimeLeft(int)}.
-	 */
-	public void testGetSetTimeLeft() {
-		lp.setTimeLeft(timeLeft);
-		assertEquals(timeLeft, lp.getTimeLeft());
-	}
-
-	/**
 	 * Test method for {@link scandium.lettercraze.model.LevelProgress#getStarCount()}.
 	 */
 	public void testGetStarCount() {
