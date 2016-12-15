@@ -126,7 +126,8 @@ public class Application extends JFrame {
 	/**
 	 * Initialize the controllers.
 	 */
-	private void initializeControllers() {
+	private void initializeControllers() {		
+		// add the open level contollers
 		for (LevelIconView view : mainMenu.getLevelIcons()) {
 			view.addMouseListener(new OpenLevelController(model, this, view.getModel()));
 		}
@@ -147,6 +148,10 @@ public class Application extends JFrame {
 		}
 		levelPlayer.getResetButton().addMouseListener(new ResetLevelController(model, this));
 		mainMenu.getResetButton().addMouseListener(new ResetTotalProgressController(model, this, model.getProgress()));
+		
+		// add the cheat controller
+		addKeyListener(new CheatCodeController(model, this));
+		setFocusable(true);
 	}
 }
 

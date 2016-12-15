@@ -169,8 +169,6 @@ public class LevelEditorView extends JPanel{
 		/* Initialize Theme Words Label                                                          */
 		theme_words_box = createLabelTextFieldBox("Words", false);
 		theme_words_textarea = new JTextArea();
-		theme_words_textarea.setPreferredSize(new Dimension(250, 100));
-		theme_words_textarea.setMaximumSize(new Dimension(250, 100));
 		theme_words_textarea.setFont(theme_name_textfield.getFont().deriveFont(theme_name_textfield.getFont().getSize() - 10f));
 		theme_words_box.remove(2);
 		JScrollPane theme_words_scrollpane = new JScrollPane(theme_words_textarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
