@@ -18,7 +18,8 @@ import scandium.lettercraze.view.Application;
 public class CheatCodeController implements KeyListener {
 	private Model model;
 	private Application app;
-	private final String cheatCode = "scandium";
+	private final String cheatCode = "sc";
+	private long lastKey;
 	private int i = 0;
 	
 	/**
@@ -36,8 +37,7 @@ public class CheatCodeController implements KeyListener {
 	 */
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(i);
 	}
 
 	/* (non-Javadoc)
@@ -54,15 +54,20 @@ public class CheatCodeController implements KeyListener {
 	 */
 	@Override
 	public void keyTyped(KeyEvent arg0) {
+		if (System.currentTimeMillis() - lastKey > 2000)
+			i = 0;
+		
+		// update the last key press
+		lastKey = System.currentTimeMillis();
+		
+		// set if the key pressed is part of the cheat word
 		if (arg0.getKeyChar() == cheatCode.charAt(i)) {
 			i++;
 			if (i == cheatCode.length()) {
-				if (app.getContentPane().getComponent(0).equals(app.getMainMenu())) {
 					for (LevelProgress progress : model.getProgress().getLevelProgresses()) {
 						progress.setUnlocked(true);
 						progress.setScore(progress.getLevel().getStar(2).getThreshold());
 					}
-				}
 				i = 0;
 				model.getProgress().SaveProgress();
 				app.getMainMenu().refresh();
@@ -70,5 +75,7 @@ public class CheatCodeController implements KeyListener {
 		} else {
 			i = 0;
 		}
+		
+		System.out.println(i);
 	}
 }
