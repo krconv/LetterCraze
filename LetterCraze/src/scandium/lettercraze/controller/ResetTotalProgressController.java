@@ -67,6 +67,10 @@ public class ResetTotalProgressController extends MouseAdapter{
     	
     	/* commit changes to file */
     	total_progress.SaveProgress();
+    	
+    	// reload the main menu
+    	app.setView(app.getMainMenu());
+    	
     	/* update view */
     	app.getMainMenu().refresh();
     }
