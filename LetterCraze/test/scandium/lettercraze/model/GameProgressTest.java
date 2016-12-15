@@ -42,7 +42,7 @@ public class GameProgressTest extends TestCase {
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#getCurrentLevelProgress()}.
 	 */
 	public void testGetCurrentLevelProgress() {
-		assertNotSame(new LevelProgress(), gp.getCurrentLevelProgress());
+		assertNotNull(gp.getCurrentLevelProgress());
 	}
 
 	/**
