@@ -1,84 +1,64 @@
 /**
+ * GameProgressTest.java
  * 
+ * @author Scandium
  */
 package scandium.lettercraze.model;
 
-import java.io.File;
-import java.util.*;
-import scandium.common.model.*;
+import java.util.List;
+
 import junit.framework.TestCase;
+import scandium.common.model.Level;
+import scandium.common.tool.GameLoader;
 
 /**
- * @author Connor
- *
+ * Test class for {@link scandium.lettercraze.model.GameProgress}.
  */
 public class GameProgressTest extends TestCase {
-	private LevelProgress lp;
-	private GameProgress gp;
+	private GameProgress progress;
 	private List<Level> levels;
-	private LightningLevel ll;
 	
-
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		levels = new ArrayList<Level>();
-		ll = new LightningLevel();
-		lp = new LevelProgress();
-		levels.add(ll);
-		lp.setLevel(ll);
-		gp = new GameProgress(levels);
+		levels = new GameLoader().LoadLevels();
+		progress = new GameProgress(levels);
+		
 	}
 
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#tearDown()
 	 */
-	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		new File("LetterCrazeProgress.xml").delete();
 	}
 
 	/**
-	 * Test method for {@link scandium.lettercraze.model.GameProgress#getCurrentLevelProgress()}.
+	 * Test method for {@link scandium.lettercraze.model.GameProgress#GameProgress(java.util.List)}.
 	 */
-	public void testGetSetCurrentLevelProgress() {
-		// test that the current progress is not null
-		assertNotNull(gp.getCurrentLevelProgress());
+	public void testGameProgress() {
+		// make sure that there are progresses for every level
+		for (Level level : levels) {
+			assertNotNull(progress.getProgressForLevel(level));
+		}
+		
+		// make sure the current progress
+		assertNotNull(progress.getCurrentLevelProgress());
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#unlockNextLevel()}.
 	 */
 	public void testUnlockNextLevel() {
-		gp.getCurrentLevelProgress().setLevel(ll);
-		assertFalse(gp.unlockNextLevel());
-	}
-
-	/**
-	 * Test method for {@link scandium.lettercraze.model.GameProgress#getProgressForLevel(scandium.common.model.Level)}.
-	 */
-	public void testGetProgressForLevel() {
-		assertNotNull(gp.getProgressForLevel(ll));
-		gp.getCurrentLevelProgress().setLevel(ll);
-		assertNotNull(gp.getProgressForLevel(ll));
+		progress.getCurrentLevelProgress().setLevel(levels.get(0));
+		assertTrue(progress.unlockNextLevel());
+		assertTrue(progress.getProgressForLevel(levels.get(1)).isUnlocked());
 		
+		// test that doing it again won't change anything
+		assertFalse(progress.unlockNextLevel());
+		assertTrue(progress.getProgressForLevel(levels.get(1)).isUnlocked());
+		assertFalse(progress.getProgressForLevel(levels.get(2)).isUnlocked());
 	}
-
-	/**
-	 * Test method for {@link scandium.lettercraze.model.GameProgress#replaceLevelProgress(scandium.lettercraze.model.LevelProgress)}.
-	 */
-	public void testReplaceLevelProgress() {
-		assertTrue(gp.replaceLevelProgress(lp));
-	}
-
-	/**
-	 * Test method for {@link scandium.lettercraze.model.GameProgress#SaveProgress()}.
-	 */
-	public void testSaveLoadProgress() {
-		assertTrue(gp.SaveProgress());
-	}
-
 }
