@@ -39,6 +39,7 @@ public class Application extends JFrame {
 	}
 
 	/**
+	 * Gets the model of this application.
 	 * @return the model
 	 */
 	public Model getModel() {
@@ -46,6 +47,7 @@ public class Application extends JFrame {
 	}
 
 	/**
+	 * Gets the main menu of this application.
 	 * @return the mainMenu
 	 */
 	public MainMenuView getMainMenu() {
@@ -53,6 +55,7 @@ public class Application extends JFrame {
 	}
 
 	/**
+	 * Gets the level player of this application.
 	 * @return the levelPlayer
 	 */
 	public LevelPlayerView getLevelPlayer() {
@@ -60,7 +63,7 @@ public class Application extends JFrame {
 	}
 	
 	/**
-	 * This function returns the SplashScreenView for LetterCraze.
+	 * Gets the splash screen of this application.
 	 * @return The splash screen.
 	 */
 	public SplashScreenView getSplashScreen(){
