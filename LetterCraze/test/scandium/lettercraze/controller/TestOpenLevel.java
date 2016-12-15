@@ -2,6 +2,7 @@ package scandium.lettercraze.controller;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import scandium.common.testresources.ScandiumLetterCrazeTestCase;
 import scandium.lettercraze.model.Model;
@@ -21,6 +22,7 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 
 	protected void tearDown() throws Exception {
 		app.dispose();
+		new File("LetterCrazeProgress.xml").delete();
 	}
 
 	/**
@@ -230,8 +232,8 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 		} catch (InterruptedException e) {
 		}
 		//check correct View is open
-		assertEquals(true,app.getMainMenu().isVisible());
-		assertEquals(false,app.getLevelPlayer().isVisible());
+		assertEquals(app.getMainMenu(), app.getContentPane().getComponent(0));
+		assertNotSame(app.getLevelPlayer(), app.getComponent(0));
 	}
 
 }

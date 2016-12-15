@@ -1,5 +1,6 @@
 package scandium.lettercraze.tool;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ProgressLoaderTest extends TestCase {
 	
 	protected void tearDown() throws Exception{
 		loader = null;
+		new File("LetterCrazeProgress.xml").delete();
 	}
 		
 	/**

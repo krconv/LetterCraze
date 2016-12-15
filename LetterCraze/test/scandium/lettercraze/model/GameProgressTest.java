@@ -3,6 +3,7 @@
  */
 package scandium.lettercraze.model;
 
+import java.io.File;
 import java.util.*;
 import scandium.common.model.*;
 import junit.framework.TestCase;
@@ -34,14 +35,17 @@ public class GameProgressTest extends TestCase {
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		new File("LetterCrazeProgress.xml").delete();
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#getCurrentLevelProgress()}.
 	 */
-	public void testGetCurrentLevelProgress() {
+	public void testGetSetCurrentLevelProgress() {
+		// test that the current progress is not null
 		assertNotNull(gp.getCurrentLevelProgress());
 	}
 
@@ -57,6 +61,7 @@ public class GameProgressTest extends TestCase {
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#getProgressForLevel(scandium.common.model.Level)}.
 	 */
 	public void testGetProgressForLevel() {
+		assertNotNull(gp.getProgressForLevel(ll));
 		gp.getCurrentLevelProgress().setLevel(ll);
 		assertNotNull(gp.getProgressForLevel(ll));
 		
@@ -72,7 +77,7 @@ public class GameProgressTest extends TestCase {
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#SaveProgress()}.
 	 */
-	public void testSaveProgress() {
+	public void testSaveLoadProgress() {
 		assertTrue(gp.SaveProgress());
 	}
 

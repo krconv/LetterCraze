@@ -107,7 +107,9 @@ public class ProgressLoader {
 					}
 					
 					// unlock the level if it should be unlocked
-					progress.setUnlocked(i == 0 || unmarshalled.getProgress().get(i - 1).getStarCount() > 0);
+					progress.setUnlocked(i == 0 
+							|| i >= unmarshalled.getProgress().size() 
+							|| unmarshalled.getProgress().get(i - 1).getStarCount() > 0);
 					
 					// add the progress
 					list.add(progress);
