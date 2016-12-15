@@ -3,6 +3,7 @@
  */
 package scandium.lettercraze.model;
 
+import java.io.File;
 import java.util.*;
 import scandium.common.model.*;
 import junit.framework.TestCase;
@@ -16,7 +17,6 @@ public class GameProgressTest extends TestCase {
 	private GameProgress gp;
 	private List<Level> levels;
 	private LightningLevel ll;
-	private long gameToken;
 	
 
 	/* (non-Javadoc)
@@ -28,7 +28,6 @@ public class GameProgressTest extends TestCase {
 		ll = new LightningLevel();
 		lp = new LevelProgress();
 		levels.add(ll);
-		gameToken = 5;
 		lp.setLevel(ll);
 		gp = new GameProgress(levels);
 	}
@@ -36,15 +35,18 @@ public class GameProgressTest extends TestCase {
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		new File("LetterCrazeProgress.xml").delete();
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#getCurrentLevelProgress()}.
 	 */
-	public void testGetCurrentLevelProgress() {
-		assertEquals(new LevelProgress(), gp.getCurrentLevelProgress());
+	public void testGetSetCurrentLevelProgress() {
+		// test that the current progress is not null
+		assertNotNull(gp.getCurrentLevelProgress());
 	}
 
 	/**
@@ -59,7 +61,7 @@ public class GameProgressTest extends TestCase {
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#getProgressForLevel(scandium.common.model.Level)}.
 	 */
 	public void testGetProgressForLevel() {
-		assertNull(gp.getProgressForLevel(ll));
+		assertNotNull(gp.getProgressForLevel(ll));
 		gp.getCurrentLevelProgress().setLevel(ll);
 		assertNotNull(gp.getProgressForLevel(ll));
 		
@@ -70,16 +72,21 @@ public class GameProgressTest extends TestCase {
 	 */
 	public void testReplaceLevelProgress() {
 		assertTrue(gp.replaceLevelProgress(lp));
-		lp = null;
-		assertFalse(gp.replaceLevelProgress(lp));
+		try {
+			assertFalse(gp.replaceLevelProgress(null));
+			fail();
+		} catch (NullPointerException e) {
+			
+		} catch (Exception e) {
+			fail();
+		}
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#SaveProgress()}.
 	 */
-	public void testSaveProgress() {
-		assertTrue(gp.SaveProgress());
-		gp.getCurrentLevelProgress().setLevel(null);
+	public void testSaveLoadProgress() {
+		
 		assertTrue(gp.SaveProgress());
 	}
 

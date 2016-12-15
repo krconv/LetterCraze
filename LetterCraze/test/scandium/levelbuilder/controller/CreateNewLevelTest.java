@@ -1,6 +1,7 @@
 package scandium.levelbuilder.controller;
 
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import scandium.common.testresources.ScandiumLevelBuilderTestCase;
 import scandium.levelbuilder.model.Model;
@@ -17,6 +18,7 @@ public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 
 	protected void tearDown() throws Exception {
 		app.dispose();
+		new File("LetterCrazeProgress.xml").delete();
 	}
 
 	/**
