@@ -70,6 +70,9 @@ public class PuzzleLevelTest extends TestCase {
 		level.setMaxNumWords(20);
 		level.setName("This is a level");
 		level.setBoard(board);
+		level.getStar(0).setThreshold(1);
+		level.getStar(1).setThreshold(2);
+		level.getStar(2).setThreshold(3);
 		board.fillEmptySquares(dictionary);
 		assertTrue(level.isValid());
 	}
