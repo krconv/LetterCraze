@@ -50,6 +50,10 @@ public class SaveLevelController implements ActionListener{
     	StringBuilder errors = new StringBuilder();
     	Level modified = model.getEditProgress().getModified();
     	
+    	// remove the tiles if the board should regenerate
+    	if (modified.getBoard().shouldRegenerate())
+    		modified.getBoard().clearExistingTiles();
+    	
     	// set the common attributes
     	modified.setName(levelEditorView.getLevelNameTextField().getText());
 		try {
