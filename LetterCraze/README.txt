@@ -5,12 +5,18 @@ December 14, 2016
 
 Group Project Final Implementation
 
+
+ **General Notes**
+To run LevelBuilder, navigate to the src folder and the scandium package. Run the file titled LevelBuilder as a Java Application.
+To run LetterCraze, navigate to the src folder and the scandium package. Run the file titled LetterCraze as a Java Application.
+
+
 **Important Note about Testing**
 Run the tests on a new version of the project. 
 (ie. before you have added or edited any levels with LevelBuilder or played any levels in LetterCraze).
-
-To run LevelBuilder, navigate to the src folder and the scandium package. Run the file titled LevelBuilder as a Java Application.
-To run LetterCraze, navigate to the src folder and the scandium package. Run the file titled LetterCraze as a Java Application.
+	If you do not do so, refresh the Package Explorer View for the Project and then 
+	delete the file named LetterCrazeProgress.xml under the main LetterCraze folder before running the tests.
+	*DO NOT DELETE THE FILE IN scandium.common.resources
 
 
 **LetterCraze**
@@ -123,4 +129,5 @@ To return to the Main Menu, click the Main Menu Button.
 **Other Information**
 After editing a level or adding a new level in the LevelBuilder, all current progress in LetterCraze will be reset.
 All third party files applications needed to run this application are included in the package.
-
+The theme words for level 3 (Quiet Colorful) are "Blue", "Red", and "Green".
+The 7th level (Puzzle Paradise) is good to test finding the max limit of words without getting a star because its one star threshold is 1000 points.
