@@ -152,6 +152,7 @@ public class GameLoader {
 	}
 
 	/**
+	 * Gets the location of the save file that this loader is using.
 	 * @return the savePath
 	 */
 	public String getSavePath() {

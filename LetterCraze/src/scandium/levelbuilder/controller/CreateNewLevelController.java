@@ -33,8 +33,8 @@ public class CreateNewLevelController extends MouseAdapter{
     /**
      * This constructor creates a new instance of the CreateNewLevelController.
      * It passes in the entire LevelBuilder model and the EntireLevelBuilder GUI.
-     * @param model The LevelBuilder Model.
-     * @param app The LevelBuilder application.
+     * @param m The LevelBuilder Model.
+     * @param a The LevelBuilder application.
      */
     public CreateNewLevelController(Model m, Application a) {
         this.model = m;

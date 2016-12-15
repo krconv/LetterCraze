@@ -46,6 +46,7 @@ public class LevelIconView extends JPanel {
 	}
 
 	/**
+	 * Gets the progress for this level icon.
 	 * @return the model
 	 */
 	public LevelProgress getModel() {
@@ -53,6 +54,7 @@ public class LevelIconView extends JPanel {
 	}
 
 	/**
+	 * Gets the name label for this level icon.
 	 * @return the levelNameLabel
 	 */
 	public JLabel getLevelNameLabel() {
@@ -60,6 +62,7 @@ public class LevelIconView extends JPanel {
 	}
 
 	/**
+	 * Gets the high score label for this level icon.
 	 * @return the highScoreLabel
 	 */
 	public JLabel getHighScoreLabel() {
@@ -67,6 +70,7 @@ public class LevelIconView extends JPanel {
 	}	
 	
 	/**
+	 * Gets a star label for this level icon.
 	 * @param index The index of the star label to get.
 	 * @return The star label at the given index.
 	 */
@@ -109,6 +113,7 @@ public class LevelIconView extends JPanel {
 	}
 	
 	/**
+	 * Gets the background color for a level of the given type.
 	 * @param level
 	 *            The level to calculate using
 	 * @return the background color for the given level 

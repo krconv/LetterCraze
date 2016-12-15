@@ -52,7 +52,7 @@ public class ThemeLevelTest extends TestCase {
 	}
 
 	/**
-	 * Test method for {@link scandium.common.model.ThemeLevel#getThemeWords()} and {@link scandium.common.model.ThemeLevel#setThemeWords(java.util.ArrayList)}.
+	 * Test method for {@link scandium.common.model.ThemeLevel#getThemeWords()} and {@link scandium.common.model.ThemeLevel#setThemeWords(java.util.List)}.
 	 */
 	public void testGetSetThemeWords() {
 		ArrayList<String> tW = new ArrayList<String>();

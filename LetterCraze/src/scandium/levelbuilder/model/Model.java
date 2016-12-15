@@ -33,6 +33,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the selected level.
 	 * @return the selectedLevel
 	 */
 	public Level getSelectedLevel() {
@@ -40,6 +41,7 @@ public class Model {
 	}
 
 	/**
+	 * Sets the selected level.
 	 * @param selectedLevel the selectedLevel to set
 	 */
 	public void setSelectedLevel(Level selectedLevel) {
@@ -47,6 +49,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the current edit progress.
 	 * @return the editProgress
 	 */
 	public EditProgress getEditProgress() {
@@ -54,6 +57,7 @@ public class Model {
 	}
 
 	/**
+	 * Sets the current edit progress.
 	 * @param editProgress the editProgress to set
 	 */
 	public void setEditProgress(EditProgress editProgress) {
@@ -61,6 +65,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the list of levels.
 	 * @return the levels
 	 */
 	public List<Level> getLevels() {
@@ -68,6 +73,7 @@ public class Model {
 	}
 	
 	/**
+	 * Gets the state of the builder.
 	 * @return state
 	 */
 	public LevelBuilderState getLevelBuilderState(){
@@ -75,7 +81,7 @@ public class Model {
 	}
 	
 	/** 
-	 * This function sets the levelBuilderState.
+	 * Sets the state of the builder.
 	 * @param state The new LevelBuilderState.
 	 */
 	public void setLevelBuilderState(LevelBuilderState state){

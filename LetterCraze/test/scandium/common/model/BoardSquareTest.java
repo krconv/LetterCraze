@@ -18,7 +18,7 @@ public class BoardSquareTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		board = new Board(true, GravityDirection.Down);
+		board = new Board(true, GravityDirection.Up);
 	}
 
 	/* (non-Javadoc)
@@ -33,7 +33,7 @@ public class BoardSquareTest extends TestCase {
 	 */
 	public void testBoardSquare() {
 		// make sure that the square has the information passed to it stored
-		board = new Board(true, GravityDirection.Down);
+		board = new Board(true, GravityDirection.Up);
 		BoardSquare square = board.getSquare(1, 1);
 		assertEquals(1, square.getRow());
 		assertEquals(1, square.getCol());

@@ -33,8 +33,8 @@ public class OpenLevelEditorController extends MouseAdapter{
     
     /**
      * This constructor instantiates a new OpenLevelEditorController.
-     * @param model The entire LevelBuilder model.
-     * @param app The entire LevelBuilder application.
+     * @param m The entire LevelBuilder model.
+     * @param a The entire LevelBuilder application.
      */
     public OpenLevelEditorController(Model m, Application a) {
         this.model = m;
@@ -44,9 +44,8 @@ public class OpenLevelEditorController extends MouseAdapter{
     
     /**
      * This function handles the opening of the selected level.
-     * @param MouseEvent me
+     * @param me The mouse event.
      */
-
     public void mouseClicked(MouseEvent me) {
       /* get selected level if it exits */
     	Level level = model.getSelectedLevel();

@@ -53,9 +53,9 @@ public class BoardTest extends TestCase {
 		assertEquals(GravityDirection.Up, board.getGravityDirection());
 		
 		// and with different values
-		board = new Board(false, GravityDirection.Down);
+		board = new Board(false, GravityDirection.Up);
 		assertEquals(false, board.shouldRegenerate());
-		assertEquals(GravityDirection.Down, board.getGravityDirection());
+		assertEquals(GravityDirection.Up, board.getGravityDirection());
 	}
 
 	/**

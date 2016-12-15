@@ -9,6 +9,7 @@ package scandium.common.tool;
  * A tool which contains a list of words.
  */
 public interface IWordDictionary {
+	
     /**
      * Check whether a word is contained in the dictionary.
      * @param word The word to check.

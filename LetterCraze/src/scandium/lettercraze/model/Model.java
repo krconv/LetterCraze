@@ -41,6 +41,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the state of the game.
 	 * @return the state
 	 */
 	public LetterCrazeState getState() {
@@ -48,6 +49,7 @@ public class Model {
 	}
 
 	/**
+	 * Sets the state of the game.
 	 * @param state the state to set
 	 */
 	public void setState(LetterCrazeState state) {
@@ -55,6 +57,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the currently selected level.
 	 * @return the selectedLevel
 	 */
 	public Level getSelectedLevel() {
@@ -62,6 +65,7 @@ public class Model {
 	}
 
 	/**
+	 * Sets the currently selected level.
 	 * @param selectedLevel the selectedLevel to set
 	 */
 	public void setSelectedLevel(Level selectedLevel) {
@@ -69,6 +73,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the list of levels for this game.
 	 * @return the levels
 	 */
 	public List<Level> getLevels() {
@@ -76,6 +81,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the progress for this game.
 	 * @return the progress
 	 */
 	public GameProgress getProgress() {

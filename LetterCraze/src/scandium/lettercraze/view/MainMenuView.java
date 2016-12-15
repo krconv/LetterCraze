@@ -49,6 +49,7 @@ public class MainMenuView extends JPanel {
     }
     
 	/**
+	 * Gets the title label of this main menu.
 	 * @return the titleLabel
 	 */
 	public JLabel getTitleLabel() {
@@ -56,6 +57,7 @@ public class MainMenuView extends JPanel {
 	}
 
 	/**
+	 * Gets the reset progress button of this main menu.
 	 * @return the resetButton
 	 */
 	public JButton getResetButton() {
@@ -64,6 +66,7 @@ public class MainMenuView extends JPanel {
 	
 	
 	/**
+	 * Gets the level icons of this main menu.
 	 * @return The list of level icons
 	 */
 	public List<LevelIconView> getLevelIcons() {

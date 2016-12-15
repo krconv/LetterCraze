@@ -12,9 +12,10 @@ import scandium.common.model.Tile;
 public class ThemeLevelTileGenerationAlgorithm {
 
 	/**
-	 * This function fills the given level's board with tiles. It does this using the algorithm
-	 * below to embed the theme words into the boards. 
+	 * Populates the given level's board with tiles that have a list of words.
+	 * 
 	 * @param level The ThemeLevel to be populated
+	 * @param seed The seed to use for the random algorithm.
 	 */
 	public static void populateThemeLevelWithTiles(ThemeLevel level, long seed){
 		/* Get the Board */
@@ -40,15 +41,10 @@ public class ThemeLevelTileGenerationAlgorithm {
 		board.fillEmptySquares(new LetterDictionary());
 	}
 	
-	
-	
-	
-	
-	
 	/** 
-	 * This function sorts an ArrayList of words by order (ascending).
-	 * @param words An ArrayList of Strings to be sorted
-	 * @return An ArrayList of strings representing the the theme words
+	 * Sorts a list of words by their length.
+	 * @param words The words to sort.
+	 * @return The sorted list.
 	 */
 	static List<String> sortWordsByLength(List<String> words){
 		List<String> sorted = new ArrayList<String>();
@@ -68,15 +64,13 @@ public class ThemeLevelTileGenerationAlgorithm {
 		return sorted;
 	}
 	
-	
-	
-	
 	/**
-	 * This function inserts the given word into the given board. It returns a boolean
-	 * indicating if the word was inserted.
+	 * Inserts the given word into the given board.
+	 * 
 	 * @param word The String word to be inserted into the board
 	 * @param board The Board to insert the word into.
-	 * @return boolean Whether the word was inserted or not.
+	 * @param random The random generator to use.
+	 * @return Whether the word was inserted or not.
 	 */
 	static boolean insertWord(String word, Board board, Random random){
 		ArrayList<Tile> tiles = convertToTiles(word);
@@ -99,11 +93,11 @@ public class ThemeLevelTileGenerationAlgorithm {
 	}
 	
 	/**
-	 * This function inserts the first word. It returns a boolean indicating if the word was 
-	 * inserted. 
+	 * Inserts the first word.
+	 * 
 	 * @param word The given word to insert into the board.
 	 * @param board The board to insert the given word into.
-	 * @return boolean Whether the word was inserted or not.
+	 * @return Whether the word was inserted or not.
 	 */
 	static boolean insertFirstWord(String word, Board board){
 		ArrayList<Tile> tiles = convertToTiles(word);
@@ -119,8 +113,8 @@ public class ThemeLevelTileGenerationAlgorithm {
 	}
 	
 	/**
-	 * This function inserts the given word (ArrayList<Tile>) into the board at the given 
-	 * row and column. It will insert tiles onto BoardSquares that already has tiles.
+	 * Inserts the given word into the board at the given row and column.
+	 * It will insert tiles onto BoardSquares that already has tiles.
 	 * The old tiles are moved down, such that gravity will reform them during game play. 
 	 * Tiles are placed pseudo-randomly.
 	 * @param row The row to try to insert this word into
@@ -129,7 +123,7 @@ public class ThemeLevelTileGenerationAlgorithm {
 	 * @param board The Board in which to insert the word
 	 * @param word_inserts. A 2 Dimensional Array of boolean showing where this word has been placed. 
 	 * (can't place tiles on BoardSquares populated from this word)
-	 * @return boolean Whether the word was inserted or not. 
+	 * @return Whether the word was inserted or not. 
 	 */
 	static boolean insertTilesAt(int row, int col, ArrayList<Tile> tiles, Board board, boolean[][] word_inserts){
 		/* Determine if the entire word has been placed */
@@ -180,17 +174,16 @@ public class ThemeLevelTileGenerationAlgorithm {
 		return true;
 	}
 	
-	
 	/** 
-	 * This function inserts the first word (ArrayList<Tile>) into the board at the given 
-	 * row and column. It works recursively to insert all tiles. It will only insert tiles into
+	 * Inserts the first word into the board at the given row and column. 
+	 * It works recursively to insert all tiles. It will only insert tiles into
 	 * empty BoardSquares.  It returns false if the word
 	 * could not be inserted at this location. 
 	 * @param row The row to try to insert this word into 
 	 * @param col The column to try to insert this word into 
 	 * @param tiles The ArrayList of tiles representing the word
 	 * @param board The board in which to insert the word
-	 * @return boolean Whether the word was inserted or not.
+	 * @return Whether the word was inserted or not.
 	 */
 	static boolean insertFirstTilesAt(int row, int col, ArrayList<Tile> tiles, Board board){
 		if(tiles.isEmpty()) return true;
@@ -230,11 +223,12 @@ public class ThemeLevelTileGenerationAlgorithm {
 	}	
 	
 	/**
-	 * This function applies gravity to the given column above a given row in the given
+	 * Applies gravity to the given column above a given row in the given
 	 * board. It does this so that a word can be inserted at this tile.
 	 * @param row The row above which to apply gravity
 	 * @param col The column which to apply gravity
 	 * @param board The Board to apply gravity to
+	 * @param word_inserts The word inserts.
 	 */
 	static void applyGravity(int row, int col, Board board, boolean[][] word_inserts){
 		for(int i = 5; i > row; i--){
@@ -254,11 +248,12 @@ public class ThemeLevelTileGenerationAlgorithm {
 	}
 	
 	/**
-	 * This function removes the effects of applyGravity(). It is used when gravity was 
-	 * applied, but it turns out the tile could not be inserted. 
+	 * Removes the effects of applying gravity. 
+	 * It is used when gravity was applied, but it turns out the tile could not be inserted. 
 	 * @param row The row above which gravity was applied
 	 * @param col The column in which gravity was applied
 	 * @param board The board in which gravity was applied
+	 * @param word_inserts The word inserts.
 	 */
 	static void removeGravity(int row, int col, Board board, boolean[][] word_inserts){
 		for(int i = row; i < 5; i++){
@@ -278,14 +273,18 @@ public class ThemeLevelTileGenerationAlgorithm {
 	}
 	
 	/**
-	 * This function determines if a tile can be inserted into the board at the given
-	 * row and column. Returns true if the BoardSquare is empty, or if the BoardSquare
-	 * is occupied and their is an empty BoardSquare below it in the same column.
-	 * Otherwise it returns false.
-	 * @param row The row of the board square
-	 * @param col The col of the board Square
-	 * @param board The board to be inserted into
-	 * @return boolean Whether a tile can be inserted into this square.
+	 * Determines if a tile can be inserted into the board at the given row and
+	 * column.
+	 * 
+	 * @param row
+	 *            The row of the board square
+	 * @param col
+	 *            The col of the board Square
+	 * @param board
+	 *            The board to be inserted into
+	 * @return Returns true if the BoardSquare is empty, or if the BoardSquare
+	 *         is occupied and their is an empty BoardSquare below it in the
+	 *         same column. Otherwise it returns false.
 	 */
 	static boolean canInsertIntoSquare(int row, int col, Board board){
 		for(int i = row; i < 6; i++){
@@ -296,7 +295,7 @@ public class ThemeLevelTileGenerationAlgorithm {
 	}
 	
 	/** 
-	 * This function determines the number of open squares in the Board.
+	 * Determines the number of open squares in the Board.
 	 * @param board The board in question
 	 * @return the number of empty squares
 	 */
@@ -311,9 +310,9 @@ public class ThemeLevelTileGenerationAlgorithm {
 	}
 	
 	/**
-	 * This function converts the given word into an ArrayList of tiles. 
+	 * Converts the given word into an ArrayList of tiles. 
 	 * @param word The word to be converted into tiles.
-	 * @return ArrayList<Tile> the tiles created from this word
+	 * @return the tiles created from this word
 	 */
 	static ArrayList<Tile> convertToTiles(String word){
 		LetterDictionary dictionary = new LetterDictionary();
