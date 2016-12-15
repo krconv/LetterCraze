@@ -25,7 +25,7 @@ public class SplashScreenView extends JPanel{
 	/**
 	 * This function initializes the splash screen
 	 */
-	void initialize(){
+	private void initialize(){
 		image_icon = new ImageIcon(LevelIconView.class.getResource("/scandium/lettercraze/resources/lettercraze-splash.gif"));
 		image_label = new JLabel(image_icon);
 		add(image_label);

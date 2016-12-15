@@ -10,7 +10,6 @@ import scandium.levelbuilder.view.Application;
 /**
  * This class handles the user's mouse click on the delete level button in the LevelBuilder Main Menu.
  * @author Scandium
- * @Date 13/12/16
  */
 public class DeleteLevelController extends MouseAdapter{
 	/** 

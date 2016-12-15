@@ -20,7 +20,7 @@ public class WordTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		board = new Board(true, GravityDirection.Down);
+		board = new Board(true, GravityDirection.Up);
 		dictionary = new LetterDictionary(100);
 	}
 

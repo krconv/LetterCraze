@@ -42,6 +42,7 @@ public class GameProgress {
 	}
 
 	/**
+	 * Gets the current level's progress.
 	 * @return the currentLevelProgress
 	 */
 	public LevelProgress getCurrentLevelProgress() {
@@ -49,6 +50,7 @@ public class GameProgress {
 	}
 
 	/**
+	 * Gets all of the level progress.
 	 * @return The list of LevelProgresses
 	 */
 	public List<LevelProgress> getLevelProgresses(){
@@ -56,6 +58,7 @@ public class GameProgress {
 	}
 	
 	/**
+	 * Unlocks the level after the currently active level progress.
 	 * @return whether a level was unlocked
 	 */
 	public boolean unlockNextLevel() {

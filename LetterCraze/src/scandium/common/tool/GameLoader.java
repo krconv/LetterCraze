@@ -99,8 +99,6 @@ public class GameLoader {
 				if (file.exists() && !file.isDirectory()) {
 					// load the file from the file system
 					unmarshalled = (LevelContainer) unmarshaller.unmarshal(file);
-				} else {
-					System.err.println("The save file could not be found! Path: \"" + savePath + "\"!");
 				}
 			} catch (JAXBException e) {
 				System.err.println("The save file could not be loaded! Path: \"" + savePath + "\"!");
@@ -109,7 +107,7 @@ public class GameLoader {
 
 			if (unmarshalled == null) {
 				// couldn't load the levels the normal way so let's try the default file
-				System.err.println("Loading the save file for the default levels!");
+				System.out.println("Loading the default levels...");
 				unmarshalled = (LevelContainer) unmarshaller.unmarshal(this.getClass().getResourceAsStream("/scandium/common/resources/LetterCrazeGame.xml"));
 			}
 			
@@ -154,6 +152,7 @@ public class GameLoader {
 	}
 
 	/**
+	 * Gets the location of the save file that this loader is using.
 	 * @return the savePath
 	 */
 	public String getSavePath() {

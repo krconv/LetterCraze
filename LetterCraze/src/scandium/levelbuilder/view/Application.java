@@ -56,6 +56,7 @@ public class Application extends JFrame{
 	 * Getter Methods                                                                            *
 	 * ~~~~~                                                                               ~~~~~ */
 	/**
+	 * Gets the model of this application.
 	 * @return the model
 	 */
 	public Model getModel(){
@@ -63,24 +64,24 @@ public class Application extends JFrame{
 	}
 	
 	/**
-	 * This function returns the MainMenuView for LevelBuilder
-	 * @return MainMenuView
+	 * Gets the main menu of this application.
+	 * @return the main menu
 	 */
 	public MainMenuView getMainMenu(){
 		return main_menu;
 	}
 
 	/**
-	 * This function returns the LevelEditorView for LevelBuilder
-	 * @return LevelEditorView
+	 * Gets the level editor of this application.
+	 * @return the level editor
 	 */
 	public LevelEditorView getLevelEditor(){
 		return level_editor;
 	}
 
 	/**
-	 * This function returns the SplashScreenView for LevelBuilder
-	 * @return SplashScreenView
+	 * Gets the splash screen of this application.
+	 * @return the splash screen
 	 */
 	public SplashScreenView getSplashScreen(){
 		return splash_screen;
@@ -98,21 +99,21 @@ public class Application extends JFrame{
 	}
 	
 	/**
-	 * This function sets the application view to display the Main Menu View
+	 * Sets the current view of this application to the main menu.
 	 */
 	public void setViewMainMenu(){
 		setView(main_menu);
 	}
 
 	/** 
-	 * This function set the application view to display the Level Editor
+	 * Sets the current view of this application to the level editor.
 	 */
 	public void setViewLevelEditor(){
 		setView(level_editor);
 	}
 	
 	/** 
-	 * This function set the application view to display the Splash Screen.
+	 * Sets the current view of this application to the splash screen.
 	 */
 	public void setSplashScreenView(){
 		setView(splash_screen);
@@ -121,7 +122,7 @@ public class Application extends JFrame{
 	/**
 	 * Initializes the LevelBuilder View
 	 */
-	void initializeView(){
+	private void initializeView(){
 		setTitle("LetterCraze Level Builder");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		try {

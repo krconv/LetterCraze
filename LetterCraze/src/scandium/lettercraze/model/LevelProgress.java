@@ -79,6 +79,7 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Gets the score of the progress.
 	 * @return the score
 	 */
 	public int getScore() {
@@ -106,6 +107,7 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Gets whether this progress is in the play state.
 	 * @return the isPlaying
 	 */
 	public boolean isPlaying() {
@@ -113,6 +115,8 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Sets whether this progress is in the play state.
+	 * 
 	 * @param isPlaying
 	 *            the isPlaying to set
 	 */
@@ -121,6 +125,7 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Gets the level that this progress is for.
 	 * @return the level
 	 */
 	public Level getLevel() {
@@ -128,6 +133,7 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Gets the restrictor for this progress.
 	 * @return the restrictor
 	 */
 	public LevelRestrictor getRestrictor() {
@@ -135,6 +141,7 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Gets the star count for this progress.
 	 * @return the starCount
 	 */
 	public int getStarCount() {
@@ -142,6 +149,7 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Gets whether this progress is unlocked and able to be played.
 	 * @return the isUnlocked
 	 */
 	public boolean isUnlocked() {
@@ -149,6 +157,7 @@ public class LevelProgress {
 	}
 
 	/**
+	 * Gets the list of found words.
 	 * @return the foundWords
 	 */
 	public List<String> getFoundWords() {
@@ -157,6 +166,7 @@ public class LevelProgress {
 
 	
 	/**
+	 * Gets the unique token for this progress.
 	 * @return the token
 	 */
 	public long getToken() {

@@ -13,7 +13,6 @@ import scandium.levelbuilder.view.Application;
 /**
  * This class handles the the user's selection of the level type.
  * @author Scandium 
- * @date 13/12/16
  */
 public class SpecifyLevelTypeController implements ActionListener {
 	/** 
@@ -29,8 +28,8 @@ public class SpecifyLevelTypeController implements ActionListener {
 
     /**
      * This constructor creates a new SpecifyLevelTypeController.
-     * @param model The entire LevelBuilder Model
-     * @param app The entire LevelBuilder application
+     * @param m The entire LevelBuilder Model
+     * @param a The entire LevelBuilder application
      */
     public SpecifyLevelTypeController(Model m, Application a) {
         this.model = m;

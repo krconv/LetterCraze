@@ -17,7 +17,6 @@ import scandium.levelbuilder.view.Application;
  * a possible distribution of tiles. For the theme level it uses an algorithm to 
  * place the theme words into the board. 
  * @author Scandium
- * @Date 13/12/16
  */
 public class GenerateBoardArrangementController extends MouseAdapter{
 
@@ -38,8 +37,8 @@ public class GenerateBoardArrangementController extends MouseAdapter{
 
     /**
      * This constructor instantiates a new GenerateBoardArrangementController.
-     * @param model 
-     * @param app
+     * @param m The model.
+     * @param a The application.
      */
     public GenerateBoardArrangementController(Model m, Application a) {
         this.model = m;

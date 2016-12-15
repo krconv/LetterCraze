@@ -75,6 +75,7 @@ public abstract class LevelRestrictor {
 	}
 
 	/**
+	 * Gets whether this restriction has been started.
 	 * @return whether the restriction has been started.
 	 */
 	public boolean isRestricting() {

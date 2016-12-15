@@ -30,21 +30,6 @@ public class WrapLayout extends FlowLayout
 	}
 
 	/**
-	* Returns the minimum dimensions needed to layout the <i>visible</i>
-	* components contained in the specified target container.
-	* @param target the component which needs to be laid out
-	* @return the minimum dimensions to lay out the
-	* subcomponents of the specified container
-	*/
-	@Override
-	public Dimension minimumLayoutSize(Container target)
-	{
-		Dimension minimum = layoutSize(target, false);
-		minimum.width -= (getHgap() + 1);
-		return minimum;
-	}
-
-	/**
 	* Returns the minimum or preferred dimension needed to layout the target
 	* container.
 	*

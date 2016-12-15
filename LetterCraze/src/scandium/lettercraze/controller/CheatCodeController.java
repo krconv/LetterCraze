@@ -18,7 +18,7 @@ import scandium.lettercraze.view.Application;
 public class CheatCodeController implements KeyListener {
 	private Model model;
 	private Application app;
-	private final String cheatCode = "sc";
+	private final String cheatCode = "scandium";
 	private long lastKey;
 	private int i = 0;
 	
@@ -36,18 +36,13 @@ public class CheatCodeController implements KeyListener {
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
 	 */
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		System.out.println(i);
-	}
+	public void keyPressed(KeyEvent arg0) { }
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
 	 */
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent arg0) { }
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
@@ -75,7 +70,5 @@ public class CheatCodeController implements KeyListener {
 		} else {
 			i = 0;
 		}
-		
-		System.out.println(i);
 	}
 }

@@ -3,22 +3,15 @@
  */
 package scandium.lettercraze.model;
 
-import java.util.List;
-
 import junit.framework.TestCase;
-import scandium.common.model.Level;
 import scandium.common.model.LightningLevel;
-import scandium.common.tool.GameLoader;
 
 /**
  * @author Connor
  *
  */
 public class ModelTest extends TestCase {
-	private List<Level> levels;
 	private LightningLevel selectedLevel;
-	private GameProgress progress;
-	private GameLoader gameLoader;
 	private Model model;
 	
 	/* (non-Javadoc)

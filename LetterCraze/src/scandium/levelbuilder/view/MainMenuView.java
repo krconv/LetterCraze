@@ -65,7 +65,7 @@ public class MainMenuView extends JPanel{
 	/**
 	 * This function initializes the GUI widgets (attributes).
 	 */
-	void initializeView(){
+	private void initializeView(){
 		// set the background color and layout manager
 		setBackground(new Color(0, 191, 255));
 		setBorder(new EmptyBorder(20, 20, 20, 20));

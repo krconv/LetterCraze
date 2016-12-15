@@ -3,11 +3,9 @@
  */
 package scandium.levelbuilder.model;
 
-import java.util.List;
 
 import junit.framework.TestCase;
 import scandium.common.model.*;
-import scandium.common.tool.GameLoader;
 
 /**
  * @author Connor
@@ -15,9 +13,7 @@ import scandium.common.tool.GameLoader;
  */
 public class ModelTest extends TestCase {
 	private LightningLevel selectedLevel;
-	private List<Level> levels;
 	private EditProgress editProgress;
-	private GameLoader gameLoader;
 	private Model model;
 	
 	/* (non-Javadoc)

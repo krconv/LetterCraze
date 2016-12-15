@@ -108,6 +108,7 @@ public class Word {
     }
     
     /**
+     * Gets the tiles in this word.
      * @return the tiles that have been selected.
      */
     public List<Tile> getTiles(){
@@ -115,6 +116,7 @@ public class Word {
     }
     
     /**
+     * Gets the board squares in this word.
      * @return the board squares that have been selected.
      */
     public List<BoardSquare> getBoardSquares(){
@@ -122,6 +124,7 @@ public class Word {
     }
     
     /**
+     * Gets the last selected square in this word.
      * @return the most recently selected board square
      */
     public BoardSquare getLastSelectedSquare() {
