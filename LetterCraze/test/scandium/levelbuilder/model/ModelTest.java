@@ -3,6 +3,7 @@
  */
 package scandium.levelbuilder.model;
 
+
 import junit.framework.TestCase;
 import scandium.common.model.*;
 
