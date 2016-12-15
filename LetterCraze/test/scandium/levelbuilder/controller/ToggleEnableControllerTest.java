@@ -1,6 +1,7 @@
 package scandium.levelbuilder.controller;
 
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import scandium.common.model.Board;
 import scandium.common.model.PuzzleLevel;
@@ -21,6 +22,7 @@ public class ToggleEnableControllerTest extends ScandiumLevelBuilderTestCase {
 
 	protected void tearDown() throws Exception {
 		app.dispose();
+		new File("LetterCrazeProgress.xml").delete();
 	}
 	
 	public void testEnableToggle(){
