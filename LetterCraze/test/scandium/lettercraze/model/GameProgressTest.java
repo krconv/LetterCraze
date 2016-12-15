@@ -53,6 +53,7 @@ public class GameProgressTest extends TestCase {
 	 */
 	public void testUnlockNextLevel() {
 		progress.getCurrentLevelProgress().setLevel(levels.get(0));
+		progress.getCurrentLevelProgress().setUnlocked(true);
 		assertTrue(progress.unlockNextLevel());
 		assertTrue(progress.getProgressForLevel(levels.get(1)).isUnlocked());
 		
