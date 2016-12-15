@@ -2,7 +2,6 @@ package scandium.levelbuilder.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -67,33 +66,4 @@ public class GenerateBoardArrangementController extends MouseAdapter{
     	
     	app.getLevelEditor().refresh();
     }
-    
-    /**
-     * This function consumes one long string representing the theme words in the text area, 
-     * and parses them into an array list of separate words. It allows the words to be 
-     * Separated by spaces, new lines, or commas.
-     * @param theme_words The String of theme words separated by commas, spaces, or new lines.
-     */
-    ArrayList<String> parseThemeWords(String theme_words){
-    	ArrayList<String> words = new ArrayList<String>();
-    	int old_index = 0;
-    	boolean on_word = false;
-    	char[] chars = theme_words.toCharArray();
-    	/* Parse the String */
-    	for(int i = 0; i <= theme_words.length(); i++){
-    		char this_char = ' ';
-    		if(i != theme_words.length()) this_char = chars[i];
-    		
-    		if(this_char == ' ' || this_char == ',' || this_char =='\n'){
-    			if(on_word){
-    				words.add(theme_words.substring(old_index, i));
-    			}
-    			old_index = i+1;
-    			on_word = false;
-    		}else on_word = true;
-    	}
-    	
-    	return words;
-    }
-
 }
