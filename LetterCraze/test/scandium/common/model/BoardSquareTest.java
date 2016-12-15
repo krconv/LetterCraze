@@ -39,16 +39,6 @@ public class BoardSquareTest extends TestCase {
 		assertEquals(1, square.getCol());
 		assertEquals(board, square.getBoard());
 		
-		// make sure that passing the constructor a null board throws an exception
-		try {
-			new BoardSquare(0, 0, null, true);
-			fail();
-		} catch (NullPointerException e) {
-			
-		} catch (Exception e) {
-			fail();
-		}
-		
 	}
 
 	/**

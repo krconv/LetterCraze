@@ -54,7 +54,7 @@ public class GameProgressTest extends TestCase {
 	 */
 	public void testUnlockNextLevel() {
 		gp.getCurrentLevelProgress().setLevel(ll);
-		assertTrue(gp.unlockNextLevel());
+		assertFalse(gp.unlockNextLevel());
 	}
 
 	/**
@@ -72,21 +72,12 @@ public class GameProgressTest extends TestCase {
 	 */
 	public void testReplaceLevelProgress() {
 		assertTrue(gp.replaceLevelProgress(lp));
-		try {
-			assertFalse(gp.replaceLevelProgress(null));
-			fail();
-		} catch (NullPointerException e) {
-			
-		} catch (Exception e) {
-			fail();
-		}
 	}
 
 	/**
 	 * Test method for {@link scandium.lettercraze.model.GameProgress#SaveProgress()}.
 	 */
 	public void testSaveLoadProgress() {
-		
 		assertTrue(gp.SaveProgress());
 	}
 

@@ -23,32 +23,6 @@ public class TileTest extends TestCase {
 		Tile tile = new Tile("A", 1);
 		assertEquals("A", tile.getContent());
 		assertEquals(1, tile.getScore());
-		
-		// test that an exception is thrown if given invalid information
-		try {
-			tile = new Tile("", 1);
-			fail();
-		} catch (IllegalArgumentException e) {
-			
-		} catch (Exception e) {
-			fail(); // should have been an illegal argument exception
-		}
-		try {
-			tile = new Tile("A", -1);
-			fail();
-		} catch (IllegalArgumentException e) {
-			
-		} catch (Exception e) {
-			fail(); // should have been an illegal argument exception
-		}
-		try {
-			tile = new Tile(null, 1);
-			fail();
-		} catch (NullPointerException e) {
-			
-		} catch (Exception e) {
-			fail(); // should have been a null pointer exception
-		}
 	}
 
 	/**

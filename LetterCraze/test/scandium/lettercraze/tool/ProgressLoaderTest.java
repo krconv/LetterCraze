@@ -1,7 +1,6 @@
 package scandium.lettercraze.tool;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import scandium.lettercraze.model.LevelProgress;
 /**
  * This class is used to test the scandium.lettercraze.tool.ProgressLoader class.
  * @author Scandium
- * @date 14/12/16
  */
 public class ProgressLoaderTest extends TestCase {
 	protected ProgressLoader loader;
@@ -28,17 +26,7 @@ public class ProgressLoaderTest extends TestCase {
 		loader = null;
 		new File("LetterCrazeProgress.xml").delete();
 	}
-	
-	/**
-	 * This function tests ProgressLoader.getSavePath(). It ensures that it returns the 
-	 * correct system path, relative to the user's system.
-	 */
-	public void testGetSavePath(){
-		String path_actual = loader.getSavePath();
-		String path_expected = Paths.get(System.getProperty("user.home"), "LetterCrazeProgress.xml").toString();
-		assertEquals(path_actual, path_expected);
-	}
-	
+		
 	/**
 	 * This function tests that a ProgressLoader can save a list of LevelProgress, 
 	 * and then load them. 
@@ -66,7 +54,6 @@ public class ProgressLoaderTest extends TestCase {
 
 		
 		/* Save the Level Progresses */
-		long gameToken = 25;
 		List<LevelProgress> loaded_progresses;
 		loader.SaveLevelProgress(progresses);
 		/* Load the Level Progresses */
@@ -83,17 +70,6 @@ public class ProgressLoaderTest extends TestCase {
 		assertEquals(actual.isUnlocked(), expected.isUnlocked());
 		
 		assertEquals(loaded_progresses.size(), 3);
-		
-		/* Test Loading with Invalid Cookie, Should generate completely new level progresses */
-		loaded_progresses = loader.LoadLevelProgress(levels);
-		
-		assertEquals(loaded_progresses.size(), 3);
-		assertEquals(loaded_progresses.get(0).getScore(), 0);
-		assertEquals(loaded_progresses.get(1).getScore(), 0);
-		assertEquals(loaded_progresses.get(2).getScore(), 0);
-		assertEquals(loaded_progresses.get(0).isUnlocked(), true);
-		assertEquals(loaded_progresses.get(1).isUnlocked(), false);
-		assertEquals(loaded_progresses.get(2).isUnlocked(), false);
 		
 	}
 }
