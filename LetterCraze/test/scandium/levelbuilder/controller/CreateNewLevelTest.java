@@ -147,6 +147,9 @@ public class CreateNewLevelTest extends ScandiumLevelBuilderTestCase {
 		//check Theme Level attributes are not visible
 		assertEquals(true,app.getLevelEditor().getThemeNameBox().isVisible());
 		assertEquals(true,app.getLevelEditor().getThemeWordsBox().isVisible());
+		assertEquals("Red", app.getLevelEditor().getThemeWords().get(0));
+		assertEquals("Blue", app.getLevelEditor().getThemeWords().get(1));
+		assertEquals("Green", app.getLevelEditor().getThemeWords().get(2));
 		//check that Lighting Level attributes are not visible
 		assertEquals(false,app.getLevelEditor().getTimeLimitBox().isVisible());
 	}
