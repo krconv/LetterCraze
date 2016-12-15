@@ -3,8 +3,6 @@
  */
 package scandium.common.tool;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.concurrent.Callable;
 
 import junit.framework.TestCase;

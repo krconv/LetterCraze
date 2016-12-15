@@ -43,6 +43,7 @@ public class PuzzleLevel extends Level {
     }
 
     /**
+     * Gets the maximum number of allowed words for this level.
 	 * @return the maxNumWords
 	 */
 	public int getMaxNumWords() {
@@ -50,6 +51,7 @@ public class PuzzleLevel extends Level {
 	}
 
 	/**
+     * Sets the maximum number of allowed words for this level.
 	 * @param maxNumWords the maxNumWords to set
 	 */
 	public void setMaxNumWords(int maxNumWords) {

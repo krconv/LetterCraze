@@ -46,7 +46,7 @@ public class LetterDictionary {
 	 * Initializes the letter dictionary. It adds all letters, their scores, and
 	 * their frequencies.
 	 */
-    void initialize(){
+    private void initialize(){
     	/* Add A                                                                                 */
     	letters[0] = "A";
     	frequencies[0] = 8.17;
@@ -179,8 +179,8 @@ public class LetterDictionary {
     }
 
     /**
-     * This function creates and returns a tile with a random letter. 
-     * @return Tile
+     * Generates a random tile with a random letter. 
+     * @return the random tile
      */
     public Tile getRandomTile() {
     	int rand = random.nextInt(10000);
@@ -196,10 +196,6 @@ public class LetterDictionary {
     		}
     	}
     	
-    	if(letter == null){
-    		System.out.println("Error Occured while generating random tile");
-    		return null;
-    	}
     	Tile tile = new Tile(letter, score);
 		return tile;
     }

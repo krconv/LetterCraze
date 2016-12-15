@@ -42,7 +42,7 @@ public class LevelEditorView extends JPanel{
 	 * ~~~~~                                                                               ~~~~~ */
 	Model model;
 	Application app;
-	EditProgress editProgress;
+	EditProgress edit_progress;
 	
 	JLabel title_label;
 	JComboBox<String> level_type_combo_box;
@@ -50,7 +50,6 @@ public class LevelEditorView extends JPanel{
 	JTextField star_one_textfield;
 	JTextField star_two_textfield;
 	JTextField star_three_textfield;
-	JLabel star_unit_label;
 	Box max_num_words_box;
 	JTextField max_num_words_textfield;
 	Box time_limit_box;
@@ -86,7 +85,7 @@ public class LevelEditorView extends JPanel{
 	 * entryCondition: None.
 	 * exitCondition: All attributes have been initialized properly
 	 */
-	void initializeView(){
+	private void initializeView(){
 		setBackground(new Color(0, 191, 255));
 		setBorder(new EmptyBorder(20, 20, 20, 20));
 		setLayout(new BorderLayout(0, 0));
@@ -130,22 +129,17 @@ public class LevelEditorView extends JPanel{
 		Box star_threshold_area_box = Box.createVerticalBox();
 		
 		// create the star thresholds
-		star_unit_label = new JLabel();
-		star_unit_label.setFont(star_unit_label.getFont().deriveFont(star_unit_label.getFont().getSize() + 15f));
 		Box star_threshold_box = Box.createVerticalBox();
 		Box star_one_box = createLabelTextFieldBox("Star One", true);
 		star_one_textfield = (JTextField) star_one_box.getComponent(2);
-		star_one_box.add(star_unit_label);
 		star_threshold_box.add(star_one_box);
 		
 		Box star_two_box = createLabelTextFieldBox("Star Two", true);
 		star_two_textfield = (JTextField) star_two_box.getComponent(2);
-		star_two_box.add(star_unit_label);
 		star_threshold_box.add(star_two_box);
 		
 		Box star_three_box = createLabelTextFieldBox("Star Three", true);
 		star_three_textfield = (JTextField) star_three_box.getComponent(2);
-		star_three_box.add(star_unit_label);
 		star_threshold_box.add(star_three_box);
 		star_threshold_area_box.add(star_threshold_box);
 		fields_panel.add(star_threshold_area_box);
@@ -260,6 +254,7 @@ public class LevelEditorView extends JPanel{
 	 * ~~~~~                                                                               ~~~~~ */
 
 	/**
+	 * Gets the mode of this level editor.
 	 * @return the model
 	 */
 	public Model getModel() {
@@ -267,13 +262,15 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the edit progress of this level editor.
 	 * @return the editProgress
 	 */
 	public EditProgress getEditProgress() {
-		return editProgress;
+		return edit_progress;
 	}
 
 	/**
+	 * Gets the title label of this level editor.
 	 * @return the title_label
 	 */
 	public JLabel getTitleLabel() {
@@ -281,6 +278,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the level type combo box of this level editor.
 	 * @return the level_type_combo_box
 	 */
 	public JComboBox<String> getLevelTypeComboBox() {
@@ -289,6 +287,7 @@ public class LevelEditorView extends JPanel{
 
 	/**
 	 * Sets the selected level in the combo box.
+	 * @param levelType The level type to set as selected.
 	 */
 	public void setSelectedLevel(String levelType) {
 		for (int i = 0; i < level_type_combo_box.getItemCount(); i++)
@@ -298,6 +297,7 @@ public class LevelEditorView extends JPanel{
 	}
 	
 	/**
+	 * Gets the level name text field of this level editor.
 	 * @return the level_name_textfield
 	 */
 	public JTextField getLevelNameTextField() {
@@ -305,6 +305,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the star one text field of this level editor.
 	 * @return the star_one_textfield
 	 */
 	public JTextField getStarOneTextField() {
@@ -312,6 +313,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the star two text field of this level editor.
 	 * @return the star_two_textfield
 	 */
 	public JTextField getStarTwoTextField() {
@@ -319,6 +321,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the star three text field of this level editor.
 	 * @return the star_three_textfield
 	 */
 	public JTextField getStarThreeTextField() {
@@ -326,13 +329,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
-	 * @return the star_unit_label
-	 */
-	public JLabel getStarUnitLabel() {
-		return star_unit_label;
-	}
-
-	/**
+	 * Gets the max num words box of this level editor.
 	 * @return the max_num_words_box
 	 */
 	public Box getMaxNumWordsBox() {
@@ -340,6 +337,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the max num words text field of this level editor.
 	 * @return the max_num_words_textfield
 	 */
 	public JTextField getMaxNumWordsTextField() {
@@ -347,6 +345,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the time limit box of this level editor.
 	 * @return the time_limit_box
 	 */
 	public Box getTimeLimitBox() {
@@ -354,6 +353,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the time limit text field of this level editor.
 	 * @return the time_limit_textfield
 	 */
 	public JTextField getTimeLimitTextField() {
@@ -361,6 +361,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the theme name box of this level editor.
 	 * @return the theme_name_box
 	 */
 	public Box getThemeNameBox() {
@@ -368,6 +369,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the theme name text field of this level editor.
 	 * @return the theme_name_textfield
 	 */
 	public JTextField getThemeNameTextField() {
@@ -375,6 +377,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the theme words box of this level editor.
 	 * @return the theme_words_box
 	 */
 	public Box getThemeWordsBox() {
@@ -382,6 +385,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the theme words text area of this level editor.
 	 * @return the theme_words_textarea
 	 */
 	public JTextArea getThemeWordsTextArea() {
@@ -389,6 +393,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the list of theme words of this level editor.
 	 * @return the list of words in the theme level words text area
 	 */
 	public List<String> getThemeWords() {
@@ -410,6 +415,7 @@ public class LevelEditorView extends JPanel{
 	}	
 	
 	/**
+	 * Gets the save button of this level editor.
 	 * @return the save_button
 	 */
 	public JButton getSaveButton() {
@@ -417,6 +423,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the generate button of this level editor.
 	 * @return the generate_button
 	 */
 	public JButton getGenerateButton() {
@@ -424,6 +431,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the main menu button of this level editor.
 	 * @return the main_menu_button
 	 */
 	public JButton getMainMenuButton() {
@@ -431,6 +439,7 @@ public class LevelEditorView extends JPanel{
 	}
 
 	/**
+	 * Gets the board view of this level editor.
 	 * @return the board_view
 	 */
 	public BoardView getBoardView() {
@@ -447,7 +456,7 @@ public class LevelEditorView extends JPanel{
 	 * @param ep The edit progress.
 	 */
 	public void setEditProgress(EditProgress ep){
-		this.editProgress = ep;
+		this.edit_progress = ep;
 		board_view.setBoard(ep.getModified().getBoard());
 	}
 

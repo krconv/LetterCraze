@@ -43,6 +43,7 @@ public class LightningLevel extends Level {
     }
 
     /**
+     * Gets the time limit of this level.
 	 * @return the timeLimit
 	 */
 	public int getTimeLimit() {
@@ -50,6 +51,7 @@ public class LightningLevel extends Level {
 	}
 
 	/**
+     * Sets the time limit of this level.
 	 * @param timeLimit the timeLimit to set
 	 */
 	public void setTimeLimit(int timeLimit) {

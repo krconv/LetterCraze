@@ -34,13 +34,14 @@ public class SelectLevelController extends MouseAdapter{
     
     /**
      * This constructor instantiates a new SelectLevelController.
-     * @param model The entire LevelBuilder model.
-     * @param app The entire LevelBuilder application.
+     * @param m The entire LevelBuilder model.
+     * @param a The entire LevelBuilder application.
+     * @param l The level that would be selected if this controller is clicked.
      */
-    public SelectLevelController(Model m, Application a, Level level) {
+    public SelectLevelController(Model m, Application a, Level l) {
         this.model = m;
         this.app = a;
-        this.level = level;
+        this.level = l;
     }
 
     

@@ -9,8 +9,5 @@ package scandium.common.model;
  * Directions that gravity can take on the Board.
  */
 public enum GravityDirection {
-    Up,
-    Right,
-    Down,
-    Left
+    Up
 }

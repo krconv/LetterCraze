@@ -68,6 +68,7 @@ public class ThemeLevel extends Level {
     }
 
     /**
+     * Gets the name of the theme for this level.
 	 * @return the theme
 	 */
 	public String getTheme() {
@@ -75,6 +76,7 @@ public class ThemeLevel extends Level {
 	}
 
 	/**
+     * Sets the name of the theme for this level.
 	 * @param theme the theme to set
 	 */
 	public void setTheme(String theme) {
@@ -82,6 +84,7 @@ public class ThemeLevel extends Level {
 	}
 
 	/**
+     * Gets the theme words for this level.
 	 * @return the themeWords
 	 */
 	public List<String> getThemeWords() {
@@ -89,6 +92,7 @@ public class ThemeLevel extends Level {
 	}
 
 	/**
+     * Sets the theme words for this level.
 	 * @param theme_words the themeWords to set
 	 */
 	public void setThemeWords(List<String> theme_words) {

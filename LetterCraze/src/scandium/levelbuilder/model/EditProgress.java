@@ -25,6 +25,7 @@ public class EditProgress {
 	}
 
 	/**
+	 * Gets the original level.
 	 * @return the original level
 	 */
 	public Level getOriginal() {
@@ -32,6 +33,7 @@ public class EditProgress {
 	}
 
 	/**
+	 * Gets the modified level.
 	 * @return the modified level
 	 */
 	public Level getModified() {
@@ -39,14 +41,16 @@ public class EditProgress {
 	}
 	
 	/**
-	 * @return the modified level
+	 * Sets the original level.
+	 * @param o the original level
 	 */
 	public void setOrignial(Level o) {
 		this.original = o;
 	}
 	
 	/**
-	 * @return the modified level
+	 * Sets the modified level.
+	 * @param m the modified level
 	 */
 	public void setModified(Level m) {
 		this.modified = m;

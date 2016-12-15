@@ -12,7 +12,6 @@ import scandium.lettercraze.model.LevelProgress;
 /**
  * This class tests the scandium.lettercraze.action.RemoveWordAction class
  * @author scandium
- * @date 14/12/16
  */
 public class RemoveWordActionTest extends TestCase{
 	protected RemoveWordAction RWA;
