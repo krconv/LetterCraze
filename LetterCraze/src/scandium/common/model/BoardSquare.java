@@ -49,10 +49,8 @@ public class BoardSquare {
      * @param col The column that the square will be in.
      * @param board The Board that the square will be in.
      * @param enabled Whether the square should initially be enabled.
-     * 
-     * @exception NullPointerException Thrown if the board is null.
      */
-    BoardSquare(int row, int col, Board board, boolean enabled) throws NullPointerException {
+    BoardSquare(int row, int col, Board board, boolean enabled) {
     	this.row = row;
     	this.col = col;
     	this.board = board;
@@ -61,6 +59,7 @@ public class BoardSquare {
     }
     
 	/**
+	 * Whether the square is enabled.
 	 * @return the enabled
 	 */
 	public boolean isEnabled() {
@@ -68,13 +67,15 @@ public class BoardSquare {
 	}
 
 	/**
-     * @return Whether this square is empty.
+	 * Whether this square is empty.
+     * @return the is empty.
      */
     public boolean isEmpty() {
         return (this.tile == null);
     }
 
     /**
+     * Sets the tile for this square.
 	 * @param tile the tile to set
 	 */
 	public void setTile(Tile tile) {
@@ -82,7 +83,7 @@ public class BoardSquare {
 	}
 
 	/**
-     * Removes any Tile from this square, if there is one. 
+     * Removes any Tile from this square. 
      * @return Whether any changes were made.
      */
     public boolean removeTile() {
@@ -94,6 +95,7 @@ public class BoardSquare {
     }
 
 	/**
+	 * Gets the row of this square.
 	 * @return the row
 	 */
 	public int getRow() {
@@ -101,6 +103,7 @@ public class BoardSquare {
 	}
 
 	/**
+	 * Gets the column of this square.
 	 * @return the col
 	 */
 	public int getCol() {
@@ -108,6 +111,7 @@ public class BoardSquare {
 	}
 
 	/**
+	 * Gets the tile of this square.
 	 * @return the tile
 	 */
 	public Tile getTile() {
@@ -115,6 +119,7 @@ public class BoardSquare {
 	}
 	
 	/**
+	 * Gets the board this square is contained within.
 	 * @return the board
 	 */
 	public Board getBoard(){
@@ -122,6 +127,7 @@ public class BoardSquare {
 	}
 
 	/**
+	 * Sets whether this square is enabled.
 	 * @param enabled the enabled to set
 	 */
 	public void setEnabled(boolean enabled) {

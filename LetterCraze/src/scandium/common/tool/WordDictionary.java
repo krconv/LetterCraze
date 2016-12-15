@@ -25,7 +25,6 @@ public class WordDictionary implements IWordDictionary {
 
     /**
      * Create a new dictionary.
-     * @param words The words in the dictionary.
      */
     private WordDictionary() {
     	this.words = new HashSet<String>();
@@ -33,7 +32,7 @@ public class WordDictionary implements IWordDictionary {
     }
     
     /**
-     * This function initializes the dictionary to hold the words stored in Dictionary.txt
+     * Initializes the dictionary to hold the words stored in Dictionary.txt
      */
     void initialize(){
 		Iterator<String> it = null;

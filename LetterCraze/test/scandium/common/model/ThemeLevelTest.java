@@ -16,7 +16,6 @@ import scandium.common.tool.LetterDictionary;
 public class ThemeLevelTest extends TestCase {
 	private ThemeLevel level;
 	private Board board;
-	private Star[] stars;
 	private LetterDictionary dictionary;
 
 	/* (non-Javadoc)
@@ -25,7 +24,6 @@ public class ThemeLevelTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		board = new Board(true, GravityDirection.Up);
-		stars = new Star[3];
 		dictionary = new LetterDictionary(100);
 		
 		level = new ThemeLevel();
@@ -54,7 +52,7 @@ public class ThemeLevelTest extends TestCase {
 	}
 
 	/**
-	 * Test method for {@link scandium.common.model.ThemeLevel#getThemeWords()} and {@link scandium.common.model.ThemeLevel#setThemeWords(java.util.ArrayList)}.
+	 * Test method for {@link scandium.common.model.ThemeLevel#getThemeWords()} and {@link scandium.common.model.ThemeLevel#setThemeWords(java.util.List)}.
 	 */
 	public void testGetSetThemeWords() {
 		ArrayList<String> tW = new ArrayList<String>();
@@ -123,6 +121,9 @@ public class ThemeLevelTest extends TestCase {
 		level.setThemeWords(tW);
 		level.setName("This is a level");
 		level.setBoard(board);
+		level.getStar(0).setThreshold(1);
+		level.getStar(1).setThreshold(2);
+		level.getStar(2).setThreshold(3);
 		board.fillEmptySquares(dictionary);
 		assertTrue(level.isValid());
 	}

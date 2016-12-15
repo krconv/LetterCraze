@@ -71,6 +71,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the level progress of this player.
 	 * @return the level Progress associated with this level
 	 */
 	public LevelProgress getLevelProgress() {
@@ -78,6 +79,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the leave button of this player.
 	 * @return the leaveButton
 	 */
 	public JButton getLeaveButton() {
@@ -85,6 +87,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the reset button of this player.
 	 * @return the resetButton
 	 */
 	public JButton getResetButton() {
@@ -92,6 +95,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the undo button box of this player.
 	 * @return the undoButtonBox
 	 */
 	public Box getUndoButtonBox() {
@@ -99,6 +103,7 @@ public class LevelPlayerView extends JPanel {
 	}
 	
 	/**
+	 * Gets the undo button of this player.
 	 * @return the undoButton
 	 */
 	public JButton getUndoButton() {
@@ -106,6 +111,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the board view of this player.
 	 * @return the boardView
 	 */
 	public BoardView getBoardView() {
@@ -114,6 +120,7 @@ public class LevelPlayerView extends JPanel {
 
 	
 	/**
+	 * Gets the restrictor box of this player.
 	 * @return the restrictor box
 	 */
 	public Box getRestrictorBox() {
@@ -121,6 +128,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the restrictor label of this player.
 	 * @return the restrictor label
 	 */
 	public JLabel getRestrictorLabel() {
@@ -128,6 +136,7 @@ public class LevelPlayerView extends JPanel {
 	}
 	
 	/**
+	 * Gets the restrictor value label of this player.
 	 * @return the restrictor value label
 	 */
 	public JLabel getRestrictorValueLabel() {
@@ -135,6 +144,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the theme word box of this player.
 	 * @return the themeWordBox
 	 */
 	public Box getThemeWordBox() {
@@ -142,6 +152,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the theme word value label of this player.
 	 * @return the themeWordValueLabel
 	 */
 	public JLabel getThemeWordValueLabel() {
@@ -149,6 +160,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the level name label of this player.
 	 * @return the levelNameLabel
 	 */
 	public JLabel getLevelNameLabel() {
@@ -156,6 +168,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the star label of this player.
 	 * @param index The index of the star label to get.
 	 * @return The star label at the given index.
 	 */
@@ -164,6 +177,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the score value label of this player.
 	 * @return the scoreValueLabel
 	 */
 	public JLabel getScoreValueLabel(){
@@ -171,6 +185,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the star threshold label of this player.
 	 * @return the starThresholdLabel
 	 */
 	public JLabel getStarThresholdLabel() {
@@ -178,6 +193,7 @@ public class LevelPlayerView extends JPanel {
 	}
 	
 	/**
+	 * Gets the star box of this player.
 	 * @return the star box for this view
 	 */
 	public Box getStarBox() {
@@ -185,6 +201,7 @@ public class LevelPlayerView extends JPanel {
 	}
 	
 	/**
+	 * Gets the score box of this player.
 	 * @return the score box for this view
 	 */
 	public Box getScoreBox() {
@@ -192,6 +209,7 @@ public class LevelPlayerView extends JPanel {
 	}
 	
 	/**
+	 * Gets the next star box of this player.
 	 * @return the next star box for this view
 	 */
 	public Box getNextStarBox() {
@@ -199,6 +217,7 @@ public class LevelPlayerView extends JPanel {
 	}
 	
 	/**
+	 * Gets the next star label of this player.
 	 * @return the next star's value label for this level
 	 */
 	public JLabel getNextStarValueLabel() {
@@ -206,6 +225,7 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the found words label of this player.
 	 * @return the foundWordsLabel
 	 */
 	public JLabel getFoundWordsLabel() {
@@ -213,12 +233,17 @@ public class LevelPlayerView extends JPanel {
 	}
 
 	/**
+	 * Gets the model of the found words.
 	 * @return the foundWordsListModel
 	 */
 	public DefaultListModel<String> getFoundWordsListModel(){
 		return foundWordsListModel;
 	}
 	
+	/**
+	 * Gets the scroll pane for the found words.
+	 * @return the scroll pane
+	 */
 	public JScrollPane getFoundWordsScrollPane(){
 		return foundWordsScrollPane;
 	}

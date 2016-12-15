@@ -43,28 +43,23 @@ public class Tile {
 	 *            The String letter
 	 * @param score
 	 *            The integer score for the tile
-	 * @throws IllegalArgumentException
-	 *             Thrown if the content is empty or the score is negative.
-	 * @throws NullPointerException
-	 *             Thrown if content is null.
 	 */
-    public Tile(String content, int score)
-    		throws IllegalArgumentException, NullPointerException {
+    public Tile(String content, int score) {
     	this.content = content;
     	this.score = score;
     }
     
     /**
-     * This function returns the string representing the tiles content
-     * @return String The tile's content
+     * Gets the content of this tile.
+     * @return the content
      */
 	public String getContent() {
 		return content;
 	}
 
 	/**
-	 * This function returns an integer representing this tile's score
-	 * @return int The tile's score 
+	 * Gets the score of this tile.
+	 * @return the score
 	 */
 	public int getScore() {
 		return score;

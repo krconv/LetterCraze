@@ -39,8 +39,8 @@ public class ExitLevelController implements ActionListener{
 	}
 	
 	/**
-	 * This function handles the mouse click on the exit level button. It returns the view to the main menu
-	 * and updates the progress (if the current progress is better than the old saved progress.
+	 * Handles the mouse click on the exit level button. 
+	 * It returns the view to the main menu and updates the progress (if the current progress is better than the old saved progress.
 	 * <p>entry condition: the button this controller is attached to is pressed.</p>
 	 * <p>exit condition: the View has been set to the Main Menu and progress in the level has been saved if needed.</p>
 	 * @param ae The mouse is clicked on the button

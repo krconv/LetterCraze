@@ -12,7 +12,6 @@ import scandium.levelbuilder.view.Application;
 /**
  * This controller handles the toggling of board squares in the level builder. 
  * @author Scandium
- * @date 12/13/16
  */
 public class ToggleEnableController extends MouseAdapter{
 	/** 
@@ -51,7 +50,7 @@ public class ToggleEnableController extends MouseAdapter{
     /**
      * This function handles the user's mouse click on a board square. It toggles
      * the selected board square.
-     * @param Mme The MouseEvent representing the mouseClick
+     * @param me The MouseEvent representing the mouseClick
      */
     public void mouseClicked(MouseEvent me) {
     	//finding boardSquare 

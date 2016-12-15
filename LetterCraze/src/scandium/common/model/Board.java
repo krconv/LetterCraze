@@ -79,6 +79,7 @@ public class Board {
 	}
 
 	/**
+	 * Gets the selected word on the board.
 	 * Precondition: None.
 	 * Postcondition: The selected word has been returned without removing it.
 	 * @return the selectedWord, or null if no selection has been made.
@@ -88,6 +89,7 @@ public class Board {
 	}
 
 	/**
+	 * Gets the gravity direction of the board.
 	 * @return the gravityDirection
 	 */
 	public GravityDirection getGravityDirection() {
@@ -104,6 +106,7 @@ public class Board {
 
 
 	/**
+	 * Gets whether tiles should be dynamically regenerated.
 	 * @return the whether tiles shouldRegenerate
 	 */
 	public boolean shouldRegenerate() {
@@ -111,7 +114,7 @@ public class Board {
 	}
 	
 	/**
-	 * This function sets whether a board should regenerate.
+	 * Sets whether a board should regenerate.
 	 * @param value Whether the board should regenerate or not.
 	 */
 	public void setShouldRegenerate(boolean value){
@@ -119,8 +122,8 @@ public class Board {
 	}
 
 	/**
-	 * Insert a Word into the Board, shifting tiles in the direction opposite to
-	 * gravity.
+	 * Inserts a word into the board.
+	 * Tiles that are in the way will be shifted in the direction opposite to gravity.
 	 * Precondition: The word is not null and the word consists of board squares on this board.
 	 * Postcondition: Any tiles in the given word are inserted into the board, and any tiles that 
 	 * need to be moved for this insert were moved in the direction opposite to gravity.
@@ -128,8 +131,6 @@ public class Board {
 	 * @param word
 	 *            The Word to insert.
 	 * @return Whether any tiles were inserted.
-	 * @exception IllegalArgumentException Thrown if the word consists of boards squares which are
-	 * not in this board.
 	 */
 	public boolean insertWord(Word word) {
 		// insert the tiles back in to the board by iterating row by row
@@ -180,8 +181,8 @@ public class Board {
 	}
 
 	/**
-	 * Apply gravity to the board, moving Tiles to fill empty squares in the
-	 * direction of gravity.
+	 * Applies gravity to the board tiles.
+	 * Tiles are shifted to fill empty squares in the direction of gravity.
 	 * Precondition: None.
 	 * Postcondition: All tiles will be moved in the direction of gravity to fill
 	 * empty squares if there are any. The board will have the same number of tiles
@@ -193,118 +194,35 @@ public class Board {
 		/* indicator of tile movement */
 		boolean moved_tiles = false;
 		/* Apply Upwards Gravity */
-		if(getGravityDirection() == GravityDirection.Up){
-			// go through each column and apply gravity to it
-			for (int col = 0; col < 6; col++) {
-				for (int row = 0; row < 6; row++) {
-					BoardSquare square = getSquare(row, col);
-					if (square.isEnabled()) {
-						// we should try to fill this square
-						for (int i = 1; square.isEmpty() && i + row < 6; i++) {
-							// continue to look to the squares below until we find one that has a tile
-							BoardSquare filler = getSquare(row + i, col);
-							if (!filler.isEmpty()) {
-								// found a tile to fill with, so let's move it
-								square.setTile(filler.getTile());
-								filler.removeTile();
-								moved_tiles = true;
-							}
+		// go through each column and apply gravity to it
+		for (int col = 0; col < 6; col++) {
+			for (int row = 0; row < 6; row++) {
+				BoardSquare square = getSquare(row, col);
+				if (square.isEnabled()) {
+					// we should try to fill this square
+					for (int i = 1; square.isEmpty() && i + row < 6; i++) {
+						// continue to look to the squares below until we find one that has a tile
+						BoardSquare filler = getSquare(row + i, col);
+						if (!filler.isEmpty()) {
+							// found a tile to fill with, so let's move it
+							square.setTile(filler.getTile());
+							filler.removeTile();
+							moved_tiles = true;
 						}
 					}
 				}
 			}
-		}else System.out.println("Have not yet implemented other gravity directions");
+		}
 		
 		return moved_tiles;
-		
-		/*
-		boolean didItWork = false;
-		if(this.getGravityDirection() == GravityDirection.Up){
-	        int indicator = 0;
-	        for (int i = 0; i < squares.length; i++){
-	        	for (int j = 0; j < squares.length; j++){
-	        		if ((squares[i-1][j].getTile() == null) && (squares[i-1][j].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
-	        			//^^^^^This logic probably doesn't work
-	        			//move shit from one to the next above
-	        			squares[i-1][j].setTile(squares[i][j].getTile());
-	        			squares[i][j].setTile(null);
-	        			indicator = 1;
-	        		}
-	        	}
-	        }
-	        if (indicator == 1){
-	        	didItWork = true;
-	        }else{
-	        	didItWork = false;
-	        }
-		}
-		if(this.getGravityDirection() == GravityDirection.Right && didItWork == false){
-	        int indicator = 0;
-	        for (int i = 0; i < squares.length; i++){
-	        	for (int j = 0; j < squares.length; j++){
-	        		if ((squares[i][j+1].getTile() == null) && (squares[i][j+1].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
-	        			//^^^^^This logic probably doesn't work
-	        			//move shit from one to the next right one
-	        			squares[i][j+1].setTile(squares[i][j].getTile());
-	        			squares[i][j].setTile(null);
-	        			indicator = 1;
-	        		}
-	        	}
-	        }
-	        if (indicator == 1){
-	        	didItWork = true;
-	        }else{
-	        	didItWork = false;
-	        }
-		}
-		if(this.getGravityDirection() == GravityDirection.Down && didItWork == false){
-	        int indicator = 0;
-	        for (int i = 0; i < squares.length; i++){
-	        	for (int j = 0; j < squares.length; j++){
-	        		if ((squares[i+1][j].getTile() == null) && (squares[i+1][j].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
-	        			//^^^^^This logic probably doesn't work
-	        			//move shit from one to the next below
-	        			squares[i+1][j].setTile(squares[i][j].getTile());
-	        			squares[i][j].setTile(null);
-	        			indicator = 1;
-	        		}
-	        	}
-	        }
-	        if (indicator == 1){
-	        	didItWork = true;
-	        }else{
-	        	didItWork = false;
-	        }
-		}
-		if(this.getGravityDirection() == GravityDirection.Left && didItWork == false){
-	        int indicator = 0;
-	        for (int i = 0; i < squares.length; i++){
-	        	for (int j = 0; j < squares.length; j++){
-	        		if ((squares[i][j-1].getTile() == null) && (squares[i][j-1].isEnabled() == true) && (squares[i][j].getTile() == null) && (squares[i][j].isEnabled() == true)){
-	        			//^^^^^This logic probably doesn't work
-	        			//move shit from one to the next left one
-	        			squares[i][j-1].setTile(squares[i][j].getTile());
-	        			squares[i][j].setTile(null);
-	        			indicator = 1;
-	        		}
-	        	}
-	        }
-	        if (indicator == 1){
-	        	didItWork = true;
-	        }else{
-	        	didItWork = false;
-	        }
-		}
-		
-		return didItWork;
-		*/
 	}
 
 
 	
 	/**
-	 * Fills empty squares on the Board with random tiles from the given
-	 * dictionary. 
+	 * Fills empty squares on the Board with random tiles.
+	 * Tiles from the dictionary are used to fill the empty squares. No checking for
+	 * whether this board should regenerate occurs and is ignored.
 	 * Precondition: The dictionary is not null. 
 	 * Postcondition: All empty squares on the board have been populated with a new tile
 	 * while existing squares are not changed.
@@ -440,7 +358,8 @@ public class Board {
 	}
 	
 	/**
-	 * This function copies the board object.
+	 * Creates a copy of this board.
+	 * @return A copy of this board.
 	 */
 	public Board copy(){
 		Board copy = new Board(shouldRegenerate, gravityDirection);

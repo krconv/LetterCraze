@@ -40,11 +40,7 @@ public abstract class Level {
 		this.name = new String();
 		this.board = new Board();
 		this.stars = new Star[] { new Star(), new Star(), new Star() };
-		// generate a random token that is not zero
-		Random random = new Random();
-		do {
-			token = random.nextLong();
-		} while (token == 0);
+		this.token = new Random().nextLong();
 	}
 
 	/**
@@ -62,13 +58,11 @@ public abstract class Level {
 		this.board = board;
 		this.stars = stars;
 		// generate a random token that is not zero
-		Random random = new Random();
-		do {
-			token = random.nextLong();
-		} while (token == 0);
+		this.token = new Random().nextLong();
 	}
 
 	/**
+	 * Gets the name of the level.
 	 * @return the name
 	 */
 	public String getName() {
@@ -76,6 +70,7 @@ public abstract class Level {
 	}
 
 	/**
+	 * Sets the name of the level.
 	 * @param name
 	 *            the name to set
 	 */
@@ -84,6 +79,7 @@ public abstract class Level {
 	}
 
 	/**
+	 * Gets the board for the level.
 	 * @return the board
 	 */
 	public Board getBoard() {
@@ -91,6 +87,7 @@ public abstract class Level {
 	}
 
 	/**
+	 * Sets the board for the level.
 	 * @param board
 	 *            the board to set
 	 */
@@ -99,6 +96,7 @@ public abstract class Level {
 	}
 
 	/**
+	 * Gets the stars for the level.
 	 * @return an array of the Stars in the level
 	 */
 	public Star[] getStars() {
@@ -106,8 +104,9 @@ public abstract class Level {
 	}
 
 	/**
+	 * Gets a star for this level.
 	 * @param index
-	 *            the star that you want (must be under 3 of will throw error)
+	 *            the zero-based index of the desired star
 	 * @return returns the star at the index
 	 */
 	public Star getStar(int index) {
@@ -115,6 +114,7 @@ public abstract class Level {
 	}
 
 	/**
+	 * 
 	 * @return the token
 	 */
 	public long getToken() {
@@ -168,6 +168,7 @@ public abstract class Level {
 	public abstract String getScoreUnits(boolean plural);
 
 	/**
+	 * Gets the type of the level.
 	 * @return the user friendly type of the Level
 	 */
 	public abstract String getType();

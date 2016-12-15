@@ -23,7 +23,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param view the JPanel that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createPressed (Application app, JPanel view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(view, MouseEvent.MOUSE_PRESSED, 
@@ -38,7 +38,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param view the JPanel that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createRightClick (Application app, JPanel view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(view, MouseEvent.MOUSE_PRESSED, 
@@ -53,7 +53,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param view the JPanel that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createReleased (Application app, JPanel view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(view, MouseEvent.MOUSE_RELEASED, 
@@ -68,7 +68,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param view the JPanel that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createClicked (Application app, JPanel view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(view, MouseEvent.MOUSE_CLICKED, 
@@ -83,7 +83,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param view the JPanel that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createDoubleClicked (Application app, JPanel view, int dx, int dy) {
 		MouseEvent me = new MouseEvent(view, MouseEvent.MOUSE_CLICKED, 
@@ -98,7 +98,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param component the JComponent that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createPressed (Application app, JComponent component, int dx, int dy) {
 		MouseEvent me = new MouseEvent(component, MouseEvent.MOUSE_PRESSED, 
@@ -113,7 +113,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param component the JComponent that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createRightClick (Application app, JComponent component, int dx, int dy) {
 		MouseEvent me = new MouseEvent(component, MouseEvent.MOUSE_PRESSED, 
@@ -128,7 +128,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param component the JComponent that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createReleased (Application app, JComponent component, int dx, int dy) {
 		MouseEvent me = new MouseEvent(component, MouseEvent.MOUSE_RELEASED, 
@@ -143,7 +143,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param component the JComponent that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createClicked (Application app, JComponent component, int dx, int dy) {
 		MouseEvent me = new MouseEvent(component, MouseEvent.MOUSE_CLICKED, 
@@ -158,7 +158,7 @@ public abstract class ScandiumLetterCrazeTestCase extends TestCase {
 	 * @param component the JComponent that is being clicked in
 	 * @param dx (dx,dy) are offsets into the widget space.
 	 * @param dy (dx,dy) are offsets into the widget space.
-	 * @return
+	 * @return The created mouse event.
 	 */
 	public MouseEvent createDoubleClicked (Application app, JComponent component, int dx, int dy) {
 		MouseEvent me = new MouseEvent(component, MouseEvent.MOUSE_CLICKED, 
