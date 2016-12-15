@@ -499,9 +499,9 @@ public class LevelEditorView extends JPanel{
 					theme_words_box.setVisible(true);
 					generate_button.setText("Generate");
 				}
+				board_view.setBoard(level.getBoard());
 			}
 		}
-		
 		board_view.refresh();
 		repaint();
 	}
