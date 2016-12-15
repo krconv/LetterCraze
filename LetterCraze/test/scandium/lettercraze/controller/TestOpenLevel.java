@@ -171,7 +171,7 @@ public class TestOpenLevel extends ScandiumLetterCrazeTestCase {
 		assertEquals(true,app.getLevelPlayer().isVisible());
 		//check attributes are visible and have correct data	
 		assertEquals(true,app.getLevelPlayer().getLevelNameLabel().isVisible());
-		assertEquals("Quiet Colorful",app.getLevelPlayer().getLevelNameLabel().getText());
+		assertEquals("Quite Colorful",app.getLevelPlayer().getLevelNameLabel().getText());
 
 		assertEquals(true,app.getLevelPlayer().getFoundWordsLabel().isVisible());
 		assertEquals("Found Words",app.getLevelPlayer().getFoundWordsLabel().getText());
