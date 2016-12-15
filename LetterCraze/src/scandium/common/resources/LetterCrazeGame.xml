@@ -430,7 +430,7 @@
             <timeLimit>25</timeLimit>
         </level>
         <level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="themeLevel">
-            <name>Quiet Colorful</name>
+            <name>Quite Colorful</name>
             <board>
                 <rows>
                     <row>
@@ -1142,61 +1142,14 @@
                             <row>0</row>
                             <col>1</col>
                             <tile>
-<content>P</content>
-<score>4</score>
+<content>A</content>
+<score>2</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
                         <item>
                             <row>0</row>
                             <col>2</col>
-                            <tile>
-<content>E</content>
-<score>1</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>0</row>
-                            <col>3</col>
-                            <tile>
-<content>P</content>
-<score>4</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>0</row>
-                            <col>4</col>
-                            <tile>
-<content>E</content>
-<score>1</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>0</row>
-                            <col>5</col>
-                            <tile>
-<content>N</content>
-<score>2</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                    </row>
-                    <row>
-                        <item>
-                            <row>1</row>
-                            <col>0</col>
-                            <tile>
-<content>E</content>
-<score>1</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>1</row>
-                            <col>1</col>
                             <tile>
 <content>B</content>
 <score>4</score>
@@ -1204,8 +1157,8 @@
                             <enabled>true</enabled>
                         </item>
                         <item>
-                            <row>1</row>
-                            <col>2</col>
+                            <row>0</row>
+                            <col>3</col>
                             <tile>
 <content>I</content>
 <score>2</score>
@@ -1213,46 +1166,28 @@
                             <enabled>true</enabled>
                         </item>
                         <item>
-                            <row>1</row>
-                            <col>3</col>
+                            <row>0</row>
+                            <col>4</col>
                             <tile>
-<content>D</content>
-<score>3</score>
+<content>P</content>
+<score>4</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
                         <item>
-                            <row>1</row>
-                            <col>4</col>
+                            <row>0</row>
+                            <col>5</col>
                             <tile>
 <content>E</content>
 <score>1</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
-                        <item>
-                            <row>1</row>
-                            <col>5</col>
-                            <tile>
-<content>B</content>
-<score>4</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
                     </row>
                     <row>
                         <item>
-                            <row>2</row>
+                            <row>1</row>
                             <col>0</col>
-                            <tile>
-<content>O</content>
-<score>2</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>2</row>
-                            <col>1</col>
                             <tile>
 <content>A</content>
 <score>2</score>
@@ -1260,7 +1195,16 @@
                             <enabled>true</enabled>
                         </item>
                         <item>
-                            <row>2</row>
+                            <row>1</row>
+                            <col>1</col>
+                            <tile>
+<content>P</content>
+<score>4</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>1</row>
                             <col>2</col>
                             <tile>
 <content>R</content>
@@ -1269,6 +1213,62 @@
                             <enabled>true</enabled>
                         </item>
                         <item>
+                            <row>1</row>
+                            <col>3</col>
+                            <tile>
+<content>A</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>1</row>
+                            <col>4</col>
+                            <tile>
+<content>E</content>
+<score>1</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>1</row>
+                            <col>5</col>
+                            <tile>
+<content>P</content>
+<score>4</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                    </row>
+                    <row>
+                        <item>
+                            <row>2</row>
+                            <col>0</col>
+                            <tile>
+<content>C</content>
+<score>3</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>2</row>
+                            <col>1</col>
+                            <tile>
+<content>I</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>2</row>
+                            <col>2</col>
+                            <tile>
+<content>T</content>
+<score>1</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
                             <row>2</row>
                             <col>3</col>
                             <tile>
@@ -1279,6 +1279,62 @@
                         </item>
                         <item>
                             <row>2</row>
+                            <col>4</col>
+                            <tile>
+<content>D</content>
+<score>3</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>2</row>
+                            <col>5</col>
+                            <tile>
+<content>E</content>
+<score>1</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                    </row>
+                    <row>
+                        <item>
+                            <row>3</row>
+                            <col>0</col>
+                            <tile>
+<content>R</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
+                            <col>1</col>
+                            <tile>
+<content>L</content>
+<score>3</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
+                            <col>2</col>
+                            <tile>
+<content>O</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
+                            <col>3</col>
+                            <tile>
+<content>R</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
                             <col>4</col>
                             <tile>
 <content>M</content>
@@ -1287,67 +1343,11 @@
                             <enabled>true</enabled>
                         </item>
                         <item>
-                            <row>2</row>
-                            <col>5</col>
-                            <tile>
-<content>E</content>
-<score>1</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                    </row>
-                    <row>
-                        <item>
-                            <row>3</row>
-                            <col>0</col>
-                            <tile>
-<content>H</content>
-<score>2</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>3</row>
-                            <col>1</col>
-                            <tile>
-<content>QU</content>
-<score>11</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>3</row>
-                            <col>2</col>
-                            <tile>
-<content>I</content>
-<score>2</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>3</row>
-                            <col>3</col>
-                            <tile>
-<content>R</content>
-<score>2</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>3</row>
-                            <col>4</col>
-                            <tile>
-<content>F</content>
-<score>4</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
                             <row>3</row>
                             <col>5</col>
                             <tile>
-<content>T</content>
-<score>1</score>
+<content>N</content>
+<score>2</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -1357,7 +1357,7 @@
                             <row>4</row>
                             <col>0</col>
                             <tile>
-<content>T</content>
+<content>E</content>
 <score>1</score>
                             </tile>
                             <enabled>true</enabled>
@@ -1366,8 +1366,8 @@
                             <row>4</row>
                             <col>1</col>
                             <tile>
-<content>E</content>
-<score>1</score>
+<content>N</content>
+<score>2</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -1384,7 +1384,7 @@
                             <row>4</row>
                             <col>3</col>
                             <tile>
-<content>E</content>
+<content>T</content>
 <score>1</score>
                             </tile>
                             <enabled>true</enabled>
@@ -1393,7 +1393,7 @@
                             <row>4</row>
                             <col>4</col>
                             <tile>
-<content>F</content>
+<content>Y</content>
 <score>4</score>
                             </tile>
                             <enabled>true</enabled>
@@ -1402,8 +1402,8 @@
                             <row>4</row>
                             <col>5</col>
                             <tile>
-<content>L</content>
-<score>3</score>
+<content>B</content>
+<score>4</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -1413,8 +1413,8 @@
                             <row>5</row>
                             <col>0</col>
                             <tile>
-<content>I</content>
-<score>2</score>
+<content>B</content>
+<score>4</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -1430,15 +1430,6 @@
                         <item>
                             <row>5</row>
                             <col>2</col>
-                            <tile>
-<content>U</content>
-<score>3</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>5</row>
-                            <col>3</col>
                             <tile>
 <content>A</content>
 <score>2</score>
@@ -1447,7 +1438,7 @@
                         </item>
                         <item>
                             <row>5</row>
-                            <col>4</col>
+                            <col>3</col>
                             <tile>
 <content>N</content>
 <score>2</score>
@@ -1456,9 +1447,18 @@
                         </item>
                         <item>
                             <row>5</row>
+                            <col>4</col>
+                            <tile>
+<content>H</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>5</row>
                             <col>5</col>
                             <tile>
-<content>T</content>
+<content>E</content>
 <score>1</score>
                             </tile>
                             <enabled>true</enabled>
@@ -1479,7 +1479,7 @@
                     <threshold>3</threshold>
                 </star>
             </stars>
-            <token>-1950660505380931237</token>
+            <token>-3525793982779620351</token>
             <theme>Memes</theme>
             <themeWords>
                 <word>Harambe</word>
@@ -1689,17 +1689,17 @@
             </board>
             <stars>
                 <star>
+                    <threshold>300</threshold>
+                </star>
+                <star>
+                    <threshold>700</threshold>
+                </star>
+                <star>
                     <threshold>1000</threshold>
                 </star>
-                <star>
-                    <threshold>1001</threshold>
-                </star>
-                <star>
-                    <threshold>1002</threshold>
-                </star>
             </stars>
-            <token>6290002957148795437</token>
-            <maxNumWords>30</maxNumWords>
+            <token>-3940307165600365951</token>
+            <maxNumWords>35</maxNumWords>
         </level>
         <level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="lightningLevel">
             <name>Time to Shine</name>
@@ -2717,7 +2717,7 @@
                             <row>0</row>
                             <col>0</col>
                             <tile>
-<content>N</content>
+<content>A</content>
 <score>2</score>
                             </tile>
                             <enabled>true</enabled>
@@ -2726,8 +2726,8 @@
                             <row>0</row>
                             <col>1</col>
                             <tile>
-<content>A</content>
-<score>2</score>
+<content>P</content>
+<score>4</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -2735,8 +2735,8 @@
                             <row>0</row>
                             <col>2</col>
                             <tile>
-<content>P</content>
-<score>4</score>
+<content>A</content>
+<score>2</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -2744,8 +2744,8 @@
                             <row>0</row>
                             <col>3</col>
                             <tile>
-<content>P</content>
-<score>4</score>
+<content>N</content>
+<score>2</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -2753,8 +2753,8 @@
                             <row>0</row>
                             <col>4</col>
                             <tile>
-<content>L</content>
-<score>3</score>
+<content>I</content>
+<score>2</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -2762,8 +2762,8 @@
                             <row>0</row>
                             <col>5</col>
                             <tile>
-<content>E</content>
-<score>1</score>
+<content>D</content>
+<score>3</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -2773,8 +2773,8 @@
                             <row>1</row>
                             <col>0</col>
                             <tile>
-<content>A</content>
-<score>2</score>
+<content>P</content>
+<score>4</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -2802,8 +2802,8 @@
                             <row>1</row>
                             <col>5</col>
                             <tile>
-<content>E</content>
-<score>1</score>
+<content>M</content>
+<score>3</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -2822,8 +2822,8 @@
                             <row>2</row>
                             <col>1</col>
                             <tile>
-<content>I</content>
-<score>2</score>
+<content>L</content>
+<score>3</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -2831,23 +2831,14 @@
                             <row>2</row>
                             <col>2</col>
                             <tile>
-<content>M</content>
-<score>3</score>
+<content>E</content>
+<score>1</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
                         <item>
                             <row>2</row>
                             <col>3</col>
-                            <tile>
-<content>A</content>
-<score>2</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>2</row>
-                            <col>4</col>
                             <tile>
 <content>L</content>
 <score>3</score>
@@ -2856,6 +2847,71 @@
                         </item>
                         <item>
                             <row>2</row>
+                            <col>4</col>
+                            <tile>
+<content>A</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>2</row>
+                            <col>5</col>
+                            <tile>
+<content>E</content>
+<score>1</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                    </row>
+                    <row>
+                        <item>
+                            <row>3</row>
+                            <col>0</col>
+                            <tile>
+<content>A</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
+                            <col>1</col>
+                            <tile>
+<content>T</content>
+<score>1</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
+                            <col>2</col>
+                            <tile>
+<content>I</content>
+<score>2</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
+                            <col>3</col>
+                            <tile>
+<content>T</content>
+<score>1</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
+                            <col>4</col>
+                            <tile>
+<content>U</content>
+<score>3</score>
+                            </tile>
+                            <enabled>true</enabled>
+                        </item>
+                        <item>
+                            <row>3</row>
                             <col>5</col>
                             <tile>
 <content>B</content>
@@ -2866,52 +2922,36 @@
                     </row>
                     <row>
                         <item>
-                            <row>3</row>
+                            <row>4</row>
                             <col>0</col>
                             <tile>
-<content>T</content>
-<score>1</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>3</row>
-                            <col>1</col>
-                            <tile>
-<content>I</content>
+<content>A</content>
 <score>2</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
                         <item>
-                            <row>3</row>
+                            <row>4</row>
+                            <col>1</col>
+                            <enabled>false</enabled>
+                        </item>
+                        <item>
+                            <row>4</row>
                             <col>2</col>
-                            <tile>
-<content>T</content>
-<score>1</score>
-                            </tile>
-                            <enabled>true</enabled>
+                            <enabled>false</enabled>
                         </item>
                         <item>
-                            <row>3</row>
+                            <row>4</row>
                             <col>3</col>
-                            <tile>
-<content>U</content>
-<score>3</score>
-                            </tile>
-                            <enabled>true</enabled>
+                            <enabled>false</enabled>
                         </item>
                         <item>
-                            <row>3</row>
+                            <row>4</row>
                             <col>4</col>
-                            <tile>
-<content>D</content>
-<score>3</score>
-                            </tile>
-                            <enabled>true</enabled>
+                            <enabled>false</enabled>
                         </item>
                         <item>
-                            <row>3</row>
+                            <row>4</row>
                             <col>5</col>
                             <tile>
 <content>E</content>
@@ -2922,51 +2962,11 @@
                     </row>
                     <row>
                         <item>
-                            <row>4</row>
-                            <col>0</col>
-                            <tile>
-<content>A</content>
-<score>2</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                        <item>
-                            <row>4</row>
-                            <col>1</col>
-                            <enabled>false</enabled>
-                        </item>
-                        <item>
-                            <row>4</row>
-                            <col>2</col>
-                            <enabled>false</enabled>
-                        </item>
-                        <item>
-                            <row>4</row>
-                            <col>3</col>
-                            <enabled>false</enabled>
-                        </item>
-                        <item>
-                            <row>4</row>
-                            <col>4</col>
-                            <enabled>false</enabled>
-                        </item>
-                        <item>
-                            <row>4</row>
-                            <col>5</col>
-                            <tile>
-<content>T</content>
-<score>1</score>
-                            </tile>
-                            <enabled>true</enabled>
-                        </item>
-                    </row>
-                    <row>
-                        <item>
                             <row>5</row>
                             <col>0</col>
                             <tile>
-<content>A</content>
-<score>2</score>
+<content>T</content>
+<score>1</score>
                             </tile>
                             <enabled>true</enabled>
                         </item>
@@ -3010,7 +3010,7 @@
                             <row>5</row>
                             <col>5</col>
                             <tile>
-<content>E</content>
+<content>T</content>
 <score>1</score>
                             </tile>
                             <enabled>true</enabled>
@@ -3022,16 +3022,16 @@
             </board>
             <stars>
                 <star>
-                    <threshold>5</threshold>
+                    <threshold>2</threshold>
                 </star>
                 <star>
-                    <threshold>10</threshold>
+                    <threshold>3</threshold>
                 </star>
                 <star>
-                    <threshold>20</threshold>
+                    <threshold>4</threshold>
                 </star>
             </stars>
-            <token>-3750496718641456996</token>
+            <token>2534390794535608232</token>
             <theme>A....</theme>
             <themeWords>
                 <word>Alphabet</word>
@@ -3242,16 +3242,16 @@
             </board>
             <stars>
                 <star>
+                    <threshold>300</threshold>
+                </star>
+                <star>
                     <threshold>500</threshold>
                 </star>
                 <star>
                     <threshold>1000</threshold>
                 </star>
-                <star>
-                    <threshold>2000</threshold>
-                </star>
             </stars>
-            <token>1390138172556765273</token>
+            <token>3653050700275076924</token>
             <maxNumWords>40</maxNumWords>
         </level>
         <level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="lightningLevel">
