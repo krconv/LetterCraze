@@ -4,7 +4,6 @@
 package scandium.lettercraze.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import junit.framework.TestCase;
 import scandium.common.model.*;
@@ -18,9 +17,6 @@ public class LevelProgressTest extends TestCase {
 	private LightningLevel level;
 	private int score;
 	private int starCount;
-	private List<String> foundWords;
-	private boolean isPlaying;
-	private int timeLeft;
 	private boolean isUnlocked;
 	
 	/* (non-Javadoc)
@@ -32,8 +28,6 @@ public class LevelProgressTest extends TestCase {
 		level = new LightningLevel("level", new Board(true, GravityDirection.Up), new Star[3], 5000);
 		score = 0;
 		starCount = 0;
-		isPlaying = false;
-		timeLeft = 5000;
 		isUnlocked = true;
 	}
 

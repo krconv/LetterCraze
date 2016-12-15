@@ -13,7 +13,6 @@ import scandium.common.tool.LetterDictionary;
 public class PuzzleLevelTest extends TestCase {
 	private PuzzleLevel level;
 	private Board board;
-	private Star[] stars;
 	private LetterDictionary dictionary;
 
 	/* (non-Javadoc)
@@ -22,7 +21,6 @@ public class PuzzleLevelTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		board = new Board(true, GravityDirection.Up);
-		stars = new Star[3];
 		dictionary = new LetterDictionary(100);
 		
 		level = new PuzzleLevel();

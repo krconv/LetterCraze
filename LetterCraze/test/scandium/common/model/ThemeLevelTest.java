@@ -16,7 +16,6 @@ import scandium.common.tool.LetterDictionary;
 public class ThemeLevelTest extends TestCase {
 	private ThemeLevel level;
 	private Board board;
-	private Star[] stars;
 	private LetterDictionary dictionary;
 
 	/* (non-Javadoc)
@@ -25,7 +24,6 @@ public class ThemeLevelTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		board = new Board(true, GravityDirection.Up);
-		stars = new Star[3];
 		dictionary = new LetterDictionary(100);
 		
 		level = new ThemeLevel();
